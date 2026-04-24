@@ -16,7 +16,6 @@ export class SupabaseService {
         if (error) {
             throw error;
         }
-        console.log(data);
 
         return data as T;
     }
