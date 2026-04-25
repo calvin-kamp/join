@@ -4,7 +4,7 @@
     "scripts": {
         "ng": "ng",
         "start": "npm run generate:types && ng serve",
-        "build": "npm run generate:types && ng build",
+        "build": "ng build",
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
         "generate:types": "npx supabase gen types typescript --linked > src/app/core/supabase/database.types.ts"
