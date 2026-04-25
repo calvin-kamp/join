@@ -1,48 +1,44 @@
 import { Injectable } from '@angular/core';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { environment } from 'src/environments/environment';
+import { type Database } from './database.types';
 
 @Injectable({ providedIn: 'root' })
 export class SupabaseService {
     readonly client: SupabaseClient;
 
     constructor() {
-        this.client = createClient(environment.supabaseUrl, environment.supabaseKey);
+        this.client = createClient<Database>(environment.supabaseUrl, environment.supabaseKey);
     }
 
-    async select<T>(tableName: string, columns: string = '*'): Promise<T | undefined> {
-        const { data, error } = await this.client.from(tableName).select(columns);
+    async select<T extends keyof Database['public']['Tables']>(table: T) {
+        const { data, error } = await this.client.from(table).select('*');
 
         if (error) {
             throw error;
         }
 
-        return data as T;
+        return data;
     }
 
-    async insert<T>(tableName: string, payload: T) {
-        const { data, error } = await this.client.from(tableName).insert([payload]).select();
-
-        if (error) {
-            throw error;
-        }
-    }
-
-    async update<T extends { id: number }>(tableName: string, payload: T) {
-        const { id, ...data } = payload;
-        const { error } = await this.client
-            .from(tableName)
-            .update(data as T)
-            .eq('id', id)
-            .select();
+    async insert<T>(tableName: string, payload: T): Promise<void> {
+        const { error } = await this.client.from(tableName).insert([payload]).select();
 
         if (error) {
             throw error;
         }
     }
 
-    async delete(tableName: string, id: number) {
-        const { data, error } = await this.client.from(tableName).delete().eq('id', id);
+    async update(tableName: string, id: number, payload: Record<string, unknown>): Promise<void> {
+        const { error } = await this.client.from(tableName).update(payload).eq('id', id);
+
+        if (error) {
+            throw error;
+        }
+    }
+
+    async delete(tableName: string, id: number): Promise<void> {
+        const { error } = await this.client.from(tableName).delete().eq('id', id);
 
         if (error) {
             throw error;
