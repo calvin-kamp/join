@@ -1,0 +1,48 @@
+@use "sass:map";
+@use "sass:meta";
+@use "sass:math";
+@use "./tokens" as *;
+
+/**
+ * Converts px -> rem (based on $rem-base).
+ * If value is already rem, it is returned as-is.
+ * Unitless values are treated as px for convenience.
+ */
+@function get-rem($value, $rem-base: 16px) {
+    @if meta.type-of($value) != number {
+        @error "get-rem(): Expected a number, got '#{meta.type-of($value)}' ('#{$value}').";
+    }
+
+    @if math.is-unitless($value) {
+        $value: $value * 1px;
+    }
+
+    $unit: math.unit($value);
+
+    @if $unit == "rem" {
+        @return $value;
+    }
+
+    @if $unit != "px" {
+        @error "get-rem(): Only 'px' and 'rem' are supported. Got '#{$unit}' ('#{$value}').";
+    }
+
+    @return math.div($value, $rem-base) * 1rem;
+}
+
+/**
+ * Token-only breakpoint resolver.
+ * Accepts only breakpoint tokens (sm, md, lg) from $breakpoints.
+ * For values like 900px use manual-breakpoint().
+ */
+@function breakpoint-value($bp) {
+    @if meta.type-of($bp) != string {
+        @error "breakpoint(): only breakpoint tokens allowed (sm, md, lg). Use manual-breakpoint() for values like 900px.";
+    }
+
+    @if not map.has-key($breakpoints, $bp) {
+        @error "breakpoint(): unknown breakpoint '#{$bp}'. Allowed: #{map.keys($breakpoints)}";
+    }
+
+    @return get-rem(map.get($breakpoints, $bp));
+}

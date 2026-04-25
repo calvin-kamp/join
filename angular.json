@@ -51,9 +51,10 @@
                                 "input": "public"
                             }
                         ],
-                        "styles": [
-                            "src/styles.scss"
-                        ]
+                        "styles": ["src/styles/main.scss"],
+                        "stylePreprocessorOptions": {
+                            "includePaths": ["src", "src/styles"]
+                        }
                     },
                     "configurations": {
                         "production": {

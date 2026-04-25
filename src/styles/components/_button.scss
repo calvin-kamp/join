@@ -1,0 +1,61 @@
+@use "abstracts" as *;
+
+.button {
+    --btn-color: var(--color-text);
+    --btn-border-color: var(--color-text);
+    --btn-bg: transparent;
+    --btn-gap: 4px;
+
+    padding: 12px 24px;
+    border: 1px solid var(--btn-border-color);
+    background-color: var(--btn-bg);
+    color: var(--btn-color);
+    transition:
+        color $transition-default,
+        border-color $transition-default,
+        background-color $transition-default,
+        box-shadow $transition-default;
+    @include flex($wrap: nowrap, $items: center, $gap: var(--btn-gap));
+
+    @include hoverable() {
+        box-shadow: var(--shadow-btn-interact);
+    }
+
+    &--primary {
+        --btn-color: var(--color-text-inverted);
+        --btn-border-color: var(--color-primary);
+        --btn-bg: var(--color-primary);
+
+        @include hoverable() {
+            --btn-border-color: var(--color-primary-hover);
+            --btn-bg: var(--color-primary-hover);
+        }
+
+        &:active {
+            --btn-border-color: var(--color-primary-active);
+            --btn-bg: var(--color-primary-active);
+        }
+    }
+
+    &--outlined {
+        --btn-color: var(--color-primary);
+        --btn-border-color: var(--color-primary);
+
+        @include hoverable() {
+            --btn-color: var(--color-primary-hover);
+            --btn-border-color: var(--color-primary-hover);
+
+            box-shadow: var(--shadow-btn-interact), inset 0 0 0 1px var(--btn-border-color);
+        }
+
+        &:active {
+            --btn-color: var(--color-primary-active);
+            --btn-border-color: var(--color-primary-active);
+        }
+    }
+
+    &--lg {
+        font-size: get-rem($font-size-btn-lg);
+        font-weight: $font-weight-bold;
+    }
+}
