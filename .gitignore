@@ -43,8 +43,5 @@ __screenshots__/
 .DS_Store
 Thumbs.db
 
-# Supabase generated types
-src/app/core/supabase/database.types.ts
-
 # Supabase CLI temp files
 supabase/.temp/
