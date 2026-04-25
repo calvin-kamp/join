@@ -1,0 +1,158 @@
+@use "abstracts" as *;
+@use "sass:map";
+
+/* -------------------------------------------------------- */
+/*                          GLOBALS                         */
+/* -------------------------------------------------------- */
+
+:root {
+    color-scheme: dark;
+    @include token-to-css-vars($css-var-tokens);
+}
+
+main {
+    min-height: calc(100vh - 394px);
+    min-height: calc(100dvh - 394px);
+    
+    @include breakpoint(md) {
+        min-height: calc(100vh - 246px);
+        min-height: calc(100dvh - 246px);
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--color-body-background);
+    color: var(--color-text);
+    font-size: $font-size;
+    font-family: $font-family;
+    font-weight: $font-weight-regular;
+    line-height: $line-height-body;
+    letter-spacing: $font-letter-spacing;
+}
+
+:where(p) {
+    max-width: 65ch;
+}
+
+:where(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
+    color: inherit;
+    font-family: inherit;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-tight;
+}
+
+@each $heading, $size in $heading-sizes {
+    :where(#{$heading}, .#{$heading}) {
+        font-size: map.get($size, sm);
+        
+        @include breakpoint(lg) {
+            font-size: map.get($size, lg);
+        }
+    }
+}
+
+
+:where(strong, b) {
+    font-weight: $font-weight-bold;
+}
+
+:where(em, i) {
+    font-style: italic;
+}
+
+:where(small) {
+    font-size: 87.5%;
+}
+
+:where(a[href]):not(.link) {
+    color: inherit;
+    text-decoration: none;
+}
+
+.link {
+    padding-block-end: 0.2em;
+    background-image:
+        linear-gradient(currentColor, currentColor),
+        linear-gradient(var(--color-primary), var(--color-primary));
+    background-repeat: no-repeat;
+    background-position: 100% 100%, 0 100%;
+    background-size: 100% 2px, 100% 2px;
+    color: inherit;
+    text-decoration: none;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    transition:
+        background-size $transition-default,
+        color $transition-default;
+
+    @include hoverable() {
+        color: var(--color-primary);
+        background-size: 0% 2px, 100% 2px;
+    }
+
+    &:focus-visible {
+        color: var(--color-primary);
+        background-size: 0% 2px, 100% 2px;
+    }
+    
+    &--no-decoration {
+        padding-block-end: 0;
+        background-image: none;
+    }
+
+    &--icon {
+        @include flex($gap: var(--gap-sm), $items: center);
+    }
+}
+
+$text-inputs: (
+    'input[type="text"]',
+    'input[type="email"]'
+);
+
+:where(#{$text-inputs}, textarea, select) {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding-block: var(--space-6) var(--space-2);
+    padding-inline: var(--space-4);
+    border: 1px solid var(--color-border-raised);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface-raised);
+    color: var(--color-text);
+    transition: 
+        color $transition-default, 
+        opacity $transition-default;
+
+    &:disabled {
+        opacity: var(--opacity-disabled);
+    }
+
+    &::placeholder {
+        color: var(--color-text-muted);
+        opacity: 1;
+    }
+}
+
+:where(#{$text-inputs}, textarea)[readonly] {
+    opacity: var(--opacity-muted);
+}
+
+:where(input[type="checkbox"]) {
+    cursor: pointer;
+}
+
+textarea {
+    min-height: 20rem;
+    resize: none;
+    overflow-y: auto;
+}
+
+::selection {
+    background-color: var(--color-primary);
+    color: var(--color-text-inverted);
+}

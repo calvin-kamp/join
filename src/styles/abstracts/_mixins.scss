@@ -1,0 +1,72 @@
+@use "./functions" as *;
+@use "./tokens" as *;
+@use "sass:meta";
+@use "sass:math";
+@use "sass:color";
+@use "sass:string";
+
+/**
+ * Wraps content in a min-width media query.
+ * Token-only: expects a breakpoint token (sm, md, lg, ...) from $breakpoints.
+ * Use manual-breakpoint() for values like 900px or 56rem.
+ */
+@mixin breakpoint($bp) {
+    $breakpoint: breakpoint-value($bp);
+
+    @media screen and (min-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin flex($type: flex, $direction: row, $wrap: wrap, $justify: flex-start, $items: stretch, $content: stretch, $gap: null) {
+    display: $type;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+    justify-content: $justify;
+    align-items: $items;
+    align-content: $content;
+
+    @if $gap != null {
+        gap: $gap;
+    }
+}
+
+@mixin hoverable($wrapWithHover: true) {
+    @media (any-hover: hover) and (any-pointer: fine) {
+        @if $wrapWithHover {
+            &:hover {
+                @content;
+            }
+        } @else {
+            @content;
+        }
+    }
+}
+
+@mixin focus-ring($color: var(--color-primary), $width: 2px, $offset: 4px) {
+    outline: $width solid $color;
+    outline-offset: $offset;
+}
+
+@mixin token-to-css-vars($tokens, $prefix: null) {
+    @if meta.type-of($tokens) !=  "map" {
+        @error "token-to-css-vars(): Expected a map.";
+    }
+
+    @each $key, $value in $tokens {
+        $name: if($prefix == null or $prefix == "", "#{$key}", "#{$prefix}-#{$key}");
+
+        @if meta.type-of($value) == "map" {
+            @include token-to-css-vars($value, $name);
+        }
+
+        @else {
+            --#{$name}: #{$value};
+
+            // RGB variant for literal Sass colors (used with rgb(var(--*-rgb) / <alpha>))
+            @if string.slice($name, 1, 6)== "color-" and meta.type-of($value)== "color" {
+                --#{$name}-rgb: #{color.red($value)} #{color.green($value)} #{color.blue($value)};
+            }
+        }
+    }
+}
