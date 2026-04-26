@@ -1,0 +1,51 @@
+@use "abstracts" as *;
+
+.link {
+    --link-color: var(--color-accent);
+
+    position: relative;
+    display: inline-block;
+    color: var(--link-color);
+    text-decoration: none;
+    transition: 
+        color $transition-default,
+        font-weight $transition-default;
+
+    @include hoverable() {
+        &::before {
+            width: 100%;
+        }
+    }
+
+    &::before {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        background-color: currentColor;
+        border-radius: $radius-pill;
+        transition: width $transition-default;
+        content: "";
+    }
+
+    &--muted {
+        --link-color: var(--color-text-muted);
+
+        &::before {
+            content: none;
+        }
+
+        @include hoverable() {
+            --link-color: var(--color-accent);
+
+            font-weight: $font-weight-bold;
+        }
+    }
+
+    &--no-decoration {
+        &::before {
+            content: none;
+        }
+    }
+}
