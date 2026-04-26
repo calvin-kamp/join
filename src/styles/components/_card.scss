@@ -1,0 +1,80 @@
+@use "abstracts" as *;
+
+.card {
+    padding: 16px;
+    border-radius: $radius-card;
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-card);
+
+    &--lg {
+        padding-block: 32px;
+        border-radius: $radius-card-lg;
+    }
+}
+
+/*
+color-scheme: light;
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+    --color-body-background: #F6F7F8;
+    --color-surface: #FFFFFF;
+    --color-surface-muted: #E7E7E7;
+    --color-surface-inverted: #2A3647;
+    --color-surface-inverted-deep: #091931;
+    --color-surface-accent: #EDF2FA;
+    --color-text: #000000;
+    --color-text-secondary: #2A3647;
+    --color-text-tertiary: #42526E;
+    --color-text-muted: #A8A8A8;
+    --color-text-placeholder: #D1D1D1;
+    --color-text-inverted: #FFFFFF;
+    --color-text-nav-inactive: #CDCDCD;
+    --color-text-nav-active: #FFFFFF;
+    --color-text-accent: #29ABE2;
+    --color-primary: #2A3647;
+    --color-primary-hover: #29ABE2;
+    --color-primary-active: #091931;
+    --color-accent: #29ABE2;
+    --color-accent-subtle: #EDF2FA;
+    --color-border: #D1D1D1;
+    --color-border-muted: #A8A8A8;
+    --color-border-strong: #2A3647;
+    --color-border-focus: #29ABE2;
+    --color-border-inverted: #2A3647;
+    --color-badge-user-story: #0038FF;
+    --color-badge-technical-task: #1FD7C1;
+    --color-task-progress-bar: #4589FF;
+    --color-ui-error: #E60026;
+    --color-ui-warning: #FF3D00;
+    --shadow-card: 0 0 14px 3px rgba(0, 0, 0, 0.04);
+    --shadow-sm: 0 0 4px 0 rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 0 4px 0 rgba(0, 0, 0, 0.08);
+    --shadow-inset-muted: 0 0 4px 0 rgba(0, 0, 0, 0.16);
+    --shadow-btn-interact: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    --shadow-header: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+    --space-0: 0;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-7: 1.75rem;
+    --space-8: 2rem;
+    --space-9: 3rem;
+    --space-10: 4rem;
+    --space-11: 5rem;
+    --space-12: 6rem;
+    --space-13: 8rem;
+    --space-14: 9rem;
+    --gap-xs: 0.5rem;
+    --gap-sm: 0.75rem;
+    --gap-md: 1rem;
+    --gap-lg: 1.25rem;
+    --gap-xl: 1.5rem;
+    --opacity-disabled: 0.4;
+    --opacity-overlay: 0.6;
+    --opacity-muted: 0.7;
+    --opacity-active: 1;
+    */
