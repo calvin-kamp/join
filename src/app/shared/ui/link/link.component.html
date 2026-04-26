@@ -1,0 +1,19 @@
+@if (isExternal()) {
+    <a
+        [attr.href]="href()"
+        target="_blank"
+        rel="noopener noreferrer"
+        uiButton
+        [variant]="buttonVariant()"
+    >
+        <ng-content />
+    </a>
+} @else {
+    <a
+        [routerLink]="route()"
+        uiButton
+        [variant]="buttonVariant()"
+    >
+        <ng-content />
+    </a>
+}
