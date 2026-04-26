@@ -5,16 +5,16 @@ type ButtonVariant = 'primary' | 'outlined';
 @Directive({
     selector: 'button[uiButton], a[uiButton]',
     host: {
-        class: 'button',
+        '[class.button]': '!!variant()',
         '[class.button--primary]': 'variant() === "primary"',
         '[class.button--outlined]': 'variant() === "outlined"',
-        '[class.button--disabled]': 'disabled()',
-        '[attr.disabled]': 'disabled() ? "" : null',
-        '[attr.aria-disabled]': 'disabled() ? "true" : null',
-        '[attr.tabindex]': 'disabled() ? -1 : null'
+        '[class.button--disabled]': '!!variant() && disabled()',
+        '[attr.disabled]': '!!variant() && disabled() ? "" : null',
+        '[attr.aria-disabled]': '!!variant() && disabled() ? "true" : null',
+        '[attr.tabindex]': '!!variant() && disabled() ? -1 : null'
     }
 })
 export class ButtonDirective {
-    variant = input<ButtonVariant>('primary');
-    disabled = input(false, { transform: booleanAttribute });
+    readonly variant = input<ButtonVariant | null>('primary');
+    readonly disabled = input(false, { transform: booleanAttribute });
 }
