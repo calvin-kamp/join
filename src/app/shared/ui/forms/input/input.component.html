@@ -1,0 +1,45 @@
+<div
+    class="form-control form-control--text"
+    [class.form-control--label-hidden]="!labelVisible()"
+>
+    <label
+        [for]="inputId()"
+        class="form-control__label"
+        [class.sr-only]="!labelVisible()"
+    >
+        {{ label() }}
+
+        @if (isRequired()) {
+            <span
+                class="form-control__required-mark"
+                aria-hidden="true"
+            >
+                *
+            </span>
+        }
+    </label>
+
+    <input
+        [id]="inputId()"
+        [name]="name()"
+        [type]="type()"
+        [value]="value()"
+        [disabled]="isDisabled()"
+        [attr.placeholder]="effectivePlaceholder()"
+        [attr.aria-invalid]="hasError() ? 'true' : null"
+        [attr.aria-required]="isRequired() ? 'true' : null"
+        (input)="onInput($event)"
+        (blur)="onBlur()"
+        autocomplete="off"
+        class="form-control__input"
+    />
+
+    @if (hasError()) {
+        <p
+            class="form-control__error-message"
+            role="alert"
+        >
+            {{ errorMessage() }}
+        </p>
+    }
+</div>
