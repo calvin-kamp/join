@@ -1,0 +1,135 @@
+@use "abstracts" as *;
+
+.form-control {
+    position: relative;
+    max-width: 422px;
+    padding-bottom: 24px;
+    margin: 0 auto 8px;
+
+    &__label {
+        display: block;
+    }
+
+    &__required-mark {
+        color: var(--color-ui-red);
+    }
+
+    &__input {
+        &[aria-invalid="true"] {
+            border-color: var(--color-ui-error);
+            
+            @supports selector(:focus-visible) {
+                &:focus {
+                    border-color: transparent;
+                }
+                
+                &:focus-visible {
+                    border-color: transparent;
+                }
+            }
+            
+            @supports not selector(:focus-visible) {
+                &:focus {
+                    border-color: transparent;
+                }
+            }
+        }
+    }
+
+
+    &__error-message {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        color: var(--color-ui-error);
+        line-height: 1;
+    }
+
+    &--checkbox {
+        .form-control__label {
+            display: inline-block;
+            min-height: get-rem(24px);
+        }
+
+        .form-control__input {
+            appearance: none;
+            -webkit-appearance: none;
+
+            &:checked {
+                ~ .form-control__visual-checkbox::after {
+                    opacity: 1;
+                }
+            }
+
+            @supports selector(:focus-visible) {
+                &:focus {
+                    outline: none;
+                }
+
+                &:focus-visible {
+                    ~ .form-control__visual-checkbox {
+                        @include focus-ring();
+                    }
+                }
+            }
+
+            @supports not selector(:focus-visible) {
+                &:focus {
+                    ~ .form-control__visual-checkbox {
+                        @include focus-ring();
+                    }
+                }
+            }
+
+            &:disabled {
+                ~ .form-control__visual-checkbox,
+                ~ .form-control__label-text {
+                    opacity: var(--opacity-disabled);
+                    cursor: not-allowed;
+                }
+            }
+        }
+
+        .form-control__visual-checkbox {
+            position: absolute;
+            top: get-rem(12px);
+            left: 0;
+            width: get-rem(24px);
+            height: get-rem(24px);
+            border: 2px solid var(--color-border-raised);
+            border-radius: var(--radius-sm);
+            background-color: var(--color-surface-raised);
+            transform: translateY(-50%);
+            pointer-events: none;
+
+            &::after {
+                position: absolute;
+                inset: 0;
+                border-radius: inherit;
+                background-color: var(--color-primary);
+                opacity: 0;
+                transition: opacity $transition-fast;
+                content: "";
+            }
+        }
+
+        .form-control__label-text {
+            margin-inline-start: var(--space-8);
+            min-height: get-rem(24px);
+            cursor: pointer;
+        }
+    }
+
+    &--text,
+    &--textarea {
+        .form-control__label-text {
+            position: absolute;
+            top: get-rem(29px);
+            left: var(--space-4);
+            transform: translateY(-50%);
+            transition: all 200ms ease;
+            pointer-events: none;
+        }
+    }
+}
