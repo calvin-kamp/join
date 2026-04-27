@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-    selector: 'public-entry',
+    selector: 'layout-header',
     imports: [],
-    templateUrl: './entry.component.html',
-    styleUrl: './entry.component.scss',
+    templateUrl: './header.component.html',
+    styleUrl: './header.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EntryComponent {}
+export class HeaderComponent {}

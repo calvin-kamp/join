@@ -6,16 +6,19 @@
     --btn-bg: transparent;
     --btn-gap: 4px;
 
+    min-width: 146px;
     padding: 12px 24px;
     border: 1px solid var(--btn-border-color);
+    border-radius: $radius-btn;
     background-color: var(--btn-bg);
     color: var(--btn-color);
+    font-weight: $font-weight-bold;
     transition:
         color $transition-default,
         border-color $transition-default,
         background-color $transition-default,
         box-shadow $transition-default;
-    @include flex($wrap: nowrap, $items: center, $gap: var(--btn-gap));
+    @include flex($wrap: nowrap, $justify:center, $items: center, $gap: var(--btn-gap));
 
     @include hoverable() {
         box-shadow: var(--shadow-btn-interact);

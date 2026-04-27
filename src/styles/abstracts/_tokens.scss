@@ -28,13 +28,13 @@ $breakpoints: (
 $palette: (
 
     // Navy — Primäre Markenfarbe (Buttons, Header, Footer, Toast, Icons)
-    navy-500:           #42526E,    // Board ColumnTitle (einziger Einsatz)
-    navy-700:           #2A3647,    // primäre Buttons, Header-/Footer-bg, Text
     navy-900:           #091931,    // btn active / nav active bg
+    navy-700:           #2A3647,    // primäre Buttons, Header-/Footer-bg, Text
+    navy-500:           #42526E,    // Board ColumnTitle (einziger Einsatz)
 
     // Cyan — Accent / Interactive (Divider, Links, Hover-States, Focus)
-    cyan-50:            #EDF2FA,    // Checkbox Hover Background
     cyan-500:           #29ABE2,    // Links, Divider, Focus-Border, Hover-State
+    cyan-50:            #EDF2FA,    // Checkbox Hover Background
 
     // Grau-Skala — Surfaces, Borders, Muted
     gray-50:            #F6F7F8,    // Body Background
@@ -358,20 +358,61 @@ $gaps: (
     xl:     map.get($spaces, 6),
 );
 
+// ─── Border Radius Scale ──────────────────────────────────────────────────────
+//
+//  7 Stufen, direkt aus der Spec abgeleitet. Pixel statt rem —
+//  Border-Radius ist optisch unabhängig vom Root-Font-Size-Kontext.
+//
+//  xs    2px   Radio Button
+//  sm    8px   Buttons (primary/secondary), Badge, Add-Icon, Progressbar
+//  md    10px  Inputs, Dropdowns, Priority-Buttons, Contact-Item,
+//              No-Task-Placeholder, Create/Cancel/Add-Task-Buttons
+//  lg    16px  Navbar Active Indicator (Mobile only)
+//  xl    20px  Submenu-Ecken (partial — als Mixin lösen, nicht inline)
+//  2xl   24px  Task Card (Board)
+//  3xl   30px  Dashboard Card, Task Dialog, Card Placeholder
+//  pill  999px Vollständig gerundete Elemente (Avatar etc.)
+//
+//  Partial-Radius-Ausnahmen (nicht tokenisierbar, component-level lösen):
+//    Desktop Submenu:          top-left/bottom-right/bottom-left: xl · top-right: 0
+//    Mobile Submenu:           top-left/top-right/bottom-left:    xl · bottom-right: 0
+//    Dashboard Card:           top-right/bottom-right/bottom-left: 3xl · top-left: 0
+//
+// ──────────────────────────────────────────────────────────────────────────────
+
 $radii: (
-    sm:     0.25rem,
-    md:     0.5rem,
-    lg:     0.75rem,
-    xl:     1rem,
-    xxl:    1.25rem,
+    xs:     2px,
+    sm:     8px,
+    md:     10px,
+    lg:     16px,
+    xl:     20px,
+    2xl:    24px,
+    3xl:    30px,
     pill:   999px
 );
 
+// ─── Semantische Radius-Aliase ────────────────────────────────────────────────
+
+$radius-btn:            map.get($radii, sm);    //  8px — alle Button-Varianten
+$radius-badge:          map.get($radii, sm);    //  8px — Task-Badges, Add-Icon
+$radius-input:          map.get($radii, md);    // 10px — Inputs, Dropdowns, Priority
+$radius-contact-item:   map.get($radii, md);    // 10px — Kontaktlisten-Element
+$radius-navbar-active:  map.get($radii, lg);    // 16px — Mobile Nav Indicator
+$radius-submenu:        map.get($radii, xl);    // 20px — Submenu-Ecken (partial)
+$radius-card:           map.get($radii, 2xl);   // 24px — Board Task Card
+$radius-card-lg:        map.get($radii, 3xl);   // 30px — Dashboard Card, Task Dialog
+$radius-pill:           map.get($radii, pill);
+$radius-radio:          map.get($radii, xs);    //  2px — Radio Button
+
+$header-height-mobile: 80px;
+$header-height-desktop: 96px;
+
+$footer-height-mobile: 80px;
+$footer-height-desktop: 80px;
 
 /* -------------------------------------------------------- */
 /*                 RESPONSIVE HEADING SCALE                 */
 /* -------------------------------------------------------- */
-
 
 $heading-sizes: (
     h1: (
@@ -389,7 +430,6 @@ $heading-sizes: (
 );
 
 
-
 /* -------------------------------------------------------- */
 /*                   CSS VARS EXPORT LIST                   */
 /* -------------------------------------------------------- */
@@ -399,6 +439,5 @@ $css-var-tokens: (
     shadow:     $shadows,
     space:      $spaces,
     gap:        $gaps,
-    radius:     $radii,
     opacity:    $opacities
 );

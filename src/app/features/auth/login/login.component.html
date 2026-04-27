@@ -1,0 +1,60 @@
+<div
+    class="login"
+    uiCard
+    [variant]="'lg'"
+>
+    <h1 class="login__headline">Log in</h1>
+
+    <form
+        (ngSubmit)="onSubmit()"
+        [formGroup]="logInForm"
+        class="login__form"
+    >
+        <ui-input
+            formControlName="email"
+            label="Email"
+            name="email"
+            type="email"
+            [labelVisible]="false"
+            [isRequired]="true"
+            [errorMessage]="emailError()"
+        />
+
+        <ui-input
+            formControlName="password"
+            label="Password"
+            name="password"
+            type="password"
+            [labelVisible]="false"
+            [isRequired]="true"
+            [errorMessage]="passwordError()"
+        />
+
+        @if (error()) {
+            <p
+                class="login__error"
+                role="alert"
+            >
+                {{ error() }}
+            </p>
+        }
+
+        <div class="login__actions">
+            <ui-button
+                [type]="'submit'"
+                [variant]="'primary'"
+                [disabled]="loading()"
+            >
+                Log in
+            </ui-button>
+
+            <ui-button
+                [type]="'button'"
+                [variant]="'outlined'"
+                (click)="continueAsGuest()"
+            >
+                Guest Log in
+            </ui-button>
+        </div>
+    </form>
+</div>

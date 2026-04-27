@@ -4,6 +4,7 @@ import { ButtonDirective } from '@shared/directives/button.directive';
 
 type ButtonVariant = 'primary' | 'outlined';
 type LinkVariant = 'default' | ButtonVariant;
+export type LinkStyle = 'default' | 'muted' | 'no-decoration';
 
 @Component({
     selector: 'ui-link',
@@ -14,11 +15,26 @@ type LinkVariant = 'default' | ButtonVariant;
 })
 export class LinkComponent {
     readonly href = input<string | null>(null);
-    readonly route = input<string | (string | number)[] | null>(null);
     readonly variant = input<LinkVariant>('default');
+    readonly linkStyle = input<LinkStyle>('default');
 
-    protected readonly isExternal = computed(() => this.href() !== null);
+    protected readonly isExternal = computed(() => {
+        const href = this.href();
+
+        if (!href) {
+            return false;
+        }
+
+        return /^https?:\/\/|^\/\//.test(href);
+    });
+
     protected readonly buttonVariant = computed<ButtonVariant | null>(() =>
         this.variant() === 'default' ? null : (this.variant() as ButtonVariant)
     );
+
+    protected readonly linkClasses = computed(() => ({
+        link: this.variant() === 'default',
+        'link--muted': this.linkStyle() === 'muted',
+        'link--no-decoration': this.linkStyle() === 'no-decoration'
+    }));
 }

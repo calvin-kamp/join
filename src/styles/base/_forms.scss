@@ -1,0 +1,44 @@
+@use "abstracts" as *;
+
+$text-inputs: (
+    'input[type="text"]',
+    'input[type="email"]',
+    'input[type="password"]'
+);
+
+:where(#{$text-inputs}, textarea, select) {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: 12px 20px;
+    border: 1px solid var(--color-border);
+    border-radius: $radius-input;
+    background-color: var(--color-white);
+    color: var(--color-text);
+    transition:
+        color $transition-default,
+        opacity $transition-default;
+
+    &:disabled {
+        opacity: var(--opacity-disabled);
+    }
+
+    &::placeholder {
+        color: var(--color-text-muted);
+        opacity: 1;
+    }
+}
+
+:where(#{$text-inputs}, textarea)[readonly] {
+    opacity: var(--opacity-muted);
+}
+
+:where(input[type="checkbox"]) {
+    cursor: pointer;
+}
+
+textarea {
+    min-height: 20rem;
+    resize: none;
+    overflow-y: auto;
+}

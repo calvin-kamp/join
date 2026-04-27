@@ -8,15 +8,13 @@ interface Contact {
     phone: string;
 }
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class ContactsService {
     supabase = inject(SupabaseService);
     contacts = signal<Contact[]>([]);
 
-    async getContacts() {
-        const contacts = await this.supabase.select<Contact[]>('contacts');
+    async getContacts(): Promise<void> {
+        const contacts: Contact[] = await this.supabase.select('contacts');
 
         if (!contacts) {
             return;
@@ -25,15 +23,22 @@ export class ContactsService {
         this.contacts.set(contacts);
     }
 
-    async addContact(contact: Contact) {
-        const contacts = await this.supabase.insert<Contact>('contacts', contact);
+    async addContact(contact: Contact): Promise<void> {
+        await this.supabase.insert<Contact>('contacts', contact);
+
+        await this.getContacts();
     }
 
-    async updateContact(contact: Contact & { id: number }) {
-        await this.supabase.update<Contact & { id: number }>('contacts', contact);
+    async updateContact(contact: Contact & { id: number }): Promise<void> {
+        const { id, ...data } = contact;
+        await this.supabase.update('contacts', id, data);
+
+        await this.getContacts();
     }
 
-    async deleteContact(id: number) {
-        const contacts = await this.supabase.delete('contacts', id);
+    async deleteContact(id: number): Promise<void> {
+        await this.supabase.delete('contacts', id);
+
+        await this.getContacts();
     }
 }

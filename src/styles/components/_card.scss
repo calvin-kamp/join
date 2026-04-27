@@ -1,0 +1,17 @@
+@use "abstracts" as *;
+
+.card {
+    padding: 16px;
+    border-radius: $radius-card;
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-card);
+
+    &--lg {
+        padding-block: 32px;
+        border-radius: $radius-card-lg;
+
+        @include breakpoint(lg) {
+            padding: 48px 112px;
+        }
+    }
+}

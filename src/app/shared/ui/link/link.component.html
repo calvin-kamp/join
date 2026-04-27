@@ -3,6 +3,7 @@
         [attr.href]="href()"
         target="_blank"
         rel="noopener noreferrer"
+        [class]="linkClasses()"
         uiButton
         [variant]="buttonVariant()"
     >
@@ -10,7 +11,8 @@
     </a>
 } @else {
     <a
-        [routerLink]="route()"
+        [routerLink]="href()"
+        [class]="linkClasses()"
         uiButton
         [variant]="buttonVariant()"
     >

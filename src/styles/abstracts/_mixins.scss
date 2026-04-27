@@ -43,9 +43,46 @@
     }
 }
 
-@mixin focus-ring($color: var(--color-primary), $width: 2px, $offset: 4px) {
+@mixin focus-ring($color: var(--color-accent), $width: 1px, $offset: -1px) {
     outline: $width solid $color;
     outline-offset: $offset;
+}
+
+@mixin divider($position: bottom, $size-mobile: 50px, $size-desktop: 100px) {
+    position: relative;
+    padding-bottom: 16px;
+
+    &::after {
+        position: absolute;
+        
+        @if $position == bottom {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: $size-mobile;
+            height: 3px;
+            
+            @include breakpoint(lg) {
+                width: $size-desktop;
+            }
+        }
+
+        @if $position == right {
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            height: $size-mobile;
+            width: 3px;
+            
+            @include breakpoint(lg) {
+                height: $size-desktop;
+            }
+        }
+
+        border-radius: $radius-pill;
+        background-color: var(--color-accent);
+        content: "";
+    }
 }
 
 @mixin token-to-css-vars($tokens, $prefix: null) {
@@ -62,11 +99,6 @@
 
         @else {
             --#{$name}: #{$value};
-
-            // RGB variant for literal Sass colors (used with rgb(var(--*-rgb) / <alpha>))
-            @if string.slice($name, 1, 6)== "color-" and meta.type-of($value)== "color" {
-                --#{$name}-rgb: #{color.red($value)} #{color.green($value)} #{color.blue($value)};
-            }
         }
     }
 }

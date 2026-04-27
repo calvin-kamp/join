@@ -1,0 +1,21 @@
+@use "abstracts" as *;
+
+.login {
+    max-width: 652px;
+    margin-inline: auto;
+
+    &__headline {
+        margin-bottom: 32px;
+        text-align: center;
+        @include divider($size-mobile: 88px, $size-desktop: 150px)
+    }
+
+    &__actions {
+        margin-top: 32px;
+        @include flex($wrap: wrap, $justify: center, $gap: 20px);
+    
+        @include breakpoint(lg) {
+            gap: 32px;
+        }
+    }
+}
