@@ -1,0 +1,22 @@
+<section class="contactlist">
+    <ul>
+        @for (contact of sortedContacts(); track $index) {
+            @if (
+                $index === 0 ||
+                contact.name.trim().charAt(0).toUpperCase() !==
+                    sortedContacts()[$index - 1].name.trim().charAt(0).toUpperCase()
+            ) {
+                <li class="contactlist__letter">
+                    {{ contact.name.trim().charAt(0).toUpperCase() }}
+                </li>
+            }
+
+            <li>
+                <list-item
+                    [name]="contact.name"
+                    [mail]="contact.mail"
+                />
+            </li>
+        }
+    </ul>
+</section>

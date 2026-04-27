@@ -1,0 +1,13 @@
+.contactlist {
+    margin: 0px 24px 0px 24px;
+
+    ul {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__letter {
+        padding: 17px 0px 17px 36px;
+        border-bottom: 1px solid rgba(209, 209, 209, 1);
+    }
+}

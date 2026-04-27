@@ -1,0 +1,21 @@
+.item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    &__initialwrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        border-radius: 50%;
+        color: white;
+        width: 42px;
+        height: 42px;
+        margin: 15px 0px 21px 24px;
+    }
+
+    &__initial {
+        border-width: 2px solid white;
+    }
+}
