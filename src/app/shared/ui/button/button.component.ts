@@ -1,4 +1,4 @@
-import { booleanAttribute, Component, input } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ButtonDirective } from '@shared/directives/button.directive';
 
 type ButtonType = 'button' | 'submit' | 'reset';
@@ -8,7 +8,8 @@ type ButtonVariant = 'primary' | 'outlined';
     selector: 'ui-button',
     imports: [ButtonDirective],
     templateUrl: './button.component.html',
-    styleUrl: './button.component.scss'
+    styleUrl: './button.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent {
     type = input<ButtonType>('button');
