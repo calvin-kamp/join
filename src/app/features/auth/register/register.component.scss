@@ -1,0 +1,21 @@
+@use "abstracts" as *;
+
+.register {
+    max-width: 600px;
+    margin-inline: auto;
+
+    &__headline {
+        margin-bottom: 32px;
+        text-align: center;
+        @include divider($size-mobile: 88px, $size-desktop: 150px)
+    }
+
+    &__form {
+
+    }
+
+    &__submit {
+        margin-top: 32px;
+        @include flex($justify: center);
+    }
+}

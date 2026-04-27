@@ -1,0 +1,71 @@
+<div
+    class="register"
+    uiCard
+    [variant]="'lg'"
+>
+    <h1 class="register__headline">Sign up</h1>
+
+    <form
+        (ngSubmit)="onSubmit()"
+        [formGroup]="registerForm"
+        class="register__form"
+    >
+        <ui-input
+            formControlName="name"
+            label="Name"
+            name="name"
+            type="text"
+            [labelVisible]="false"
+            [isRequired]="true"
+            [errorMessage]="nameError()"
+        />
+
+        <ui-input
+            formControlName="email"
+            label="Email"
+            name="email"
+            type="email"
+            [labelVisible]="false"
+            [isRequired]="true"
+            [errorMessage]="emailError()"
+        />
+
+        <ui-input
+            formControlName="password"
+            label="Password"
+            name="password"
+            type="password"
+            [labelVisible]="false"
+            [isRequired]="true"
+            [errorMessage]="passwordError()"
+        />
+
+        <ui-input
+            formControlName="confirmPassword"
+            label="Confirm Password"
+            name="confirm-password"
+            type="password"
+            [labelVisible]="false"
+            [isRequired]="true"
+            [errorMessage]="passwordConfirmError()"
+        />
+
+        @if (error()) {
+            <p
+                class="register-form__error"
+                role="alert"
+            >
+                {{ error() }}
+            </p>
+        }
+
+        <div class="register__submit">
+            <ui-button
+                [type]="'submit'"
+                [disabled]="loading()"
+            >
+                Sign up
+            </ui-button>
+        </div>
+    </form>
+</div>
