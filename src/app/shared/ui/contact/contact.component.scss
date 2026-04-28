@@ -1,0 +1,24 @@
+@use "abstracts" as *;
+
+.contact {
+    @include flex($gap: 32px);
+    
+    &--compact {
+        gap: 16px;
+
+        .contact__name {
+            font-size: $font-size-xs;
+            
+            @include breakpoint(lg) {
+                font-size: $font-size-sm;
+            }
+        }
+    }
+    
+    &__name {
+        display: block;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-regular;
+        line-height: $line-height-tight;
+    }
+}
