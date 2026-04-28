@@ -25,6 +25,15 @@ export class LinkComponent {
             return false;
         }
 
+        return /^(https?:|mailto:|tel:)|^\/\//.test(href);
+    });
+
+    protected readonly opensInNewTab = computed(() => {
+        const href = this.href();
+
+        if (!href) {
+            return false;
+        }
         return /^https?:\/\/|^\/\//.test(href);
     });
 

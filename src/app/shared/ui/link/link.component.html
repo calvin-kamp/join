@@ -1,8 +1,8 @@
 @if (isExternal()) {
     <a
         [attr.href]="href()"
-        target="_blank"
-        rel="noopener noreferrer"
+        [attr.target]="opensInNewTab() ? '_blank' : null"
+        [attr.rel]="opensInNewTab() ? 'noopener noreferrer' : null"
         [class]="linkClasses()"
         uiButton
         [variant]="buttonVariant()"
