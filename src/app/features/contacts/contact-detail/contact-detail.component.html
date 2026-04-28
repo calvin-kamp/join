@@ -1,0 +1,20 @@
+<article class="contact-detail">
+    <div>
+        <h2 class="contact-detail__name">{{contact()?.name}}</h2>
+    </div>
+
+    <p class="contact-detail__info-text">Contact Information</p>
+
+    <div class="contact-detail__wrapper">
+        <div class="contact-detail__mail">
+            <p><strong>Email</strong></p>
+            <ui-link [href]="'mailto:'+contact()?.mail" [linkStyle]="'no-decoration'">{{contact()?.mail}}</ui-link>
+        </div>
+
+        <div class="contact-detail__phone">
+            <p><strong>Phone</strong></p>
+            <ui-link [href]="'tel:'+contact()?.phone" [linkStyle]="'no-decoration'">{{contact()?.phone}}</ui-link>
+        </div>
+    </div>
+
+</article>
