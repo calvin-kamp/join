@@ -1,21 +1,27 @@
+@use '../../../../../styles/abstracts/tokens' as *;
+
 .item {
     display: flex;
     align-items: center;
     gap: 20px;
+    cursor: pointer;
 
     &__initialwrapper {
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: black;
         border-radius: 50%;
-        color: white;
+        color: var(--color-white);
         width: 42px;
         height: 42px;
         margin: 15px 0px 21px 24px;
     }
 
     &__initial {
-        border-width: 2px solid white;
+        border-width: 2px solid var(--color-white);
+    }
+
+    &__mail {
+        color: var(--palette-cyan-500);
     }
 }

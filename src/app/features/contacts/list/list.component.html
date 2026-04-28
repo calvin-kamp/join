@@ -1,4 +1,12 @@
 <section class="contactlist">
+    <ui-button
+        class="contactlist__btn"
+        [type]="'button'"
+        [variant]="'primary'"
+        (click)="continueToContact()"
+    >
+        Add new contact <img src="icon/person_add.png" />
+    </ui-button>
     <ul>
         @for (contact of sortedContacts(); track $index) {
             @if (
@@ -13,10 +21,19 @@
 
             <li>
                 <list-item
+                    (click)="getcard($index)"
                     [name]="contact.name"
                     [mail]="contact.mail"
                 />
             </li>
         }
     </ul>
+
+    <button
+        class="contactlist__btnround"
+        type="button"
+        (click)="continueToContact()"
+    >
+        <img src="icon/person_add.png" />
+    </button>
 </section>
