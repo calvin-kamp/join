@@ -1,0 +1,81 @@
+@if (isOpen()) {
+    <ui-dialog
+        [open]="isOpen()"
+        (close)="close()"
+    >
+        <div class="contact-form">
+            <div class="contact-form__header">
+                <div class="contact-form__logo"></div>
+
+                <h2 class="contact-form__title">
+                    @if (formType() === 'add') {
+                        Add contact
+
+                        <span class="contact-form__subtitle"> Tasks are better with a team! </span>
+                    } @else {
+                        Edit contact
+                    }
+                </h2>
+            </div>
+
+            <div class="contact-form__body">
+                <div class="contact-form__avatar">
+                    @if (hasName()) {
+                        <ui-initial-letter [name]="displayName()" />
+                    }
+                </div>
+
+                <div class="contact-form__form">
+                    <form
+                        [formGroup]="contactForm"
+                        (ngSubmit)="onSubmit()"
+                        class="form"
+                    >
+                        <ui-input
+                            formControlName="name"
+                            label="Name"
+                            name="name"
+                            [labelVisible]="false"
+                            [isRequired]="true"
+                            [errorMessage]="nameError()"
+                        />
+
+                        <ui-input
+                            formControlName="email"
+                            label="Email"
+                            name="email"
+                            type="email"
+                            [labelVisible]="false"
+                            [isRequired]="true"
+                            [errorMessage]="emailError()"
+                        />
+
+                        <ui-input
+                            formControlName="phone"
+                            label="Phone"
+                            name="phone"
+                            type="tel"
+                            [labelVisible]="false"
+                            [isRequired]="true"
+                            [errorMessage]="phoneError()"
+                        />
+
+                        @if (error()) {
+                            <p class="form__error">{{ error() }}</p>
+                        }
+
+                        <div class="form__actions">
+                            @if (formType() === 'add') {
+                                <ui-button (click)="close()">Cancel</ui-button>
+                                <ui-button [type]="'submit'">Create contact</ui-button>
+                            } @else {
+                                <ui-button (click)="onDelete()">Delete</ui-button>
+                                <ui-button [type]="'submit'">Save</ui-button>
+                            }
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </ui-dialog>
+}
