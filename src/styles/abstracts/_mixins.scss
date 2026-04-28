@@ -48,7 +48,7 @@
     outline-offset: $offset;
 }
 
-@mixin divider($position: bottom, $size-mobile: 50px, $size-desktop: 100px) {
+@mixin divider($position: bottom, $sizeMobile: 50px, $sizeDesktop: 0) {
     position: relative;
     padding-bottom: 16px;
 
@@ -59,11 +59,26 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: $size-mobile;
+            width: $sizeMobile;
             height: 3px;
             
-            @include breakpoint(lg) {
-                width: $size-desktop;
+            @if $sizeDesktop != 0 {
+                @include breakpoint(lg) {
+                    width: $sizeDesktop;
+                }
+            }
+        }
+
+        @if $position == bottom-left {
+            left: 0;
+            bottom: 0;
+            width: $sizeMobile;
+            height: 3px;
+            
+            @if $sizeDesktop != 0 {
+                @include breakpoint(lg) {
+                    width: $sizeDesktop;
+                }
             }
         }
 
@@ -71,11 +86,13 @@
             top: 50%;
             right: 0;
             transform: translateY(-50%);
-            height: $size-mobile;
+            height: $sizeMobile;
             width: 3px;
             
-            @include breakpoint(lg) {
-                height: $size-desktop;
+            @if $sizeDesktop != 0 {
+                @include breakpoint(lg) {
+                    height: $sizeDesktop;
+                }
             }
         }
 
