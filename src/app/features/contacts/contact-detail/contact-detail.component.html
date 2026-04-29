@@ -1,22 +1,14 @@
 <article class="contact-detail">
     <div class="contact-detail__headline">
         <ui-initial-letter
-            [name]="contact()!.name"
+            [name]="contact()?.name!"
             [size]="'lg'"
         ></ui-initial-letter>
         <div>
             <h2 class="contact-detail__name">{{ contact()?.name }}</h2>
             <div class="contact-detail__cta">
-                <ui-link
-                    [href]="'edit'"
-                    [linkStyle]="'default'"
-                    >Edit</ui-link
-                >
-                <ui-link
-                    [href]="'delete'"
-                    [linkStyle]="'default'"
-                    >Delete</ui-link
-                >
+                <ui-button>edit</ui-button>
+                <ui-button>delete</ui-button>
             </div>
         </div>
     </div>
@@ -28,18 +20,16 @@
             <p><strong>Email</strong></p>
             <ui-link
                 [href]="'mailto:' + contact()?.mail"
-                [linkStyle]="'no-decoration'"
-                >{{ contact()?.mail }}</ui-link
-            >
+                [label]="contact()?.mail!"
+            ></ui-link>
         </div>
 
         <div class="contact-detail__phone">
             <p><strong>Phone</strong></p>
             <ui-link
-                [href]="'tel:' + contact()?.phone"
-                [linkStyle]="'no-decoration'"
-                >{{ contact()?.phone }}</ui-link
-            >
+                [href]="'tel:' + contact()?.phone!"
+                [label]="contact()?.phone!"
+            ></ui-link>
         </div>
     </div>
 </article>
