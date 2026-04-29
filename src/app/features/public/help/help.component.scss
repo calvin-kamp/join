@@ -11,10 +11,11 @@
         padding-left: 10px;
     }
 
-    &__arrowback {
+    &__arrow-left {
         position: absolute;
         top: 120px;
         right: 16px;
+        padding-right: 16px;
     }
 
     &__headline {
@@ -58,6 +59,11 @@
     @include breakpoint(md) {
         padding-left: 96px;
         padding-right: 96px;
+
+        &__arrow-left {
+            padding-right: 96px;
+            top: 200px;
+        }
 
         &__headline {
             padding-top: 110px;
