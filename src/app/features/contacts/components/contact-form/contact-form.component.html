@@ -5,7 +5,9 @@
     >
         <div class="contact-form">
             <div class="contact-form__header">
-                <div class="contact-form__logo"></div>
+                <div class="contact-form__logo">
+                    <ui-logo [variant]="'light'" />
+                </div>
 
                 <h2 class="contact-form__title">
                     @if (formType() === 'add') {
@@ -25,6 +27,14 @@
                             [name]="displayName()"
                             size="xl"
                         />
+                    } @else {
+                        <div class="contact-form__placeholder">
+                            <ui-icon
+                                [name]="'person'"
+                                [width]="64"
+                                [height]="64"
+                            />
+                        </div>
                     }
                 </div>
 
