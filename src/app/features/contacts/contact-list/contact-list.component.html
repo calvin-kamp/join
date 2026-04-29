@@ -1,0 +1,27 @@
+<section class="contact-list">
+    <ui-button class="contact-list__btn"> Add new contact <img src="icon/person_add.png" /> </ui-button>
+    <ul>
+        @for (contact of sortedContacts(); track $index) {
+            @if (
+                $index === 0 ||
+                contact.name.trim().charAt(0).toUpperCase() !==
+                    sortedContacts()[$index - 1].name.trim().charAt(0).toUpperCase()
+            ) {
+                <li class="contact-list__letter">
+                    {{ contact.name.trim().charAt(0).toUpperCase() }}
+                </li>
+            }
+
+            <li>
+                <ui-contact [contact]="contact" />
+            </li>
+        }
+    </ul>
+
+    <button
+        class="contact-list__btnround"
+        type="button"
+    >
+        <img src="icon/person_add.png" />
+    </button>
+</section>

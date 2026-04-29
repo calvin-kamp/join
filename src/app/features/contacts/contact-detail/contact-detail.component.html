@@ -1,0 +1,35 @@
+<article class="contact-detail">
+    <div class="contact-detail__headline">
+        <ui-initial-letter
+            [name]="contact()?.name!"
+            [size]="'lg'"
+        ></ui-initial-letter>
+        <div>
+            <h2 class="contact-detail__name">{{ contact()?.name }}</h2>
+            <div class="contact-detail__cta">
+                <ui-button>edit</ui-button>
+                <ui-button>delete</ui-button>
+            </div>
+        </div>
+    </div>
+
+    <p class="contact-detail__info-text">Contact Information</p>
+
+    <div class="contact-detail__wrapper">
+        <div class="contact-detail__mail">
+            <p><strong>Email</strong></p>
+            <ui-link
+                [href]="'mailto:' + contact()?.mail"
+                [label]="contact()?.mail!"
+            ></ui-link>
+        </div>
+
+        <div class="contact-detail__phone">
+            <p><strong>Phone</strong></p>
+            <ui-link
+                [href]="'tel:' + contact()?.phone!"
+                [label]="contact()?.phone!"
+            ></ui-link>
+        </div>
+    </div>
+</article>

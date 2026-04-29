@@ -1,13 +1,13 @@
 @if (isExternal()) {
     <a
-        [attr.href]="href()"
-        [attr.target]="opensInNewTab() ? '_blank' : null"
-        [attr.rel]="opensInNewTab() ? 'noopener noreferrer' : null"
+        [href]="href()"
+        [target]="opensInNewTab() ? '_blank' : null"
+        [rel]="opensInNewTab() ? 'noopener noreferrer' : null"
         [class]="linkClasses()"
         uiButton
         [variant]="buttonVariant()"
     >
-        <ng-content />
+        {{ label() }}
     </a>
 } @else {
     <a
@@ -16,6 +16,6 @@
         uiButton
         [variant]="buttonVariant()"
     >
-        <ng-content />
+        {{ label() }}
     </a>
 }
