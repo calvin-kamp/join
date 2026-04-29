@@ -22,6 +22,11 @@ export class ContactsService {
 
         this.contacts.set(contacts);
     }
+    async getContactByID(id: number): Promise<Contact | undefined> {
+        const contact: Contact = await this.supabase.selectByID('contacts', id);
+
+        return contact ?? undefined;
+    }
 
     async addContact(contact: Contact): Promise<void> {
         await this.supabase.insert<Contact>('contacts', contact);

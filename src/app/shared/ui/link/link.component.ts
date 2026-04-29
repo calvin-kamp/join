@@ -17,6 +17,7 @@ export class LinkComponent {
     readonly href = input<string | null>(null);
     readonly variant = input<LinkVariant>('default');
     readonly linkStyle = input<LinkStyle>('default');
+    readonly label = input<string>('');
 
     protected readonly isExternal = computed(() => {
         const href = this.href();
@@ -24,6 +25,8 @@ export class LinkComponent {
         if (!href) {
             return false;
         }
+        console.log(href);
+        console.log(href.startsWith('https:'));
 
         return /^(https?:|mailto:|tel:)|^\/\//.test(href);
     });
