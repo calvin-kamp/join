@@ -21,7 +21,10 @@
             <div class="contact-form__body">
                 <div class="contact-form__avatar">
                     @if (hasName()) {
-                        <ui-initial-letter [name]="displayName()" />
+                        <ui-initial-letter
+                            [name]="displayName()"
+                            size="xl"
+                        />
                     }
                 </div>
 
@@ -61,12 +64,16 @@
                         />
 
                         @if (error()) {
-                            <p class="form__error">{{ error() }}</p>
+                            <p class="contact-form__error">{{ error() }}</p>
                         }
 
-                        <div class="form__actions">
+                        <div class="contact-form__actions">
                             @if (formType() === 'add') {
-                                <ui-button (click)="close()">Cancel</ui-button>
+                                <ui-button
+                                    [variant]="'outlined'"
+                                    (click)="close()"
+                                    >Cancel</ui-button
+                                >
                                 <ui-button [type]="'submit'">Create contact</ui-button>
                             } @else {
                                 <ui-button (click)="onDelete()">Delete</ui-button>

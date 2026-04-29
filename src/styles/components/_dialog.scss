@@ -3,7 +3,8 @@
 .dialog {
     display: block!important;
     width: 100%;
-    max-height: calc(100% - 166px);
+    // max-height: calc(100% - 166px);
+    height: 100dvh;
     padding: 0;
     border: none;
     border-radius: $radius-card;

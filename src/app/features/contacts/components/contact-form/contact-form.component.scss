@@ -1,13 +1,20 @@
 @use "abstracts" as *;
 
 .contact-form {
+    --bg-header: var(--color-surface-inverted);
+    --header-text: var(--color-white);
 
-    &__logo {
-        display: none;
+    color: var(--header-text);
 
-        @include breakpoint(lg) {
-            display: block;
-        }
+    height: 100%;
+
+    &__header{
+        height: 50%;
+        padding-left: 24px;
+        background-color: var(--bg-header);
+
+        @include flex($direction: column, $justify: center, $gap: 32px);
+       
     }
 
     &__title {
@@ -19,9 +26,38 @@
         }
     }
 
+    &__logo {
+        display: none;
+
+        @include breakpoint(lg) {
+            display: block;
+        }
+    }
+
     &__subtitle {
         display: block;
         margin-top: 8px;
         font-size: $font-size-sm;
     }
+
+    &__body{
+        height: 50%;
+    }
+
+    &__avatar{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-60px) translateY(-60px);
+    }
+
+    &__form{
+        padding-top: 92px;
+    }
+
+    &__actions{
+        @include flex($justify:center, $gap:20px);
+    }
 }
+
+
