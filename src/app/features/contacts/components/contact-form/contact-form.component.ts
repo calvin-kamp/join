@@ -18,7 +18,7 @@ type FormType = 'add' | 'edit';
 })
 export class ContactFormComponent {
     private fb = inject(FormBuilder);
-    private contactService = inject(ContactsService);
+    private contactsService = inject(ContactsService);
 
     private editingContact = signal<Contact | null>(null);
 
@@ -101,9 +101,9 @@ export class ContactFormComponent {
             const editing = this.editingContact();
 
             if (editing?.id) {
-                await this.contactService.updateContact({ ...contactData, id: editing.id });
+                await this.contactsService.updateContact({ ...contactData, id: editing.id });
             } else {
-                await this.contactService.addContact(contactData);
+                await this.contactsService.addContact(contactData);
             }
 
             this.close();
@@ -125,7 +125,7 @@ export class ContactFormComponent {
         this.error.set(null);
 
         try {
-            await this.contactService.deleteContact(contact.id);
+            await this.contactsService.deleteContact(contact.id);
 
             this.close();
         } catch {
