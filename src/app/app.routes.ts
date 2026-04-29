@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { MainLayoutComponent } from '@core/layout/main-layout.component';
 
-
 export const ROUTES: Routes = [
     {
         path: '',
@@ -15,11 +14,6 @@ export const ROUTES: Routes = [
                 path: 'summary',
                 loadComponent: () =>
                     import('./features/summary/dashboard/dashboard.component').then((m) => m.DashboardComponent)
-            },
-            {
-                path: 'contact-list',
-                loadComponent: () =>
-                    import('./features/contacts/list/list.component').then((m) => m.ListComponent)
             }
         ]
     },

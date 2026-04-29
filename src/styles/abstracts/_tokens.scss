@@ -1,4 +1,4 @@
-@use 'sass:map';
+@use "sass:map";
 
 /* -------------------------------------------------------- */
 /*                          LAYOUT                          */
@@ -10,6 +10,7 @@ $breakpoints: (
     md: 48rem,
     lg: 80rem
 );
+
 
 /* -------------------------------------------------------- */
 /*                          COLORS                          */
@@ -25,53 +26,40 @@ $breakpoints: (
 // ──────────────────────────────────────────────────────────────────────────────
 
 $palette: (
+
     // Navy — Primäre Markenfarbe (Buttons, Header, Footer, Toast, Icons)
-    navy-900: #091931,
-    // btn active / nav active bg
-    navy-700: #2a3647,
-    // primäre Buttons, Header-/Footer-bg, Text
-    navy-500: #42526e,
+    navy-900:           #091931,    // btn active / nav active bg
+    navy-700:           #2A3647,    // primäre Buttons, Header-/Footer-bg, Text
+    navy-500:           #42526E,    // Board ColumnTitle (einziger Einsatz)
 
-    // Board ColumnTitle (einziger Einsatz)
     // Cyan — Accent / Interactive (Divider, Links, Hover-States, Focus)
-    cyan-500: #29abe2,
-    // Links, Divider, Focus-Border, Hover-State
-    cyan-50: #edf2fa,
+    cyan-500:           #29ABE2,    // Links, Divider, Focus-Border, Hover-State
+    cyan-50:            #EDF2FA,    // Checkbox Hover Background
 
-    // Checkbox Hover Background
     // Grau-Skala — Surfaces, Borders, Muted
-    gray-50: #f6f7f8,
-    // Body Background
-    gray-100: #e7e7e7,
-    // Disabled Button Background
-    gray-300: #d1d1d1,
-    // Input Border / Placeholder / Divider
-    gray-400: #cdcdcd,
-    // Navigation Text + Icon (inaktiv)
-    gray-500: #a8a8a8,
+    gray-50:            #F6F7F8,    // Body Background
+    gray-100:           #E7E7E7,    // Disabled Button Background
+    gray-300:           #D1D1D1,    // Input Border / Placeholder / Divider
+    gray-400:           #CDCDCD,    // Navigation Text + Icon (inaktiv)
+    gray-500:           #A8A8A8,    // Icons, Muted Text, Footer Text
 
-    // Icons, Muted Text, Footer Text
     // Neutrals
-    white: #ffffff,
-    // Card Backgrounds, Input Background
-    black: #000000,
+    white:              #FFFFFF,    // Card Backgrounds, Input Background
+    black:              #000000,    // PageTitle, Fließtext
 
-    // PageTitle, Fließtext
     // Task Badge Colors — projektspezifische Kennzeichnung
-    badge-story: #0038ff,
-    // User Story Badge
-    badge-tech: #1fd7c1,
+    badge-story:        #0038FF,    // User Story Badge
+    badge-tech:         #1FD7C1,    // Technical Task Badge
 
-    // Technical Task Badge
     // Progress / Chart
-    progress-bar: #4589ff,
+    progress-bar:       #4589FF,    // Subtask Progressbar
 
-    // Subtask Progressbar
     // Status
-    ui-error: #e60026,
-    // Fehlerzustand
-    ui-warning: #ff3d00 // Deadline / Dringlichkeit (Dashboard Divider)
+    ui-error:           #E60026,    // Fehlerzustand
+    ui-warning:         #FF3D00,    // Deadline / Dringlichkeit (Dashboard Divider)
+
 );
+
 
 // ─── Semantische Color Map ─────────────────────────────────────────────────────
 //
@@ -88,81 +76,82 @@ $palette: (
 // ──────────────────────────────────────────────────────────────────────────────
 
 $colors: (
+
     // ── Neutrals ──────────────────────────────────────────────────────────────
-    white: map.get($palette, white),
-    black: map.get($palette, black),
+
+    white:                          map.get($palette, white),
+    black:                          map.get($palette, black),
+
+
     // ── Surfaces & Backgrounds ────────────────────────────────────────────────
-    body-background: map.get($palette, gray-50),
-    // #F6F7F8 — alle Page-Hintergründe
-    surface: map.get($palette, white),
-    // #FFFFFF — Cards, Dialoge, Inputs
-    surface-muted: map.get($palette, gray-100),
-    // #E7E7E7 — disabled btn bg, "no task" bg
-    surface-inverted: map.get($palette, navy-700),
-    // #2A3647 — Header, Footer, Toast, Dialog-Title-bg
-    surface-inverted-deep: map.get($palette, navy-900),
-    // #091931 — Nav active bg, btn active bg
-    surface-accent: map.get($palette, cyan-50),
-    // #EDF2FA — Checkbox hover bg
+
+    body-background:                map.get($palette, gray-50),         // #F6F7F8 — alle Page-Hintergründe
+
+    surface:                        map.get($palette, white),           // #FFFFFF — Cards, Dialoge, Inputs
+    surface-muted:                  map.get($palette, gray-100),        // #E7E7E7 — disabled btn bg, "no task" bg
+
+    surface-inverted:               map.get($palette, navy-700),        // #2A3647 — Header, Footer, Toast, Dialog-Title-bg
+    surface-inverted-deep:          map.get($palette, navy-900),        // #091931 — Nav active bg, btn active bg
+
+    surface-accent:                 map.get($palette, cyan-50),         // #EDF2FA — Checkbox hover bg
+
+
     // ── Text ──────────────────────────────────────────────────────────────────
-    text: map.get($palette, black),
-    // #000000 — Fließtext, PageTitles, FormInput
-    text-secondary: map.get($palette, navy-700),
-    // #2A3647 — Dashboard Text, Labels
-    text-tertiary: map.get($palette, navy-500),
-    // #42526E — Board ColumnTitle
-    text-muted: map.get($palette, gray-500),
-    // #A8A8A8 — Icons, Footer, "no task"-Text
-    text-placeholder: map.get($palette, gray-300),
-    // #D1D1D1 — Input Placeholder
-    text-inverted: map.get($palette, white),
-    // #FFFFFF — Text auf dunklen Surfaces
-    text-nav-inactive: map.get($palette, gray-400),
-    // #CDCDCD — Nav Text/Icon (inaktiv)
-    text-nav-active: map.get($palette, white),
-    // #FFFFFF — Nav Text/Icon (aktiv)
-    text-accent: map.get($palette, cyan-500),
-    // #29ABE2 — Links, Username highlight, Avatar-Text
+
+    text:                           map.get($palette, black),           // #000000 — Fließtext, PageTitles, FormInput
+    text-secondary:                 map.get($palette, navy-700),        // #2A3647 — Dashboard Text, Labels
+    text-tertiary:                  map.get($palette, navy-500),        // #42526E — Board ColumnTitle
+    text-muted:                     map.get($palette, gray-500),        // #A8A8A8 — Icons, Footer, "no task"-Text
+    text-placeholder:               map.get($palette, gray-300),        // #D1D1D1 — Input Placeholder
+
+    text-inverted:                  map.get($palette, white),           // #FFFFFF — Text auf dunklen Surfaces
+    text-nav-inactive:              map.get($palette, gray-400),        // #CDCDCD — Nav Text/Icon (inaktiv)
+    text-nav-active:                map.get($palette, white),           // #FFFFFF — Nav Text/Icon (aktiv)
+
+    text-accent:                    map.get($palette, cyan-500),        // #29ABE2 — Links, Username highlight, Avatar-Text
+
+
     // ── Brand / Primary ───────────────────────────────────────────────────────
     //
     //  primary         = Btn-1 default + alle primären Aktionselemente
     //  primary-hover   = Btn-1 hover (wechselt auf Accent-Cyan)
     //  primary-active  = Btn-1 active (tiefstes Navy)
     //
-    primary: map.get($palette, navy-700),
-    // #2A3647
-    primary-hover: map.get($palette, cyan-500),
-    // #29ABE2
-    primary-active: map.get($palette, navy-900),
-    // #091931
+
+    primary:                        map.get($palette, navy-700),        // #2A3647
+    primary-hover:                  map.get($palette, cyan-500),        // #29ABE2
+    primary-active:                 map.get($palette, navy-900),        // #091931
+
+
     // ── Accent ────────────────────────────────────────────────────────────────
-    accent: map.get($palette, cyan-500),
-    // #29ABE2 — Divider, Focus, Links, Btn-1 hover
-    accent-subtle: map.get($palette, cyan-50),
-    // #EDF2FA — Hover-Hintergrund (Checkbox)
+
+    accent:                         map.get($palette, cyan-500),        // #29ABE2 — Divider, Focus, Links, Btn-1 hover
+    accent-subtle:                  map.get($palette, cyan-50),         // #EDF2FA — Hover-Hintergrund (Checkbox)
+
+
     // ── Borders ───────────────────────────────────────────────────────────────
-    border: map.get($palette, gray-300),
-    // #D1D1D1 — Input, Card-Divider, Listen-Trennlinie
-    border-muted: map.get($palette, gray-500),
-    // #A8A8A8 — Search Input Border
-    border-strong: map.get($palette, navy-700),
-    // #2A3647 — Btn-2 Border, Checkbox Border
-    border-focus: map.get($palette, cyan-500),
-    // #29ABE2 — Input fokussiert
-    border-inverted: map.get($palette, navy-700),
-    // #2A3647 — Avatar Border im Header
+
+    border:                         map.get($palette, gray-300),        // #D1D1D1 — Input, Card-Divider, Listen-Trennlinie
+    border-muted:                   map.get($palette, gray-500),        // #A8A8A8 — Search Input Border
+    border-strong:                  map.get($palette, navy-700),        // #2A3647 — Btn-2 Border, Checkbox Border
+    border-focus:                   map.get($palette, cyan-500),        // #29ABE2 — Input fokussiert
+    border-inverted:                map.get($palette, navy-700),        // #2A3647 — Avatar Border im Header
+
+
     // ── Task Badges ───────────────────────────────────────────────────────────
-    badge-user-story: map.get($palette, badge-story),
-    // #0038FF
-    badge-technical-task: map.get($palette, badge-tech),
-    // #1FD7C1
-    task-progress-bar: map.get($palette, progress-bar),
-    // #4589FF
+
+    badge-user-story:               map.get($palette, badge-story),     // #0038FF
+    badge-technical-task:           map.get($palette, badge-tech),      // #1FD7C1
+    task-progress-bar:              map.get($palette, progress-bar),    // #4589FF
+
+
     // ── Status ────────────────────────────────────────────────────────────────
-    ui-error: map.get($palette, ui-error),
-    // #E60026
-    ui-warning: map.get($palette, ui-warning) // #FF3D00 — Deadline-Divider Dashboard
+
+    ui-error:                       map.get($palette, ui-error),        // #E60026
+    ui-warning:                     map.get($palette, ui-warning),      // #FF3D00 — Deadline-Divider Dashboard
+
 );
+
 
 /* -------------------------------------------------------- */
 /*                       BOX SHADOWS                        */
@@ -181,21 +170,30 @@ $colors: (
 // ──────────────────────────────────────────────────────────────────────────────
 
 $shadows: (
+
     // Cards & Dialoge (Login, Signup, Dialog-Overlays) — großer weicher Blur
-    card: 0 0 14px 3px rgba(0, 0, 0, 0.04),
+    card:               0 0 14px 3px rgba(0, 0, 0, 0.04),
+
     // Standard (Priority-Select, "no task" Hintergrund, kleine Dialoge)
-    sm: 0 0 4px 0 rgba(0, 0, 0, 0.04),
+    sm:                 0 0 4px 0 rgba(0, 0, 0, 0.04),
+
     // Mittel (Overview Cards, Toast, Footer, Navigation)
-    md: 0 0 4px 0 rgba(0, 0, 0, 0.1),
+    md:                 0 0 4px 0 rgba(0, 0, 0, 0.10),
+
     // Stark (TaskCard Board, Contact-List)
-    lg: 0 0 4px 0 rgba(0, 0, 0, 0.08),
+    lg:                 0 0 4px 0 rgba(0, 0, 0, 0.08),
+
     // Prominenter Rahmen ("no task" Button, Dialog)
-    inset-muted: 0 0 4px 0 rgba(0, 0, 0, 0.16),
+    inset-muted:        0 0 4px 0 rgba(0, 0, 0, 0.16),
+
     // Btn Hover + Active — mit y-Offset (gibt Tiefe-Feedback)
-    btn-interact: 0 4px 4px 0 rgba(0, 0, 0, 0.25),
+    btn-interact:       0 4px 4px 0 rgba(0, 0, 0, 0.25),
+
     // Header — leichter y-Offset
-    header: 0 4px 4px 0 rgba(0, 0, 0, 0.1)
+    header:             0 4px 4px 0 rgba(0, 0, 0, 0.10),
+
 );
+
 
 /* -------------------------------------------------------- */
 /*                        TYPOGRAPHY                        */
@@ -203,8 +201,8 @@ $shadows: (
 
 // ─── Font Basics ──────────────────────────────────────────────────────────────
 
-$font-family: 'Inter', Arial, sans-serif;
-$font-letter-spacing: normal;
+$font-family:                   "Inter", Arial, sans-serif;
+$font-letter-spacing:           normal;
 
 // ─── Type Scale ───────────────────────────────────────────────────────────────
 //
@@ -222,144 +220,142 @@ $font-letter-spacing: normal;
 // ──────────────────────────────────────────────────────────────────────────────
 
 $type-scale: (
-    xs: 16px,
-    // body · badge · nav · footer · btn-default · fließtext
-    sm: 20px,
-    // form-elements · body-lg · header-text · btn-lg
-    md: 23px,
-    // badge-lg · overview-card text · deadline-date
-    lg: 27px,
-    // h3 · section-headlines · subtitles
-    xl: 36px,
-    // h2 mobile · contact-name mobile · dialog-title (detail)
-    2xl: 47px,
-    // h1 mobile · page-title · h2 desktop · no-avatar-initials
-    3xl: 61px // h1 desktop · page-title desktop
+    xs:     16px,   // body · badge · nav · footer · btn-default · fließtext
+    sm:     20px,   // form-elements · body-lg · header-text · btn-lg
+    md:     23px,   // badge-lg · overview-card text · deadline-date
+    lg:     27px,   // h3 · section-headlines · subtitles
+    xl:     36px,   // h2 mobile · contact-name mobile · dialog-title (detail)
+    2xl:    47px,   // h1 mobile · page-title · h2 desktop · no-avatar-initials
+    3xl:    61px    // h1 desktop · page-title desktop
 );
 
 // ─── Convenience-Variablen ────────────────────────────────────────────────────
 
-$font-size: map.get($type-scale, xs); // 16px  ← CSS-Reset-Basis
+$font-size:                     map.get($type-scale, xs);   // 16px  ← CSS-Reset-Basis
 
-$font-size-xs: map.get($type-scale, xs); // 16px
-$font-size-sm: map.get($type-scale, sm); // 20px
-$font-size-md: map.get($type-scale, md); // 23px
-$font-size-lg: map.get($type-scale, lg); // 27px
-$font-size-xl: map.get($type-scale, xl); // 36px
-$font-size-2xl: map.get($type-scale, 2xl); // 47px
-$font-size-3xl: map.get($type-scale, 3xl); // 61px
+$font-size-xs:                  map.get($type-scale, xs);   // 16px
+$font-size-sm:                  map.get($type-scale, sm);   // 20px
+$font-size-md:                  map.get($type-scale, md);   // 23px
+$font-size-lg:                  map.get($type-scale, lg);   // 27px
+$font-size-xl:                  map.get($type-scale, xl);   // 36px
+$font-size-2xl:                 map.get($type-scale, 2xl);  // 47px
+$font-size-3xl:                 map.get($type-scale, 3xl);  // 61px
 
 // ─── Semantische Heading-Aliase ───────────────────────────────────────────────
 
-$font-size-h1-mobile: $font-size-2xl; // 47px
-$font-size-h1-desktop: $font-size-3xl; // 61px
+$font-size-h1-mobile:           $font-size-2xl;     // 47px
+$font-size-h1-desktop:          $font-size-3xl;     // 61px
 
-$font-size-h2-mobile: $font-size-xl; // 36px
-$font-size-h2-desktop: $font-size-2xl; // 47px
+$font-size-h2-mobile:           $font-size-xl;      // 36px
+$font-size-h2-desktop:          $font-size-2xl;     // 47px
 
-$font-size-h3-mobile: $font-size-lg; // 27px
-$font-size-h3-desktop: $font-size-lg; // 27px
+$font-size-h3-mobile:           $font-size-lg;      // 27px
+$font-size-h3-desktop:          $font-size-lg;      // 27px
 
 // ─── Body & Fließtext ─────────────────────────────────────────────────────────
 
-$font-size-body: $font-size-xs; // 16px
-$font-size-body-lg: $font-size-sm; // 20px
+$font-size-body:                $font-size-xs;      // 16px
+$font-size-body-lg:             $font-size-sm;      // 20px
 
 // ─── Komponenten-Tokens ───────────────────────────────────────────────────────
 
-$font-size-btn: $font-size-xs; // 16px  Standard
-$font-size-btn-lg: $font-size-sm; // 20px  --lg Modifier
+$font-size-btn:                 $font-size-xs;      // 16px  Standard
+$font-size-btn-lg:              $font-size-sm;      // 20px  --lg Modifier
 
-$font-size-badge: $font-size-xs; // 16px  Standard
-$font-size-badge-lg: $font-size-md; // 23px  --lg Modifier
+$font-size-badge:               $font-size-xs;      // 16px  Standard
+$font-size-badge-lg:            $font-size-md;      // 23px  --lg Modifier
 
-$font-size-form: $font-size-sm; // 20px  Standard
-$font-size-form-sm: $font-size-xs; // 16px  Kompakt
+$font-size-form:                $font-size-sm;      // 20px  Standard
+$font-size-form-sm:             $font-size-xs;      // 16px  Kompakt
 
 // ─── Font Weights ─────────────────────────────────────────────────────────────
 
-$font-weight-thin: 100;
-$font-weight-extralight: 200;
-$font-weight-light: 300;
-$font-weight-regular: 400;
-$font-weight-medium: 500;
-$font-weight-semibold: 600;
-$font-weight-bold: 700;
-$font-weight-extrabold: 800;
-$font-weight-black: 900;
+$font-weight-thin:              100;
+$font-weight-extralight:        200;
+$font-weight-light:             300;
+$font-weight-regular:           400;
+$font-weight-medium:            500;
+$font-weight-semibold:          600;
+$font-weight-bold:              700;
+$font-weight-extrabold:         800;
+$font-weight-black:             900;
 
 // ─── Line Heights ─────────────────────────────────────────────────────────────
 
-$line-height-body: 1.5;
-$line-height-tight: 1.2;
+$line-height-body:              1.5;
+$line-height-tight:             1.2;
+
 
 /* -------------------------------------------------------- */
 /*                         Z-LEVELS                         */
 /* -------------------------------------------------------- */
 
-$z-index-1: 100;
-$z-index-2: 200;
-$z-index-3: 300;
-$z-index-4: 400;
-$z-index-5: 500;
-$z-index-6: 600;
-$z-index-7: 700;
-$z-index-8: 800;
-$z-index-9: 900;
+$z-index-1:                                 100;
+$z-index-2:                                 200;
+$z-index-3:                                 300;
+$z-index-4:                                 400;
+$z-index-5:                                 500;
+$z-index-6:                                 600;
+$z-index-7:                                 700;
+$z-index-8:                                 800;
+$z-index-9:                                 900;
+
 
 /* -------------------------------------------------------- */
 /*                          MOTION                          */
 /* -------------------------------------------------------- */
 
-$transition-duration-fast: 200ms;
-$transition-duration-default: 400ms;
-$transition-duration-slow: 800ms;
+$transition-duration-fast:              200ms;
+$transition-duration-default:           400ms;
+$transition-duration-slow:              800ms;
 
-$transition-ease: cubic-bezier(0.2, 0, 0, 1);
+$transition-ease:                       cubic-bezier(0.2, 0, 0, 1);
 
-$transition-fast: #{$transition-duration-fast} #{$transition-ease};
-$transition-default: #{$transition-duration-default} #{$transition-ease};
-$transition-slow: #{$transition-duration-slow} #{$transition-ease};
+$transition-fast:                       #{$transition-duration-fast} #{$transition-ease};
+$transition-default:                    #{$transition-duration-default} #{$transition-ease};
+$transition-slow:                       #{$transition-duration-slow} #{$transition-ease};
+
 
 /* -------------------------------------------------------- */
 /*                          EFFECTS                         */
 /* -------------------------------------------------------- */
 
 $opacities: (
-    disabled: 0.4,
-    overlay: 0.6,
-    muted: 0.7,
-    active: 1
+    disabled:   0.4,
+    overlay:    0.6,
+    muted:      0.7,
+    active:     1
 );
+
 
 /* -------------------------------------------------------- */
 /*                          SIZING                          */
 /* -------------------------------------------------------- */
 
 $spaces: (
-    0: 0,
-    1: 0.25rem,
-    2: 0.5rem,
-    3: 0.75rem,
-    4: 1rem,
-    5: 1.25rem,
-    6: 1.5rem,
-    7: 1.75rem,
-    8: 2rem,
-    9: 3rem,
-    10: 4rem,
-    11: 5rem,
-    12: 6rem,
-    13: 8rem,
-    14: 9rem
+    0:      0,
+    1:      0.25rem,
+    2:      0.5rem,
+    3:      0.75rem,
+    4:      1rem,
+    5:      1.25rem,
+    6:      1.5rem,
+    7:      1.75rem,
+    8:      2rem,
+    9:      3rem,
+    10:     4rem,
+    11:     5rem,
+    12:     6rem,
+    13:     8rem,
+    14:     9rem
 );
 
 $gaps: (
-    xs: map.get($spaces, 2),
-    sm: map.get($spaces, 3),
-    md: map.get($spaces, 4),
-    lg: map.get($spaces, 5),
-    xl: map.get($spaces, 6)
+    xs:     map.get($spaces, 2),
+    sm:     map.get($spaces, 3),
+    md:     map.get($spaces, 4),
+    lg:     map.get($spaces, 5),
+    xl:     map.get($spaces, 6),
 );
 
 // ─── Border Radius Scale ──────────────────────────────────────────────────────
@@ -385,30 +381,30 @@ $gaps: (
 // ──────────────────────────────────────────────────────────────────────────────
 
 $radii: (
-    xs: 2px,
-    sm: 8px,
-    md: 10px,
-    lg: 16px,
-    xl: 20px,
-    2xl: 24px,
-    3xl: 30px,
-    pill: 999px,
+    xs:     2px,
+    sm:     8px,
+    md:     10px,
+    lg:     16px,
+    xl:     20px,
+    2xl:    24px,
+    3xl:    30px,
+    pill:   999px,
     circle: 50%
 );
 
 // ─── Semantische Radius-Aliase ────────────────────────────────────────────────
 
-$radius-btn: map.get($radii, sm); //  8px — alle Button-Varianten
-$radius-badge: map.get($radii, sm); //  8px — Task-Badges, Add-Icon
-$radius-input: map.get($radii, md); // 10px — Inputs, Dropdowns, Priority
-$radius-contact-item: map.get($radii, md); // 10px — Kontaktlisten-Element
-$radius-navbar-active: map.get($radii, lg); // 16px — Mobile Nav Indicator
-$radius-submenu: map.get($radii, xl); // 20px — Submenu-Ecken (partial)
-$radius-card: map.get($radii, 2xl); // 24px — Board Task Card
-$radius-card-lg: map.get($radii, 3xl); // 30px — Dashboard Card, Task Dialog
-$radius-pill: map.get($radii, pill);
-$radius-radio: map.get($radii, xs); //  2px — Radio Button
-$radius-circle: map.get($radii, circle);
+$radius-btn:            map.get($radii, sm);    //  8px — alle Button-Varianten
+$radius-badge:          map.get($radii, sm);    //  8px — Task-Badges, Add-Icon
+$radius-input:          map.get($radii, md);    // 10px — Inputs, Dropdowns, Priority
+$radius-contact-item:   map.get($radii, md);    // 10px — Kontaktlisten-Element
+$radius-navbar-active:  map.get($radii, lg);    // 16px — Mobile Nav Indicator
+$radius-submenu:        map.get($radii, xl);    // 20px — Submenu-Ecken (partial)
+$radius-card:           map.get($radii, 2xl);   // 24px — Board Task Card
+$radius-card-lg:        map.get($radii, 3xl);   // 30px — Dashboard Card, Task Dialog
+$radius-pill:           map.get($radii, pill);
+$radius-radio:          map.get($radii, xs);    //  2px — Radio Button
+$radius-circle:         map.get($radii, circle);
 
 $header-height-mobile: 80px;
 $header-height-desktop: 96px;
@@ -435,15 +431,15 @@ $heading-sizes: (
     )
 );
 
+
 /* -------------------------------------------------------- */
 /*                   CSS VARS EXPORT LIST                   */
 /* -------------------------------------------------------- */
 
 $css-var-tokens: (
-    color: $colors,
-    shadow: $shadows,
-    space: $spaces,
-    gap: $gaps,
-    opacity: $opacities,
-    palette: $palette
+    color:      $colors,
+    shadow:     $shadows,
+    space:      $spaces,
+    gap:        $gaps,
+    opacity:    $opacities
 );

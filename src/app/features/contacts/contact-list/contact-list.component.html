@@ -18,11 +18,7 @@
             }
 
             <li>
-                <list-item
-                    (click)="getcard(contact.id!)"
-                    [name]="contact.name"
-                    [mail]="contact.mail"
-                />
+                <ui-contact [contact]="contact" />
             </li>
         }
     </ul>
