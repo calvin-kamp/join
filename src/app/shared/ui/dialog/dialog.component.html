@@ -1,0 +1,10 @@
+<dialog
+    #dialogEl
+    class="dialog"
+    (click)="closeOnBackdropClick($event)"
+    (close)="nativeClose()"
+>
+    <div class="dialog__close"></div>
+
+    <ng-content />
+</dialog>

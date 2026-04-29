@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { SupabaseService } from '@core/supabase/supabase.service';
 
-interface Contact {
+export interface Contact {
     id?: number;
     name: string;
     mail: string;
