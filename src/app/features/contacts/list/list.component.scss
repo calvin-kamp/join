@@ -1,23 +1,17 @@
 @use 'abstracts' as *;
 
-.contactlist {
+.contact-list {
     display: flex;
     flex-direction: column;
-
-    max-height: 766px;
+    max-height: calc(100vh - $header-height-mobile - $footer-height-mobile);
     margin: 0px 24px 0px 24px;
     overflow: auto;
 
     &__btn {
         padding: 23px 64px 23px 64px;
+        display: none;
         img {
             padding-left: 16px;
-        }
-    }
-
-    @include breakpoint(sm) {
-        &__btn {
-            display: none;
         }
     }
 
@@ -29,14 +23,6 @@
         &__btn {
             display: block;
         }
-    }
-
-    @include breakpoint(lg) {
-    }
-
-    ul {
-        display: flex;
-        flex-direction: column;
     }
 
     &__letter {

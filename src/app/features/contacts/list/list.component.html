@@ -1,8 +1,6 @@
-<section class="contactlist">
+<section class="contact-list">
     <ui-button
-        class="contactlist__btn"
-        [type]="'button'"
-        [variant]="'primary'"
+        class="contact-list__btn"
         (click)="continueToContact()"
     >
         Add new contact <img src="icon/person_add.png" />
@@ -14,14 +12,14 @@
                 contact.name.trim().charAt(0).toUpperCase() !==
                     sortedContacts()[$index - 1].name.trim().charAt(0).toUpperCase()
             ) {
-                <li class="contactlist__letter">
+                <li class="contact-list__letter">
                     {{ contact.name.trim().charAt(0).toUpperCase() }}
                 </li>
             }
 
             <li>
                 <list-item
-                    (click)="getcard($index)"
+                    (click)="getcard(contact.id!)"
                     [name]="contact.name"
                     [mail]="contact.mail"
                 />
@@ -30,7 +28,7 @@
     </ul>
 
     <button
-        class="contactlist__btnround"
+        class="contact-list__btnround"
         type="button"
         (click)="continueToContact()"
     >
