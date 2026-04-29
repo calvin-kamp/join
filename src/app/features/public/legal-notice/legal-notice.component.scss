@@ -1,0 +1,57 @@
+@use 'abstracts' as *;
+
+.legal-notice {
+    ul {
+        padding-top: 16px;
+        list-style-position: inside;
+        padding-bottom: 16px;
+    }
+
+    li {
+        padding-left: 10px;
+    }
+
+    &__arrowback {
+        position: absolute;
+        top: 125px;
+        right: 16px;
+    }
+
+    &__headline {
+        padding-bottom: 32px;
+        padding-top: 48px;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    &__mobilenone {
+        display: none;
+    }
+    .padding16px {
+        padding-top: 16px;
+    }
+
+    @include breakpoint(md) {
+        padding-left: 96px;
+        padding-right: 96px;
+
+        &__headline {
+            padding-top: 110px;
+        }
+        &__mobilenone {
+            display: block;
+        }
+
+        h1 {
+            font-size: $font-size-3xl;
+        }
+
+        &__arrowback {
+            display: none;
+        }
+    }
+}
