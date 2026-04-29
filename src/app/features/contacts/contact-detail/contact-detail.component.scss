@@ -1,0 +1,30 @@
+@use "abstracts" as *;
+
+.contact-detail {
+
+    @include flex($direction: column, $gap: 21px);
+    
+    &__headline {
+        @include flex($items: center, $gap: 20px); 
+    }
+    
+    &__cta{
+        @include flex($gap: 16px);
+    }
+
+    &__info-text {
+        font-size: $font-size-sm;
+    }
+
+    &__mail {
+        @include flex($direction:column, $gap: 15px);
+    }
+
+    &__phone {
+        @include flex($direction:column, $gap: 15px);
+    }
+
+    &__wrapper {
+        @include flex($direction:column, $gap: 22px);
+    }
+}
