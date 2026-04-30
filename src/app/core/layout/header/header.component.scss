@@ -1,0 +1,79 @@
+@use "abstracts" as *;
+
+.main-header {
+    @include flex($justify:space-between, $items: center);
+    padding: 20px 16px;
+    box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.3);
+
+    &__ui-logo-tool-title-wrapper {
+        @include flex($items: center, $justify:center);
+    }
+
+    &__ui-logo {
+        width: 32px;
+        height: 40px;
+
+        @include breakpoint(md) {
+            display: none;
+        }
+    }
+
+    &__tool-title {
+        padding-left: 116px;
+        display: none;
+
+        @include breakpoint(md) {
+            display: block;
+        }
+    }
+
+    &__help-profil-btn-wrapper {
+        @include flex($items: center, $justify:center, $gap: 22px);
+    }
+
+    &__help-icon {
+        display: none;
+
+        @include breakpoint(md) {
+            display: block;
+        }
+    }
+
+    &__profil-btn {
+        border-radius: 50%;
+    }
+
+    &__nav {
+        position: fixed;
+        opacity: 0;
+        top: 70px;
+        right: 16px;
+        width: 150px;
+        height: 224px;
+        @include flex($direction: column);
+        background-color:  #2A3647;
+        color: #CDCDCD;
+        padding: 12px;
+        padding-left: 12px;
+        padding-right: 12px;
+        border-radius: 16px 0px 16px 16px;
+        overflow: hidden;
+        transform: translate-X(100%);
+
+        &--active{
+            opacity: 1;
+            animation: slideInRight 0.3s ease-in-out forwards;
+        }
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}

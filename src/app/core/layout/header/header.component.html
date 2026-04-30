@@ -1,1 +1,47 @@
-<p>header works!</p>
+<header class="main-header">
+    <div class="main-header__ui-logo-tool-title-wrapper">
+        <ui-logo class="main-header__ui-logo"></ui-logo>
+        <p class="main-header__tool-title">Kanban Project Management Tool</p>
+    </div>
+
+    <div class="main-header__help-profil-btn-wrapper">
+        <ui-icon
+            [name]="'help-question'"
+            [width]="20"
+            [height]="20"
+            class="main-header__help-icon"
+        ></ui-icon>
+        <button
+            class="main-header__profil-btn"
+            [style.color]="'red'"
+            (click)="showMenu()"
+        >
+            XY
+        </button>
+    </div>
+    <nav
+        class="main-header__nav"
+        [class.main-header__nav--active]="isToggled"
+    >
+        <ui-link
+            [href]="'/help'"
+            [linkStyle]="'no-decoration'"
+            >Help</ui-link
+        >
+        <ui-link
+            [href]="'/legal-notice'"
+            [linkStyle]="'no-decoration'"
+            >Legal Notice</ui-link
+        >
+        <ui-link
+            [href]="'/privacy-policy'"
+            [linkStyle]="'no-decoration'"
+            >Privacy Policy</ui-link
+        >
+        <ui-link
+            [href]="'/logout'"
+            [linkStyle]="'no-decoration'"
+            >Log out</ui-link
+        >
+    </nav>
+</header>
