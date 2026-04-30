@@ -1,12 +1,15 @@
 <section class="privacy-policy">
-    <ui-link [href]="'/'">
+    <a
+        [routerLink]="'/'"
+        class="privacy-policy__backlink"
+    >
         <ui-icon
             class="privacy-policy__arrowback"
             name="arrow-left"
             [width]="32"
             [height]="32"
         ></ui-icon>
-    </ui-link>
+    </a>
 
     <div class="privacy-policy__container">
         <div class="privacy-policy__headline">
