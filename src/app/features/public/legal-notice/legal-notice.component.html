@@ -1,12 +1,15 @@
 <section class="legal-notice">
-    <ui-link [href]="'/'">
+    <a
+        [routerLink]="'/'"
+        class="legal-notice__link"
+    >
         <ui-icon
             class="legal-notice__arrowback"
             name="arrow-left"
             [width]="32"
             [height]="32"
         ></ui-icon>
-    </ui-link>
+    </a>
     <div class="legal-notice__container">
         <div class="legal-notice__headline">
             <h1 class="legal-notice__title">Legal Notice</h1>
@@ -21,7 +24,10 @@
                     <li>• [22844 Norderstedt]</li>
                 </ul>
                 <h3>Exploring the Board</h3>
-                <p>Email: [info@info.de]</p>
+                <ui-link
+                    [href]="'mailto:info@info.com'"
+                    [label]="'info@info.de'"
+                ></ui-link>
             </div>
             <div class="legal-notice__teams">
                 <h3>Acceptance of Terms</h3>
@@ -43,7 +49,8 @@
                         [href]="'/'"
                         [label]="'Join'"
                     ></ui-link>
-                    has been developed as part of a student group project in a web development bootcamp at the<ui-link
+                    has been developed as part of a student group project in a web development bootcamp at the
+                    <ui-link
                         [href]="'https://developerakademie.com/'"
                         [label]="'Developer Akademie GmbH'"
                     ></ui-link>
