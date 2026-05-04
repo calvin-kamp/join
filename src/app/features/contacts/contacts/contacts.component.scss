@@ -1,0 +1,78 @@
+@use "abstracts" as *;
+
+:host {
+    display: block;
+    height: 100%;
+}
+
+.contacts {
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 100%;
+    overflow: hidden;
+
+    @include breakpoint(lg) {
+        grid-template-columns: minmax(320px, 400px) 1fr;
+        column-gap: 56px;
+    }
+
+    &__list {
+        min-height: 0;
+    }
+
+    &__title {
+        display: none;
+        @include divider($position: bottom-left, $sizeMobile: 59px);
+
+        @include breakpoint(lg) {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding-bottom: 0;
+
+            &::after {
+                content: none;
+            }
+        }
+    }
+
+    &__subtitle {
+        display: block;
+        width: 100%;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-regular;
+
+        @include breakpoint(lg) {
+            display: inline-block;
+            width: auto;
+            font-size: $font-size-lg;
+            @include divider($position: left, $sizeDesktop: 59px);
+        }
+    }
+
+    &__detail {
+        @include breakpoint(lg) {
+            padding-top: 110px;
+        }
+    }
+
+    &:has(router-outlet + *) {
+        .contacts__list {
+            display: none;
+
+            @include breakpoint(lg) {
+                display: block;
+            }
+        }
+
+        .contacts__title {
+            @include flex($gap: 8px);
+
+            @include breakpoint(lg) {
+                display: flex;
+                align-items: center;
+                gap: 30px;
+            }
+        }
+    }
+}

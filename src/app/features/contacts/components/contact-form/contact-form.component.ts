@@ -1,4 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ContactsService, type Contact } from '@features/contacts/contacts.service';
 import { controlErrorMessage } from '@shared/forms/control-error-message';
@@ -7,18 +9,31 @@ import { DialogComponent } from '@shared/ui/dialog/dialog.component';
 import { ButtonComponent } from '@shared/ui/button/button.component';
 import { InitialLetterComponent } from '@shared/ui/initial-letter/initial-letter.component';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { LogoComponent } from '@shared/ui/logo/logo.component';
+import { IconComponent } from '@shared/ui/icon/icon.component';
+import { LinkComponent } from '@shared/ui/link/link.component';
 
 type FormType = 'add' | 'edit';
 
 @Component({
     selector: 'contacts-contact-form',
-    imports: [ReactiveFormsModule, InputComponent, DialogComponent, ButtonComponent, InitialLetterComponent],
+    imports: [
+        ReactiveFormsModule,
+        InputComponent,
+        DialogComponent,
+        ButtonComponent,
+        InitialLetterComponent,
+        LogoComponent,
+        IconComponent,
+        LinkComponent
+    ],
     templateUrl: './contact-form.component.html',
     styleUrl: './contact-form.component.scss'
 })
 export class ContactFormComponent {
     private fb = inject(FormBuilder);
     private contactsService = inject(ContactsService);
+    private router = inject(Router);
 
     private editingContact = signal<Contact | null>(null);
 
@@ -55,6 +70,10 @@ export class ContactFormComponent {
         required: 'Phone is required',
         minlength: 'Must be atleast 6 characters'
     });
+
+    constructor() {
+        this.contactsService.formOpenRequests$.pipe(takeUntilDestroyed()).subscribe((contact) => this.open(contact));
+    }
 
     open(contact?: Contact): void {
         if (contact) {
@@ -128,6 +147,7 @@ export class ContactFormComponent {
             await this.contactsService.deleteContact(contact.id);
 
             this.close();
+            this.router.navigate(['/contacts']);
         } catch {
             this.error.set('Failed to delete contact.');
         } finally {

@@ -50,7 +50,12 @@
 
 @mixin divider($position: bottom, $sizeMobile: 50px, $sizeDesktop: 0) {
     position: relative;
-    padding-bottom: 16px;
+
+    @if $position == left {
+        padding-left: 30px;
+    } @else {
+        padding-bottom: 16px;
+    }
 
     &::after {
         position: absolute;
@@ -82,12 +87,26 @@
             }
         }
 
+        @if $position == left {
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 3px;
+            height: $sizeMobile;
+            
+            @if $sizeDesktop != 0 {
+                @include breakpoint(lg) {
+                    height: $sizeDesktop;
+                }
+            }
+        }
+
         @if $position == right {
             top: 50%;
             right: 0;
             transform: translateY(-50%);
-            height: $sizeMobile;
             width: 3px;
+            height: $sizeMobile;
             
             @if $sizeDesktop != 0 {
                 @include breakpoint(lg) {
@@ -100,6 +119,12 @@
         background-color: var(--color-accent);
         content: "";
     }
+}
+
+@mixin fade-in-transition($startingPosition: right) {
+    
+    transition: transform $transition-default;
+
 }
 
 @mixin token-to-css-vars($tokens, $prefix: null) {

@@ -1,4 +1,4 @@
-@use "abstracts" as *;
+@use 'abstracts' as *;
 
 .button {
     --btn-color: var(--color-text);
@@ -18,7 +18,8 @@
         border-color $transition-default,
         background-color $transition-default,
         box-shadow $transition-default;
-    @include flex($wrap: nowrap, $justify:center, $items: center, $gap: var(--btn-gap));
+
+    @include flex($wrap: nowrap, $justify: center, $items: center, $gap: var(--btn-gap));
 
     @include hoverable() {
         box-shadow: var(--shadow-btn-interact);
@@ -48,7 +49,9 @@
             --btn-color: var(--color-primary-hover);
             --btn-border-color: var(--color-primary-hover);
 
-            box-shadow: var(--shadow-btn-interact), inset 0 0 0 1px var(--btn-border-color);
+            box-shadow:
+                var(--shadow-btn-interact),
+                inset 0 0 0 1px var(--btn-border-color);
         }
 
         &:active {
@@ -57,8 +60,72 @@
         }
     }
 
+    &--link {
+        gap: 8px;
+        --btn-color: var(--color-primary);
+        border: none;
+        min-width: auto;
+        padding: 12px 0;
+        padding-inline: 0;
+
+        & > ui-icon > svg > path {
+            fill: var(--color-primary);
+            transition: fill $transition-default;  
+        }
+        
+        @include hoverable() {
+            --btn-color: var(--color-primary-hover);
+            --btn-border-color: none;
+            box-shadow: none;
+            & > ui-icon > svg > path {
+                fill: var(--color-primary-hover);
+            }
+        }
+
+    }
+
+    &--add-contact {
+        position: fixed;
+        right: 16px;
+        bottom: calc($footer-height-mobile + 16px);
+        width: 56px;
+        min-width: 0;
+        height: 56px;
+        padding: 0;
+        border-radius: $radius-round;
+        z-index: $z-index-1;
+
+        @include breakpoint(lg) {
+            --btn-gap: 16px;
+
+            position: static;
+            width: 100%;
+            min-width: 146px;
+            height: auto;
+            margin-block: 20px;
+            border-radius: $radius-btn;
+        }
+    }
+
     &--lg {
         font-size: get-rem($font-size-btn-lg);
         font-weight: $font-weight-bold;
+
+        @include breakpoint(lg) {
+            padding: 16px;
+        }
+    }
+
+    &__label {
+        display: none;
+
+        @include breakpoint(lg) {
+            display: inline;
+        }
+    }
+
+    &__icon {
+        width: 24px;
+        height: 24px;
     }
 }

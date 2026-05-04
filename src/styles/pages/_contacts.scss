@@ -1,0 +1,9 @@
+@use "abstracts" as *;
+
+body:has(contacts) {
+    background: var(--color-white);
+
+    @include breakpoint(lg) {
+        background: var(--color-body-background);
+    }
+}
