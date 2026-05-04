@@ -1,1 +1,76 @@
-<p>footer works!</p>
+<footer class="main-footer">
+    <ui-logo
+        class="main-footer__ui-logo"
+        variant="light"
+    ></ui-logo>
+    <ul class="main-footer__nav">
+        <li class="main-footer__nav-link main-footer__nav-link--active">
+            <ui-link
+                [href]="'/summay'"
+                [linkStyle]="'no-decoration'"
+            >
+                <ui-icon
+                    [name]="'nav-summary'"
+                    [width]="20"
+                    [height]="20"
+                    class="main-footer__icon"
+                ></ui-icon>
+            </ui-link>
+            <p>Summary</p>
+        </li>
+        <li class="main-footer__nav-link">
+            <ui-link
+                [href]="'/add-task'"
+                [linkStyle]="'no-decoration'"
+            >
+                <ui-icon
+                    [name]="'nav-add-task'"
+                    [width]="24"
+                    [height]="24"
+                    class="main-footer__icon"
+                ></ui-icon>
+            </ui-link>
+            <p>Add Task</p>
+        </li>
+        <li class="main-footer__nav-link">
+            <ui-link
+                [href]="'/board'"
+                [linkStyle]="'no-decoration'"
+            >
+                <ui-icon
+                    [name]="'nav-board'"
+                    [width]="24"
+                    [height]="24"
+                    class="main-footer__icon"
+                ></ui-icon>
+            </ui-link>
+            <p>Board</p>
+        </li>
+        <li class="main-footer__nav-link">
+            <ui-link
+                [href]="'/contacts'"
+                [linkStyle]="'no-decoration'"
+            >
+                <ui-icon
+                    [name]="'nav-contacts'"
+                    [width]="24"
+                    [height]="24"
+                    class="main-footer__icon"
+                ></ui-icon>
+            </ui-link>
+            <p>Contacts</p>
+        </li>
+    </ul>
+    <div class="main-footer__links">
+        <ui-link
+            [href]="'/privacy-policy'"
+            [linkStyle]="'muted'"
+            >Privacy Policy</ui-link
+        >
+        <ui-link
+            [href]="'/legal-notice'"
+            [linkStyle]="'muted'"
+            >Legal Notice</ui-link
+        >
+    </div>
+</footer>
