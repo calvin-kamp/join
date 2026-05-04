@@ -1,4 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ContactsService, type Contact } from '@features/contacts/contacts.service';
 import { controlErrorMessage } from '@shared/forms/control-error-message';
@@ -19,6 +21,7 @@ type FormType = 'add' | 'edit';
 export class ContactFormComponent {
     private fb = inject(FormBuilder);
     private contactsService = inject(ContactsService);
+    private router = inject(Router);
 
     private editingContact = signal<Contact | null>(null);
 
@@ -55,6 +58,10 @@ export class ContactFormComponent {
         required: 'Phone is required',
         minlength: 'Must be atleast 6 characters'
     });
+
+    constructor() {
+        this.contactsService.formOpenRequests$.pipe(takeUntilDestroyed()).subscribe((contact) => this.open(contact));
+    }
 
     open(contact?: Contact): void {
         if (contact) {
@@ -128,6 +135,7 @@ export class ContactFormComponent {
             await this.contactsService.deleteContact(contact.id);
 
             this.close();
+            this.router.navigate(['/contacts']);
         } catch {
             this.error.set('Failed to delete contact.');
         } finally {
