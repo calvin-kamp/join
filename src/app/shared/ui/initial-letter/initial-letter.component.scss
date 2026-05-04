@@ -1,0 +1,39 @@
+@use "abstracts" as *;
+
+.initial-letter {
+    border: 2px solid var(--color-white);
+    border-radius: $radius-round;
+    color: var(--color-white);
+    user-select: none;
+    aspect-ratio: 1;
+    @include flex($items: center, $justify: center);
+
+    &--sm {
+        width: 32px;
+        border-width: 1px;
+    }
+
+    &--md {
+        width: 42px;
+    }
+
+    &--lg {
+        width: 90px;
+        border-width: 3px;
+        font-size: $font-size-lg;
+        box-shadow: var(--shadow-md);
+        
+        @include breakpoint(lg) {
+            font-size: $font-size-2xl;
+            width: 120px;
+        }
+    }
+    
+    &--xl {
+        width: 120px;
+        border-width: 3px;
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-medium;
+        box-shadow: var(--shadow-md);
+    }
+}

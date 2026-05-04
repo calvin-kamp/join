@@ -1,0 +1,36 @@
+<div class="contact-list">
+    <ui-button
+        variant="primary"
+        btnClass="button--add-contact button--lg"
+        (click)="addContact()"
+    >
+        <span class="button__label">Add new contact</span>
+        <ui-icon
+            name="add-contact"
+            [width]="24"
+            [height]="24"
+        />
+    </ui-button>
+
+    <ul class="contact-list__list">
+        @for (group of groupedContacts(); track group.letter) {
+            <li class="contact-list__group">
+                <span class="contact-list__letter">{{ group.letter }}</span>
+
+                <ul class="contact-list__contacts">
+                    @for (contact of group.contacts; track contact.id) {
+                        <li class="contact-list__item">
+                            <ui-link
+                                class="contact-list__link"
+                                [routerLink]="['/contacts', contact.id]"
+                                routerLinkActive="contact-list__link--active"
+                            >
+                                <ui-contact [contact]="contact" />
+                            </ui-link>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+</div>

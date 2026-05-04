@@ -171,6 +171,9 @@ $colors: (
 
 $shadows: (
 
+    // List
+    list:               4px 0 6px 0 rgba(0, 0, 0, 0.08),
+
     // Cards & Dialoge (Login, Signup, Dialog-Overlays) — großer weicher Blur
     card:               0 0 14px 3px rgba(0, 0, 0, 0.04),
 
@@ -388,7 +391,8 @@ $radii: (
     xl:     20px,
     2xl:    24px,
     3xl:    30px,
-    pill:   999px
+    pill:   999px,
+    circle: 50%
 );
 
 // ─── Semantische Radius-Aliase ────────────────────────────────────────────────
@@ -403,6 +407,7 @@ $radius-card:           map.get($radii, 2xl);   // 24px — Board Task Card
 $radius-card-lg:        map.get($radii, 3xl);   // 30px — Dashboard Card, Task Dialog
 $radius-pill:           map.get($radii, pill);
 $radius-radio:          map.get($radii, xs);    //  2px — Radio Button
+$radius-round:          map.get($radii, circle);
 
 $header-height-mobile: 80px;
 $header-height-desktop: 96px;

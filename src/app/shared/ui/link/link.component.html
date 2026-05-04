@@ -1,21 +1,26 @@
+<ng-template #content>
+    <ng-content />
+</ng-template>
+
 @if (isExternal()) {
     <a
-        [attr.href]="href()"
-        target="_blank"
-        rel="noopener noreferrer"
+        [href]="href()"
+        [target]="opensInNewTab() ? '_blank' : null"
+        [rel]="opensInNewTab() ? 'noopener noreferrer' : null"
         [class]="linkClasses()"
         uiButton
         [variant]="buttonVariant()"
     >
-        <ng-content />
+        <ng-container [ngTemplateOutlet]="content" />
     </a>
 } @else {
     <a
         [routerLink]="href()"
+        [routerLinkActive]="activeClass()"
         [class]="linkClasses()"
         uiButton
         [variant]="buttonVariant()"
     >
-        <ng-content />
+        <ng-container [ngTemplateOutlet]="content" />
     </a>
 }

@@ -48,9 +48,14 @@
     outline-offset: $offset;
 }
 
-@mixin divider($position: bottom, $size-mobile: 50px, $size-desktop: 100px) {
+@mixin divider($position: bottom, $sizeMobile: 50px, $sizeDesktop: 0) {
     position: relative;
-    padding-bottom: 16px;
+
+    @if $position == left {
+        padding-left: 30px;
+    } @else {
+        padding-bottom: 16px;
+    }
 
     &::after {
         position: absolute;
@@ -59,11 +64,40 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: $size-mobile;
+            width: $sizeMobile;
             height: 3px;
             
-            @include breakpoint(lg) {
-                width: $size-desktop;
+            @if $sizeDesktop != 0 {
+                @include breakpoint(lg) {
+                    width: $sizeDesktop;
+                }
+            }
+        }
+
+        @if $position == bottom-left {
+            left: 0;
+            bottom: 0;
+            width: $sizeMobile;
+            height: 3px;
+            
+            @if $sizeDesktop != 0 {
+                @include breakpoint(lg) {
+                    width: $sizeDesktop;
+                }
+            }
+        }
+
+        @if $position == left {
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 3px;
+            height: $sizeMobile;
+            
+            @if $sizeDesktop != 0 {
+                @include breakpoint(lg) {
+                    height: $sizeDesktop;
+                }
             }
         }
 
@@ -71,11 +105,13 @@
             top: 50%;
             right: 0;
             transform: translateY(-50%);
-            height: $size-mobile;
             width: 3px;
+            height: $sizeMobile;
             
-            @include breakpoint(lg) {
-                height: $size-desktop;
+            @if $sizeDesktop != 0 {
+                @include breakpoint(lg) {
+                    height: $sizeDesktop;
+                }
             }
         }
 
@@ -83,6 +119,12 @@
         background-color: var(--color-accent);
         content: "";
     }
+}
+
+@mixin fade-in-transition($startingPosition: right) {
+    
+    transition: transform $transition-default;
+
 }
 
 @mixin token-to-css-vars($tokens, $prefix: null) {

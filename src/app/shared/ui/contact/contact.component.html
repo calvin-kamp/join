@@ -1,0 +1,18 @@
+<div
+    class="contact"
+    [class.contact--compact]="compact()"
+>
+    <ui-initial-letter [name]="contact().name" />
+
+    <div class="contact__wrapper">
+        <strong class="contact__name">
+            {{ contact().name }}
+        </strong>
+
+        @if (showEmail()) {
+            <ui-link [href]="contact().mail">
+                {{ contact().mail }}
+            </ui-link>
+        }
+    </div>
+</div>

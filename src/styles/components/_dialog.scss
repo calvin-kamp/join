@@ -1,0 +1,11 @@
+@use "abstracts" as *;
+
+.dialog {
+    display: block!important;
+    width: 100%;
+    max-height: calc(100% - 166px);
+    padding: 0;
+    border: none;
+    border-radius: $radius-card;
+    overflow: auto;
+}

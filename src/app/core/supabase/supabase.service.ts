@@ -20,6 +20,15 @@ export class SupabaseService {
 
         return data;
     }
+    async selectByID<T extends keyof Database['public']['Tables']>(table: T, id: number) {
+        const { data, error } = await this.client.from(table).select('*').eq('id', id).limit(1).single();
+
+        if (error) {
+            throw error;
+        }
+
+        return data;
+    }
 
     async insert<T>(tableName: string, payload: T): Promise<void> {
         const { error } = await this.client.from(tableName).insert([payload]).select();
