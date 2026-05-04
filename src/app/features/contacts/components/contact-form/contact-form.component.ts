@@ -11,6 +11,7 @@ import { InitialLetterComponent } from '@shared/ui/initial-letter/initial-letter
 import { toSignal } from '@angular/core/rxjs-interop';
 import { LogoComponent } from '@shared/ui/logo/logo.component';
 import { IconComponent } from '@shared/ui/icon/icon.component';
+import { LinkComponent } from '@shared/ui/link/link.component';
 
 type FormType = 'add' | 'edit';
 
@@ -23,7 +24,8 @@ type FormType = 'add' | 'edit';
         ButtonComponent,
         InitialLetterComponent,
         LogoComponent,
-        IconComponent
+        IconComponent,
+        LinkComponent
     ],
     templateUrl: './contact-form.component.html',
     styleUrl: './contact-form.component.scss'

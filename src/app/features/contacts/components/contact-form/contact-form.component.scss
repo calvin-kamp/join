@@ -11,7 +11,24 @@
 
     @include breakpoint(lg){
         @include flex();
-    }    
+    }   
+    
+    &__close{
+        cursor: pointer;
+        position: absolute;
+        top: 52px;
+        right: 52px;
+        ::ng-deep svg path{
+            stroke: var(--color-white) !important;
+        }
+
+        @include breakpoint(lg){
+            ::ng-deep svg path{
+                stroke: var(--color-primary) !important;
+            }
+        }
+        
+    }
 
     &__header{
         height: 50%;
@@ -82,7 +99,7 @@
     &__placeholder{
         background-color: var(--color-text-placeholder);
         border: 3px solid var(--color-white);
-        border-radius: $radius-circle;
+        border-radius: $radius-round;
         aspect-ratio: 1;
         @include flex($items: center, $justify: center);
         width: 120px;

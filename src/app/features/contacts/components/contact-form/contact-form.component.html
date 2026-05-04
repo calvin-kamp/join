@@ -4,7 +4,20 @@
         (close)="close()"
     >
         <div class="contact-form">
-            <div class="contact-form__header">
+            <div
+                (click)="close()"
+                class="contact-form__header"
+            >
+                <ui-link
+                    linkStyle="muted"
+                    class="contact-form__close"
+                >
+                    <ui-icon
+                        name="close"
+                        [width]="24"
+                        [height]="24"
+                    ></ui-icon>
+                </ui-link>
                 <div class="contact-form__logo">
                     <ui-logo [variant]="'light'" />
                 </div>
