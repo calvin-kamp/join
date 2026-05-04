@@ -1,0 +1,9 @@
+@use "abstracts" as *;
+
+p {
+    height: $header-height-mobile;
+    
+    @include breakpoint(lg) {
+        height: $header-height-desktop;
+    }
+}

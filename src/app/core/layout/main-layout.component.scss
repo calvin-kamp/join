@@ -1,0 +1,15 @@
+@use "abstracts" as *;
+
+:host {
+    display: block;
+    height: 100vh;
+}
+
+main {
+    height: calc(100vh - $header-height-mobile - $footer-height-mobile);
+    overflow: hidden;
+
+    @include breakpoint(lg) {
+        height: calc(100vh - $header-height-desktop - $footer-height-desktop);
+    }
+}

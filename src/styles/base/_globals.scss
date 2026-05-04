@@ -5,8 +5,6 @@
     @include token-to-css-vars($css-var-tokens);
 }
 
-main {}
-
 html {
     scroll-behavior: smooth;
 }
