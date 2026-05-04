@@ -1,0 +1,17 @@
+@use "abstracts" as *;
+
+svg {
+    display: block;
+    width: var(--ui-icon-w);
+    height: var(--ui-icon-h);
+
+    @include breakpoint(md) {
+        width: var(--ui-icon-w-md, var(--ui-icon-w));
+        height: var(--ui-icon-h-md, var(--ui-icon-h));
+    }
+
+    @include breakpoint(lg) {
+        width: var(--ui-icon-w-lg, var(--ui-icon-w-md, var(--ui-icon-w)));
+        height: var(--ui-icon-h-lg, var(--ui-icon-h-md, var(--ui-icon-h)));
+    }
+}
