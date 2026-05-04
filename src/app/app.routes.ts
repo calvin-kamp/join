@@ -14,6 +14,10 @@ export const ROUTES: Routes = [
                 path: 'summary',
                 loadComponent: () =>
                     import('./features/summary/dashboard/dashboard.component').then((m) => m.DashboardComponent)
+            },
+            {
+                path: 'contacts',
+                loadChildren: () => import('./features/contacts/contacts.routes').then((m) => m.CONTACTS_ROUTES)
             }
         ]
     },
