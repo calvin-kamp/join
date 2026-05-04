@@ -1,0 +1,18 @@
+<section class="contacts">
+    <contacts-contact-list
+        class="contacts__list"
+        [contacts]="contactsService.contacts()"
+    />
+
+    <div class="contacts__detail">
+        <h1 class="contacts__title">
+            Contacts
+
+            <span class="contacts__subtitle">Better with a Team</span>
+        </h1>
+
+        <router-outlet />
+    </div>
+
+    <contacts-contact-form />
+</section>
