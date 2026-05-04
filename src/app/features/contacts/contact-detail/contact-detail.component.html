@@ -1,5 +1,17 @@
 @if (contact(); as c) {
     <section class="contact-detail">
+        <div class="contact-detail__back-arrow">
+            <ui-link
+                href="/contacts"
+                linkStyle="muted"
+            >
+                <ui-icon
+                    name="arrow-left"
+                    [width]="46"
+                    [height]="45"
+                ></ui-icon>
+            </ui-link>
+        </div>
         <div class="contact-detail__person">
             <ui-initial-letter
                 [name]="c.name"

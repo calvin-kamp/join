@@ -7,6 +7,16 @@
         margin-left: 8px;
     }
     
+    &__back-arrow{
+        position: absolute;
+        top: $header-height-mobile;
+        right: 16px;
+
+        @include breakpoint(lg){
+            display: none;
+        }
+    }
+
     &__subtitle {
         display: block;
         margin-top: 8px;
