@@ -14,6 +14,5 @@ export class HeaderComponent {
     isToggled = false;
     showMenu() {
         this.isToggled = !this.isToggled;
-        console.log(this.isToggled);
     }
 }
