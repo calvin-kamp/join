@@ -1,13 +1,31 @@
 @use "abstracts" as *;
 
 .contact-form {
+    --bg-header: var(--color-surface-inverted);
+    --header-text: var(--color-white);
 
-    &__logo {
-        display: none;
+    color: var(--header-text);
 
-        @include breakpoint(lg) {
-            display: block;
+    height: 100%;
+    width: 100%;
+
+    @include breakpoint(lg){
+        @include flex();
+    }    
+
+    &__header{
+        height: 50%;
+        padding-left: 24px;
+        background-color: var(--bg-header);
+
+        @include flex($direction: column, $justify: center, $gap: 32px);
+
+        @include breakpoint(lg){
+            width: 40%;
+            height: 100%;
+            padding-left: 46px;
         }
+       
     }
 
     &__title {
@@ -15,7 +33,16 @@
         @include divider($position: bottom-left, $sizeMobile: 90px);
         
         @include breakpoint(lg) {
-            font-size: $font-size-2xl;
+            font-size: $font-size-3xl;
+        }
+    }
+
+    &__logo {
+        display: none;
+
+        @include breakpoint(lg) {
+            display: block;
+            width: 55px;
         }
     }
 
@@ -23,5 +50,65 @@
         display: block;
         margin-top: 8px;
         font-size: $font-size-sm;
+
+        @include breakpoint(lg){
+            display: none;
+        }
+    }
+
+    &__body{
+        height: 50%;
+
+        @include breakpoint(lg){
+            width: 60%;
+            height: 100%;
+            @include flex($items: center)
+            
+        }
+    }
+
+    &__avatar{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-60px) translateY(-60px);
+
+        @include breakpoint(lg){
+            position: static;
+            transform: translate(0,0);
+            padding-left: 97px;
+        }
+    }
+    &__placeholder{
+        background-color: var(--color-text-placeholder);
+        border: 3px solid var(--color-white);
+        border-radius: $radius-circle;
+        aspect-ratio: 1;
+        @include flex($items: center, $justify: center);
+        width: 120px;
+        box-shadow: var(--shadow-md);
+
+    }
+
+    &__form{
+        padding-top: 92px;
+
+        @include breakpoint(lg){
+            width: auto;
+            padding-top: 0;
+            flex-grow: 1;
+        }
+    }
+
+    &__actions{
+        @include flex($justify:center, $gap:20px);
+
+        @include breakpoint(lg){
+            justify-content: flex-start;
+            margin-inline: auto;
+            max-width: 422px;
+        }
     }
 }
+
+
