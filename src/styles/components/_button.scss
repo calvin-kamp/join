@@ -17,7 +17,8 @@
         color $transition-default,
         border-color $transition-default,
         background-color $transition-default,
-        box-shadow $transition-default;
+        box-shadow $transition-default,
+        fill $transition-default;
     @include flex($wrap: nowrap, $justify: center, $items: center, $gap: var(--btn-gap));
 
     @include hoverable() {
@@ -54,6 +55,24 @@
         &:active {
             --btn-color: var(--color-primary-active);
             --btn-border-color: var(--color-primary-active);
+        }
+    }
+
+    &--link{
+        gap: 8px;
+        --btn-color: var(--color-primary);
+        border: none;
+        min-width: auto;
+        padding: 12px 0;
+        padding-inline: 0;
+
+        @include hoverable() {
+            --btn-color: var(--color-primary-hover);
+            --btn-border-color: none;
+            box-shadow: none;
+            & > ui-icon > svg >path{
+                fill: var(--color-primary-hover);
+            }
         }
     }
 
