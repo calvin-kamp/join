@@ -5,6 +5,10 @@
     @include token-to-css-vars($css-var-tokens);
 }
 
+main {
+    padding-top: $header-height-mobile;
+}
+
 html {
     scroll-behavior: smooth;
 }
