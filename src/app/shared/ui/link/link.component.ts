@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { NgTemplateOutlet } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ButtonDirective } from '@shared/directives/button.directive';
 
 type ButtonVariant = 'primary' | 'outlined';
@@ -8,7 +9,7 @@ export type LinkStyle = 'default' | 'muted' | 'no-decoration';
 
 @Component({
     selector: 'ui-link',
-    imports: [RouterLink, ButtonDirective],
+    imports: [RouterLink, RouterLinkActive, ButtonDirective, NgTemplateOutlet],
     templateUrl: './link.component.html',
     styleUrl: './link.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -17,7 +18,7 @@ export class LinkComponent {
     readonly href = input<string | null>(null);
     readonly variant = input<LinkVariant>('default');
     readonly linkStyle = input<LinkStyle>('default');
-    readonly label = input<string>('');
+    readonly activeClass = input<string>('');
 
     protected readonly isExternal = computed(() => {
         const href = this.href();
@@ -25,8 +26,6 @@ export class LinkComponent {
         if (!href) {
             return false;
         }
-        console.log(href);
-        console.log(href.startsWith('https:'));
 
         return /^(https?:|mailto:|tel:)|^\/\//.test(href);
     });
@@ -37,6 +36,7 @@ export class LinkComponent {
         if (!href) {
             return false;
         }
+
         return /^https?:\/\/|^\/\//.test(href);
     });
 
