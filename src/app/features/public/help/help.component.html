@@ -1,12 +1,15 @@
 <section class="help">
-    <a [href]="'/summary'">
+    <ui-link
+        class="help__arrow-left"
+        linkStyle="muted"
+        [href]="'/'"
+    >
         <ui-icon
-            class="help__arrow-left"
             name="arrow-left"
             [width]="32"
             [height]="32"
         ></ui-icon>
-    </a>
+    </ui-link>
     <div class="help__container">
         <div class="help__headline">
             <h1 class="help__title">Help</h1>
@@ -21,29 +24,20 @@
             <div class="help__whatis">
                 <h3>What is Join?</h3>
                 <p class="help__p16px">
-                    <ui-link
-                        [href]="'/'"
-                        [label]="'Join'"
-                    ></ui-link>
+                    <ui-link [href]="'/'">Join</ui-link>
                     is a kanban-based project management tool designed and built by a group of dedicated students as
                     part of their web development bootcamp at the Developer Akademie.
                 </p>
                 <p class="help__p16px">
                     Kanban, a Japanese term meaning "billboard", is a highly effective method to visualize work, limit
                     work-in-progress, and maximize efficiency (or flow).
-                    <ui-link
-                        [href]="'/'"
-                        [label]="'Join'"
-                    ></ui-link>
+                    <ui-link [href]="'/'">Join</ui-link>
                     leverages the principles of kanban to help users manage their tasks and projects in an intuitive,
                     visual interface.
                 </p>
                 <p>
                     It is important to note that
-                    <ui-link
-                        [href]="'/'"
-                        [label]="'Join'"
-                    ></ui-link>
+                    <ui-link [href]="'/'">Join</ui-link>
                     is designed as an educational exercise and is not intended for extensive business usage. While we
                     strive to ensure the best possible user experience, we cannot guarantee consistent availability,
                     reliability, accuracy, or other aspects of quality regarding Join.
@@ -54,11 +48,7 @@
                 <div class="help__howto">
                     <p class="help__p16px">
                         Here is a step-by-step guide on how to use
-                        <ui-link
-                            [href]="'/'"
-                            [label]="'Join'"
-                        ></ui-link
-                        >:
+                        <ui-link [href]="'/'">Join</ui-link>:
                     </p>
                 </div>
                 <div class="help__howto-details">
@@ -67,12 +57,8 @@
                     <p class="help__p16px">
                         <span class="help__detail-title">Exploring the Board</span><br />
                         When you log in to
-                        <ui-link
-                            [href]="'/'"
-                            [label]="'Join'"
-                        ></ui-link
-                        >, you'll find a default board. This board represents your project and contains four default
-                        lists: "To Do", "In Progress", “Await feedback” and "Done".
+                        <ui-link [href]="'/'">Join</ui-link>, you'll find a default board. This board represents your
+                        project and contains four default lists: "To Do", "In Progress", “Await feedback” and "Done".
                     </p>
                 </div>
 
@@ -82,13 +68,9 @@
                     <p class="help__p16px">
                         <span class="help__detail-title">Creating Contacts</span><br />
                         In
-                        <ui-link
-                            [href]="'/'"
-                            [label]="'Join'"
-                        ></ui-link
-                        >, you can add contacts to collaborate on your projects. Go to the "Contacts" section, click on
-                        "New contact", and fill in the required information. Once added, these contacts can be assigned
-                        tasks and they can interact with the tasks on the board.
+                        <ui-link [href]="'/'">Join</ui-link>, you can add contacts to collaborate on your projects. Go
+                        to the "Contacts" section, click on "New contact", and fill in the required information. Once
+                        added, these contacts can be assigned tasks and they can interact with the tasks on the board.
                     </p>
                 </div>
                 <div class="help__howto-details">
@@ -121,24 +103,14 @@
                         </p>
                         <p class="help__p16px">
                             Remeber thas using
-                            <ui-link
-                                [href]="'/'"
-                                [label]="'Join'"
-                            ></ui-link>
+                            <ui-link [href]="'/'">Join</ui-link>
                             effectively requires consistent updates drom you and your team to ensure the board reflects
                             the current state of your project.
                         </p>
                         <p>
                             Have more questions about
-                            <ui-link
-                                [href]="'/'"
-                                [label]="'Join'"
-                            ></ui-link
-                            >? Feel free to contact us at
-                            <ui-link
-                                [href]="'mailto:info@info.com'"
-                                [label]="'info@info.de'"
-                            ></ui-link>
+                            <ui-link [href]="'/'">Join</ui-link>? Feel free to contact us at
+                            <ui-link [href]="'mailto:info@info.com'">info@info.de</ui-link>
                             We're here to help you!
                         </p>
                     </div>
