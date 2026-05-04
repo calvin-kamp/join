@@ -1,22 +1,35 @@
 @use "abstracts" as *;
 
 .contact {
-    @include flex($gap: 32px);
+    padding-block: 15px;
+    @include flex($items: center);
     
     &--compact {
-        gap: 16px;
+        padding-block: 8px;
 
-        .contact__name {
-            font-size: $font-size-xs;
-            
-            @include breakpoint(lg) {
-                font-size: $font-size-sm;
+        .contact {
+            &__wrapper {
+                margin-left: 16px;
+            }
+
+            &__name {
+                font-size: $font-size-xs;
+                
+                @include breakpoint(lg) {
+                    font-size: $font-size-sm;
+                }
             }
         }
+        
+    }
+
+    &__wrapper {
+        margin-left: 32px;
     }
     
     &__name {
         display: block;
+        color: var(--color-text);
         font-size: $font-size-sm;
         font-weight: $font-weight-regular;
         line-height: $line-height-tight;
