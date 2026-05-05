@@ -1,0 +1,10 @@
+<span
+    class="initial-letter"
+    [class]="'initial-letter--' + size()"
+    [class.initial-letter--border-dark]="borderColor() === 'dark'"
+    [style.background-color]="backgroundColor()"
+    role="img"
+    [attr.aria-label]="name()"
+>
+    {{ initials() }}
+</span>

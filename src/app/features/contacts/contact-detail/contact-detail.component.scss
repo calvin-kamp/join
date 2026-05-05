@@ -1,0 +1,134 @@
+@use "abstracts" as *;
+
+.contact-detail {
+    @include flex($direction: column, $gap: 20px);
+
+    @include breakpoint(lg) {
+        margin-left: 8px;
+    }
+    
+    &__subtitle {
+        display: block;
+        margin-top: 8px;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-regular;
+        
+        @include breakpoint(lg) {
+            font-size: $font-size-lg;
+            @include divider($position: left, $sizeDesktop: 59px)
+        }
+    }
+
+    &__person {
+        margin-top: 56px;
+        @include flex($items: center, $gap: 20px);
+
+        @include breakpoint(lg) {
+            gap: 56px;
+            margin-top: 32px;
+        }
+    }
+
+    &__person-text {
+        @include flex($direction: column, $gap: 8px);
+    }
+
+    &__name {
+        margin: 0;
+        font-size: $font-size-xl;
+
+        @include breakpoint(lg) {
+            font-size: $font-size-2xl;
+        }
+    }
+
+    &__cta {
+        @include flex($gap: 16px);
+        display: none;
+
+        @include breakpoint(lg) {
+            display: flex;
+        }
+    }
+
+    &__info-text {
+        font-size: $font-size-sm;
+
+        @include breakpoint(lg) {
+            margin-block: 20px;
+        }
+    }
+
+    &__wrapper {
+        @include flex($direction: column, $gap: 20px);
+    }
+
+    &__field {
+        @include flex($direction: column, $gap: 12px);
+    }
+
+    &__label {
+        font-weight: $font-weight-bold;
+    }
+
+    &__value {
+        margin: 0;
+    }
+
+    &__menu-toggle {
+        position: fixed;
+        right: 16px;
+        bottom: calc($footer-height-mobile + 16px);
+        z-index: $z-index-2;
+        width: 56px;
+        height: 56px;
+        padding: 0;
+        border: none;
+        border-radius: 50%;
+        background-color: var(--color-text);
+        color: var(--color-text-inverted);
+        box-shadow: var(--shadow-btn-interact);
+        cursor: pointer;
+        @include flex($justify: center, $items: center);
+
+        @include breakpoint(lg) {
+            display: none;
+        }
+    }
+
+    &__menu-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: $z-index-3;
+    }
+
+    &__menu {
+        position: fixed;
+        right: 16px;
+        bottom: calc($footer-height-mobile + 16px + 56px + 12px);
+        z-index: $z-index-4;
+        min-width: 160px;
+        padding: 8px;
+        background-color: var(--color-bg, white);
+        border-radius: $radius-btn;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        @include flex($direction: column, $gap: 4px);
+    }
+
+    &__menu-item {
+        @include flex($items: center, $gap: 12px);
+        padding: 10px 12px;
+        border: none;
+        border-radius: $radius-btn;
+        background: transparent;
+        color: var(--color-text);
+        font-size: inherit;
+        text-align: left;
+        cursor: pointer;
+        transition: background-color $transition-default;
+
+        @include hoverable() {
+            background-color: var(--color-bg-hover);
+        }
+    }
+}

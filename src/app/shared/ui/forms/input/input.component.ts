@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, forwardRef, input, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-type InputType = 'text' | 'email' | 'password';
+type InputType = 'text' | 'email' | 'password' | 'tel';
 
 @Component({
     selector: 'ui-input',

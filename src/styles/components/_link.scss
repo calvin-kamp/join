@@ -31,19 +31,21 @@
 
     &--muted {
         --link-color: var(--color-text-muted);
-
+        
         &::before {
             content: none;
         }
-
+        
         @include hoverable() {
             --link-color: var(--color-accent);
-
+            
             font-weight: $font-weight-bold;
         }
     }
 
     &--no-decoration {
+        --link-color: var(--color-text-muted);
+        
         &::before {
             content: none;
         }

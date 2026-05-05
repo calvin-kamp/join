@@ -3,6 +3,7 @@
 .main-footer{
     background-color: var(--color-surface-inverted);
     box-shadow: var(--shadow-md);
+    height: $footer-height-mobile;
 
         @include breakpoint(md) {
             max-width: 232px;

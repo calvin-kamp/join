@@ -1,0 +1,114 @@
+@if (contact(); as c) {
+    <section class="contact-detail">
+        <div class="contact-detail__person">
+            <ui-initial-letter
+                [name]="c.name"
+                size="lg"
+            />
+
+            <div class="contact-detail__person-text">
+                <h2 class="contact-detail__name">{{ c.name }}</h2>
+
+                <div class="contact-detail__cta">
+                    <ui-button
+                        variant="outlined"
+                        (click)="onEdit()"
+                    >
+                        <ui-icon
+                            name="pen-outline"
+                            [width]="18"
+                            [height]="18"
+                        />
+                        Edit
+                    </ui-button>
+
+                    <ui-button
+                        variant="outlined"
+                        (click)="onDelete()"
+                    >
+                        <ui-icon
+                            name="trash"
+                            [width]="18"
+                            [height]="18"
+                        />
+                        Delete
+                    </ui-button>
+                </div>
+            </div>
+        </div>
+
+        <p class="contact-detail__info-text">Contact Information</p>
+
+        <dl class="contact-detail__wrapper">
+            <div class="contact-detail__field">
+                <dt class="contact-detail__label">Email</dt>
+                <dd class="contact-detail__value">
+                    <ui-link [href]="'mailto:' + c.mail">{{ c.mail }}</ui-link>
+                </dd>
+            </div>
+
+            <div class="contact-detail__field">
+                <dt class="contact-detail__label">Phone</dt>
+                <dd class="contact-detail__value">
+                    <ui-link [href]="'tel:' + c.phone">{{ c.phone }}</ui-link>
+                </dd>
+            </div>
+        </dl>
+
+        @if (menuOpen()) {
+            <div
+                class="contact-detail__menu-backdrop"
+                (click)="closeMenu()"
+                aria-hidden="true"
+            ></div>
+
+            <div
+                class="contact-detail__menu"
+                role="menu"
+            >
+                <button
+                    type="button"
+                    class="contact-detail__menu-item"
+                    role="menuitem"
+                    (click)="onEdit()"
+                >
+                    <ui-icon
+                        name="pen-outline"
+                        [width]="20"
+                        [height]="20"
+                    />
+                    Edit
+                </button>
+
+                <button
+                    type="button"
+                    class="contact-detail__menu-item"
+                    role="menuitem"
+                    (click)="onDelete()"
+                >
+                    <ui-icon
+                        name="trash"
+                        [width]="20"
+                        [height]="20"
+                    />
+                    Delete
+                </button>
+            </div>
+        }
+
+        <button
+            type="button"
+            class="contact-detail__menu-toggle"
+            (click)="toggleMenu()"
+            [attr.aria-expanded]="menuOpen()"
+            aria-haspopup="menu"
+            aria-label="Show actions"
+        >
+            <ui-icon
+                name="more-vertical"
+                [width]="24"
+                [height]="24"
+            />
+        </button>
+    </section>
+}

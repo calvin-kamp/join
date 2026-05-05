@@ -1,0 +1,27 @@
+@use "abstracts" as *;
+
+.contact-form {
+
+    &__logo {
+        display: none;
+
+        @include breakpoint(lg) {
+            display: block;
+        }
+    }
+
+    &__title {
+        font-size: $font-size-2xl;
+        @include divider($position: bottom-left, $sizeMobile: 90px);
+        
+        @include breakpoint(lg) {
+            font-size: $font-size-2xl;
+        }
+    }
+
+    &__subtitle {
+        display: block;
+        margin-top: 8px;
+        font-size: $font-size-sm;
+    }
+}
