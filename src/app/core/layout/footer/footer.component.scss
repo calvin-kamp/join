@@ -5,7 +5,7 @@
     box-shadow: var(--shadow-md);
     height: $footer-height-mobile;
 
-        @include breakpoint(md) {
+        @include breakpoint(lg) {
             max-width: 232px;
             height: 100vh;
             @include flex($direction: column, $items: center, $content: center);
@@ -19,7 +19,7 @@
         margin-bottom: 115px;
         display: none;
 
-        @include breakpoint(md) {
+        @include breakpoint(lg) {
             @include flex($direction: column, $items: center, $content: center);
         }        
     }
@@ -27,35 +27,52 @@
     &__nav {
         @include flex($items: center, $justify: space-evenly);
 
-        @include breakpoint(md) {
+        @include breakpoint(lg) {
             @include flex($direction: column, $items: center, $content: start);
+            flex-grow: 1;
         } 
     }
 
     &__nav-link {
         @include flex($items: center, $direction: column, $justify:center);
+        column-gap: 8px;
         color:var(--color-text-nav-inactive);
-            border-radius: 16px;
-            padding: 15px 2px;
+        border-radius: 16px;
+        padding: 11px 2px;
+        width: 80px;
+            @include hoverable() {
+                background-color:  #29ABE2;
+            }
+            
+            @include breakpoint(lg) {
+                &--active {
+                    @include flex($items: center, $direction: row, $justify:center);
+                    background-color: var(--color-surface-inverted-deep);
+                    color: var(--color-text-nav-active);
+                }
+                @include flex($items: center, $justify:start, $gap: 8px);
+                @include hoverable() {
+                    background-color:  #29ABE2;
+                }
+
+                width: 232px;
+                padding: 8px 56px 8px 56px;
+                border-radius: 0px;
+                }
 
         &--active {
-            background-color: var(--color-surface-inverted-deep);
-            color: var(--color-text-nav-active);
-
-            //this part is for the active desktop version
-            // width: 230px;
-            // padding: 8px 56px 8px 56px;
-            // border-radius: 0px;
-        }
+                background-color: var(--color-surface-inverted-deep);
+                color: var(--color-text-nav-active);
+            }
     }
 
     &__links {
         display: none;
 
-        @include breakpoint(md) {
+        @include breakpoint(lg) {
             @include flex($items: center, $direction: column, $justify: center, $content: start);
             position: relative;
-            margin-top: 156px;
+            margin-bottom: 64px;
         }  
     }
 }
