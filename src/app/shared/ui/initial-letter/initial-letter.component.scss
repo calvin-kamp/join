@@ -22,18 +22,23 @@
         border-width: 3px;
         font-size: $font-size-lg;
         box-shadow: var(--shadow-md);
-        
+
         @include breakpoint(lg) {
             font-size: $font-size-2xl;
             width: 120px;
         }
     }
-    
+
     &--xl {
         width: 120px;
         border-width: 3px;
         font-size: $font-size-2xl;
         font-weight: $font-weight-medium;
         box-shadow: var(--shadow-md);
+    }
+
+    &--border-dark {
+        border-color: var(--color-primary);
+        color: var(--color-accent);
     }
 }

@@ -1,1 +1,66 @@
-<p>header works!</p>
+<header class="header">
+    <div class="header__wrapper">
+        <div class="header__brand">
+            <ui-logo class="header__logo" />
+
+            <span class="header__title">Kanban Project Management Tool</span>
+        </div>
+
+        <div class="header__actions">
+            <ui-link
+                [href]="'/help'"
+                class="header__help"
+                [linkStyle]="'no-decoration'"
+            >
+                <ui-icon
+                    [name]="'help-question'"
+                    [width]="20"
+                    [height]="20"
+                    class="header__help-icon"
+                />
+            </ui-link>
+
+            <button
+                type="button"
+                class="header__avatar"
+                (click)="toggleNavigation()"
+            >
+                <ui-initial-letter
+                    [name]="displayName()"
+                    [borderColor]="'dark'"
+                />
+            </button>
+        </div>
+
+        <nav
+            class="header__nav"
+            [class.header__nav--open]="showNavigation()"
+        >
+            <ul class="header__nav-list">
+                @for (link of navigationLinks; track link.href) {
+                    <li
+                        class="header__nav-item"
+                        [class.header__nav-item--mobile-only]="link.mobileOnly"
+                    >
+                        <ui-link
+                            [href]="link.href"
+                            [linkStyle]="'no-decoration'"
+                        >
+                            {{ link.label }}
+                        </ui-link>
+                    </li>
+                }
+
+                <li class="header__nav-item">
+                    <button
+                        type="button"
+                        class="header__nav-action"
+                        (click)="logout()"
+                    >
+                        Log out
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

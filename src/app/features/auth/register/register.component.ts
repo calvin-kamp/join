@@ -84,9 +84,9 @@ export class RegisterComponent {
         this.error.set(null);
 
         try {
-            const { email, password } = this.registerForm.getRawValue();
+            const { name, email, password } = this.registerForm.getRawValue();
 
-            await this.auth.signUp(email!, password!);
+            await this.auth.signUp(email!, password!, name!);
             await this.router.navigateByUrl('/summary');
         } catch {
             this.error.set('Registration failed.');

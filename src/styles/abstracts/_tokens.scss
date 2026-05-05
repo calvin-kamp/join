@@ -31,6 +31,7 @@ $palette: (
     navy-900:           #091931,    // btn active / nav active bg
     navy-700:           #2A3647,    // primäre Buttons, Header-/Footer-bg, Text
     navy-500:           #42526E,    // Board ColumnTitle (einziger Einsatz)
+    navy-accent:        #2A3D59,
 
     // Cyan — Accent / Interactive (Divider, Links, Hover-States, Focus)
     cyan-500:           #29ABE2,    // Links, Divider, Focus-Border, Hover-State
@@ -121,7 +122,7 @@ $colors: (
     primary:                        map.get($palette, navy-700),        // #2A3647
     primary-hover:                  map.get($palette, cyan-500),        // #29ABE2
     primary-active:                 map.get($palette, navy-900),        // #091931
-
+    primary-subtle:                 map.get($palette, navy-accent),
 
     // ── Accent ────────────────────────────────────────────────────────────────
 

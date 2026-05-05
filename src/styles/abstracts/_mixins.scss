@@ -121,10 +121,31 @@
     }
 }
 
-@mixin fade-in-transition($startingPosition: right) {
-    
-    transition: transform $transition-default;
-
+@mixin fade-in(
+    $origin-x: 0,
+    $duration: $transition-duration-default,
+    $easing: $transition-ease,
+    $open-selector: "&--open"
+) {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX($origin-x);
+    pointer-events: none;
+    transition:
+        opacity $duration $easing,
+        transform $duration $easing,
+        visibility 0s linear $duration;
+ 
+    #{$open-selector} {
+        visibility: visible;
+        opacity: 1;
+        transform: translate(0, 0);
+        pointer-events: auto;
+        transition:
+            opacity $duration $easing,
+            transform $duration $easing,
+            visibility 0s linear 0s;
+    }
 }
 
 @mixin token-to-css-vars($tokens, $prefix: null) {

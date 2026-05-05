@@ -1,6 +1,7 @@
 import { Component, computed, input } from '@angular/core';
 
 export type InitialLetterSize = 'sm' | 'md' | 'lg' | 'xl';
+export type InitialLetterBorderColor = 'default' | 'dark';
 
 @Component({
     selector: 'ui-initial-letter',
@@ -11,6 +12,7 @@ export type InitialLetterSize = 'sm' | 'md' | 'lg' | 'xl';
 export class InitialLetterComponent {
     readonly name = input.required<string>();
     readonly size = input<InitialLetterSize>('md');
+    readonly borderColor = input<InitialLetterBorderColor>('default');
 
     readonly initials = computed(() => {
         const parts = this.name().trim().split(/\s+/).filter(Boolean);
@@ -25,7 +27,11 @@ export class InitialLetterComponent {
         return (first + last).toUpperCase();
     });
 
-    readonly backgroundColor = computed(() => {
+    readonly backgroundColor = computed<string | null>(() => {
+        if (this.borderColor() !== 'default') {
+            return null;
+        }
+
         const palette = [
             '#FF7A00',
             '#9327FF',

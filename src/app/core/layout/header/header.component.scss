@@ -1,9 +1,110 @@
 @use "abstracts" as *;
 
-p {
+.header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
     height: $header-height-mobile;
-    
-    @include breakpoint(lg) {
-        height: $header-height-desktop;
+    padding: 20px 16px;
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-header);
+    z-index: $z-index-9;
+
+    &__wrapper {
+        @include flex($justify: space-between, $items: center);
+    }
+
+    &__brand {
+        @include flex($items: center, $justify: center);
+    }
+
+    &__logo {
+        width: 32px;
+        height: 40px;
+
+        @include breakpoint(lg) {
+            display: none;
+        }
+    }
+
+    &__title {
+        display: none;
+        padding-left: 116px;
+
+        @include breakpoint(lg) {
+            display: block;
+        }
+    }
+
+    &__actions {
+        @include flex($items: center, $justify: center, $gap: 20px);
+    }
+
+    &__help {
+        display: none;
+
+        @include breakpoint(lg) {
+            @include flex($items: center)
+        }
+    }
+
+    &__help-icon {
+        display: block;
+        transition: transform $transition-default;
+
+        @include hoverable() {
+            transform: scale(1.2);
+        }
+    }
+
+    &__avatar {
+        padding: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    &__nav {
+        position: fixed;
+        top: $header-height-mobile;
+        right: 16px;
+        width: 150px;
+        padding: 16px 4px;
+        background-color: var(--color-surface-inverted);
+        color: var(--color-text-nav-inactive);
+        border-radius: 16px 0 16px 16px;
+        overflow: hidden;
+        @include fade-in($origin-x: 100%);
+    }
+
+    &__nav-list {
+        @include flex($direction: column);
+    }
+
+    &__nav-item {
+        padding: 10px;
+        border-radius: 4px;
+        transition: background-color $transition-default;
+
+        @include hoverable() {
+            background-color: var(--color-primary-subtle);
+        }
+
+        &--mobile-only {
+            @include breakpoint(lg) {
+                display: none;
+            }
+        }
+    }
+
+    &__nav-action {
+        padding: 0;
+        background: none;
+        border: none;
+        color: var(--color-text-muted);
+        font: inherit;
+        text-align: left;
+        cursor: pointer;
     }
 }
