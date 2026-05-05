@@ -1,79 +1,110 @@
 @use "abstracts" as *;
 
-.main-header {
-    @include flex($justify:space-between, $items: center);
+.header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: $header-height-mobile;
     padding: 20px 16px;
-    box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.3);
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-header);
+    z-index: $z-index-9;
 
-    &__ui-logo-tool-title-wrapper {
-        @include flex($items: center, $justify:center);
+    &__wrapper {
+        @include flex($justify: space-between, $items: center);
     }
 
-    &__ui-logo {
+    &__brand {
+        @include flex($items: center, $justify: center);
+    }
+
+    &__logo {
         width: 32px;
         height: 40px;
 
-        @include breakpoint(md) {
+        @include breakpoint(lg) {
             display: none;
         }
     }
 
-    &__tool-title {
-        padding-left: 116px;
+    &__title {
         display: none;
+        padding-left: 116px;
 
-        @include breakpoint(md) {
+        @include breakpoint(lg) {
             display: block;
         }
     }
 
-    &__help-profil-btn-wrapper {
-        @include flex($items: center, $justify:center, $gap: 22px);
+    &__actions {
+        @include flex($items: center, $justify: center, $gap: 20px);
+    }
+
+    &__help {
+        display: none;
+
+        @include breakpoint(lg) {
+            @include flex($items: center)
+        }
     }
 
     &__help-icon {
-        display: none;
+        display: block;
+        transition: transform $transition-default;
 
-        @include breakpoint(md) {
-            display: block;
+        @include hoverable() {
+            transform: scale(1.2);
         }
     }
 
-    &__profil-btn {
-        border-radius: 50%;
+    &__avatar {
+        padding: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
     }
 
     &__nav {
         position: fixed;
-        opacity: 0;
-        top: 70px;
+        top: $header-height-mobile;
         right: 16px;
         width: 150px;
-        height: 224px;
-        @include flex($direction: column);
-        background-color:  #2A3647;
-        color: #CDCDCD;
-        padding: 12px;
-        padding-left: 12px;
-        padding-right: 12px;
-        border-radius: 16px 0px 16px 16px;
+        padding: 16px 4px;
+        background-color: var(--color-surface-inverted);
+        color: var(--color-text-nav-inactive);
+        border-radius: 16px 0 16px 16px;
         overflow: hidden;
-        transform: translate-X(100%);
+        @include fade-in($origin-x: 100%);
+    }
 
-        &--active{
-            opacity: 1;
-            animation: slideInRight 0.3s ease-in-out forwards;
+    &__nav-list {
+        @include flex($direction: column);
+    }
+
+    &__nav-item {
+        padding: 10px;
+        border-radius: 4px;
+        transition: background-color $transition-default;
+
+        @include hoverable() {
+            background-color: var(--color-primary-subtle);
+        }
+
+        &--mobile-only {
+            @include breakpoint(lg) {
+                display: none;
+            }
         }
     }
-}
 
-@keyframes slideInRight {
-    0% {
-        opacity: 0;
-        transform: translateX(100%);
+    &__nav-action {
+        padding: 0;
+        background: none;
+        border: none;
+        color: var(--color-text-muted);
+        font: inherit;
+        text-align: left;
+        cursor: pointer;
     }
-  100% {
-    opacity: 1;
-    transform: translateX(0%);
-  }
 }
