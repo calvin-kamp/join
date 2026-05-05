@@ -1,76 +1,55 @@
 @use 'abstracts' as *;
 
 .help {
-    ul {
-        padding-top: 16px;
-        list-style-position: inside;
-        padding-bottom: 16px;
-    }
-
-    li {
-        padding-left: 10px;
+    @include breakpoint(lg) {
+        padding-left: 96px;
     }
 
     &__arrow-left {
         position: absolute;
-        top: 120px;
         right: 16px;
         padding-right: 16px;
-    }
 
-    &__headline {
-        padding-bottom: 32px;
-        padding-top: 48px;
-    }
-
-    &__content {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-    }
-
-    &__whatis {
-        h3 {
-            padding-bottom: 16px;
+        @include breakpoint(lg) {
+            padding-right: 96px;
+            top: 200px;
         }
     }
 
-    &__p16px {
+    &__headline {
+        margin-bottom: 32px;
+        @include breakpoint(lg) {
+            font-size: $font-size-3xl;
+            padding-top: 110px;
+        }
+    }
+
+    &__howto {
+        margin-top: 24px;
+        @include flex($direction: column, $gap: var(--gap-md));
+    }
+
+    &__list-item {
+        padding-left: 35px;
         padding-bottom: 16px;
+
+        &::marker{
+            font-size: $font-size-lg;
+            font-weight: $font-weight-bold;
+        }
     }
 
-    &__mobilenone {
-        display: none;
-    }
-    .padding16px {
-        padding-top: 16px;
-    }
-
-    &__howto-details {
-        display: flex;
-        gap: 32px;
-    }
-
-    &__detail-title {
+    &__title {
         font-size: $font-size-sm;
         font-weight: $font-weight-bold;
     }
 
-    @include breakpoint(md) {
-        padding-left: 96px;
-        padding-right: 96px;
+    &__whatis {
+        margin-top: 24px;
+        @include flex($direction: column, $gap: var(--gap-md));
+    }
 
-        &__arrow-left {
-            padding-right: 96px;
-            top: 200px;
-        }
-
-        &__headline {
-            padding-top: 110px;
-        }
-
-        h1 {
-            font-size: $font-size-3xl;
-        }
+    &__enjoy{
+        padding-bottom: 16px;
     }
 }
