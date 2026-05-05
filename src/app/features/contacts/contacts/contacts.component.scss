@@ -21,6 +21,7 @@
     }
 
     &__title {
+        padding-top: 48px;
         display: none;
         @include divider($position: bottom-left, $sizeMobile: 59px);
 

@@ -1,6 +1,7 @@
 @use 'abstracts' as *;
 
 .privacy-policy {
+    padding-top: 48px;
 
     @include breakpoint(lg){
         padding-inline: 96px;
@@ -16,7 +17,8 @@
     }
 
     &__headline {
-        padding-bottom: 10px;
+        padding-bottom: 32px;
+        
         @include breakpoint(lg){
             font-size: $font-size-3xl;
             padding-top: 110px;

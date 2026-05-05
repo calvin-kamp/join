@@ -1,6 +1,7 @@
 @use 'abstracts' as *;
 
 .legal-notice {
+    padding-top: 48px;
 
     @include breakpoint(lg){
         padding-inline: 96px;

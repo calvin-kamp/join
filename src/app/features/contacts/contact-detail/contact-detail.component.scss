@@ -1,6 +1,7 @@
 @use "abstracts" as *;
 
 .contact-detail {
+    
     @include flex($direction: column, $gap: 20px);
 
     @include breakpoint(lg) {
@@ -9,7 +10,7 @@
     
     &__back-arrow{
         position: absolute;
-        top: $header-height-mobile;
+        top: calc($header-height-mobile + 48px);
         right: 16px;
 
         @include breakpoint(lg){

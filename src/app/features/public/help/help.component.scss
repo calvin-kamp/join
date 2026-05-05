@@ -1,6 +1,8 @@
 @use 'abstracts' as *;
 
 .help {
+    padding-top: 48px;
+
     @include breakpoint(lg) {
         padding-left: 96px;
     }
