@@ -1,1 +1,5 @@
+@for (item of t.tasks(); track $index) {
+    <p style="padding-top: 200px">{{ item | json }}</p>
+}
+
 <router-outlet />
