@@ -1,5 +1,17 @@
 @if (contact(); as c) {
     <section class="contact-detail">
+        <div class="contact-detail__back-arrow">
+            <ui-link
+                href="/contacts"
+                linkStyle="muted"
+            >
+                <ui-icon
+                    name="arrow-left"
+                    [width]="46"
+                    [height]="45"
+                ></ui-icon>
+            </ui-link>
+        </div>
         <div class="contact-detail__person">
             <ui-initial-letter
                 [name]="c.name"
@@ -11,19 +23,19 @@
 
                 <div class="contact-detail__cta">
                     <ui-button
-                        variant="outlined"
+                        variant="link"
                         (click)="onEdit()"
                     >
                         <ui-icon
                             name="pen-outline"
-                            [width]="18"
+                            [width]="22"
                             [height]="18"
                         />
                         Edit
                     </ui-button>
 
                     <ui-button
-                        variant="outlined"
+                        variant="link"
                         (click)="onDelete()"
                     >
                         <ui-icon
@@ -74,7 +86,7 @@
                 >
                     <ui-icon
                         name="pen-outline"
-                        [width]="20"
+                        [width]="24"
                         [height]="20"
                     />
                     Edit

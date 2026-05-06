@@ -1,0 +1,57 @@
+@use 'abstracts' as *;
+
+.help {
+    padding-top: 48px;
+
+    @include breakpoint(lg) {
+        padding-left: 96px;
+    }
+
+    &__arrow-left {
+        position: absolute;
+        right: 16px;
+        padding-right: 16px;
+
+        @include breakpoint(lg) {
+            padding-right: 96px;
+            top: 200px;
+        }
+    }
+
+    &__headline {
+        margin-bottom: 32px;
+        @include breakpoint(lg) {
+            font-size: $font-size-3xl;
+            padding-top: 110px;
+        }
+    }
+
+    &__howto {
+        margin-top: 24px;
+        @include flex($direction: column, $gap: var(--gap-md));
+    }
+
+    &__list-item {
+        padding-left: 35px;
+        padding-bottom: 16px;
+
+        &::marker{
+            font-size: $font-size-lg;
+            font-weight: $font-weight-bold;
+        }
+    }
+
+    &__title {
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+    }
+
+    &__whatis {
+        margin-top: 24px;
+        @include flex($direction: column, $gap: var(--gap-md));
+    }
+
+    &__enjoy{
+        padding-bottom: 16px;
+    }
+}

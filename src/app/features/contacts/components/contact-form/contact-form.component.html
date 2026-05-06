@@ -4,8 +4,23 @@
         (close)="close()"
     >
         <div class="contact-form">
-            <div class="contact-form__header">
-                <div class="contact-form__logo"></div>
+            <div
+                (click)="close()"
+                class="contact-form__header"
+            >
+                <ui-link
+                    linkStyle="muted"
+                    class="contact-form__close"
+                >
+                    <ui-icon
+                        name="close"
+                        [width]="24"
+                        [height]="24"
+                    ></ui-icon>
+                </ui-link>
+                <div class="contact-form__logo">
+                    <ui-logo [variant]="'light'" />
+                </div>
 
                 <h2 class="contact-form__title">
                     @if (formType() === 'add') {
@@ -21,7 +36,18 @@
             <div class="contact-form__body">
                 <div class="contact-form__avatar">
                     @if (hasName()) {
-                        <ui-initial-letter [name]="displayName()" />
+                        <ui-initial-letter
+                            [name]="displayName()"
+                            size="xl"
+                        />
+                    } @else {
+                        <div class="contact-form__placeholder">
+                            <ui-icon
+                                [name]="'person'"
+                                [width]="64"
+                                [height]="64"
+                            />
+                        </div>
                     }
                 </div>
 
@@ -61,12 +87,16 @@
                         />
 
                         @if (error()) {
-                            <p class="form__error">{{ error() }}</p>
+                            <p class="contact-form__error">{{ error() }}</p>
                         }
 
-                        <div class="form__actions">
+                        <div class="contact-form__actions">
                             @if (formType() === 'add') {
-                                <ui-button (click)="close()">Cancel</ui-button>
+                                <ui-button
+                                    [variant]="'outlined'"
+                                    (click)="close()"
+                                    >Cancel</ui-button
+                                >
                                 <ui-button [type]="'submit'">Create contact</ui-button>
                             } @else {
                                 <ui-button (click)="onDelete()">Delete</ui-button>

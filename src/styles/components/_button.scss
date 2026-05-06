@@ -1,4 +1,4 @@
-@use "abstracts" as *;
+@use 'abstracts' as *;
 
 .button {
     --btn-color: var(--color-text);
@@ -18,6 +18,7 @@
         border-color $transition-default,
         background-color $transition-default,
         box-shadow $transition-default;
+
     @include flex($wrap: nowrap, $justify: center, $items: center, $gap: var(--btn-gap));
 
     @include hoverable() {
@@ -48,13 +49,39 @@
             --btn-color: var(--color-primary-hover);
             --btn-border-color: var(--color-primary-hover);
 
-            box-shadow: var(--shadow-btn-interact), inset 0 0 0 1px var(--btn-border-color);
+            box-shadow:
+                var(--shadow-btn-interact),
+                inset 0 0 0 1px var(--btn-border-color);
         }
 
         &:active {
             --btn-color: var(--color-primary-active);
             --btn-border-color: var(--color-primary-active);
         }
+    }
+
+    &--link {
+        gap: 8px;
+        --btn-color: var(--color-primary);
+        border: none;
+        min-width: auto;
+        padding: 12px 0;
+        padding-inline: 0;
+
+        & > ui-icon > svg > path {
+            fill: var(--color-primary);
+            transition: fill $transition-default;  
+        }
+        
+        @include hoverable() {
+            --btn-color: var(--color-primary-hover);
+            --btn-border-color: none;
+            box-shadow: none;
+            & > ui-icon > svg > path {
+                fill: var(--color-primary-hover);
+            }
+        }
+
     }
 
     &--add-contact {

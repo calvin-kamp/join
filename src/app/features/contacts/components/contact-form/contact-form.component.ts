@@ -9,12 +9,24 @@ import { DialogComponent } from '@shared/ui/dialog/dialog.component';
 import { ButtonComponent } from '@shared/ui/button/button.component';
 import { InitialLetterComponent } from '@shared/ui/initial-letter/initial-letter.component';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { LogoComponent } from '@shared/ui/logo/logo.component';
+import { IconComponent } from '@shared/ui/icon/icon.component';
+import { LinkComponent } from '@shared/ui/link/link.component';
 
 type FormType = 'add' | 'edit';
 
 @Component({
     selector: 'contacts-contact-form',
-    imports: [ReactiveFormsModule, InputComponent, DialogComponent, ButtonComponent, InitialLetterComponent],
+    imports: [
+        ReactiveFormsModule,
+        InputComponent,
+        DialogComponent,
+        ButtonComponent,
+        InitialLetterComponent,
+        LogoComponent,
+        IconComponent,
+        LinkComponent
+    ],
     templateUrl: './contact-form.component.html',
     styleUrl: './contact-form.component.scss'
 })

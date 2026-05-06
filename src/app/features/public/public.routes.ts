@@ -15,5 +15,9 @@ export const PUBLIC_ROUTES: Routes = [
     {
         path: 'privacy-policy',
         loadComponent: () => import('./privacy-policy/privacy-policy.component').then((m) => m.PrivacyPolicyComponent)
+    },
+    {
+        path: 'help',
+        loadComponent: () => import('./help/help.component').then((m) => m.HelpComponent)
     }
 ];

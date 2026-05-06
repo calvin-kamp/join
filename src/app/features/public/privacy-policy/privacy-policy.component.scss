@@ -1,0 +1,76 @@
+@use 'abstracts' as *;
+
+.privacy-policy {
+    padding-top: 48px;
+
+    @include breakpoint(lg){
+        padding-inline: 96px;
+    }
+    
+    &__arrowback {
+        position: absolute;
+        right: 16px;
+
+        @include breakpoint(lg){
+            display: none;
+        }
+    }
+
+    &__headline {
+        padding-bottom: 32px;
+        
+        @include breakpoint(lg){
+            font-size: $font-size-3xl;
+            padding-top: 110px;
+        }
+    }
+
+    &__description{
+        padding-bottom: 32px;
+    }
+
+    &__project {
+        @include flex($direction: column, $gap: 10px);
+        padding-bottom: 35px;
+    }
+    
+    &__data-collect {
+        @include flex($direction: column, $gap: 10px);
+        padding-bottom: 35px;
+    }
+
+    &__data-use {
+        @include flex($direction: column, $gap: 10px);
+        padding-bottom: 35px;
+    }
+
+    &__data-storage {
+        @include flex($direction: column, $gap: 10px);
+        padding-bottom: 35px;
+    }
+
+    &__services {
+        @include flex($direction: column, $gap: 10px);
+        padding-bottom: 35px;
+    }
+
+    &__rights {
+        @include flex($direction: column, $gap: 10px);
+        padding-bottom: 35px;
+    }
+    
+    &__security {
+        @include flex($direction: column, $gap: 10px);
+        padding-bottom: 35px;
+    }
+    &__changes {
+        @include flex($direction: column, $gap: 10px);
+        padding-bottom: 35px;
+    }
+
+
+
+
+}
+
+

@@ -1,12 +1,23 @@
 @use "abstracts" as *;
 
 .contact-detail {
+    
     @include flex($direction: column, $gap: 20px);
 
     @include breakpoint(lg) {
         margin-left: 8px;
     }
     
+    &__back-arrow{
+        position: absolute;
+        top: calc($header-height-mobile + 48px);
+        right: 16px;
+
+        @include breakpoint(lg){
+            display: none;
+        }
+    }
+
     &__subtitle {
         display: block;
         margin-top: 8px;
