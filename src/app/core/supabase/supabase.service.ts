@@ -30,6 +30,46 @@ export class SupabaseService {
         return data;
     }
 
+    async selectByRef<T extends keyof Database['public']['Tables']>(table: T) {
+        const { data, error } = await this.client.from(table).select(`
+            *,
+            subtasks (*),
+            contacts (*),
+            priority (*),
+            status (*),
+            category (*)
+        `);
+
+        if (error) {
+            throw error;
+        }
+
+        return data;
+    }
+
+    async selectByRefId<T extends keyof Database['public']['Tables']>(table: T, id: number) {
+        const { data, error } = await this.client
+            .from(table)
+            .select(
+                `
+            *,
+            subtasks (*),
+            contacts (*),
+            priority (*),
+            status (*),
+            category (*)
+        `
+            )
+            .eq('id', id)
+            .single();
+
+        if (error) {
+            throw error;
+        }
+
+        return data;
+    }
+
     async insert<T>(tableName: string, payload: T): Promise<void> {
         const { error } = await this.client.from(tableName).insert([payload]).select();
 
