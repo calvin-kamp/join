@@ -1,5 +1,125 @@
 @use "abstracts" as *;
 
-p {
-    height: $footer-height-mobile;
+.footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-surface-inverted);
+    box-shadow: var(--shadow-md);
+    z-index: $z-index-9;
+
+    @include breakpoint(lg) {
+        top: 0;
+        right: auto;
+        width: 232px;
+        @include flex($direction: column, $items: center, $content: center);
+    }
+
+    &__wrapper {
+        height: $footer-height-mobile;
+        padding-inline: 16px;
+        @include flex($items: center);
+        
+        @include breakpoint(lg) {
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            padding-inline: 0;
+            padding-block: 64px;
+        }
+    }
+
+    &__logo {
+        display: none;
+
+        @include breakpoint(lg) {
+            display: block;
+            margin-bottom: 114px;
+        }
+    }
+
+    &__nav {
+        width: 100%;
+    }
+
+    &__nav-list {
+        width: 100%;
+        @include flex($justify: space-between);
+
+        @include breakpoint(lg) {
+            flex-direction: column;
+            gap: 16px;
+        }
+    }
+
+    &__nav-item {
+        text-align: center;
+
+        @include breakpoint(lg) {
+            @include flex();
+        }
+    }
+
+    &__nav-link {
+        &--active {
+            --link-color: var(--color-white);
+            background-color: var(--color-surface-inverted-deep);
+
+            @include hoverable() {
+                background: var(--color-primary);
+            }
+        }
+    }
+
+    ::ng-deep ui-link {
+        @include breakpoint(lg) {
+            width: 100%;
+        }
+    }
+
+    ::ng-deep .footer__nav-link {
+        @include flex($direction: column, $items: center, $justify: center);
+        min-height: 76px;
+        padding-inline: 6px;
+        border-radius: 16px;
+
+        @include hoverable() {
+            background-color: var(--color-primary-subtle);
+        }
+
+        @include breakpoint(lg) {
+            flex-direction: row;
+            justify-content: flex-start;
+            gap: 8px;
+            padding-left: 56px;
+            border-radius: 0;
+        }
+
+        &.footer__nav-link--active {
+            --link-color: var(--color-white);
+            background-color: var(--color-surface-inverted-deep);
+        }
+    }
+
+    ::ng-deep .footer__nav-link ui-icon {
+        flex-shrink: 0;
+    }
+
+    &__nav-label {
+        display: block;
+
+        @include breakpoint(lg) {
+            display: inline-block;
+        }
+    }
+
+    &__legal-list {
+        display: none;
+
+        @include breakpoint(lg) {
+            display: block;
+            margin-top: auto;
+        }
+    }
 }

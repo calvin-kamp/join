@@ -22,6 +22,10 @@ body {
     font-weight: $font-weight-regular;
     line-height: $line-height-body;
     letter-spacing: $font-letter-spacing;
+
+    @include breakpoint(lg) {
+        padding-inline: 0;
+    }
 }
 
 ::selection {

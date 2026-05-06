@@ -1,1 +1,50 @@
-<p>footer works!</p>
+<footer class="footer">
+    <div class="footer__wrapper">
+        <ui-logo
+            class="footer__logo"
+            variant="light"
+        />
+
+        <nav class="footer__nav">
+            <ul class="footer__nav-list">
+                @for (link of navigationLinks; track link.href) {
+                    <li class="footer__nav-item">
+                        <ui-link
+                            [linkStyle]="'no-decoration'"
+                            [href]="link.href"
+                            [linkClass]="'footer__nav-link'"
+                            [activeClass]="'footer__nav-link--active'"
+                            [activeOptions]="link.activeOptions"
+                        >
+                            <ui-icon [name]="link.iconName" />
+
+                            <span class="footer__nav-label">
+                                {{ link.label }}
+                            </span>
+                        </ui-link>
+                    </li>
+                }
+            </ul>
+        </nav>
+
+        <ul class="footer__legal-list">
+            <li>
+                <ui-link
+                    [href]="'/privacy-policy'"
+                    [linkStyle]="'muted'"
+                >
+                    Privacy Policy
+                </ui-link>
+            </li>
+
+            <li>
+                <ui-link
+                    [href]="'/legal-notice'"
+                    [linkStyle]="'muted'"
+                >
+                    Legal Notice
+                </ui-link>
+            </li>
+        </ul>
+    </div>
+</footer>

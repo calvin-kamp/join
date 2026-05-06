@@ -1,6 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 
-type IconName =
+export type IconName =
     | 'more-vertical'
     | 'arrow-left'
     | 'help-question'
