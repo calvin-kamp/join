@@ -1,11 +1,11 @@
 @use "abstracts" as *;
 
 .contact-detail {
-    
     @include flex($direction: column, $gap: 20px);
 
     @include breakpoint(lg) {
         margin-left: 8px;
+        @include fade-in($origin-x: 100px, $open-selector: "&--visible", $duration: $transition-duration-slow);
     }
     
     &__back-arrow{
@@ -54,11 +54,10 @@
     }
 
     &__cta {
-        @include flex($gap: 16px);
         display: none;
-
+        
         @include breakpoint(lg) {
-            display: flex;
+            @include flex($gap: 16px);
         }
     }
 
