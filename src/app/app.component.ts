@@ -1,7 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TasksService } from '@features/board/tasks.service';
 
 @Component({
     selector: 'app-root',
@@ -11,6 +10,4 @@ import { TasksService } from '@features/board/tasks.service';
 })
 export class AppComponent {
     protected readonly title = signal('join');
-
-    t = inject(TasksService);
 }
