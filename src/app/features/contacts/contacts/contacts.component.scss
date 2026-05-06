@@ -26,10 +26,8 @@
         @include divider($position: bottom-left, $sizeMobile: 59px);
 
         @include breakpoint(lg) {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            padding-bottom: 0;
+            @include flex($items: center, $gap: 30px);
+            padding-block: 0;
 
             &::after {
                 content: none;
@@ -70,7 +68,6 @@
             @include flex($gap: 8px);
 
             @include breakpoint(lg) {
-                display: flex;
                 align-items: center;
                 gap: 30px;
             }
