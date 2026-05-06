@@ -30,10 +30,10 @@
 
     &__title {
         display: none;
-        padding-left: 116px;
-
+        
         @include breakpoint(lg) {
             display: block;
+            padding-left: 332px;
         }
     }
 
