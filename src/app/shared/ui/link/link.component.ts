@@ -19,6 +19,8 @@ export class LinkComponent {
     readonly variant = input<LinkVariant>('default');
     readonly linkStyle = input<LinkStyle>('default');
     readonly activeClass = input<string>('');
+    readonly activeOptions = input<{ exact: boolean }>({ exact: false });
+    readonly linkClass = input<string>('');
 
     protected readonly isExternal = computed(() => {
         const href = this.href();
@@ -44,9 +46,23 @@ export class LinkComponent {
         this.variant() === 'default' ? null : (this.variant() as ButtonVariant)
     );
 
-    protected readonly linkClasses = computed(() => ({
-        link: this.variant() === 'default',
-        'link--muted': this.linkStyle() === 'muted',
-        'link--no-decoration': this.linkStyle() === 'no-decoration'
-    }));
+    protected readonly linkClasses = computed(() => {
+        const baseClasses = {
+            link: this.variant() === 'default',
+            'link--muted': this.linkStyle() === 'muted',
+            'link--no-decoration': this.linkStyle() === 'no-decoration'
+        };
+
+        const classArray = Object.entries(baseClasses)
+            .filter(([_, value]) => value)
+            .map(([key]) => key);
+
+        const customClasses = this.linkClass();
+
+        if (customClasses) {
+            classArray.push(customClasses);
+        }
+
+        return classArray.join(' ');
+    });
 }
