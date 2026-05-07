@@ -18,6 +18,10 @@ export const ROUTES: Routes = [
             {
                 path: 'contacts',
                 loadChildren: () => import('./features/contacts/contacts.routes').then((m) => m.CONTACTS_ROUTES)
+            },
+            {
+                path: 'tasks',
+                loadChildren: () => import('./features/tasks/tasks.routes').then((m) => m.TASKS_ROUTES)
             }
         ]
     },

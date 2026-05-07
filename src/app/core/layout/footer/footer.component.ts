@@ -30,7 +30,7 @@ export class FooterComponent {
             }
         },
         {
-            href: '/add-task',
+            href: '/tasks/add-task',
             label: 'Add Task',
             iconName: 'nav-add-task',
             activeOptions: {
@@ -38,7 +38,7 @@ export class FooterComponent {
             }
         },
         {
-            href: '/board',
+            href: '/tasks/board',
             label: 'Board',
             iconName: 'nav-board',
             activeOptions: {
