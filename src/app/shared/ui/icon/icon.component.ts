@@ -137,8 +137,8 @@ const ICONS: Record<IconName, IconMeta> = {
         height: 24
     },
     'pen-outline': {
-        viewBox: '0 0 14 19',
-        width: 14,
+        viewBox: '0 0 19 19',
+        width: 19,
         height: 19
     },
     'check-solid': {
