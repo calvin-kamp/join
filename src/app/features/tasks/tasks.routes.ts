@@ -5,7 +5,6 @@ export const TASKS_ROUTES: Routes = [
     {
         path: 'board',
         pathMatch: 'full',
-        canActivate: [guestGuard],
         loadComponent: () => import('./board/board.component').then((m) => m.BoardComponent)
     },
     {
