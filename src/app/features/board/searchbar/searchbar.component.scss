@@ -1,0 +1,25 @@
+@use 'abstracts' as *;
+
+.search {
+    padding-top: 40px;
+    padding-bottom: 24px;
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+
+    &__error {
+        position: absolute;
+        bottom: -1px;
+        left: 25%;
+        color: var(--color-ui-error);
+    }
+
+    &__icon {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-100%);
+        padding-left: 16px;
+        border-left: 1px solid black;
+    }
+}
