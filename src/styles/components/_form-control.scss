@@ -17,7 +17,7 @@
 
     &__input {
         &[aria-invalid="true"] {
-            border-color: var(--color-ui-error);
+            border-color: var(--color-ui-red);
             
             @supports selector(:focus-visible) {
                 &:focus {
@@ -43,7 +43,7 @@
         bottom: 0;
         left: 0;
         right: 0;
-        color: var(--color-ui-error);
+        color: var(--color-ui-red);
         line-height: 1;
     }
 
