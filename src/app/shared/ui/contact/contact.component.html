@@ -9,8 +9,8 @@
             {{ contact().name }}
         </strong>
 
-        @if (showEmail()) {
-            <ui-link [href]="contact().mail">
+        @if (showEmail() && mailHref()) {
+            <ui-link [href]="mailHref()">
                 {{ contact().mail }}
             </ui-link>
         }

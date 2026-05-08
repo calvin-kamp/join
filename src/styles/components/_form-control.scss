@@ -2,9 +2,10 @@
 
 .form-control {
     position: relative;
+    width: 100%;
     max-width: 422px;
     padding-bottom: 24px;
-    margin: 0 auto 8px;
+    margin-bottom: 8px;
 
     &__label {
         display: block;

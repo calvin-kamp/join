@@ -16,26 +16,18 @@
         column-gap: 56px;
     }
 
-    &:has(router-outlet + *) .contacts__list {
-        display: none;
-
-        @include breakpoint(lg) {
-            display: block;
-        }
-    }
-
     &__list {
         min-height: 0;
     }
 
     &__title {
-        @include flex($gap: 8px);
+        padding-top: 48px;
+        display: none;
         @include divider($position: bottom-left, $sizeMobile: 59px);
 
         @include breakpoint(lg) {
-            align-items: center;
-            gap: 30px;
-            padding-bottom: 0;
+            @include flex($items: center, $gap: 30px);
+            padding-block: 0;
 
             &::after {
                 content: none;
@@ -60,6 +52,25 @@
     &__detail {
         @include breakpoint(lg) {
             padding-top: 110px;
+        }
+    }
+
+    &:has(router-outlet + *) {
+        .contacts__list {
+            display: none;
+
+            @include breakpoint(lg) {
+                display: block;
+            }
+        }
+
+        .contacts__title {
+            @include flex($gap: 8px);
+
+            @include breakpoint(lg) {
+                align-items: center;
+                gap: 30px;
+            }
         }
     }
 }

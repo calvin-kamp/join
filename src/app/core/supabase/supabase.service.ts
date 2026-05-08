@@ -53,4 +53,44 @@ export class SupabaseService {
             throw error;
         }
     }
+
+    async selectTasks() {
+        const { data, error } = await this.client.from('tasks').select(`
+            *,
+            subtasks (*),
+            contacts (*),
+            priority (*),
+            status (*),
+            category (*)
+        `);
+
+        if (error) {
+            throw error;
+        }
+
+        return data;
+    }
+
+    async selectTaskById(id: number) {
+        const { data, error } = await this.client
+            .from('tasks')
+            .select(
+                `
+            *,
+            subtasks (*),
+            contacts (*),
+            priority (*),
+            status (*),
+            category (*)
+        `
+            )
+            .eq('id', id)
+            .single();
+
+        if (error) {
+            throw error;
+        }
+
+        return data;
+    }
 }

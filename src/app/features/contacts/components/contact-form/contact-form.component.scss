@@ -1,12 +1,45 @@
 @use "abstracts" as *;
 
 .contact-form {
+    color: var(--color-white);
 
-    &__logo {
-        display: none;
+    height: 100%;
+    width: 100%;
 
-        @include breakpoint(lg) {
-            display: block;
+    @include breakpoint(lg){
+        @include flex();
+    }   
+
+    &__header{
+        position: relative;
+        height: 46%;
+        padding-inline: 24px;
+        background-color: var(--color-surface-inverted);
+        @include flex($direction: column, $justify: center, $gap: 32px);
+
+        @include breakpoint(lg){
+            width: 38%;
+            height: 100%;
+            padding-left: 48px;
+        }
+    }
+
+    &__close-btn {
+        position: absolute;
+        top: 24px;
+        right: 16px;
+        min-width: unset;
+        padding: 0;
+        border: 0;
+
+        ::ng-deep svg path{
+            stroke: var(--color-white) !important;
+        }
+
+        @include breakpoint(lg){
+            ::ng-deep svg path{
+                stroke: var(--color-primary) !important;
+            }
         }
     }
 
@@ -15,7 +48,16 @@
         @include divider($position: bottom-left, $sizeMobile: 90px);
         
         @include breakpoint(lg) {
-            font-size: $font-size-2xl;
+            font-size: $font-size-3xl;
+        }
+    }
+
+    &__logo {
+        display: none;
+
+        @include breakpoint(lg) {
+            display: block;
+            width: 55px;
         }
     }
 
@@ -23,5 +65,69 @@
         display: block;
         margin-top: 8px;
         font-size: $font-size-sm;
+
+        @include breakpoint(lg){
+            display: none;
+        }
+    }
+
+    &__body{
+        position: relative;
+        height: 54%;
+        padding-inline: 16px;
+
+        @include breakpoint(lg){
+            width: 62%;
+            height: 100%;
+            padding-inline: 48px;
+            @include flex($items: center, $gap: 72px)
+        }
+    }
+
+    &__avatar{
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        @include breakpoint(lg){
+            position: static;
+            transform: translate(0,0);
+            padding-left: 36px;
+            padding-bottom: 96px;
+        }
+    }
+    &__placeholder{
+        background-color: var(--color-text-placeholder);
+        border: 3px solid var(--color-white);
+        border-radius: $radius-round;
+        aspect-ratio: 1;
+        @include flex($items: center, $justify: center);
+        width: 120px;
+        box-shadow: var(--shadow-md);
+
+    }
+
+    &__form{
+        padding-top: 92px;
+
+        @include breakpoint(lg){
+            width: auto;
+            padding-top: 0;
+            flex-grow: 1;
+        }
+    }
+
+    &__actions{
+        margin-block: 24px 62px;
+        @include flex($justify:center, $gap:20px);
+
+        @include breakpoint(lg){
+            justify-content: flex-start;
+            margin-inline: auto;
+            max-width: 422px;
+        }
     }
 }
+
+

@@ -22,11 +22,47 @@ export class ContactDetailComponent {
 
     contact = signal<Contact | undefined>(undefined);
     menuOpen = signal<boolean>(false);
+    detailVisible = signal<boolean>(false);
 
     constructor() {
-        effect(async () => {
-            this.contact.set(await this.contactsService.getContactByID(this.id()));
+        effect((onCleanup) => {
+            const id = this.id();
+
+            let cancelled = false;
+            let firstFrame = 0;
+            let secondFrame = 0;
+
+            this.detailVisible.set(false);
+            this.contact.set(undefined);
+
+            void this.loadContact(id, (contact) => {
+                if (cancelled) {
+                    return;
+                }
+
+                this.contact.set(contact);
+
+                firstFrame = requestAnimationFrame(() => {
+                    secondFrame = requestAnimationFrame(() => {
+                        if (!cancelled) {
+                            this.detailVisible.set(Boolean(contact));
+                        }
+                    });
+                });
+            });
+
+            onCleanup(() => {
+                cancelled = true;
+                cancelAnimationFrame(firstFrame);
+                cancelAnimationFrame(secondFrame);
+            });
         });
+    }
+
+    private async loadContact(id: number, callback: (contact: Contact | undefined) => void): Promise<void> {
+        const contact = await this.contactsService.getContactByID(id);
+
+        callback(contact);
     }
 
     toggleMenu(): void {

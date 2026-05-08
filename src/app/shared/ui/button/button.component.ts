@@ -2,7 +2,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, input } from '@an
 import { ButtonDirective } from '@shared/directives/button.directive';
 
 type ButtonType = 'button' | 'submit' | 'reset';
-type ButtonVariant = 'primary' | 'outlined';
+type ButtonVariant = 'primary' | 'outlined' | 'link';
 
 @Component({
     selector: 'ui-button',

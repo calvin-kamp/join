@@ -1,9 +1,8 @@
 import { Component, ElementRef, effect, input, output, viewChild } from '@angular/core';
-import { ButtonComponent } from '../button/button.component';
 
 @Component({
     selector: 'ui-dialog',
-    imports: [ButtonComponent],
+    imports: [],
     templateUrl: './dialog.component.html',
     styleUrl: './dialog.component.scss'
 })

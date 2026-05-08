@@ -1,0 +1,40 @@
+@use 'abstracts' as *;
+
+.legal-notice {
+    padding-top: 48px;
+
+    @include breakpoint(lg){
+        padding-inline: 96px;
+    }
+
+    &__arrowback {
+        position: absolute;
+        top: 125px;
+        right: 16px;
+
+        @include breakpoint(lg) {
+            display: none;
+        }
+    }
+
+    &__headline {
+        padding-bottom: 32px;
+
+        @include breakpoint(lg) {
+            padding-top: 110px;
+            font-size: $font-size-3xl;
+        }
+    }
+
+    &__adress-list{
+        list-style-type: unset;
+    } 
+
+    &__question {
+        padding-block: var(--gap-lg);
+    }
+    
+    &__title {
+        padding-top: var(--gap-lg);
+    }
+}

@@ -1,5 +1,8 @@
 @if (contact(); as c) {
-    <section class="contact-detail">
+    <section
+        class="contact-detail"
+        [class.contact-detail--visible]="detailVisible()"
+    >
         <div class="contact-detail__person">
             <ui-initial-letter
                 [name]="c.name"
@@ -11,19 +14,19 @@
 
                 <div class="contact-detail__cta">
                     <ui-button
-                        variant="outlined"
+                        variant="link"
                         (click)="onEdit()"
                     >
                         <ui-icon
                             name="pen-outline"
-                            [width]="18"
-                            [height]="18"
+                            [width]="19"
+                            [height]="19"
                         />
                         Edit
                     </ui-button>
 
                     <ui-button
-                        variant="outlined"
+                        variant="link"
                         (click)="onDelete()"
                     >
                         <ui-icon
@@ -62,20 +65,16 @@
                 aria-hidden="true"
             ></div>
 
-            <div
-                class="contact-detail__menu"
-                role="menu"
-            >
+            <div class="contact-detail__menu">
                 <button
                     type="button"
                     class="contact-detail__menu-item"
-                    role="menuitem"
                     (click)="onEdit()"
                 >
                     <ui-icon
                         name="pen-outline"
-                        [width]="20"
-                        [height]="20"
+                        [width]="19"
+                        [height]="19"
                     />
                     Edit
                 </button>
@@ -101,8 +100,6 @@
             class="contact-detail__menu-toggle"
             (click)="toggleMenu()"
             [attr.aria-expanded]="menuOpen()"
-            aria-haspopup="menu"
-            aria-label="Show actions"
         >
             <ui-icon
                 name="more-vertical"

@@ -1,76 +1,50 @@
-<footer class="main-footer">
-    <ui-logo
-        class="main-footer__ui-logo"
-        variant="light"
-    ></ui-logo>
-    <ul class="main-footer__nav">
-        <li class="main-footer__nav-link main-footer__nav-link--active">
-            <ui-link
-                [href]="'/summay'"
-                [linkStyle]="'no-decoration'"
-            >
-                <ui-icon
-                    [name]="'nav-summary'"
-                    [width]="25"
-                    [height]="25"
-                    class="main-footer__icon"
-                ></ui-icon>
-            </ui-link>
-            <p>Summary</p>
-        </li>
-        <li class="main-footer__nav-link">
-            <ui-link
-                [href]="'/add-task'"
-                [linkStyle]="'no-decoration'"
-            >
-                <ui-icon
-                    [name]="'nav-add-task'"
-                    [width]="25"
-                    [height]="25"
-                    class="main-footer__icon"
-                ></ui-icon>
-            </ui-link>
-            <p>Add Task</p>
-        </li>
-        <li class="main-footer__nav-link">
-            <ui-link
-                [href]="'/board'"
-                [linkStyle]="'no-decoration'"
-            >
-                <ui-icon
-                    [name]="'nav-board'"
-                    [width]="25"
-                    [height]="25"
-                    class="main-footer__icon"
-                ></ui-icon>
-            </ui-link>
-            <p>Board</p>
-        </li>
-        <li class="main-footer__nav-link">
-            <ui-link
-                [href]="'/contacts'"
-                [linkStyle]="'no-decoration'"
-            >
-                <ui-icon
-                    [name]="'nav-contacts'"
-                    [width]="25"
-                    [height]="29"
-                    class="main-footer__icon"
-                ></ui-icon>
-            </ui-link>
-            <p>Contacts</p>
-        </li>
-    </ul>
-    <div class="main-footer__links">
-        <ui-link
-            [href]="'/privacy-policy'"
-            [linkStyle]="'muted'"
-            >Privacy Policy</ui-link
-        >
-        <ui-link
-            [href]="'/legal-notice'"
-            [linkStyle]="'muted'"
-            >Legal Notice</ui-link
-        >
+<footer class="footer">
+    <div class="footer__wrapper">
+        <ui-logo
+            class="footer__logo"
+            variant="light"
+        />
+
+        <nav class="footer__nav">
+            <ul class="footer__nav-list">
+                @for (link of navigationLinks; track link.href) {
+                    <li class="footer__nav-item">
+                        <ui-link
+                            [linkStyle]="'no-decoration'"
+                            [href]="link.href"
+                            [linkClass]="'footer__nav-link'"
+                            [activeClass]="'footer__nav-link--active'"
+                            [activeOptions]="link.activeOptions"
+                        >
+                            <ui-icon [name]="link.iconName" />
+
+                            <span class="footer__nav-label">
+                                {{ link.label }}
+                            </span>
+                        </ui-link>
+                    </li>
+                }
+            </ul>
+        </nav>
+
+        <ul class="footer__legal-list">
+            <li>
+                <ui-link
+                    [href]="'/privacy-policy'"
+                    [linkStyle]="'muted'"
+                >
+                    Privacy Policy
+                </ui-link>
+            </li>
+
+            <li>
+                <ui-link
+                    [href]="'/legal-notice'"
+                    [linkStyle]="'muted'"
+                >
+                    Legal Notice
+                </ui-link>
+            </li>
+        </ul>
     </div>
 </footer>

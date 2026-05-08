@@ -3,9 +3,14 @@
 .dialog {
     display: block!important;
     width: 100%;
-    max-height: calc(100% - 166px);
+    max-width: 1212px;
+    height: 100dvh;
     padding: 0;
     border: none;
     border-radius: $radius-card;
     overflow: auto;
+
+    @include breakpoint(lg) {
+        max-height: 594px;
+    }
 }

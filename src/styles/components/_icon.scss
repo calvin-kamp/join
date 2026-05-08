@@ -2,8 +2,10 @@
 
 svg {
     display: block;
+    flex: 0 0 auto;
     width: var(--ui-icon-w);
     height: var(--ui-icon-h);
+    overflow: visible;
 
     @include breakpoint(md) {
         width: var(--ui-icon-w-md, var(--ui-icon-w));

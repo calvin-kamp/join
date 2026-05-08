@@ -5,8 +5,19 @@
 
     @include breakpoint(lg) {
         margin-left: 8px;
+        @include fade-in($origin-x: 100px, $open-selector: "&--visible", $duration: $transition-duration-slow);
     }
     
+    &__back-arrow{
+        position: absolute;
+        top: calc($header-height-mobile + 48px);
+        right: 16px;
+
+        @include breakpoint(lg){
+            display: none;
+        }
+    }
+
     &__subtitle {
         display: block;
         margin-top: 8px;
@@ -43,11 +54,10 @@
     }
 
     &__cta {
-        @include flex($gap: 16px);
         display: none;
-
+        
         @include breakpoint(lg) {
-            display: flex;
+            @include flex($gap: 16px);
         }
     }
 
