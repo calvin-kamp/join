@@ -1,0 +1,133 @@
+@use "abstracts" as *;
+
+.summary {
+    margin-top: 120px;
+    color: white;
+    
+    &__wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 396px;
+        height: 150px;
+        border-radius: 30px;
+        background-color: var(--color-surface-inverted);
+        color: white;
+    }
+    &__wrapper-left {
+        width: 120px;
+        height: 98px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 8px;
+        @include divider($position: right, $sizeMobile: 102px);
+        &:after {
+            background-color: var(--color-surface);  
+        }
+    }
+
+    &__status-number {
+        display: flex;
+        gap: 8px;
+    }
+
+    &__status-symbol {
+        // position: absolute;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: (var(--color-ui-warning));
+    }
+    &__status {
+        position: relative;
+        top: 19px;
+        left: 19px;
+    }
+    &__amount {
+        font-weight: $font-weight-bold;
+        font-size: 40px;
+        color: white;
+    }
+
+    &__wrapper-right {
+        width: 192px;
+        height: 48px;
+        margin: 16px;
+    }
+
+    &__deadline {
+        font-weight: $font-weight-bold;
+    }
+
+    &__to-do {
+        @include flex($type:flex, $justify: center, $items: center, $gap: 20px);
+        width: 396px;
+        height: 106px;
+        margin: 24px 0px;
+        border-radius: 30px;
+        background-color: var(--color-surface-inverted);
+
+        &-symbol {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: (var(--color-ui-warning));
+        }
+
+        &-icon {
+            position: relative;
+            top: 15px;
+            left: 19px;
+        }
+    }
+
+    &__task-squares1 {
+        display: flex;
+        gap: 15px;
+    }
+
+    
+    &__task-squares2 {
+        display: flex;
+        gap: 15px;
+    }
+
+    &__board-task {
+            @include flex($type:flex, $justify: center, $items: center, $direction: column, $gap: 8px);
+        width: 186px;
+        height: 152px;
+        border-radius: 30px;
+        background-color: var(--color-surface-inverted);
+        margin-bottom: 24px;
+
+    }
+
+    &__bts {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &__board-task-symbol {
+        display: flex;
+        gap: 8px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: (var(--color-ui-warning));
+    }
+
+    &__board-task-icon {
+        position: relative;
+        top: 20px;
+        left: 18px;
+    }
+
+    &__task-type {
+        width: 100px;
+        font-weight: $font-weight-regular;
+    }
+}
+
+ 
