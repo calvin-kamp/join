@@ -9,6 +9,7 @@
 
     &__label {
         display: block;
+        margin-bottom: 8px;
     }
 
     &__required-mark {
@@ -131,6 +132,49 @@
             transform: translateY(-50%);
             transition: all 200ms ease;
             pointer-events: none;
+        }
+    }
+
+        &--radio {
+        position: relative;
+        display: inline-flex;
+    }
+
+    &--radio .form-control__input {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &--radio {
+        .form-control__label {
+            min-width: 120px;
+            padding: 16px 12px;
+            background-color: var(--color-white);
+            border-radius: $radius-input;
+            box-shadow: var(--shadow-sm);
+            transition:
+                background-color $transition-default,
+                color $transition-default;
+            @include flex($type: inline-flex, $items: center, $justify: center, $gap: 8px);
+        }
+    }
+
+    &--radio {
+        .form-control__input:checked {
+            + .form-control__label {
+                background-color: var(--fill-color);
+                border-color: var(--fill-color);
+                color: var(--color-white);
+                font-weight: $font-weight-bold;
+
+                ui-icon {
+                    path {
+                        fill: currentColor;
+                    }
+                }
+            }
         }
     }
 }
