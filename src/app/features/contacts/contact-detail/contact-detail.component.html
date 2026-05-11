@@ -3,6 +3,17 @@
         class="contact-detail"
         [class.contact-detail--visible]="detailVisible()"
     >
+        <ui-link
+            linkStyle="muted"
+            [href]="'/contacts'"
+            class="contact-detail__back-arrow"
+        >
+            <ui-icon
+                name="arrow-left"
+                [width]="44"
+                [height]="40"
+            ></ui-icon>
+        </ui-link>
         <div class="contact-detail__person">
             <ui-initial-letter
                 [name]="c.name"
