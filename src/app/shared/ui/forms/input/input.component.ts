@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input, output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 type InputType = 'text' | 'email' | 'password' | 'tel';
@@ -25,6 +25,8 @@ export class InputComponent implements ControlValueAccessor {
     errorMessage = input<string>('');
     isRequired = input<boolean>(false);
     labelVisible = input<boolean>(true);
+
+    blurred = output<void>();
 
     protected readonly value = signal('');
     protected readonly isDisabled = signal(false);
@@ -60,5 +62,6 @@ export class InputComponent implements ControlValueAccessor {
 
     protected onBlur(): void {
         this.onTouched();
+        this.blurred.emit();
     }
 }

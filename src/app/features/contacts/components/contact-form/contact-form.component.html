@@ -5,16 +5,17 @@
     >
         <div class="contact-form">
             <div class="contact-form__header">
-                <button
+                <ui-link
+                    linkStyle="no-decoration"
                     (click)="close()"
-                    class="contact-form__close-btn button"
+                    class="contact-form__close-btn"
                 >
                     <ui-icon
                         name="close"
                         [width]="13"
                         [height]="13"
                     />
-                </button>
+                </ui-link>
 
                 <div class="contact-form__logo">
                     <ui-logo [variant]="'light'" />
@@ -32,6 +33,18 @@
             </div>
 
             <div class="contact-form__body">
+                <ui-button
+                    [variant]="'link'"
+                    (click)="close()"
+                    class="contact-form__close-btn-desktop"
+                >
+                    <ui-icon
+                        name="close"
+                        [width]="13"
+                        [height]="13"
+                    />
+                </ui-button>
+
                 <div class="contact-form__avatar">
                     @if (hasName()) {
                         <ui-initial-letter
@@ -63,6 +76,7 @@
                                 [labelVisible]="false"
                                 [isRequired]="true"
                                 [errorMessage]="nameError()"
+                                (blurred)="onNameBlur()"
                             />
                         </div>
 
@@ -99,15 +113,19 @@
                                 <ui-button
                                     [variant]="'outlined'"
                                     (click)="close()"
-                                    >Cancel</ui-button
                                 >
+                                    Cancel
+                                </ui-button>
+
                                 <ui-button [type]="'submit'">Create contact</ui-button>
                             } @else {
                                 <ui-button
                                     [variant]="'outlined'"
                                     (click)="onDelete()"
-                                    >Delete</ui-button
                                 >
+                                    Delete
+                                </ui-button>
+
                                 <ui-button [type]="'submit'">Save</ui-button>
                             }
                         </div>
