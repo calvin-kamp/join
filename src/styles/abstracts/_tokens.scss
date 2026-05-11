@@ -39,6 +39,7 @@ $palette: (
 
     // Grau-Skala — Surfaces, Borders, Muted
     gray-50:            #F6F7F8,    // Body Background
+    gray-200:           #F4F4F4,    // Progessbar 
     gray-100:           #E7E7E7,    // Disabled Button Background
     gray-300:           #D1D1D1,    // Input Border / Placeholder / Divider
     gray-400:           #CDCDCD,    // Navigation Text + Icon (inaktiv)
@@ -143,6 +144,7 @@ $colors: (
 
     badge-user-story:               map.get($palette, badge-story),     // #0038FF
     badge-technical-task:           map.get($palette, badge-tech),      // #1FD7C1
+    task-progress-bar-bg:           map.get($palette, gray-200),         // #F4F4F4
     task-progress-bar:              map.get($palette, progress-bar),    // #4589FF
 
 
