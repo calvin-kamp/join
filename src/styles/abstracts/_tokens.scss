@@ -56,9 +56,16 @@ $palette: (
     // Progress / Chart
     progress-bar:       #4589FF,    // Subtask Progressbar
 
+
+    // Priority
+    priority-urgent:    #FF3D00,
+    priority-medium:    #FFA800,
+    priority-low:       #7AE229,
+
     // Status
-    ui-error:           #E60026,    // Fehlerzustand
-    ui-warning:         #FF3D00,    // Deadline / Dringlichkeit (Dashboard Divider)
+    ui-red:             #E60026,    // Fehlerzustand
+    ui-orange:          #FF3D00,    // Deadline / Dringlichkeit (Dashboard Divider)
+    ui-green:           #7AE229
 
 );
 
@@ -148,11 +155,16 @@ $colors: (
     task-progress-bar:              map.get($palette, progress-bar),    // #4589FF
 
 
+    // Priority
+    priority-urgent:                map.get($palette, priority-urgent),
+    priority-medium:                map.get($palette, priority-medium),
+    priority-low:                   map.get($palette, priority-low),
+
     // ── Status ────────────────────────────────────────────────────────────────
 
-    ui-error:                       map.get($palette, ui-error),        // #E60026
-    ui-warning:                     map.get($palette, ui-warning),      // #FF3D00 — Deadline-Divider Dashboard
-
+    ui-red:                         map.get($palette, ui-red),          // #E60026
+    ui-orange:                      map.get($palette, ui-orange),       // #FF3D00 — Deadline-Divider Dashboard
+    ui-green:                       map.get($palette, ui-green)
 );
 
 

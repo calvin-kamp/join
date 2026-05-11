@@ -1,1 +1,62 @@
-<p>add-task works!</p>
+<h1>Add Task</h1>
+
+<form>
+    <div>
+        <ui-input
+            [name]="'d'"
+            [label]="'Title'"
+            [isRequired]="true"
+            [placeholder]="'Enter a title'"
+        />
+
+        <ui-textarea
+            [name]="'description'"
+            [label]="'Description'"
+            [labelVisible]="false"
+            [placeholder]="'Enter a Description'"
+        />
+    </div>
+
+    <div>
+        <p style="margin-bottom: 8px">Priority</p>
+        <div style="display: flex; gap: 16px">
+            @for (priority of priorities; track priority.name) {
+                <ui-radio
+                    [name]="'priority'"
+                    [value]="priority.name"
+                    [checked]="priority.checked === true"
+                    [fillColor]="priority.fillColor"
+                >
+                    {{ priority.name }}
+
+                    <ui-icon [name]="priority.iconName" />
+                </ui-radio>
+            }
+        </div>
+
+        <div>
+            <h3>select assigned to - multiple</h3>
+            <select
+                name=""
+                id=""
+            >
+                @for (item of contactsService.contacts(); track $index) {
+                    <option value="">{{ item.name }}</option>
+                }
+            </select>
+        </div>
+
+        <div>
+            <h3>select category - single</h3>
+
+            <select
+                name=""
+                id=""
+            >
+                @for (category of categories; track $index) {
+                    <option [value]="category">{{ category }}</option>
+                }
+            </select>
+        </div>
+    </div>
+</form>
