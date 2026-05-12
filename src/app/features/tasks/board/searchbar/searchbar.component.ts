@@ -15,7 +15,6 @@ export class SearchbarComponent {
     readonly taskService = inject(TasksService);
 
     searchControl = new FormControl('');
-    error = signal<string | null>(null);
     allTasks: Task[] = [];
 
     constructor() {
@@ -32,8 +31,6 @@ export class SearchbarComponent {
             this.allTasks = this.taskService.tasks();
         }
 
-        this.error.set(null);
-
         // Suchfeld leer: Originale Liste wiederherstellen
         if (!lowerTerm) {
             this.taskService.tasks.set(this.allTasks);
@@ -45,10 +42,6 @@ export class SearchbarComponent {
             (t) =>
                 t.title?.toLowerCase().includes(lowerTerm) || (t as any).description?.toLowerCase().includes(lowerTerm)
         );
-
-        if (filtered.length === 0) {
-            this.error.set('Keine Ergebnisse gefunden.');
-        }
 
         this.taskService.tasks.set(filtered);
     }

@@ -36,13 +36,13 @@
         
 
         &::ng-deep > a{
-            padding: 10px;
+            padding: 12px;
             border-radius: 10px;
         }
 
         @include breakpoint(lg){
             position: unset;
-            padding-top: 42px;
+            padding-top: 41px;
             padding-right: 88px;
         }
     }
