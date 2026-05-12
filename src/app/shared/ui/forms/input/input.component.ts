@@ -25,6 +25,7 @@ export class InputComponent implements ControlValueAccessor {
     errorMessage = input<string>('');
     isRequired = input<boolean>(false);
     labelVisible = input<boolean>(true);
+    fullWidth = input<boolean>(false);
 
     blurred = output<void>();
 

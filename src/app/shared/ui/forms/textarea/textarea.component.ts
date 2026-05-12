@@ -23,6 +23,7 @@ export class TextareaComponent {
     errorMessage = input<string>('');
     isRequired = input<boolean>(false);
     labelVisible = input<boolean>(true);
+    fullWidth = input<boolean>(false);
 
     protected readonly value = signal('');
     protected readonly isDisabled = signal(false);
