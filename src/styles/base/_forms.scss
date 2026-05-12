@@ -5,6 +5,7 @@ $text-inputs: (
     'input[type="email"]',
     'input[type="password"]',
     'input[type="tel"]',
+    'input[type="date"]'
 );
 
 :where(#{$text-inputs}, textarea, select) {

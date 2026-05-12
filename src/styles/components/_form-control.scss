@@ -1,11 +1,17 @@
 @use "abstracts" as *;
 
 .form-control {
+    --max-width: 422px;
+
     position: relative;
     width: 100%;
-    max-width: 422px;
+    max-width: var(--max-width);
     padding-bottom: 24px;
     margin-bottom: 8px;
+
+    &--full-width {
+        --max-width: none;
+    }
 
     &__label {
         display: block;
@@ -140,14 +146,29 @@
         display: inline-flex;
     }
 
-    &--radio .form-control__input {
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-        pointer-events: none;
-    }
-
     &--radio {
+        .form-control__input {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            pointer-events: none;
+            
+            &:checked {
+                + .form-control__label {
+                    background-color: var(--fill-color);
+                    border-color: var(--fill-color);
+                    color: var(--color-white);
+                    font-weight: $font-weight-bold;
+    
+                    ui-icon {
+                        path {
+                            fill: currentColor;
+                        }
+                    }
+                }
+            }
+        }
+
         .form-control__label {
             min-width: 120px;
             padding: 16px 12px;
@@ -161,19 +182,50 @@
         }
     }
 
-    &--radio {
-        .form-control__input:checked {
-            + .form-control__label {
-                background-color: var(--fill-color);
-                border-color: var(--fill-color);
-                color: var(--color-white);
-                font-weight: $font-weight-bold;
-
-                ui-icon {
-                    path {
-                        fill: currentColor;
-                    }
+    &--date {
+        .form-control {
+            &__date-wrapper {
+                position: relative;
+                max-width: var(--max-width);
+                @include flex($items: center)
+            }
+    
+            &__input {
+                padding-right: 48px;
+    
+                &::-webkit-calendar-picker-indicator {
+                    position: absolute;
+                    inset: 0;
+                    width: auto;
+                    height: auto;
+                    opacity: 0;
+                    cursor: pointer;
                 }
+            }
+    
+            &__date-icon {
+                position: absolute;
+                top: 50%;
+                right: 16px;
+                transform: translateY(-50%);
+                pointer-events: none;
+            }
+
+            &__date-picker {
+                position: absolute;
+                opacity: 0;
+                pointer-events: none;
+                width: 0;
+                height: 0;
+            }
+    
+            &__placeholder {
+                position: absolute;
+                left: 0.75rem;
+                color: var(--text-placeholder);
+                pointer-events: none;
+                user-select: none;
+                z-index: 1;
             }
         }
     }
