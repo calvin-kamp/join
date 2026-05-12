@@ -1,0 +1,59 @@
+@use "abstracts" as *;
+
+.board {
+
+
+    @include breakpoint(lg){
+        margin-left: 64px;
+    }
+
+    &__headline{
+        display: block;
+        
+        @include breakpoint(lg){
+            @include flex();
+        }
+    }
+
+    &__searchbar-wrapper{
+        @include flex($gap: 12px);
+        margin-top: 20px;
+    }
+
+    &__searchbar {
+        flex-grow: 1;
+    }
+
+    &__title {
+        margin-top: 48px;
+        flex-grow: 1;
+    }
+
+    &__cta {
+        position: absolute;
+        top: calc($header-height-mobile + 48px);
+        right: 16px;
+        
+
+        &::ng-deep > a{
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        @include breakpoint(lg){
+            position: unset;
+            padding-top: 42px;
+            padding-right: 88px;
+        }
+    }
+
+    &__btn-label {
+        display: none;
+        color: var(--color-white);
+
+        @include breakpoint(lg){
+            padding-right: 4px;
+            display: inline-block;
+        }
+    }
+}

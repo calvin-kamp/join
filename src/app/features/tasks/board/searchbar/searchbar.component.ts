@@ -12,11 +12,11 @@ import { IconComponent } from '@shared/ui/icon/icon.component';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchbarComponent {
-    public taskService = inject(TasksService);
+    readonly taskService = inject(TasksService);
 
     searchControl = new FormControl('');
     error = signal<string | null>(null);
-    private allTasks: Task[] = [];
+    allTasks: Task[] = [];
 
     constructor() {
         this.searchControl.valueChanges.subscribe((value) => {

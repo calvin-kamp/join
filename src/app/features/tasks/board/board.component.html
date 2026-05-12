@@ -1,1 +1,25 @@
-<p>board works!</p>
+<section class="board">
+    <div class="board__headline">
+        <h1 class="board__title">Board</h1>
+
+        <div class="board__searchbar-wrapper">
+            <board-searchbar class="board__searchbar" />
+
+            <ui-link
+                class="board__cta"
+                [variant]="'primary'"
+                linkClass="button--link"
+            >
+                <span class="board__btn-label">Add Task</span>
+                <ui-icon
+                    [name]="'plus'"
+                    [width]="16"
+                    [height]="16"
+                />
+            </ui-link>
+        </div>
+    </div>
+    @for (task of tasksService.tasks(); track $index) {
+        <tasks-task-card [task]="task" />
+    }
+</section>
