@@ -1,10 +1,9 @@
-import { JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet, JsonPipe],
+    imports: [RouterOutlet],
     templateUrl: './app.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })

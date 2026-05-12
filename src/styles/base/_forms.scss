@@ -39,7 +39,12 @@ $text-inputs: (
 }
 
 textarea {
-    min-height: 20rem;
+    min-height: 88px;
     resize: none;
     overflow-y: auto;
+    
+    @include breakpoint(lg) {
+        min-height: 120px;
+        resize: vertical;
+    }
 }

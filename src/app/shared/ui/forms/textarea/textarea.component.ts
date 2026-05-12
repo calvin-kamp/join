@@ -1,37 +1,33 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, input, output, signal } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
-type InputType = 'text' | 'email' | 'password' | 'tel';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input, signal } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-    selector: 'ui-input',
+    selector: 'ui-textarea',
     imports: [],
-    templateUrl: './input.component.html',
+    templateUrl: './textarea.component.html',
+    styleUrl: './textarea.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => InputComponent),
+            useExisting: forwardRef(() => TextareaComponent),
             multi: true
         }
     ]
 })
-export class InputComponent implements ControlValueAccessor {
+export class TextareaComponent {
     label = input.required<string>();
     name = input.required<string>();
 
-    type = input<InputType>('text');
     placeholder = input<string>('');
     errorMessage = input<string>('');
     isRequired = input<boolean>(false);
     labelVisible = input<boolean>(true);
 
-    blurred = output<void>();
-
     protected readonly value = signal('');
     protected readonly isDisabled = signal(false);
 
-    protected readonly inputId = computed(() => `ui-input-${this.name()}`);
+    protected readonly textareaId = computed(() => `ui-textarea-${this.name()}`);
     protected readonly hasError = computed(() => this.errorMessage().length > 0);
     protected readonly effectivePlaceholder = computed(() => this.placeholder() || this.label());
 
@@ -56,12 +52,12 @@ export class InputComponent implements ControlValueAccessor {
 
     protected onInput(event: Event): void {
         const value = (event.target as HTMLInputElement).value;
+
         this.value.set(value);
         this.onChange(value);
     }
 
     protected onBlur(): void {
         this.onTouched();
-        this.blurred.emit();
     }
 }

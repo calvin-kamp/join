@@ -4,20 +4,19 @@
         (close)="close()"
     >
         <div class="contact-form">
-            <div
-                (click)="close()"
-                class="contact-form__header"
-            >
+            <div class="contact-form__header">
                 <ui-link
-                    linkStyle="muted"
-                    class="contact-form__close"
+                    linkStyle="no-decoration"
+                    (click)="close()"
+                    class="contact-form__close-btn"
                 >
                     <ui-icon
                         name="close"
-                        [width]="24"
-                        [height]="24"
-                    ></ui-icon>
+                        [width]="13"
+                        [height]="13"
+                    />
                 </ui-link>
+
                 <div class="contact-form__logo">
                     <ui-logo [variant]="'light'" />
                 </div>
@@ -34,6 +33,18 @@
             </div>
 
             <div class="contact-form__body">
+                <ui-button
+                    [variant]="'link'"
+                    (click)="close()"
+                    class="contact-form__close-btn-desktop"
+                >
+                    <ui-icon
+                        name="close"
+                        [width]="13"
+                        [height]="13"
+                    />
+                </ui-button>
+
                 <div class="contact-form__avatar">
                     @if (hasName()) {
                         <ui-initial-letter
@@ -57,34 +68,41 @@
                         (ngSubmit)="onSubmit()"
                         class="form"
                     >
-                        <ui-input
-                            formControlName="name"
-                            label="Name"
-                            name="name"
-                            [labelVisible]="false"
-                            [isRequired]="true"
-                            [errorMessage]="nameError()"
-                        />
+                        <div>
+                            <ui-input
+                                formControlName="name"
+                                label="Name"
+                                name="name"
+                                [labelVisible]="false"
+                                [isRequired]="true"
+                                [errorMessage]="nameError()"
+                                (blurred)="onNameBlur()"
+                            />
+                        </div>
 
-                        <ui-input
-                            formControlName="email"
-                            label="Email"
-                            name="email"
-                            type="email"
-                            [labelVisible]="false"
-                            [isRequired]="true"
-                            [errorMessage]="emailError()"
-                        />
+                        <div>
+                            <ui-input
+                                formControlName="email"
+                                label="Email"
+                                name="email"
+                                type="email"
+                                [labelVisible]="false"
+                                [isRequired]="true"
+                                [errorMessage]="emailError()"
+                            />
+                        </div>
 
-                        <ui-input
-                            formControlName="phone"
-                            label="Phone"
-                            name="phone"
-                            type="tel"
-                            [labelVisible]="false"
-                            [isRequired]="true"
-                            [errorMessage]="phoneError()"
-                        />
+                        <div>
+                            <ui-input
+                                formControlName="phone"
+                                label="Phone"
+                                name="phone"
+                                type="tel"
+                                [labelVisible]="false"
+                                [isRequired]="true"
+                                [errorMessage]="phoneError()"
+                            />
+                        </div>
 
                         @if (error()) {
                             <p class="contact-form__error">{{ error() }}</p>
@@ -95,11 +113,19 @@
                                 <ui-button
                                     [variant]="'outlined'"
                                     (click)="close()"
-                                    >Cancel</ui-button
                                 >
+                                    Cancel
+                                </ui-button>
+
                                 <ui-button [type]="'submit'">Create contact</ui-button>
                             } @else {
-                                <ui-button (click)="onDelete()">Delete</ui-button>
+                                <ui-button
+                                    [variant]="'outlined'"
+                                    (click)="onDelete()"
+                                >
+                                    Delete
+                                </ui-button>
+
                                 <ui-button [type]="'submit'">Save</ui-button>
                             }
                         </div>

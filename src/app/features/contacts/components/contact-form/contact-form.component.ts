@@ -8,7 +8,6 @@ import { InputComponent } from '@shared/ui/forms/input/input.component';
 import { DialogComponent } from '@shared/ui/dialog/dialog.component';
 import { ButtonComponent } from '@shared/ui/button/button.component';
 import { InitialLetterComponent } from '@shared/ui/initial-letter/initial-letter.component';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { LogoComponent } from '@shared/ui/logo/logo.component';
 import { IconComponent } from '@shared/ui/icon/icon.component';
 import { LinkComponent } from '@shared/ui/link/link.component';
@@ -49,9 +48,7 @@ export class ContactFormComponent {
         phone: ['', [Validators.required, Validators.minLength(6)]]
     });
 
-    nameValue = toSignal(this.contactForm.controls.name.valueChanges, {
-        initialValue: this.contactForm.controls.name.value
-    });
+    nameValue = signal<string | null>(null);
 
     hasName = computed(() => !!this.nameValue()?.trim());
     displayName = computed(() => this.nameValue() ?? '');
@@ -83,10 +80,15 @@ export class ContactFormComponent {
                 email: contact.mail,
                 phone: contact.phone
             });
+
+            this.nameValue.set(contact.name);
         } else {
             this.editingContact.set(null);
             this.contactForm.reset();
+
+            this.nameValue.set(null);
         }
+
         this.error.set(null);
         this.isOpen.set(true);
     }
@@ -96,6 +98,11 @@ export class ContactFormComponent {
         this.contactForm.reset();
         this.editingContact.set(null);
         this.error.set(null);
+        this.nameValue.set(null);
+    }
+
+    onNameBlur(): void {
+        this.nameValue.set(this.contactForm.controls.name.value);
     }
 
     async onSubmit(): Promise<void> {

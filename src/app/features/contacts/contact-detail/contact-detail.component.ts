@@ -21,6 +21,7 @@ export class ContactDetailComponent {
     });
 
     contact = signal<Contact | undefined>(undefined);
+
     menuOpen = signal<boolean>(false);
     detailVisible = signal<boolean>(false);
 
@@ -80,6 +81,7 @@ export class ContactDetailComponent {
             this.closeMenu();
             this.contactsService.requestFormOpen(contact);
         }
+        this.router.navigate(['/contacts']);
     }
 
     async onDelete(): Promise<void> {

@@ -1,0 +1,52 @@
+<article
+    uiCard
+    class="task-card"
+>
+    <span
+        class="task-card__badge"
+        [class]="categoryModifierClass()"
+        >{{ task().category.name }}</span
+    >
+
+    <div class="task-card__header">
+        <h4 class="task-card__title">{{ task().title }}</h4>
+        <p class="task-card__description">{{ task().description }}</p>
+    </div>
+
+    @if (task().subtasks.length > 0) {
+        <div
+            class="task-card__subtasks"
+            [style.]=""
+        >
+            <div
+                class="task-card__progessbar"
+                [style.--progess.px]="setProgress()"
+            ></div>
+            <span>{{ subtasksDone() }}/{{ task().subtasks.length }} Subtasks</span>
+        </div>
+    }
+
+    <div class="task-card__footer">
+        <ul class="task-card__list">
+            @for (item of visibleContacts(); track $index) {
+                <li class="task-card__list-item">
+                    <ui-initial-letter
+                        [name]="item.name"
+                        size="sm"
+                    />
+                </li>
+            }
+            @if (hiddenContactsCount() >= 4) {
+                <li class="task-card__counter">+{{ hiddenContactsCount() }}</li>
+            }
+        </ul>
+
+        <ui-icon
+            style="padding-right: 10px"
+            class="test"
+            [name]="getBadgeName()"
+            [width]="22"
+            [height]="17"
+        />
+    </div>
+</article>

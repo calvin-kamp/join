@@ -118,7 +118,8 @@
         display: none;
 
         @include breakpoint(lg) {
-            display: block;
+            width: 100%;
+            @include flex($direction:column,$items:center,$gap:4px);
             margin-top: auto;
         }
     }
