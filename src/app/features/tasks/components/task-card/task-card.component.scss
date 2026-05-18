@@ -43,7 +43,7 @@
     }
 
     &__subtasks {
-        @include flex($justify: space-between, $items: center);
+        @include flex( $items: center, $gap:10px);
         margin-block: 4px 24px;
     }
 
@@ -57,8 +57,9 @@
             content: '';
 
             display: inline-block;
-            position: absolute;
+            position: relative;
             width: var(--progess);
+            transform: translateY(-10px);
             height: 8px;
             border-radius: $radius-badge;
             background-color: var(--color-task-progress-bar);
