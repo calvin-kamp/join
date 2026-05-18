@@ -1,6 +1,6 @@
 import { booleanAttribute, Directive, input } from '@angular/core';
 
-type ButtonVariant = 'primary' | 'outlined' | 'link';
+type ButtonVariant = 'primary' | 'outlined' | 'link' | 'icon';
 
 @Directive({
     selector: 'button[uiButton], a[uiButton]',
@@ -9,6 +9,7 @@ type ButtonVariant = 'primary' | 'outlined' | 'link';
         '[class.button--primary]': 'variant() === "primary"',
         '[class.button--outlined]': 'variant() === "outlined"',
         '[class.button--link]': 'variant() === "link"',
+        '[class.button--icon]': 'variant() === "icon"',
         '[class.button--disabled]': '!!variant() && disabled()',
         '[attr.disabled]': '!!variant() && disabled() ? "" : null',
         '[attr.aria-disabled]': '!!variant() && disabled() ? "true" : null',

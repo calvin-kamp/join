@@ -70,9 +70,9 @@
 
         & > ui-icon > svg > path {
             fill: var(--color-primary);
-            transition: fill $transition-default;  
+            transition: fill $transition-default;
         }
-        
+
         @include hoverable() {
             --btn-color: var(--color-primary-hover);
             --btn-border-color: none;
@@ -81,7 +81,47 @@
                 fill: var(--color-primary-hover);
             }
         }
+    }
+    &--icon {
+        --btn-border-color: var(--color-primary);
+        border: 2px solid var(--btn-border-color);
+        min-width: unset;
+        padding: 8px;
 
+        & > ui-icon > svg > path {
+            fill: var(--color-primary);
+            transition: fill $transition-default;
+        }
+
+        @include hoverable() {
+            --btn-color: var(--color-primary-hover);
+            --btn-border-color: var(--color-primary-hover);
+            box-shadow: none;
+            & > ui-icon > svg > path {
+                fill: var(--color-primary-hover);
+                //stroke: var(--color-white);
+            }
+        }
+    }
+    &--icon-text {
+        --btn-border-color: var(--color-primary);
+        border: 2px solid var(--btn-border-color);
+        min-width: unset;
+        padding: 8px;
+
+        & > ui-icon > svg > path {
+            fill: var(--color-primary);
+            transition: fill $transition-default;
+        }
+
+        @include hoverable() {
+            --btn-color: var(--color-primary-hover);
+            --btn-border-color: var(--color-primary-hover);
+            box-shadow: none;
+            & > ui-icon > svg > path {
+                stroke: var(--color-white);
+            }
+        }
     }
 
     &--add-contact {
