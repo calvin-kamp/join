@@ -1,0 +1,46 @@
+@use "abstracts" as *;
+
+.form-control--select {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+:host {
+    .select-wrapper {
+        position: relative;
+    }
+
+    .select-placeholder {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--color-text-muted);
+        pointer-events: none;
+        z-index: 1;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .ng-option {
+        .initial-letter {
+            flex-shrink: 0;
+        }
+    }
+
+    .with-checkboxes {
+        .ng-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            input[type="checkbox"] {
+                margin-left: auto;
+                flex-shrink: 0;
+                width: 18px;
+                height: 18px;
+                cursor: pointer;
+            }
+        }
+    }
+}

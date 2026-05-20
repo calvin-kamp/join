@@ -1,0 +1,121 @@
+@use "abstracts" as *;
+
+// ─── ng-select global overrides ───────────────────────────────────────────────
+// Must live in global styles — component ::ng-deep doesn't reliably reach
+// into ng-select's rendered DOM.
+
+// ── Trigger / Select-container ────────────────────────────────────────────────
+
+.ng-select {
+    // Hide placeholder once a value is selected
+    &.ng-has-value .ng-placeholder {
+        display: none;
+    }
+
+    // Hide selected-item tags inside the input when .hide-multi-labels is set
+    &.hide-multi-labels .ng-value {
+        display: none;
+    }
+}
+
+// ── Dropdown panel ────────────────────────────────────────────────────────────
+
+.ng-dropdown-panel {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: $radius-input;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    z-index: 9999;
+
+    // ── Option rows ───────────────────────────────────────────────────────────
+
+    .ng-dropdown-panel-items .ng-option {
+        display: flex !important;          // override ng-select default theme
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 16px;
+        background-color: var(--color-surface);
+        color: var(--color-text);
+        cursor: pointer;
+        transition: background-color 0.15s;
+        white-space: normal;               // ng-select's default sets nowrap on .ng-option-label
+
+        // Initial-letter (avatar) — keep its square footprint
+        ui-initial-letter,
+        .initial-letter {
+            flex-shrink: 0;
+        }
+
+        // Label takes remaining width and truncates
+        .option-label {
+            flex: 1 1 auto;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        // ── Hover ─────────────────────────────────────────────────────────────
+        &.ng-option-marked:not(.ng-option-disabled) {
+            background-color: var(--color-surface-accent); // #EDF2FA
+        }
+
+        // ── Selected ──────────────────────────────────────────────────────────
+        &.ng-option-selected {
+            background-color: var(--color-primary);        // #2A3647
+            color: var(--color-text-inverted);
+
+            // Avatar ring stays readable on dark bg
+            .initial-letter {
+                border-color: var(--color-text-inverted);
+            }
+        }
+
+        // ── Hover on already-selected ─────────────────────────────────────────
+        &.ng-option-selected.ng-option-marked {
+            background-color: var(--color-primary-subtle);
+        }
+
+        // ── Pseudo-element checkbox ───────────────────────────────────────────
+        //
+        // Box drawn via ::before, checkmark via ::after. `currentColor` makes
+        // it adapt to the row's text color automatically (dark on light rows,
+        // white on selected/dark rows).
+        //
+        .select-checkbox {
+            position: relative;
+            flex-shrink: 0;
+            margin-left: auto;
+            width: 18px;
+            height: 18px;
+            color: currentColor;
+            pointer-events: none;
+
+            // Box
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border: 2px solid currentColor;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+
+            // Checkmark (rotated border trick)
+            &.is-checked::after {
+                content: "";
+                position: absolute;
+                left: 5px;
+                top: 1px;
+                width: 6px;
+                height: 11px;
+                border-right: 2px solid currentColor;
+                border-bottom: 2px solid currentColor;
+                transform: rotate(45deg);
+            }
+        }
+    }
+}

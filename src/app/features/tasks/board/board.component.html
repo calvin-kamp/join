@@ -22,174 +22,60 @@
     </div>
 
     <div class="board__task-table">
-        <div class="board__column">
-            <div class="board__list-headline">
-                <h3>To do</h3>
-                <ui-link
-                    [variant]="'outlined'"
-                    linkClass="button--icon"
-                    href="/tasks/add-task"
+        @for (column of columns; track column.id) {
+            <div class="board__column">
+                <div class="board__list-headline">
+                    <h3>{{ column.name }}</h3>
+
+                    @if (column.id !== STATUS_IDS.DONE) {
+                        <button
+                            type="button"
+                            class="board__add-btn"
+                            (click)="openDialogForColumn(column.id)"
+                            [attr.aria-label]="'Add task to ' + column.name"
+                        >
+                            <ui-icon
+                                [name]="'plus'"
+                                [width]="10"
+                                [height]="10"
+                            />
+                        </button>
+                    }
+                </div>
+
+                <div
+                    cdkDropList
+                    [id]="dropListId(column.id)"
+                    cdkDropListOrientation="mixed"
+                    [cdkDropListData]="columnTasks[column.id]"
+                    [cdkDropListConnectedTo]="dropListIds"
+                    (cdkDropListDropped)="drop($event)"
+                    class="board__list"
                 >
-                    <ui-icon
-                        [name]="'plus'"
-                        [width]="10"
-                        [height]="10"
-                /></ui-link>
+                    @for (task of columnTasks[column.id]; track task.id) {
+                        <tasks-task-card
+                            cdkDrag
+                            [cdkDragData]="task"
+                            [cdkDragStartDelay]="dragDelayTime()"
+                            class="board__list-item"
+                            [task]="task"
+                        >
+                            <div
+                                *cdkDragPlaceholder
+                                class="board__task-placeholder"
+                            ></div>
+                        </tasks-task-card>
+                    } @empty {
+                        <p class="board__empty-column">No tasks {{ column.name }}</p>
+                    }
+                </div>
             </div>
-
-            <div
-                cdkDropList
-                id="todo"
-                #toDoList="cdkDropList"
-                cdkDropListOrientation="mixed"
-                [cdkDropListData]="toDoColumn"
-                [cdkDropListConnectedTo]="[progressList]"
-                (cdkDropListDropped)="drop($event)"
-                class="board__list"
-            >
-                @if (toDoColumn.length == 0) {
-                    <p class="board__empty-column">No tasks To do</p>
-                }
-                @for (toDo of toDoColumn; track $index) {
-                    <tasks-task-card
-                        cdkDrag
-                        [cdkDragData]="toDo"
-                        [cdkDragStartDelay]="dragDelayTime()"
-                        class="board__list-item"
-                        [task]="toDo"
-                    >
-                        <div
-                            *cdkDragPlaceholder
-                            class="board__task-placeholder"
-                        ></div>
-                    </tasks-task-card>
-                }
-            </div>
-        </div>
-
-        <div class="board__column">
-            <div class="board__list-headline">
-                <h3>In progress</h3>
-                <ui-link
-                    [variant]="'outlined'"
-                    linkClass="button--icon"
-                    href="/tasks/add-task"
-                >
-                    <ui-icon
-                        [name]="'plus'"
-                        [width]="10"
-                        [height]="10"
-                /></ui-link>
-            </div>
-
-            <div
-                cdkDropList
-                id="progress"
-                #progressList="cdkDropList"
-                cdkDropListOrientation="mixed"
-                [cdkDropListData]="progressColumn"
-                [cdkDropListConnectedTo]="[toDoList, feedbackList, doneList]"
-                (cdkDropListDropped)="drop($event)"
-                class="board__list"
-            >
-                @if (progressColumn.length == 0) {
-                    <p class="board__empty-column">No tasks In Progress</p>
-                }
-                @for (progress of progressColumn; track $index) {
-                    <tasks-task-card
-                        cdkDrag
-                        [cdkDragData]="progress"
-                        [cdkDragStartDelay]="dragDelayTime()"
-                        class="board__list-item"
-                        [task]="progress"
-                    >
-                        <div
-                            *cdkDragPlaceholder
-                            class="board__task-placeholder"
-                        ></div>
-                    </tasks-task-card>
-                }
-            </div>
-        </div>
-
-        <div class="board__column">
-            <div class="board__list-headline">
-                <h3>Await feedback</h3>
-                <ui-link
-                    [variant]="'outlined'"
-                    linkClass="button--icon"
-                    href="/tasks/add-task"
-                >
-                    <ui-icon
-                        [name]="'plus'"
-                        [width]="10"
-                        [height]="10"
-                /></ui-link>
-            </div>
-
-            <div
-                cdkDropList
-                id="feedback"
-                #feedbackList="cdkDropList"
-                cdkDropListOrientation="mixed"
-                [cdkDropListData]="feedbackColumn"
-                [cdkDropListConnectedTo]="[progressList, toDoList, doneList]"
-                (cdkDropListDropped)="drop($event)"
-                class="board__list"
-            >
-                @if (feedbackColumn.length == 0) {
-                    <p class="board__empty-column">No tasks Await feedback</p>
-                }
-                @for (feedback of feedbackColumn; track $index) {
-                    <tasks-task-card
-                        cdkDrag
-                        [cdkDragData]="feedback"
-                        [cdkDragStartDelay]="dragDelayTime()"
-                        class="board__list-item"
-                        [task]="feedback"
-                    >
-                        <div
-                            *cdkDragPlaceholder
-                            class="board__task-placeholder"
-                        ></div>
-                    </tasks-task-card>
-                }
-            </div>
-        </div>
-
-        <div class="board__column">
-            <div class="board__list-headline">
-                <h3>Done</h3>
-            </div>
-
-            <div
-                cdkDropList
-                id="done"
-                #doneList="cdkDropList"
-                cdkDropListOrientation="mixed"
-                [cdkDropListData]="doneColumn"
-                [cdkDropListConnectedTo]="[progressList, feedbackList, toDoList]"
-                (cdkDropListDropped)="drop($event)"
-                class="board__list"
-            >
-                @if (doneColumn.length == 0) {
-                    <p class="board__empty-column">No tasks Done</p>
-                }
-                @for (done of doneColumn; track $index) {
-                    <tasks-task-card
-                        cdkDrag
-                        [cdkDragData]="done"
-                        [cdkDragStartDelay]="dragDelayTime()"
-                        class="board__list-item"
-                        [task]="done"
-                    >
-                        <div
-                            *cdkDragPlaceholder
-                            class="board__task-placeholder"
-                        ></div>
-                    </tasks-task-card>
-                }
-            </div>
-        </div>
+        }
     </div>
 </section>
+
+<tasks-task-form-dialog
+    [open]="dialogOpen()"
+    [statusId]="dialogStatusId()"
+    (close)="closeDialog()"
+/>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input, output, signal } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -20,6 +20,12 @@ export class RadioComponent {
     value = input.required<string>();
     checked = input<boolean>(false);
     fillColor = input();
+
+    // Emits this radio's value when the user picks it. Use this instead of
+    // formControlName when several ui-radios share one form control — Angular
+    // only links one ValueAccessor per FormControl, so radio groups need
+    // manual wiring through this output + the [checked] input.
+    selectionChange = output<string>();
 
     protected readonly isDisabled = signal(false);
 
@@ -55,6 +61,7 @@ export class RadioComponent {
         }
 
         this.onChange(this.value());
+        this.selectionChange.emit(this.value());
     }
 
     protected onBlur(): void {

@@ -1,1 +1,257 @@
-<p>task-form works!</p>
+<div class="task-form">
+    <div class="task-form__header">
+        @if (showClose()) {
+            <button
+                type="button"
+                class="task-form__close-btn btn"
+                (click)="onCloseClick()"
+                aria-label="Close"
+            >
+                <ui-icon
+                    name="close"
+                    [width]="13"
+                    [height]="13"
+                />
+            </button>
+        }
+
+        <h1 class="task-form__title">Add Task</h1>
+    </div>
+
+    <form
+        class="task-form__form"
+        [formGroup]="taskForm"
+        (ngSubmit)="onSubmit()"
+    >
+        <div class="task-form__column">
+            <div>
+                <ui-input
+                    formControlName="title"
+                    label="Title"
+                    name="title"
+                    [isRequired]="true"
+                    [errorMessage]="titleError()"
+                    placeholder="Enter a title"
+                    [fullWidth]="true"
+                />
+            </div>
+
+            <div>
+                <ui-textarea
+                    formControlName="description"
+                    name="description"
+                    label="Description"
+                    placeholder="Enter a Description"
+                    [fullWidth]="true"
+                />
+            </div>
+
+            <div>
+                <ui-date
+                    formControlName="dueDate"
+                    name="dueDate"
+                    label="Due date"
+                    [isRequired]="true"
+                    placeholder="dd/mm/yyyy"
+                    [errorMessage]="dueDateError()"
+                    [fullWidth]="true"
+                />
+            </div>
+        </div>
+
+        <div class="task-form__column">
+            <fieldset class="task-form__priority">
+                <legend class="task-form__label">Priority</legend>
+
+                @for (priority of priorities; track $index) {
+                    <ui-radio
+                        name="priority"
+                        [value]="priority.label"
+                        [fillColor]="priority.fillColor"
+                        [checked]="taskForm.controls.priority.value === priority.label"
+                        (selectionChange)="taskForm.controls.priority.setValue($event)"
+                    >
+                        {{ priority.label }}
+
+                        <ui-icon [name]="priority.iconName" />
+                    </ui-radio>
+                }
+            </fieldset>
+
+            <div class="task-form__assigned-to">
+                <ui-select
+                    formControlName="assignedTo"
+                    [options]="contacts()"
+                    bindLabel="name"
+                    bindValue="id"
+                    [multiSelect]="true"
+                    [searchable]="true"
+                    [clearable]="false"
+                    [showAvatar]="true"
+                    [hideMultiLabels]="true"
+                    [alwaysShowPlaceholder]="true"
+                    avatarNameField="name"
+                    placeholder="Select contacts to assign"
+                    label="Assigned to"
+                    [fullWidth]="true"
+                />
+
+                @if (assignedContacts().length > 0) {
+                    <ul class="task-form__assigned-list">
+                        @for (contact of assignedContacts(); track contact.id) {
+                            <li class="task-form__assigned-item">
+                                <ui-initial-letter
+                                    [name]="contact.name"
+                                    size="sm"
+                                />
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+
+            <div class="task-form__category">
+                <ui-select
+                    formControlName="category"
+                    [options]="categories"
+                    bindLabel="name"
+                    bindValue="id"
+                    placeholder="Select task category"
+                    label="Category"
+                    [isRequired]="true"
+                    [clearable]="false"
+                    [fullWidth]="true"
+                />
+            </div>
+
+            <div class="task-form__subtasks">
+                <span class="task-form__label">Subtasks</span>
+
+                <ui-input
+                    name="subtask"
+                    label="Subtasks"
+                    [labelVisible]="false"
+                    placeholder="Add new subtask"
+                    [fullWidth]="true"
+                    [showActions]="true"
+                    (confirmed)="addSubtask($event)"
+                />
+
+                @if (subtasks().length > 0) {
+                    <ul class="task-form__subtask-list">
+                        @for (subtask of subtasks(); track $index) {
+                            <li class="task-form__subtask-item">
+                                @if (editingSubtaskIndex() === $index) {
+                                    <div class="task-form__subtask-edit">
+                                        <input
+                                            class="task-form__subtask-edit-input"
+                                            type="text"
+                                            [value]="editingSubtaskValue()"
+                                            (input)="editingSubtaskValue.set($any($event.target).value)"
+                                            (keyup.enter)="confirmEditSubtask()"
+                                            (keyup.escape)="cancelEditSubtask()"
+                                        />
+                                        <div class="task-form__subtask-edit-actions">
+                                            <button
+                                                type="button"
+                                                class="form-control__action-btn form-control__action-btn--clear"
+                                                (click)="cancelEditSubtask()"
+                                                aria-label="Cancel"
+                                            >
+                                                <ui-icon
+                                                    name="close"
+                                                    [width]="12"
+                                                    [height]="12"
+                                                />
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="form-control__action-btn form-control__action-btn--confirm"
+                                                (click)="confirmEditSubtask()"
+                                                aria-label="Confirm"
+                                            >
+                                                <ui-icon
+                                                    name="check-solid"
+                                                    [width]="15"
+                                                    [height]="11"
+                                                />
+                                            </button>
+                                        </div>
+                                    </div>
+                                } @else {
+                                    <span
+                                        class="task-form__subtask-bullet"
+                                        aria-hidden="true"
+                                        >•</span
+                                    >
+                                    <span class="task-form__subtask-text">{{ subtask }}</span>
+                                    <div class="task-form__subtask-actions">
+                                        <button
+                                            type="button"
+                                            class="task-form__subtask-btn"
+                                            (click)="startEditSubtask($index)"
+                                            aria-label="Edit"
+                                        >
+                                            <ui-icon
+                                                name="pen-outline"
+                                                [width]="16"
+                                                [height]="16"
+                                            />
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="task-form__subtask-btn"
+                                            (click)="removeSubtask($index)"
+                                            aria-label="Delete"
+                                        >
+                                            <ui-icon
+                                                name="trash"
+                                                [width]="16"
+                                                [height]="16"
+                                            />
+                                        </button>
+                                    </div>
+                                }
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+
+        <div class="task-form__footer">
+            <p class="task-form__hint">
+                <span class="required-mark"> * </span>
+                This field is required
+            </p>
+
+            @if (error()) {
+                <p
+                    class="task-form__error"
+                    role="alert"
+                >
+                    {{ error() }}
+                </p>
+            }
+
+            <div class="task-form__actions">
+                <ui-button
+                    type="button"
+                    variant="outlined"
+                    (click)="clearForm()"
+                >
+                    Clear
+                    <ui-icon name="close" />
+                </ui-button>
+
+                <ui-button
+                    type="submit"
+                    [disabled]="isInvalid() || loading()"
+                >
+                    Create Task
+                    <ui-icon name="check-outline" />
+                </ui-button>
+            </div>
+        </div>
+    </form>
+</div>
