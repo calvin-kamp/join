@@ -8,6 +8,7 @@ import { Component, ElementRef, effect, input, output, viewChild } from '@angula
 })
 export class DialogComponent {
     open = input<boolean>(false);
+    id = input.required<string>();
     close = output<void>();
 
     dialogRef = viewChild.required<ElementRef<HTMLDialogElement>>('dialogEl');
