@@ -1,1 +1,35 @@
-<p>board works!</p>
+<div class="board">
+    @for (column of columns; track column.id) {
+        <section class="board__column">
+            <header class="board__column-header">
+                <h2 class="board__column-title">{{ column.name }}</h2>
+                <button
+                    type="button"
+                    class="board__add-btn"
+                    (click)="openDialogForColumn(column.id)"
+                    [attr.aria-label]="'Add task to ' + column.name"
+                >
+                    <ui-icon
+                        name="board-add-task"
+                        [width]="14"
+                        [height]="14"
+                    />
+                </button>
+            </header>
+
+            <ul class="board__column-list">
+                @for (task of tasksByStatus(column.id)(); track task.id) {
+                    <li class="board__task">{{ task.title }}</li>
+                } @empty {
+                    <li class="board__empty">No tasks in {{ column.name }}</li>
+                }
+            </ul>
+        </section>
+    }
+</div>
+
+<tasks-task-form-dialog
+    [open]="dialogOpen()"
+    [statusId]="dialogStatusId()"
+    (close)="closeDialog()"
+/>
