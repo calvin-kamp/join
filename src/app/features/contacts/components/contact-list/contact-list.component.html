@@ -13,6 +13,20 @@
     </ui-button>
 
     <ul class="contact-list__list">
+        <li class="contact-list__group">
+            <span class="contact-list__letter">Me</span>
+            <ul class="contact-list__contacts">
+                <li class="contact-list__item">
+                    <ui-link
+                        class="contact-list__link"
+                        [routerLink]="['/contacts', 0]"
+                        routerLinkActive="contact-list__link--active"
+                    >
+                        <ui-contact [contact]="userContact" />
+                    </ui-link>
+                </li>
+            </ul>
+        </li>
         @for (group of groupedContacts(); track group.letter) {
             <li class="contact-list__group">
                 <span class="contact-list__letter">{{ group.letter }}</span>
