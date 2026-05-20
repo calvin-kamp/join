@@ -115,8 +115,7 @@ export class TasksService {
                         id,
                         name,
                         mail,
-                        phone,
-                        color
+                        phone
                     )
                 )
             `);
@@ -161,8 +160,7 @@ export class TasksService {
                         id,
                         name,
                         mail,
-                        phone,
-                        color
+                        phone
                     )
                 )
             `
