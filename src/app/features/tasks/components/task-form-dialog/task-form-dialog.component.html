@@ -1,0 +1,12 @@
+<ui-dialog
+    [id]="'task-form-dialog'"
+    [open]="open()"
+    (close)="onCloseRequested()"
+>
+    <tasks-task-form
+        [showClose]="true"
+        [statusId]="statusId()"
+        (close)="onCloseRequested()"
+        (created)="onTaskCreated()"
+    />
+</ui-dialog>
