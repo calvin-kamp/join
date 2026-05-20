@@ -80,8 +80,8 @@ export class TasksService {
         await this.getTasks();
     }
 
-    async updateTask(task: UpdateTaskPayload & { id: number }): Promise<void> {
-        const { id, ...data } = task;
+    async updateTask(task: UpdateTaskPayload, id: number): Promise<void> {
+        const { ...data } = task;
 
         await this.supabase.update('tasks', id, data);
         await this.getTasks();
