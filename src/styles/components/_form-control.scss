@@ -1,4 +1,4 @@
-@use "abstracts" as *;
+@use 'abstracts' as *;
 
 .form-control {
     --max-width: 422px;
@@ -23,19 +23,19 @@
     }
 
     &__input {
-        &[aria-invalid="true"] {
+        &[aria-invalid='true'] {
             border-color: var(--color-ui-red);
-            
+
             @supports selector(:focus-visible) {
                 &:focus {
                     border-color: transparent;
                 }
-                
+
                 &:focus-visible {
                     border-color: transparent;
                 }
             }
-            
+
             @supports not selector(:focus-visible) {
                 &:focus {
                     border-color: transparent;
@@ -43,7 +43,6 @@
             }
         }
     }
-
 
     &__error-message {
         position: absolute;
@@ -118,7 +117,7 @@
                 background-color: var(--color-primary);
                 opacity: 0;
                 transition: opacity $transition-fast;
-                content: "";
+                content: '';
             }
         }
 
@@ -141,7 +140,7 @@
         }
     }
 
-        &--radio {
+    &--radio {
         position: relative;
         display: inline-flex;
     }
@@ -152,14 +151,14 @@
             inset: 0;
             opacity: 0;
             pointer-events: none;
-            
+
             &:checked {
                 + .form-control__label {
                     background-color: var(--fill-color);
                     border-color: var(--fill-color);
                     color: var(--color-white);
                     font-weight: $font-weight-bold;
-    
+
                     ui-icon {
                         path {
                             fill: currentColor;
@@ -187,12 +186,12 @@
             &__date-wrapper {
                 position: relative;
                 max-width: var(--max-width);
-                @include flex($items: center)
+                @include flex($items: center);
             }
-    
+
             &__input {
                 padding-right: 48px;
-    
+
                 &::-webkit-calendar-picker-indicator {
                     position: absolute;
                     inset: 0;
@@ -202,7 +201,7 @@
                     cursor: pointer;
                 }
             }
-    
+
             &__date-icon {
                 position: absolute;
                 top: 50%;
@@ -218,7 +217,7 @@
                 width: 0;
                 height: 0;
             }
-    
+
             &__placeholder {
                 position: absolute;
                 left: 0.75rem;
@@ -264,10 +263,12 @@
         width: 30px;
         height: 30px;
         border-radius: 8px;
-        border: 1px solid var(--color-border);
-        background-color: var(--color-white);
+        border: 0px solid var(--color-border);
+        background-color: transparent;
         cursor: pointer;
-        transition: background-color 0.2s, border-color 0.2s;
+        transition:
+            background-color 0.2s,
+            border-color 0.2s;
         flex-shrink: 0;
 
         &:hover {
@@ -275,22 +276,24 @@
         }
 
         &--confirm {
-            border-color: var(--color-primary);
             color: var(--color-primary);
 
             &:hover {
-                background-color: var(--color-primary);
-                color: var(--color-white);
+                color: var(--color-ui-green);
             }
         }
 
         &--clear {
-            color: var(--color-text-muted);
+            color: var(--color-primary);
 
             &:hover {
-                border-color: var(--color-ui-red);
                 color: var(--color-ui-red);
             }
         }
+    }
+    
+    &__divider {
+        height: 24px;
+        border: solid 1px var(--color-border);
     }
 }

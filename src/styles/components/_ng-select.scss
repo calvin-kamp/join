@@ -1,4 +1,4 @@
-@use "abstracts" as *;
+@use 'abstracts' as *;
 
 // ─── ng-select global overrides ───────────────────────────────────────────────
 // Must live in global styles — component ::ng-deep doesn't reliably reach
@@ -7,6 +7,13 @@
 // ── Trigger / Select-container ────────────────────────────────────────────────
 
 .ng-select {
+    .ng-value {
+        padding-left: 16px;
+    }
+    .ng-input {
+        padding-left: 16px;
+    }
+
     // Hide placeholder once a value is selected
     &.ng-has-value .ng-placeholder {
         display: none;
@@ -15,6 +22,40 @@
     // Hide selected-item tags inside the input when .hide-multi-labels is set
     &.hide-multi-labels .ng-value {
         display: none;
+    }
+
+    .ng-arrow-wrapper {
+        padding-right: 16px;
+    }
+
+    .ng-arrow {
+        border: none !important;
+        width: 16px;
+        height: 16px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 16px;
+
+        &::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid var(--color-text);
+            border-bottom: 2px solid var(--color-text);
+            transform: rotate(45deg);
+            transition: transform 0.2s ease;
+            display: block;
+            margin-top: -10px;
+        }
+    }
+
+    &.ng-select-opened {
+        .ng-arrow::before {
+            transform: rotate(-135deg);
+            margin-top: -8px;
+        }
     }
 }
 
@@ -27,11 +68,12 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     overflow: hidden;
     z-index: 9999;
+    margin-top: 13px;
 
     // ── Option rows ───────────────────────────────────────────────────────────
 
     .ng-dropdown-panel-items .ng-option {
-        display: flex !important;          // override ng-select default theme
+        display: flex !important; // override ng-select default theme
         flex-direction: row;
         flex-wrap: nowrap;
         align-items: center;
@@ -41,7 +83,7 @@
         color: var(--color-text);
         cursor: pointer;
         transition: background-color 0.15s;
-        white-space: normal;               // ng-select's default sets nowrap on .ng-option-label
+        white-space: normal; // ng-select's default sets nowrap on .ng-option-label
 
         // Initial-letter (avatar) — keep its square footprint
         ui-initial-letter,
@@ -65,7 +107,7 @@
 
         // ── Selected ──────────────────────────────────────────────────────────
         &.ng-option-selected {
-            background-color: var(--color-primary);        // #2A3647
+            background-color: var(--color-primary); // #2A3647
             color: var(--color-text-inverted);
 
             // Avatar ring stays readable on dark bg
@@ -96,7 +138,7 @@
 
             // Box
             &::before {
-                content: "";
+                content: '';
                 position: absolute;
                 inset: 0;
                 border: 2px solid currentColor;
@@ -106,10 +148,10 @@
 
             // Checkmark (rotated border trick)
             &.is-checked::after {
-                content: "";
+                content: '';
                 position: absolute;
-                left: 5px;
-                top: 1px;
+                left: 6px;
+                top: 2px;
                 width: 6px;
                 height: 11px;
                 border-right: 2px solid currentColor;

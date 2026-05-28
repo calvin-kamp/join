@@ -14,9 +14,13 @@
     }
 
     &#task-form-dialog {
+       padding-inline: 16px;
+       padding-bottom: 20px;
+
         @include breakpoint(lg) {
             max-height: 768px;
-            padding: 64px;
+            padding-left: 74px;
+            padding-right: 65px;
         }
     }
 }
