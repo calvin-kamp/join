@@ -21,6 +21,7 @@ export class RouteStateService {
     );
 
     isScrollable = computed(() => this.scrollableRoutes.some((path) => this.url().startsWith(path)));
+    showAuthSignUp = computed(() => !this.url().startsWith('/auth/sign-up'));
 
     matches(path: string): boolean {
         return this.url().startsWith(path);
