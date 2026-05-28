@@ -1,5 +1,5 @@
 <layout-header />
-<main>
+<main [class.is-scrollable]="routeStateService.isScrollable()">
     <router-outlet />
 </main>
 <layout-footer />

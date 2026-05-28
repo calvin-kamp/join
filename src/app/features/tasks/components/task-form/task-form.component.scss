@@ -1,17 +1,19 @@
-@use "abstracts" as *;
+@use 'abstracts' as *;
 
 .task-form {
-
-    &__header {
-
+    padding-bottom: 20px;
+    @include breakpoint(lg) {
+        padding-left: 97px;
     }
-
-    &__close {
-
+    &__header {
+        padding-top: 24px;
+        @include breakpoint(lg){
+            padding-top: 48px;
+        }
     }
 
     &__title {
-        margin-bottom: 40px;
+        margin-bottom: 32px;
 
         @include breakpoint(lg) {
             margin-bottom: 48px;
@@ -25,7 +27,7 @@
             column-gap: 96px;
             position: relative;
         }
-        
+
         @include breakpoint(lg) {
             &::after {
                 position: absolute;
@@ -36,7 +38,7 @@
                 height: 100%;
                 background-color: var(--color-border);
                 border-radius: $radius-round;
-                content: "";
+                content: '';
             }
         }
     }
@@ -47,7 +49,11 @@
     }
 
     &__priority {
-        @include flex($gap: 16px)
+        @include flex($direction: column);
+
+        @include breakpoint(md) {
+            @include flex($gap: 16px);
+        }
     }
 
     &__label {
@@ -107,6 +113,11 @@
         flex-shrink: 0;
     }
 
+    &__divider {
+        height: 24px;
+        border: solid 1px var(--color-border);
+    }
+
     &__subtask-btn {
         display: flex;
         align-items: center;
@@ -118,7 +129,9 @@
         cursor: pointer;
         color: var(--color-text-muted);
         border-radius: $radius-input;
-        transition: color $transition-default, background-color $transition-default;
+        transition:
+            color $transition-default,
+            background-color $transition-default;
 
         &:hover {
             color: var(--color-primary);
@@ -147,7 +160,7 @@
 
     &__close-btn {
         position: absolute;
-        top: 0;
+        top: 24px;
         right: 0;
         display: inline-flex;
         align-items: center;
@@ -160,6 +173,10 @@
         cursor: pointer;
         color: var(--color-text);
         transition: background-color $transition-default;
+
+        @include breakpoint(lg) {
+            top: 64px;
+        }
 
         &:hover {
             background-color: var(--color-surface-accent);
@@ -179,7 +196,7 @@
     &__hint {
         margin: 0;
         font-size: 14px;
-        color: var(--color-text-muted);
+        color: var(--color-text);
     }
 
     &__error {
@@ -193,4 +210,7 @@
         @include flex($items: center, $gap: 12px);
         margin-left: auto;
     }
+}
+.required-mark {
+    color: var(--color-ui-red);
 }

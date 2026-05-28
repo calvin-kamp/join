@@ -16,7 +16,7 @@
     }
 
     <div class="select-wrapper">
-        @if ((!hasSelectedValue() || alwaysShowPlaceholder()) && placeholder()) {
+        @if ((!hasSelectedValue() || alwaysShowPlaceholder()) && !searchTerm() && placeholder() && !isFocused()) {
             <span class="select-placeholder">{{ placeholder() }}</span>
         }
 
@@ -25,7 +25,10 @@
             [bindLabel]="bindLabel()"
             [bindValue]="bindValue()"
             [multiple]="multiSelect()"
+            (focus)="handleFocused()"
             [placeholder]="''"
+            (search)="searchTerm.set($event.term)"
+            (clear)="searchTerm.set('')"
             [searchable]="searchable()"
             [clearable]="clearable()"
             [closeOnSelect]="effectiveCloseOnSelect()"
@@ -35,6 +38,7 @@
             (blur)="handleBlur()"
             [class.with-checkboxes]="(useCheckboxes() || showAvatar()) && multiSelect()"
             [class.hide-multi-labels]="hideMultiLabels() && multiSelect()"
+            [class.invalid]="hasError()"
         >
             <ng-template
                 ng-option-tmp
@@ -58,4 +62,12 @@
             </ng-template>
         </ng-select>
     </div>
+    @if (hasError()) {
+        <p
+            class="select-error-message"
+            role="alert"
+        >
+            {{ errorMessage() }}
+        </p>
+    }
 </div>

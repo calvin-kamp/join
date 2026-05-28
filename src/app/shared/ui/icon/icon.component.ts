@@ -142,9 +142,9 @@ const ICONS: Record<IconName, IconMeta> = {
         height: 19
     },
     'check-solid': {
-        viewBox: '0 0 25 20',
-        width: 25,
-        height: 20
+        viewBox: '0 0 15 11',
+        width: 15,
+        height: 11
     },
     'check-outline': {
         viewBox: '0 0 21 16',
