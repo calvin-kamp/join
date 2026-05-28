@@ -3,15 +3,19 @@
 :host {
     display: block;
     height: 100vh;
+    overflow: hidden;
 }
 
 main {
     height: calc(100vh - $footer-height-mobile);
-    overflow: hidden;
 
     @include breakpoint(lg) {
         max-width: 1440px;
         height: 100vh;
         padding-left: 232px;
+    }
+    &.is-scrollable{
+        overflow: auto;
+        padding-bottom: $footer-height-mobile;
     }
 }

@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { RouteStateService } from '@shared/services/route-state.service';
 
 @Component({
     selector: 'main-layout',
@@ -10,4 +11,6 @@ import { FooterComponent } from './footer/footer.component';
     styleUrl: './main-layout.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MainLayoutComponent {}
+export class MainLayoutComponent {
+    protected routeStateService = inject(RouteStateService);
+}

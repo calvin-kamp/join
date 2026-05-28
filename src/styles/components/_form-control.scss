@@ -1,4 +1,4 @@
-@use "abstracts" as *;
+@use 'abstracts' as *;
 
 .form-control {
     --max-width: 422px;
@@ -7,6 +7,7 @@
     width: 100%;
     max-width: var(--max-width);
     padding-bottom: 24px;
+    margin-inline: auto;
     margin-bottom: 8px;
 
     &--full-width {
@@ -23,19 +24,19 @@
     }
 
     &__input {
-        &[aria-invalid="true"] {
+        &[aria-invalid='true'] {
             border-color: var(--color-ui-red);
-            
+
             @supports selector(:focus-visible) {
                 &:focus {
                     border-color: transparent;
                 }
-                
+
                 &:focus-visible {
                     border-color: transparent;
                 }
             }
-            
+
             @supports not selector(:focus-visible) {
                 &:focus {
                     border-color: transparent;
@@ -43,7 +44,6 @@
             }
         }
     }
-
 
     &__error-message {
         position: absolute;
@@ -118,7 +118,7 @@
                 background-color: var(--color-primary);
                 opacity: 0;
                 transition: opacity $transition-fast;
-                content: "";
+                content: '';
             }
         }
 
@@ -141,7 +141,7 @@
         }
     }
 
-        &--radio {
+    &--radio {
         position: relative;
         display: inline-flex;
     }
@@ -152,14 +152,14 @@
             inset: 0;
             opacity: 0;
             pointer-events: none;
-            
+
             &:checked {
                 + .form-control__label {
                     background-color: var(--fill-color);
                     border-color: var(--fill-color);
                     color: var(--color-white);
                     font-weight: $font-weight-bold;
-    
+
                     ui-icon {
                         path {
                             fill: currentColor;
@@ -187,12 +187,12 @@
             &__date-wrapper {
                 position: relative;
                 max-width: var(--max-width);
-                @include flex($items: center)
+                @include flex($items: center);
             }
-    
+
             &__input {
                 padding-right: 48px;
-    
+
                 &::-webkit-calendar-picker-indicator {
                     position: absolute;
                     inset: 0;
@@ -202,7 +202,7 @@
                     cursor: pointer;
                 }
             }
-    
+
             &__date-icon {
                 position: absolute;
                 top: 50%;
@@ -218,7 +218,7 @@
                 width: 0;
                 height: 0;
             }
-    
+
             &__placeholder {
                 position: absolute;
                 left: 0.75rem;
@@ -228,5 +228,73 @@
                 z-index: 1;
             }
         }
+    }
+
+    &__input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: stretch;
+
+        .form-control__input {
+            flex: 1;
+            min-width: 0;
+        }
+    }
+
+    &--with-actions {
+        .form-control__input {
+            padding-right: 88px;
+        }
+    }
+
+    &__actions {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__action-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        border: 0px solid var(--color-border);
+        background-color: transparent;
+        cursor: pointer;
+        transition:
+            background-color 0.2s,
+            border-color 0.2s;
+        flex-shrink: 0;
+
+        &:hover {
+            border-color: var(--color-primary);
+        }
+
+        &--confirm {
+            color: var(--color-primary);
+
+            &:hover {
+                color: var(--color-ui-green);
+            }
+        }
+
+        &--clear {
+            color: var(--color-primary);
+
+            &:hover {
+                color: var(--color-ui-red);
+            }
+        }
+    }
+    
+    &__divider {
+        height: 24px;
+        border: solid 1px var(--color-border);
     }
 }

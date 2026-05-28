@@ -1,0 +1,73 @@
+<div
+    class="form-control form-control--select"
+    [class.form-control--full-width]="fullWidth()"
+>
+    @if (label()) {
+        <label class="form-control__label">
+            {{ label() }}
+            @if (isRequired()) {
+                <span
+                    class="form-control__required-mark"
+                    aria-hidden="true"
+                    >*</span
+                >
+            }
+        </label>
+    }
+
+    <div class="select-wrapper">
+        @if ((!hasSelectedValue() || alwaysShowPlaceholder()) && !searchTerm() && placeholder() && !isFocused()) {
+            <span class="select-placeholder">{{ placeholder() }}</span>
+        }
+
+        <ng-select
+            [items]="options()"
+            [bindLabel]="bindLabel()"
+            [bindValue]="bindValue()"
+            [multiple]="multiSelect()"
+            (focus)="handleFocused()"
+            [placeholder]="''"
+            (search)="searchTerm.set($event.term)"
+            (clear)="searchTerm.set('')"
+            [searchable]="searchable()"
+            [clearable]="clearable()"
+            [closeOnSelect]="effectiveCloseOnSelect()"
+            [disabled]="isDisabled()"
+            [ngModel]="selectedValue()"
+            (ngModelChange)="handleValueChange($event)"
+            (blur)="handleBlur()"
+            [class.with-checkboxes]="(useCheckboxes() || showAvatar()) && multiSelect()"
+            [class.hide-multi-labels]="hideMultiLabels() && multiSelect()"
+            [class.invalid]="hasError()"
+        >
+            <ng-template
+                ng-option-tmp
+                let-item="item"
+                let-item$="item$"
+            >
+                @if (showAvatar()) {
+                    <ui-initial-letter
+                        [name]="item[avatarNameField()]"
+                        size="sm"
+                    />
+                }
+                <span class="option-label">{{ item[bindLabel()] }}</span>
+                @if (showAvatar() || useCheckboxes()) {
+                    <span
+                        class="select-checkbox"
+                        [class.is-checked]="item$.selected"
+                        aria-hidden="true"
+                    ></span>
+                }
+            </ng-template>
+        </ng-select>
+    </div>
+    @if (hasError()) {
+        <p
+            class="select-error-message"
+            role="alert"
+        >
+            {{ errorMessage() }}
+        </p>
+    }
+</div>

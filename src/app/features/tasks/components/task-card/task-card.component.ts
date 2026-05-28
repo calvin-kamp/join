@@ -55,11 +55,11 @@ export class TaskCardComponent {
     }
 
     visibleContacts() {
-        return this.task().contacts.slice(0, 4);
+        return this.task().assignedTo.slice(0, 4);
     }
 
     hiddenContactsCount(): number {
-        const total = this.task().contacts.length;
+        const total = this.task().assignedTo.length;
 
         return total > 4 ? total - 4 : 0;
     }

@@ -1,7 +1,6 @@
 @use "abstracts" as *;
 
 .dialog {
-    display: block!important;
     width: 100%;
     max-width: 1212px;
     height: 100dvh;
@@ -12,5 +11,16 @@
 
     @include breakpoint(lg) {
         max-height: 594px;
+    }
+
+    &#task-form-dialog {
+       padding-inline: 16px;
+       padding-bottom: 20px;
+
+        @include breakpoint(lg) {
+            max-height: 768px;
+            padding-left: 74px;
+            padding-right: 65px;
+        }
     }
 }
