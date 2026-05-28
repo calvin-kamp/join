@@ -1,0 +1,80 @@
+@use "abstracts" as *;
+
+.auth-layout {
+    height: 100dvh;
+    @include flex($direction: column, $justify: center);
+
+    &__header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+
+    &__main {
+
+    }
+
+    &__footer {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding-bottom: 20px;
+
+        @include breakpoint(lg) {
+            padding-bottom: 48px;
+        }
+    }
+
+}
+
+.auth-header {
+    padding: 36px 20px;
+
+    &__wrapper {
+        
+        @include breakpoint(lg) {
+            max-width: 1440px;
+            margin-inline: auto;
+            @include flex($justify: space-between, $items: center);
+        }
+    }
+
+    &__logo {
+        display: block;
+        width: 64px;
+    }
+
+    &__sign-up {
+        display: none;
+
+        @include breakpoint(lg) {
+            @include flex($gap: 36px, $items: center);
+        }
+    }
+}
+
+.auth-footer {
+
+    &__wrapper {
+        @include flex($justify: center, $wrap: wrap);
+    }
+    
+    &__sign-up {
+        margin-bottom: 40px;
+        @include flex($gap: 24px, $justify: center, $items: center);
+
+        @include breakpoint(lg) {
+            display: none;
+        }
+    }
+
+    &__navigation {
+        width: 100%;
+    }
+    
+    &__nav-list {
+        @include flex($gap: 32px, $justify: center);
+    }
+}
