@@ -1,3 +1,6 @@
+<div class="summary__welcome-msg">
+    <h1>{{ greetings() }}</h1>
+</div>
 <div class="summary">
     <div class="summary__wrapper">
         <div class="summary__wrapper-left">
@@ -9,7 +12,7 @@
                     ></ui-icon>
                 </div>
                 <div>
-                    <p class="summary__amount">{{ taskAmount }}</p>
+                    <p class="summary__amount">{{ urgentAmount() }}</p>
                 </div>
             </div>
             <div class="summary__urgent">
@@ -20,6 +23,7 @@
         <div class="summary__wrapper-right">
             <p class="summary__deadline">PH October 16, 2022</p>
             <p>Upcoming Deadline</p>
+            <p>{{ upcomingDeadlineInDays() }}</p>
         </div>
     </div>
 
@@ -31,14 +35,14 @@
             ></ui-icon>
         </div>
         <div>
-            <p class="summary__amount">1</p>
+            <p class="summary__amount">{{ toDoAmount() }}</p>
         </div>
         <div class="summary__task-to-do">
             <p class="summary__task-type">Tasks To-Do</p>
         </div>
     </div>
 
-    <!-- copy pasted the first div change the class names -->
+    <!-- equal to the first div changing the class names will follow-->
     <div class="summary__task-squares1">
         <div class="summary__board-task">
             <div class="summary__bts">
@@ -49,7 +53,7 @@
                     ></ui-icon>
                 </div>
                 <div>
-                    <p class="summary__amount">1</p>
+                    <p class="summary__amount">{{ tasksOnBoard() }}</p>
                 </div>
             </div>
 
@@ -67,7 +71,7 @@
                     ></ui-icon>
                 </div>
                 <div>
-                    <p class="summary__amount">1</p>
+                    <p class="summary__amount">{{ inProgress() }}</p>
                 </div>
             </div>
 
@@ -87,12 +91,12 @@
                     ></ui-icon>
                 </div>
                 <div>
-                    <p class="summary__amount">1</p>
+                    <p class="summary__amount">{{ awaitFeedback() }}</p>
                 </div>
             </div>
 
             <div>
-                <p class="summary__task-type">Tasks on Board</p>
+                <p class="summary__task-type">Awaiting feedback</p>
             </div>
         </div>
 
@@ -105,13 +109,14 @@
                     ></ui-icon>
                 </div>
                 <div>
-                    <p class="summary__amount">1</p>
+                    <p class="summary__amount">{{ done() }}</p>
                 </div>
             </div>
 
             <div>
-                <p class="summary__task-type">Tasks in Progress</p>
+                <p class="summary__task-type">Tasks Done</p>
             </div>
         </div>
     </div>
 </div>
+<div></div>

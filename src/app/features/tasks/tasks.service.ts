@@ -3,23 +3,23 @@ import { SupabaseService } from '@core/supabase/supabase.service';
 import { Contact } from '@features/contacts/contacts.service';
 
 export interface Task {
-    id?: number; //auto generated
-    title: string; //is required
-    description: string; // can be empty string
-    dueDate?: Date | null; // can be null Format yyyy-mm-dd
-    priority: NamedEntity | number;
-    category: NamedEntity | number;
-    status: NamedEntity | number;
-    createdBy?: string; // UUID
-    assignTo?: Contact[];
-    subTasks?: Subtask[];
+    id: number;
+    title: string;
+    description: string;
+    due_date: Date;
+    priority: NamedEntity;
+    category: NamedEntity;
+    status: NamedEntity;
+    created_by: string | null;
+    contacts: Contact[];
+    subtasks: Subtask[];
 }
 
 export interface Subtask {
-    id?: number;
+    id: number;
     task_id: number;
-    title: string;
-    status?: boolean;
+    title: string | null;
+    status: boolean;
 }
 
 export interface NamedEntity {
@@ -27,19 +27,40 @@ export interface NamedEntity {
     name: string;
 }
 
+export interface CreateTaskPayload {
+    title: string;
+    description?: string;
+    due_date?: Date | null;
+    priority?: number;
+    category: number;
+    status: number;
+    created_by?: string | null;
+}
+
+export interface UpdateTaskPayload {
+    title?: string;
+    description?: string;
+    due_date?: Date | null;
+    priority?: number;
+    category?: number;
+    status?: number;
+    created_by?: string | null;
+}
+
 @Injectable({
     providedIn: 'root'
 })
 export class TasksService {
-    supabase = inject(SupabaseService);
+    private supabase = inject(SupabaseService);
+
     tasks = signal<Task[]>([]);
 
     constructor() {
         this.getTasks();
     }
 
-    async getTasks() {
-        const tasks: Task[] = await this.supabase.selectTasks();
+    async getTasks(): Promise<void> {
+        const tasks = await this.supabase.selectTasks();
 
         if (!tasks) {
             return;
@@ -49,18 +70,17 @@ export class TasksService {
     }
 
     async getTaskByID(id: number): Promise<Task | undefined> {
-        const task: Task = await this.supabase.selectTaskById(id);
+        const task = await this.supabase.selectTaskById(id);
 
         return task ?? undefined;
     }
 
-    async createTask(task: Task): Promise<void> {
-        await this.supabase.insert<Task>('tasks', task);
-
+    async createTask(task: CreateTaskPayload): Promise<void> {
+        await this.supabase.insert<CreateTaskPayload>('tasks', task);
         await this.getTasks();
     }
 
-    async updateTask(task: Task & { id: number }): Promise<void> {
+    async updateTask(task: UpdateTaskPayload & { id: number }): Promise<void> {
         const { id, ...data } = task;
 
         await this.supabase.update('tasks', id, data);
@@ -72,16 +92,16 @@ export class TasksService {
         await this.getTasks();
     }
 
-    async createSubtask(subtask: Subtask) {
+    async createSubtask(subtask: Subtask): Promise<void> {
         await this.supabase.insert('subtasks', subtask);
         await this.getTasks();
     }
-    async updateSubtask(id: number, payload: {}) {
+    async updateSubtask(id: number, payload: {}): Promise<void> {
         await this.supabase.update('subtasks', id, payload);
         await this.getTasks();
     }
 
-    async deleteSubtask(id: number) {
+    async deleteSubtask(id: number): Promise<void> {
         this.supabase.delete('subtasks', id);
         await this.getTasks();
     }

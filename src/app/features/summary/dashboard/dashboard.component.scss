@@ -1,8 +1,11 @@
 @use "abstracts" as *;
 
 .summary {
-    margin-top: 120px;
+    background-color: var(--color-body-background);
     color: white;
+    position: relative;
+    z-index: 2;
+    animation: slideUpSummary 0.8s ease-in-out 1s forwards;
     
     &__wrapper {
         display: flex;
@@ -26,13 +29,38 @@
         }
     }
 
+    &__welcome-msg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+        height: 86vh;
+        color: black;
+        
+        animation: slideUp 0.9s ease-in-out 3s forwards;
+    }
+
+    @keyframes slideUp{
+        100% {
+            transform: translateY(-26vh);
+        }
+
+    }
+
+    @keyframes slideUpSummary{
+        100% {
+            transform: translateY(-80vh);
+        }
+
+    }
+
     &__status-number {
         display: flex;
         gap: 8px;
     }
 
     &__status-symbol {
-        // position: absolute;
         width: 60px;
         height: 60px;
         border-radius: 50%;
