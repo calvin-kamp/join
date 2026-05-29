@@ -9,7 +9,7 @@ import { filter, map, startWith } from 'rxjs';
 export class RouteStateService {
     router = inject(Router);
 
-    scrollableRoutes = ['/tasks/board', '/tasks/add-task', '/contacts'];
+    scrollableRoutes = ['/tasks/board', '/tasks/add-task', '/contacts', '/legal-notice', '/privacy-policy', '/help'];
 
     url = toSignal(
         this.router.events.pipe(
