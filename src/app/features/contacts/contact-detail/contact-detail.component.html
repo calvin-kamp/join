@@ -60,13 +60,14 @@
                     <ui-link [href]="'mailto:' + c.mail">{{ c.mail }}</ui-link>
                 </dd>
             </div>
-
-            <div class="contact-detail__field">
-                <dt class="contact-detail__label">Phone</dt>
-                <dd class="contact-detail__value">
-                    <ui-link [href]="'tel:' + c.phone">{{ c.phone }}</ui-link>
-                </dd>
-            </div>
+            @if (c.phone != 'undefined') {
+                <div class="contact-detail__field">
+                    <dt class="contact-detail__label">Phone</dt>
+                    <dd class="contact-detail__value">
+                        <ui-link [href]="'tel:' + c.phone">{{ c.phone }}</ui-link>
+                    </dd>
+                </div>
+            }
         </dl>
 
         @if (menuOpen()) {

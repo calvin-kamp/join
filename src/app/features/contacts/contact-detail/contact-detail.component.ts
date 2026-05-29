@@ -66,6 +66,7 @@ export class ContactDetailComponent {
         var contact;
         if (id === 0) {
             contact = this.authService.getUserContact();
+            contact.id = 0;
         } else {
             contact = await this.contactsService.getContactByID(id);
         }

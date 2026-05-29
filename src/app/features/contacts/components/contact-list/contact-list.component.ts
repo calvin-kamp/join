@@ -17,8 +17,14 @@ export class ContactListComponent {
     private authService = inject(AuthService);
 
     contacts = input.required<Contact[]>();
-    user = input(this.authService.displayName());
-    userContact: Contact = this.authService.getUserContact();
+    userContact = computed(() => {
+        const id = 0;
+        const user = this.authService.getUserContact();
+        const userData: Contact = user;
+        userData.id = id;
+
+        return userData;
+    });
 
     protected groupedContacts = computed(() => {
         const sorted = [...this.contacts()].sort((a, b) => a.name.localeCompare(b.name));
