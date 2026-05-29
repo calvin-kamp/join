@@ -5,7 +5,7 @@ import { InputComponent } from '@shared/ui/forms/input/input.component';
 import { IconComponent } from '@shared/ui/icon/icon.component';
 
 @Component({
-    selector: 'board-searchbar',
+    selector: 'tasks-searchbar',
     imports: [ReactiveFormsModule, InputComponent, IconComponent],
     templateUrl: './searchbar.component.html',
     styleUrl: './searchbar.component.scss',

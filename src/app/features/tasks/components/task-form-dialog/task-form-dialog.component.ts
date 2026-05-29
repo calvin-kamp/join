@@ -2,6 +2,7 @@ import { Component, input, output } from '@angular/core';
 import { DialogComponent } from '@shared/ui/dialog/dialog.component';
 import { TaskFormComponent } from '../task-form/task-form.component';
 import { STATUS_IDS } from '@features/tasks/tasks.constants';
+import { type Task } from '@features/tasks/tasks.service';
 
 @Component({
     selector: 'tasks-task-form-dialog',
@@ -12,6 +13,7 @@ import { STATUS_IDS } from '@features/tasks/tasks.constants';
 export class TaskFormDialogComponent {
     open = input<boolean>(false);
     statusId = input<number>(STATUS_IDS.TODO);
+    task = input<Task | null>(null);
     close = output<void>();
     created = output<void>();
 
