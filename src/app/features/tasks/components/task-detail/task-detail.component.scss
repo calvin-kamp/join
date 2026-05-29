@@ -1,0 +1,90 @@
+@use "abstracts" as *;
+
+.task-detail {
+    padding: 32px 24px;
+    @include flex($direction: column, $gap: 16px);
+    
+    @include breakpoint(lg) {
+        gap: 24px;
+        padding: 48px 40px;
+    }
+
+    &__header {
+        @include flex($justify: space-between, $items: center);
+    }
+
+    &__badge {
+        display: inline-block;
+        color: var(--color-white);
+        padding: 4px 16px;
+        border-radius: $radius-badge;
+
+        &--user-story {
+            background-color: var(--color-badge-user-story);
+        }
+        
+        &--technical-task {
+            background-color: var(--color-badge-technical-task);
+        }
+    }
+
+    &__body {
+        @include flex($direction: column, $gap: 16px);
+
+        @include breakpoint(lg) {
+            gap: 24px;
+        }
+    }
+
+    &__title {}
+
+    &__description {}
+
+    &__meta {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        column-gap: 24px;
+        row-gap: 16px;
+
+        @include breakpoint(lg) {
+            row-gap: 24px;
+        }
+    }
+
+    &__term {
+        font-weight: $font-weight-bold;
+        color: var(--color-text-tertiary);
+
+        @include breakpoint(lg) {
+            font-weight: $font-weight-regular;
+        }
+    }
+
+    &__value {
+        @include flex($items: center, $gap: 12px)
+    }
+
+    &__assigned-to {}
+
+    &__assigned-list {}
+
+    &__assigned-item {
+        padding: 8px 16px;
+        @include flex($items: center, $gap: 16px);
+    }
+
+    &__subtasks {}
+
+    &__subtasks-list {}
+
+    &__subtasks-item {
+        padding: 4px 16px;
+        @include flex($gap: 4px);
+    }
+
+    &__footer {
+
+    }
+
+    &__actions {}
+}
