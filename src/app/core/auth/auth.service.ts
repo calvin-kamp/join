@@ -70,9 +70,26 @@ export class AuthService {
         contact = {
             name: this.displayName(),
             mail: String(user.email),
-            phone: String(user.phone)
+            phone: String(user.user_metadata['phone'])
         };
 
         return contact;
+    }
+
+    async updateUserContact(payload: Contact): Promise<void> {
+        const user = this.user();
+
+        if (!user) {
+            throw new Error('No user logged in');
+        }
+
+        const { error } = await this.supabase.auth.updateUser({
+            email: payload.mail,
+            data: { name: payload.name, phone: payload.phone }
+        });
+
+        if (error) {
+            throw error;
+        }
     }
 }
