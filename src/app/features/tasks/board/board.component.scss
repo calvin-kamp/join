@@ -14,6 +14,7 @@
     }
 
     &__searchbar-wrapper {
+        position: relative;
         @include flex($gap: 12px);
         margin-top: 40px;
 
@@ -33,8 +34,8 @@
 
     &__add {
         position: absolute;
-        top: calc($header-height-mobile + 56px);
-        right: 16px;
+        right: 0;
+        top: -80px;
 
         @include hoverable() {
             & > a > ui-icon > svg > path {
@@ -75,12 +76,12 @@
         @include breakpoint(lg) {
             flex-direction: row;
             margin-top: 48px;
-            padding-bottom: 16px;
         }
     }
 
     &__list {
         min-height: 55px;
+        width: 100%;
         @include flex($wrap: nowrap, $gap: 16px);
         overflow-x: scroll;
 
@@ -94,17 +95,16 @@
     }
 
     &__column {
-        &:last-child {
-            margin-bottom: calc($footer-height-mobile + 16px);
+        width: 100%;
+        
 
-            @include breakpoint(lg) {
-                margin-bottom: 0;
-            }
+        @include breakpoint(lg){
+            width: 252px;
         }
     }
 
     &__list-headline {
-        min-width: 252px;
+
         padding-bottom: 16px;
         color: var(--color-text-tertiary);
         @include flex($justify: space-between, $items: center);

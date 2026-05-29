@@ -36,6 +36,10 @@ export class SelectComponent implements ControlValueAccessor {
     hideMultiLabels = input<boolean>(false);
     alwaysShowPlaceholder = input<boolean>(false);
     closeOnSelect = input<boolean | undefined>(undefined);
+    isFocused = signal<boolean>(false);
+    errorMessage = input<string>('');
+
+    protected readonly hasError = computed(() => this.errorMessage().length > 0);
 
     readonly effectiveCloseOnSelect = computed(() => {
         const explicit = this.closeOnSelect();
@@ -56,8 +60,14 @@ export class SelectComponent implements ControlValueAccessor {
         return true;
     });
 
+    searchTerm = signal('');
+
     private onChange: (value: SelectValue) => void = () => {};
     private onTouched: () => void = () => {};
+
+    handleFocused() {
+        this.isFocused.set(true);
+    }
 
     writeValue(value: SelectValue): void {
         this.selectedValue.set(value);
@@ -83,5 +93,6 @@ export class SelectComponent implements ControlValueAccessor {
 
     handleBlur(): void {
         this.onTouched();
+        this.isFocused.set(false);
     }
 }
