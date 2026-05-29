@@ -41,6 +41,18 @@ export interface CreateTaskPayload {
     }>;
 }
 
+export interface EditTaskPayload {
+    title: string;
+    description: string;
+    dueDate: string | null;
+    priorityId: number;
+    categoryId: number;
+    assignedContactIds: number[];
+    subtasks: Array<{
+        title: string;
+    }>;
+}
+
 export interface UpdateTaskPayload {
     title?: string;
     description?: string;
@@ -227,6 +239,78 @@ export class TasksService {
 
     async updateTask(payload: UpdateTaskPayload, id: number): Promise<void> {
         await this.supabase.update('tasks', id, payload as Record<string, unknown>);
+        await this.getTasks();
+    }
+
+    async editTask(id: number, task: EditTaskPayload): Promise<void> {
+        const { error: taskError } = await this.supabase.client
+            .from('tasks')
+            .update({
+                title: task.title,
+                description: task.description,
+                due_date: task.dueDate,
+                priority: task.priorityId,
+                category: task.categoryId
+            })
+            .eq('id', id);
+
+        if (taskError) {
+            throw taskError;
+        }
+
+        const { error: deleteContactsError } = await this.supabase.client
+            .from('task_contacts')
+            .delete()
+            .eq('task_id', id);
+
+        if (deleteContactsError) {
+            throw deleteContactsError;
+        }
+
+        if (task.assignedContactIds.length > 0) {
+            const { error } = await this.supabase.client.from('task_contacts').insert(
+                task.assignedContactIds.map((contactId) => ({
+                    task_id: id,
+                    contacts_id: contactId
+                }))
+            );
+
+            if (error) {
+                throw error;
+            }
+        }
+
+        const { data: existingSubtasks, error: fetchSubtasksError } = await this.supabase.client
+            .from('subtasks')
+            .select('title, status')
+            .eq('task_id', id);
+
+        if (fetchSubtasksError) {
+            throw fetchSubtasksError;
+        }
+
+        const statusByTitle = new Map((existingSubtasks ?? []).map((s) => [s.title, s.status]));
+
+        const { error: deleteSubtasksError } = await this.supabase.client.from('subtasks').delete().eq('task_id', id);
+
+        if (deleteSubtasksError) {
+            throw deleteSubtasksError;
+        }
+
+        if (task.subtasks.length > 0) {
+            const { error } = await this.supabase.client.from('subtasks').insert(
+                task.subtasks.map((subtask) => ({
+                    task_id: id,
+                    title: subtask.title,
+                    status: statusByTitle.get(subtask.title) ?? false
+                }))
+            );
+
+            if (error) {
+                throw error;
+            }
+        }
+
         await this.getTasks();
     }
 
