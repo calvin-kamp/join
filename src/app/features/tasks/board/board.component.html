@@ -3,7 +3,7 @@
         <h1 class="board__title">Board</h1>
 
         <div class="board__searchbar-wrapper">
-            <board-searchbar class="board__searchbar" />
+            <tasks-searchbar class="board__searchbar" />
 
             <ui-link
                 class="board__add"
@@ -57,6 +57,9 @@
                             cdkDrag
                             [cdkDragData]="task"
                             [cdkDragStartDelay]="dragDelayTime()"
+                            (cdkDragStarted)="onCardDragStarted()"
+                            (cdkDragEnded)="onCardDragEnded()"
+                            (click)="openFromCard(task)"
                             class="board__list-item"
                             [task]="task"
                         >
@@ -74,8 +77,18 @@
     </div>
 </section>
 
+<tasks-task-detail
+    [open]="detailOpen()"
+    [task]="selectedTask()"
+    (close)="closeDetail()"
+    (editRequested)="onEditTask($event)"
+    (deleteRequested)="onDeleteTask($event)"
+/>
+
 <tasks-task-form-dialog
     [open]="dialogOpen()"
     [statusId]="dialogStatusId()"
+    [task]="taskToEdit()"
     (close)="closeDialog()"
+    (created)="onFormSaved()"
 />
