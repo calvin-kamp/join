@@ -13,6 +13,7 @@ import { InitialLetterComponent } from '@shared/ui/initial-letter/initial-letter
 import { ButtonComponent } from '@shared/ui/button/button.component';
 import { TasksService, type Task, type EditTaskPayload } from '@features/tasks/tasks.service';
 import { STATUS_IDS } from '@features/tasks/tasks.constants';
+import { ToastService } from '@shared/services/toast.service';
 
 export interface Priority {
     label: string;
@@ -41,6 +42,7 @@ export class TaskFormComponent implements OnChanges {
     private fb = inject(FormBuilder);
     private tasksService = inject(TasksService);
     contactsService = inject(ContactsService);
+    toast = inject(ToastService);
 
     contacts = this.contactsService.contacts;
 
@@ -226,6 +228,7 @@ export class TaskFormComponent implements OnChanges {
 
                 this.created.emit();
                 this.clearForm();
+                this.toast.show('Task added to board', '/assets/icons/nav-board.svg');
             }
         } catch (e) {
             console.error('Failed to save task', e);

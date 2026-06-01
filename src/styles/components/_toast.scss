@@ -1,0 +1,12 @@
+@use 'abstracts' as *;
+@import 'toastify-js/src/toastify.css';
+
+.toastify {
+    @include flex($direction: row-reverse, $items: center, $gap: 20px);
+
+    font-size: $font-size-sm;
+    border-radius: $radius-submenu;
+    background: var(--color-surface-inverted);
+    color: var(--color-white);
+    padding: 25px 30px;
+}

@@ -11,6 +11,7 @@ import { InitialLetterComponent } from '@shared/ui/initial-letter/initial-letter
 import { LogoComponent } from '@shared/ui/logo/logo.component';
 import { IconComponent } from '@shared/ui/icon/icon.component';
 import { LinkComponent } from '@shared/ui/link/link.component';
+import { ToastService } from '@shared/services/toast.service';
 
 type FormType = 'add' | 'edit';
 
@@ -38,6 +39,7 @@ export class ContactFormComponent {
 
     readonly formType = computed<FormType>(() => (this.editingContact() ? 'edit' : 'add'));
 
+    toast = inject(ToastService);
     isOpen = signal<boolean>(false);
     loading = signal<boolean>(false);
     error = signal<string | null>(null);
@@ -130,6 +132,7 @@ export class ContactFormComponent {
                 await this.contactsService.updateContact({ ...contactData, id: editing.id });
             } else {
                 await this.contactsService.addContact(contactData);
+                this.toast.show('Contact succesfully created');
             }
 
             this.close();
