@@ -16,7 +16,7 @@ export class DashboardComponent {
     urgentAmount() {
         let urgentAmount = 0;
         for (const task of this.taskService.tasks()) {
-            if (task.priority.id == 1) {
+            if (task.priority.id === 1) {
                 urgentAmount++;
             } else {
                 urgentAmount;
@@ -31,30 +31,24 @@ export class DashboardComponent {
             if (task.due_date) {
                 deadlines.push(new Date(task.due_date));
             }
+            console.log(task.status);
         }
 
         let importantDate: Date = new Date();
         for (const deadline of deadlines) {
-            if (importantDate < deadline) {
-                importantDate = deadline;
-            }
+            importantDate = importantDate < deadline ? (importantDate = deadline) : importantDate;
         }
 
-        const urgentDate =
-            importantDate.toLocaleString('default', { month: 'long' }) +
-            ' ' +
-            importantDate.getDate() +
-            ', ' +
-            importantDate.getFullYear();
+        const month = importantDate.toLocaleString('default', { month: 'long' });
+        const urgentDate = `${month} ${importantDate.getDate()}, ${importantDate.getFullYear()}`;
+
         return urgentDate;
     }
 
     toDoAmount() {
         let taskAmountToDo = 0;
         for (const task of this.taskService.tasks()) {
-            if (task.status.name == 'To do') {
-                taskAmountToDo++;
-            }
+            task.status.name == 'To do' ? taskAmountToDo++ : taskAmountToDo;
         }
         return taskAmountToDo;
     }
@@ -108,23 +102,23 @@ export class DashboardComponent {
     greetings() {
         let timeHour = new Date().getHours();
         let greets: string[] = ['Good Morning', 'Good Afternoon', 'Good Evening'];
-        let greetmsg: string = '';
+        let greetMsg: string = '';
 
         if (timeHour > 5 && timeHour < 12) {
-            greetmsg = greets[0];
+            greetMsg = greets[0];
         }
 
         if (timeHour >= 12 && timeHour < 18) {
-            greetmsg = greets[1];
+            greetMsg = greets[1];
         }
 
         if (timeHour >= 18 && timeHour < 0) {
-            greetmsg = greets[2];
+            greetMsg = greets[2];
         }
 
         if (timeHour >= 0 && timeHour < 5) {
-            greetmsg = greets[2];
+            greetMsg = greets[2];
         }
-        return greetmsg;
+        return greetMsg;
     }
 }
