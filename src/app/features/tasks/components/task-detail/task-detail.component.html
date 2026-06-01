@@ -32,13 +32,13 @@
                 <p class="task-detail__description">{{ task.description }}</p>
 
                 <dl class="task-detail__meta">
-                    <dt class="task-detail__term">Due date</dt>
+                    <dt class="task-detail__term">Due date:</dt>
 
                     <dd class="task-detail__value">
                         {{ task.dueDate | date: 'dd/MM/yyyy' }}
                     </dd>
 
-                    <dt class="task-detail__term">Priority</dt>
+                    <dt class="task-detail__term">Priority:</dt>
                     <dd class="task-detail__value">
                         {{ task.priority.name }}
 
@@ -48,7 +48,7 @@
 
                 @if (task.assignedTo.length > 0) {
                     <section class="task-detail__assigned-to">
-                        <p class="task-detail__term">Assigned to</p>
+                        <p class="task-detail__term">Assigned to:</p>
 
                         <ul class="task-detail__assigned-list">
                             @for (contact of task.assignedTo; track contact.id) {
@@ -86,9 +86,32 @@
 
             <div class="task-detail__footer">
                 <div class="task-detail__actions">
-                    <ui-button (click)="deleteRequested.emit(task)"> Delete </ui-button>
+                    <ui-button
+                        (click)="deleteRequested.emit(task)"
+                        [variant]="'link'"
+                    >
+                        <ui-icon
+                            name="trash"
+                            [width]="16"
+                            [height]="16"
+                        />
 
-                    <ui-button (click)="editRequested.emit(task)"> Edit </ui-button>
+                        Delete
+                    </ui-button>
+
+                    <div class="task-detail__divider"></div>
+
+                    <ui-button
+                        (click)="editRequested.emit(task)"
+                        [variant]="'link'"
+                    >
+                        <ui-icon
+                            name="pen-outline"
+                            [width]="16"
+                            [height]="16"
+                        />
+                        Edit
+                    </ui-button>
                 </div>
             </div>
         </div>
