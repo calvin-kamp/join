@@ -19,6 +19,10 @@
         padding: 4px 16px;
         border-radius: $radius-badge;
 
+        @include breakpoint(lg){
+            font-size: $font-size-md;
+        }
+
         &--user-story {
             background-color: var(--color-badge-user-story);
         }
@@ -26,6 +30,7 @@
         &--technical-task {
             background-color: var(--color-badge-technical-task);
         }
+
     }
 
     &__body {
@@ -37,11 +42,16 @@
     }
 
     &__title {
-        font-size: $font-size-3xl;
+        font-size: $font-size-xl;
+        @include breakpoint(lg) {
+            font-size: $font-size-3xl;
+        }
     }
 
     &__description {
-        font-size: $font-size-sm;
+        @include breakpoint(lg) {
+            font-size: $font-size-sm;
+        }
     }
 
     &__meta {
@@ -56,24 +66,19 @@
     }
 
     &__term {
-        font-size: $font-size-sm;
-        font-weight: $font-weight-bold;
         color: var(--color-text-tertiary);
 
         @include breakpoint(lg) {
+            font-size: $font-size-sm;
             font-weight: $font-weight-regular;
         }
     }
 
     &__value {
-        font-size: $font-size-sm;
         @include flex($items: center, $gap: 12px);
-    }
-
-    &__assigned-to {
-    }
-
-    &__assigned-list {
+        @include breakpoint(lg) {
+            font-size: $font-size-sm;
+        }
     }
 
     &__assigned-item {
@@ -81,10 +86,8 @@
         @include flex($items: center, $gap: 16px);
     }
 
-    &__subtasks {
-    }
-
-    &__subtasks-list {
+    &__subtask-list {
+        padding-top: 8px;
     }
 
     &__subtasks-item {
@@ -97,9 +100,6 @@
         border: solid 1px var(--color-border);
     }
 
-    &__footer {
-    }
-    
     &__actions {
         @include flex($justify: flex-end, $items: center, $gap: 8px);
     }
