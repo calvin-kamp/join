@@ -1,5 +1,4 @@
 import { Component, effect, inject, signal } from '@angular/core';
-import { SearchbarComponent } from './searchbar/searchbar.component';
 import { Task, TasksService, UpdateTaskPayload } from '../tasks.service';
 import { TaskCardComponent } from '../components/task-card/task-card.component';
 import { TaskFormDialogComponent } from '../components/task-form-dialog/task-form-dialog.component';
@@ -14,6 +13,8 @@ import {
     moveItemInArray,
     transferArrayItem
 } from '@angular/cdk/drag-drop';
+import { TaskDetailComponent } from '../components/task-detail/task-detail.component';
+import { SearchbarComponent } from '../components/searchbar/searchbar.component';
 
 @Component({
     selector: 'tasks-board',
@@ -25,7 +26,8 @@ import {
         LinkComponent,
         CdkDropList,
         CdkDragPlaceholder,
-        CdkDrag
+        CdkDrag,
+        TaskDetailComponent
     ],
     templateUrl: './board.component.html',
     styleUrl: './board.component.scss'
@@ -49,6 +51,13 @@ export class BoardComponent {
     // Dialog state
     protected readonly dialogOpen = signal(false);
     protected readonly dialogStatusId = signal<number>(STATUS_IDS.TODO);
+
+    protected readonly taskToEdit = signal<Task | null>(null);
+
+    detailOpen = signal(false);
+    protected readonly selectedTask = signal<Task | null>(null);
+
+    private dragging = false;
 
     constructor() {
         effect(() => {
@@ -98,11 +107,65 @@ export class BoardComponent {
     }
 
     openDialogForColumn(statusId: number): void {
+        this.taskToEdit.set(null);
         this.dialogStatusId.set(statusId);
         this.dialogOpen.set(true);
     }
 
     closeDialog(): void {
         this.dialogOpen.set(false);
+        this.taskToEdit.set(null);
+    }
+
+    onEditTask(task: Task): void {
+        this.detailOpen.set(false);
+        this.taskToEdit.set(task);
+        this.dialogStatusId.set(task.status.id);
+        this.dialogOpen.set(true);
+    }
+
+    async onDeleteTask(task: Task): Promise<void> {
+        this.detailOpen.set(false);
+        await this.tasksService.deleteTask(task.id);
+    }
+
+    onFormSaved(): void {
+        const editing = this.taskToEdit();
+
+        if (!editing) {
+            return;
+        }
+
+        const updated = this.tasksService.tasks().find((task) => task.id === editing.id);
+
+        if (updated) {
+            this.selectedTask.set(updated);
+            this.detailOpen.set(true);
+        }
+    }
+
+    closeDetail() {
+        this.detailOpen.set(false);
+    }
+
+    onCardDragStarted(): void {
+        this.dragging = true;
+    }
+
+    onCardDragEnded(): void {
+        setTimeout(() => (this.dragging = false));
+    }
+
+    openFromCard(task: Task): void {
+        if (this.dragging) {
+            return;
+        }
+
+        this.openDetail(task);
+    }
+
+    openDetail(task: Task): void {
+        this.selectedTask.set(task);
+        this.detailOpen.set(true);
     }
 }

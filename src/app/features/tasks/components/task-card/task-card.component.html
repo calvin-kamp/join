@@ -14,10 +14,7 @@
     </div>
 
     @if (task().subtasks.length > 0) {
-        <div
-            class="task-card__subtasks"
-            [style.]=""
-        >
+        <div class="task-card__subtasks">
             <div
                 class="task-card__progessbar"
                 [style.--progess.px]="setProgress()"

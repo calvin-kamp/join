@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, output, signal } from '@angular/core';
+import { Component, computed, inject, input, OnChanges, output, signal, SimpleChanges } from '@angular/core';
 import { InputComponent } from '@shared/ui/forms/input/input.component';
 import { FormBuilder, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { RadioComponent } from '@shared/ui/forms/radio/radio.component';
@@ -11,8 +11,9 @@ import { ContactsService } from '@features/contacts/contacts.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { InitialLetterComponent } from '@shared/ui/initial-letter/initial-letter.component';
 import { ButtonComponent } from '@shared/ui/button/button.component';
-import { TasksService } from '@features/tasks/tasks.service';
+import { TasksService, type Task, type EditTaskPayload } from '@features/tasks/tasks.service';
 import { STATUS_IDS } from '@features/tasks/tasks.constants';
+import { ToastService } from '@shared/services/toast.service';
 
 export interface Priority {
     label: string;
@@ -37,27 +38,26 @@ export interface Priority {
     templateUrl: './task-form.component.html',
     styleUrl: './task-form.component.scss'
 })
-export class TaskFormComponent {
+export class TaskFormComponent implements OnChanges {
     private fb = inject(FormBuilder);
     private tasksService = inject(TasksService);
     contactsService = inject(ContactsService);
+    toast = inject(ToastService);
 
     contacts = this.contactsService.contacts;
 
-    // ── Inputs / Outputs ──────────────────────────────────────────────────────
-    // When this form is rendered inside a dialog, the parent sets `showClose`
-    // to `true`; the close button then emits `close` on click.
     showClose = input<boolean>(false);
-    // Status id assigned to newly created tasks. Defaults to "To do" but the
-    // board page passes the id of whichever column the user clicked "+" on.
     statusId = input<number>(STATUS_IDS.TODO);
+    task = input<Task | null>(null);
     close = output<void>();
     created = output<void>();
+
+    private readonly editingTask = signal<Task | null>(null);
+    readonly formType = computed<'add' | 'edit'>(() => (this.editingTask() ? 'edit' : 'add'));
 
     error = signal<string | null>(null);
     loading = signal<boolean>(false);
 
-    // Numeric ids so the form value matches `CreateTaskPayload`.
     categories: SelectOption[] = [
         { name: 'Technical Task', id: 1 },
         { name: 'User Story', id: 2 }
@@ -97,7 +97,6 @@ export class TaskFormComponent {
         required: 'Category is required'
     });
 
-    // Tracks form validity reactively so the Create button can be disabled.
     private formStatus = toSignal(this.taskForm.statusChanges, { initialValue: this.taskForm.status });
     isInvalid = computed(() => this.formStatus() !== 'VALID');
 
@@ -143,7 +142,35 @@ export class TaskFormComponent {
         this.editingSubtaskIndex.set(null);
     }
 
-    // ── Form actions ──────────────────────────────────────────────────────────
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes['task']) {
+            this.applyTask(this.task());
+        }
+    }
+
+    private applyTask(task: Task | null): void {
+        if (!task) {
+            this.editingTask.set(null);
+            this.clearForm();
+            return;
+        }
+
+        this.editingTask.set(task);
+
+        this.taskForm.reset({
+            title: task.title,
+            description: task.description,
+            dueDate: task.dueDate ?? '',
+            assignedTo: task.assignedTo.map((contact) => contact.id).filter((id): id is number => id !== undefined),
+            priority: task.priority.name || 'Medium',
+            category: task.category.id
+        });
+
+        this.subtasks.set(task.subtasks.map((subtask) => subtask.title));
+        this.editingSubtaskIndex.set(null);
+        this.editingSubtaskValue.set('');
+        this.error.set(null);
+    }
 
     clearForm(): void {
         this.taskForm.reset({
@@ -172,24 +199,40 @@ export class TaskFormComponent {
         this.error.set(null);
 
         const value = this.taskForm.getRawValue();
+        const editing = this.editingTask();
 
         try {
-            await this.tasksService.createTask({
-                title: value.title ?? '',
-                description: value.description ?? '',
-                dueDate: value.dueDate || null,
-                priorityId: this.priorityIdByLabel[value.priority ?? 'Medium'] ?? 2,
-                categoryId: value.category!,
-                statusId: this.statusId(),
-                assignedContactIds: value.assignedTo ?? [],
-                subtasks: this.subtasks().map((title) => ({ title, status: false }))
-            });
+            if (editing) {
+                await this.tasksService.editTask(editing.id, {
+                    title: value.title ?? '',
+                    description: value.description ?? '',
+                    dueDate: value.dueDate || null,
+                    priorityId: this.priorityIdByLabel[value.priority ?? 'Medium'] ?? 2,
+                    categoryId: value.category!,
+                    assignedContactIds: value.assignedTo ?? [],
+                    subtasks: this.subtasks().map((title) => ({ title }))
+                } satisfies EditTaskPayload);
 
-            this.created.emit();
-            this.clearForm();
+                this.created.emit();
+            } else {
+                await this.tasksService.createTask({
+                    title: value.title ?? '',
+                    description: value.description ?? '',
+                    dueDate: value.dueDate || null,
+                    priorityId: this.priorityIdByLabel[value.priority ?? 'Medium'] ?? 2,
+                    categoryId: value.category!,
+                    statusId: this.statusId(),
+                    assignedContactIds: value.assignedTo ?? [],
+                    subtasks: this.subtasks().map((title) => ({ title, status: false }))
+                });
+
+                this.created.emit();
+                this.clearForm();
+                this.toast.show('Task added to board', '/assets/icons/nav-board.svg');
+            }
         } catch (e) {
-            console.error('Failed to create task', e);
-            this.error.set('Failed to create task. Please try again.');
+            console.error('Failed to save task', e);
+            this.error.set('Failed to save task. Please try again.');
         } finally {
             this.loading.set(false);
         }

@@ -1,0 +1,50 @@
+<div
+    class="form-control form-control--checkbox"
+    [class.form-control--label-hidden]="!labelVisible()"
+    [class.form-control--full-width]="fullWidth()"
+>
+    <label class="form-control__label">
+        <input
+            [id]="inputId()"
+            [name]="name()"
+            type="checkbox"
+            [checked]="checked()"
+            [disabled]="isDisabled()"
+            [attr.aria-invalid]="hasError() ? 'true' : null"
+            [attr.aria-required]="isRequired() ? 'true' : null"
+            (change)="onCheckedChange($event)"
+            (blur)="onBlur()"
+            class="form-control__input"
+        />
+
+        <span
+            class="form-control__visual-checkbox"
+            aria-hidden="true"
+        ></span>
+
+        <span
+            class="form-control__label-text"
+            [class.sr-only]="!labelVisible()"
+        >
+            <ng-content />
+
+            @if (isRequired() && !hideRequiredMark()) {
+                <span
+                    class="form-control__required-mark"
+                    aria-hidden="true"
+                >
+                    *
+                </span>
+            }
+        </span>
+    </label>
+
+    @if (hasError()) {
+        <p
+            class="form-control__error-message"
+            role="alert"
+        >
+            {{ errorMessage() }}
+        </p>
+    }
+</div>

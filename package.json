@@ -22,12 +22,14 @@
         "@ng-select/ng-select": "^21.8.2",
         "@supabase/supabase-js": "^2.105.0",
         "rxjs": "~7.8.0",
+        "toastify-js": "^1.12.0",
         "tslib": "^2.3.0"
     },
     "devDependencies": {
         "@angular/build": "^21.2.6",
         "@angular/cli": "^21.2.6",
         "@angular/compiler-cli": "^21.2.0",
+        "@types/toastify-js": "^1.12.4",
         "prettier": "^3.8.1",
         "typescript": "~5.9.2"
     }

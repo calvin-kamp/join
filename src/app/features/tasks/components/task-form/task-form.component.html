@@ -15,7 +15,7 @@
             </button>
         }
 
-        <h1 class="task-form__title">Add Task</h1>
+        <h1 class="task-form__title">{{ formType() === 'edit' ? 'Edit Task' : 'Add Task' }}</h1>
     </div>
 
     <form
@@ -241,22 +241,41 @@
             }
 
             <div class="task-form__actions">
-                <ui-button
-                    type="button"
-                    variant="outlined"
-                    (click)="clearForm()"
-                >
-                    Clear
-                    <ui-icon name="close" />
-                </ui-button>
+                @if (formType() === 'edit') {
+                    <ui-button
+                        type="button"
+                        variant="outlined"
+                        (click)="onCloseClick()"
+                    >
+                        Cancel
+                        <ui-icon name="close" />
+                    </ui-button>
 
-                <ui-button
-                    type="submit"
-                    [disabled]="isInvalid() || loading()"
-                >
-                    Create Task
-                    <ui-icon name="check-solid" />
-                </ui-button>
+                    <ui-button
+                        type="submit"
+                        [disabled]="isInvalid() || loading()"
+                    >
+                        Save
+                        <ui-icon name="check-outline" />
+                    </ui-button>
+                } @else {
+                    <ui-button
+                        type="button"
+                        variant="outlined"
+                        (click)="clearForm()"
+                    >
+                        Clear
+                        <ui-icon name="close" />
+                    </ui-button>
+
+                    <ui-button
+                        type="submit"
+                        [disabled]="isInvalid() || loading()"
+                    >
+                        Create Task
+                        <ui-icon name="check-outline" />
+                    </ui-button>
+                }
             </div>
         </div>
     </form>

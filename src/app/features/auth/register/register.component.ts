@@ -6,12 +6,15 @@ import { AuthService } from '@core/auth/auth.service';
 import { CardDirective } from '@shared/directives/card.directive';
 import { controlErrorMessage } from '@shared/forms/control-error-message';
 import { passwordMatchValidator } from '@shared/forms/password-match.validator';
+import { ToastService } from '@shared/services/toast.service';
 import { ButtonComponent } from '@shared/ui/button/button.component';
 import { InputComponent } from '@shared/ui/forms/input/input.component';
+import { CheckboxComponent } from '@shared/ui/forms/checkbox/checkbox.component';
+import { LinkComponent } from '@shared/ui/link/link.component';
 
 @Component({
     selector: 'auth-register',
-    imports: [CardDirective, InputComponent, ReactiveFormsModule, ButtonComponent],
+    imports: [CardDirective, InputComponent, ReactiveFormsModule, ButtonComponent, CheckboxComponent, LinkComponent],
     templateUrl: './register.component.html',
     styleUrl: './register.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -23,13 +26,15 @@ export class RegisterComponent {
 
     loading = signal<boolean>(false);
     error = signal<string | null>(null);
+    toast = inject(ToastService);
 
     registerForm = this.fb.group(
         {
             name: ['', [Validators.required, Validators.minLength(4)]],
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(6)]],
-            confirmPassword: ['', Validators.required]
+            confirmPassword: ['', Validators.required],
+            acceptTos: ['', Validators.required]
         },
         { validators: passwordMatchValidator() }
     );
@@ -51,6 +56,10 @@ export class RegisterComponent {
 
     private confirmFieldError = controlErrorMessage(this.registerForm.controls.confirmPassword, {
         required: 'Please confirm your password'
+    });
+
+    protected acceptTosError = controlErrorMessage(this.registerForm.controls.email, {
+        required: 'Please accept the Privacy Policy'
     });
 
     private formStatus = toSignal(this.registerForm.statusChanges, {
@@ -85,8 +94,8 @@ export class RegisterComponent {
 
         try {
             const { name, email, password } = this.registerForm.getRawValue();
-
             await this.auth.signUp(email!, password!, name!);
+            this.toast.show('You Signed Up successfully');
             await this.router.navigateByUrl('/summary');
         } catch {
             this.error.set('Registration failed.');

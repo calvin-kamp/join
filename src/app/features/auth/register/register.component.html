@@ -50,6 +50,16 @@
             [errorMessage]="passwordConfirmError()"
         />
 
+        <ui-checkbox
+            formControlName="acceptTos"
+            name="accept-tos"
+            [isRequired]="true"
+            [hideRequiredMark]="true"
+            [errorMessage]="acceptTosError()"
+        >
+            I accept the <ui-link>Privacy policy</ui-link>
+        </ui-checkbox>
+
         @if (error()) {
             <p
                 class="register-form__error"
