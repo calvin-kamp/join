@@ -85,26 +85,6 @@ interface TaskRow {
     }> | null;
 }
 
-export interface CreateTaskPayload {
-    title: string;
-    description?: string;
-    due_date?: Date | null;
-    priority?: number;
-    category: number;
-    status: number;
-    created_by?: string | null;
-}
-
-export interface UpdateTaskPayload {
-    title?: string;
-    description?: string;
-    due_date?: Date | null;
-    priority?: number;
-    category?: number;
-    status?: number;
-    created_by?: string | null;
-}
-
 @Injectable({
     providedIn: 'root'
 })
