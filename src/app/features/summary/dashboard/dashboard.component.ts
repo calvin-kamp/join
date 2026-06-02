@@ -30,8 +30,8 @@ export class DashboardComponent {
     upcomingDeadlineInDays() {
         let deadlines: Date[] = [];
         for (const task of this.taskService.tasks()) {
-            if (task.due_date) {
-                deadlines.push(new Date(task.due_date));
+            if (task.dueDate) {
+                deadlines.push(new Date(task.dueDate));
             }
             console.log(task.status);
         }
