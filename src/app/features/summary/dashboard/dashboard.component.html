@@ -1,11 +1,14 @@
-<div class="summary__welcome-msg">
-    @if (authService.displayName() !== 'Guest') {
-        <h1 class="greet-user">{{ greetings() + authService.displayName() }}</h1>
-    } @else {
-        <h1 class="greet-guest">{{ greetings() }}</h1>
-    }
-</div>
 <div class="summary">
+    <div class="summary__welcome-msg">
+        @if (authService.displayName() !== 'Guest') {
+            <h1 class="summary__greet">
+                {{ greetings() }},
+                <span class="summary__greet-user"> {{ authService.displayName() }} </span>
+            </h1>
+        } @else {
+            <h1 class="greet-guest">{{ greetings() }}</h1>
+        }
+    </div>
     <div class="summary__wrapper">
         <div class="summary__wrapper-left">
             <div class="summary__status-number">

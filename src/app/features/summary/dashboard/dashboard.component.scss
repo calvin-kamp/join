@@ -4,6 +4,7 @@
     
     &__welcome-msg {
         @include flex($type: flex, $items: center, $justify: center);
+        padding: 24px;
         position: relative;
         z-index: 1;
         height: 86vh;
@@ -24,6 +25,19 @@
         }
 
     }
+
+    &__greet {
+        text-align: center;
+        font-weight: 400;
+        font-size: 36px;
+    }
+
+    &__greet-user {
+        font-weight: 700;
+        font-size: 48px;
+        color: #29ABE2;
+    }
+
     background-color: var(--color-body-background);
     color: white;
     position: relative;
