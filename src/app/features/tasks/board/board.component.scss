@@ -1,0 +1,125 @@
+@use 'abstracts' as *;
+
+.board {
+    @include breakpoint(lg) {
+        margin-left: 64px;
+    }
+
+    &__headline {
+        display: block;
+
+        @include breakpoint(lg) {
+            @include flex();
+        }
+    }
+
+    &__searchbar-wrapper {
+        position: relative;
+        @include flex($gap: 12px);
+        margin-top: 40px;
+
+        @include breakpoint(lg) {
+            padding-right: 88px;
+        }
+    }
+
+    &__searchbar {
+        flex-grow: 1;
+    }
+
+    &__title {
+        margin-top: 48px;
+        flex-grow: 1;
+    }
+
+    &__add {
+        position: absolute;
+        right: 0;
+        top: -80px;
+
+        @include hoverable() {
+            & > a > ui-icon > svg > path {
+                stroke: var(--color-white) !important;
+            }
+        }
+
+        @include breakpoint(lg) {
+            position: unset;
+            padding-top: 3px;
+        }
+    }
+
+    &__btn-label {
+        display: none;
+        color: var(--color-white);
+
+        @include breakpoint(lg) {
+            padding-right: 4px;
+            display: inline-block;
+        }
+    }
+
+    &__empty-column {
+        padding-block: 15px;
+        text-align: center;
+        min-width: 252px;
+        max-height: 55px;
+        color: var(--color-text-muted);
+        border-radius: $radius-input;
+        background-color: var(--color-surface-muted);
+        border: 1px dashed var(--color-text-muted);
+    }
+
+    &__task-table {
+        @include flex($direction: column, $gap: 26px);
+
+        @include breakpoint(lg) {
+            flex-direction: row;
+            margin-top: 48px;
+        }
+    }
+
+    &__list {
+        min-height: 55px;
+        width: 100%;
+        @include flex($wrap: nowrap, $gap: 16px);
+        overflow-x: scroll;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        @include breakpoint(lg) {
+            flex-direction: column;
+        }
+    }
+
+    &__column {
+        width: 100%;
+        
+
+        @include breakpoint(lg){
+            width: 252px;
+        }
+    }
+
+    &__list-headline {
+
+        padding-bottom: 16px;
+        color: var(--color-text-tertiary);
+        @include flex($justify: space-between, $items: center);
+    }
+
+    &__list-item {
+        flex-shrink: 0;
+    }
+
+    &__task-placeholder {
+        background: var(--color-surface-muted);
+        border: dotted 3px var(--color-text-muted);
+        border-radius: $radius-input;
+        min-height: 160px;
+        min-width: 252px;
+        transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    }
+}

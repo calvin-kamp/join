@@ -1,0 +1,216 @@
+@use 'abstracts' as *;
+
+.task-form {
+    padding-bottom: 20px;
+    @include breakpoint(lg) {
+        padding-left: 97px;
+    }
+    &__header {
+        padding-top: 24px;
+        @include breakpoint(lg){
+            padding-top: 48px;
+        }
+    }
+
+    &__title {
+        margin-bottom: 32px;
+
+        @include breakpoint(lg) {
+            margin-bottom: 48px;
+        }
+    }
+
+    &__form {
+        @include breakpoint(lg) {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 96px;
+            position: relative;
+        }
+
+        @include breakpoint(lg) {
+            &::after {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 1px;
+                height: 100%;
+                background-color: var(--color-border);
+                border-radius: $radius-round;
+                content: '';
+            }
+        }
+    }
+
+    &__column {
+        @include breakpoint(lg) {
+        }
+    }
+
+    &__priority {
+        @include flex($direction: column);
+
+        @include breakpoint(md) {
+            @include flex($gap: 16px);
+        }
+    }
+
+    &__label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: inherit;
+    }
+
+    &__assigned-list {
+        list-style: none;
+        padding: 0;
+        margin: 8px 0 0;
+        @include flex($items: center, $gap: 4px);
+    }
+
+    &__assigned-item {
+        line-height: 0;
+    }
+
+    &__assigned-to,
+    &__category,
+    &__subtasks {
+        margin-bottom: 8px;
+    }
+
+    &__subtask-list {
+        list-style: none;
+        padding: 0;
+        margin: 8px 0 0;
+    }
+
+    &__subtask-item {
+        @include flex($items: center, $justify: space-between, $gap: 8px);
+        padding: 8px 12px;
+        border-radius: $radius-input;
+
+        &:hover {
+            background-color: var(--color-bg-subtle, #f9f9f9);
+        }
+    }
+
+    &__subtask-bullet {
+        flex-shrink: 0;
+        color: var(--color-text-muted);
+    }
+
+    &__subtask-text {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__subtask-actions {
+        @include flex($items: center, $gap: 4px);
+        flex-shrink: 0;
+    }
+
+    &__divider {
+        height: 24px;
+        border: solid 1px var(--color-border);
+    }
+
+    &__subtask-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        color: var(--color-text-muted);
+        border-radius: $radius-input;
+        transition:
+            color $transition-default,
+            background-color $transition-default;
+
+        &:hover {
+            color: var(--color-primary);
+            background-color: var(--color-primary-light, rgba(41, 171, 226, 0.1));
+        }
+    }
+
+    &__subtask-edit {
+        flex: 1;
+        @include flex($items: center, $gap: 8px);
+
+        &-input {
+            flex: 1;
+            min-width: 0;
+        }
+
+        &-actions {
+            @include flex($items: center, $gap: 8px);
+            flex-shrink: 0;
+        }
+    }
+
+    &__header {
+        position: relative;
+    }
+
+    &__close-btn {
+        position: absolute;
+        top: 24px;
+        right: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        background: transparent;
+        border: none;
+        border-radius: $radius-input;
+        cursor: pointer;
+        color: var(--color-text);
+        transition: background-color $transition-default;
+
+        @include breakpoint(lg) {
+            top: 64px;
+        }
+
+        &:hover {
+            background-color: var(--color-surface-accent);
+        }
+    }
+
+    &__footer {
+        margin-top: 24px;
+        @include flex($items: center, $justify: space-between, $gap: 16px);
+        flex-wrap: wrap;
+
+        @include breakpoint(lg) {
+            grid-column: 1 / -1;
+        }
+    }
+
+    &__hint {
+        margin: 0;
+        font-size: 14px;
+        color: var(--color-text);
+    }
+
+    &__error {
+        margin: 0;
+        font-size: 14px;
+        color: var(--color-ui-red);
+        flex: 1 1 100%;
+    }
+
+    &__actions {
+        @include flex($items: center, $gap: 12px);
+        margin-left: auto;
+    }
+}
+.required-mark {
+    color: var(--color-ui-red);
+}

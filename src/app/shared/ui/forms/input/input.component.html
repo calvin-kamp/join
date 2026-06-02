@@ -1,38 +1,74 @@
 <div
     class="form-control form-control--text"
     [class.form-control--label-hidden]="!labelVisible()"
+    [class.form-control--full-width]="fullWidth()"
+    [class.form-control--with-actions]="showActions()"
 >
-    <label
-        [for]="inputId()"
-        class="form-control__label"
-        [class.sr-only]="!labelVisible()"
-    >
-        {{ label() }}
+    @if (label()) {
+        <label
+            [for]="inputId()"
+            class="form-control__label"
+            [class.sr-only]="!labelVisible()"
+        >
+            {{ label() }}
 
-        @if (isRequired()) {
-            <span
-                class="form-control__required-mark"
-                aria-hidden="true"
-            >
-                *
-            </span>
+            @if (isRequired()) {
+                <span
+                    class="form-control__required-mark"
+                    aria-hidden="true"
+                >
+                    *
+                </span>
+            }
+        </label>
+    }
+
+    <div class="form-control__input-wrapper">
+        <input
+            [id]="inputId()"
+            [name]="name()"
+            [type]="type()"
+            [value]="value()"
+            [disabled]="isDisabled()"
+            [attr.placeholder]="effectivePlaceholder()"
+            [attr.aria-invalid]="hasError() ? 'true' : null"
+            [attr.aria-required]="isRequired() ? 'true' : null"
+            (input)="onInput($event)"
+            (blur)="onBlur()"
+            autocomplete="off"
+            class="form-control__input"
+        />
+
+        @if (showActions() && hasValue()) {
+            <div class="form-control__actions">
+                <button
+                    type="button"
+                    class="form-control__action-btn form-control__action-btn--clear"
+                    (click)="onClear()"
+                    aria-label="Clear"
+                >
+                    <ui-icon
+                        name="close"
+                        [width]="12"
+                        [height]="12"
+                    />
+                </button>
+                <div class="form-control__divider"></div>
+                <button
+                    type="button"
+                    class="form-control__action-btn form-control__action-btn--confirm"
+                    (click)="onConfirm()"
+                    aria-label="Confirm"
+                >
+                    <ui-icon
+                        name="check-solid"
+                        [width]="15"
+                        [height]="11"
+                    />
+                </button>
+            </div>
         }
-    </label>
-
-    <input
-        [id]="inputId()"
-        [name]="name()"
-        [type]="type()"
-        [value]="value()"
-        [disabled]="isDisabled()"
-        [attr.placeholder]="effectivePlaceholder()"
-        [attr.aria-invalid]="hasError() ? 'true' : null"
-        [attr.aria-required]="isRequired() ? 'true' : null"
-        (input)="onInput($event)"
-        (blur)="onBlur()"
-        autocomplete="off"
-        class="form-control__input"
-    />
+    </div>
 
     @if (hasError()) {
         <p

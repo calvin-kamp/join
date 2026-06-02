@@ -1,1 +1,119 @@
-<p>task-detail works!</p>
+@if (open() && task(); as task) {
+    <ui-dialog
+        [id]="'task-detail-dialog'"
+        [open]="open()"
+        (close)="close.emit()"
+    >
+        <div class="task-detail">
+            <div class="task-detail__header">
+                <span
+                    class="task-detail__badge"
+                    [class]="categoryModifierClass(task)"
+                >
+                    {{ task.category.name }}
+                </span>
+
+                <ui-link
+                    linkStyle="no-decoration"
+                    (click)="close.emit()"
+                    class="task-detail__close-btn"
+                >
+                    <ui-icon
+                        name="close"
+                        [width]="13"
+                        [height]="13"
+                    />
+                </ui-link>
+            </div>
+
+            <div class="task-detail__body">
+                <h2 class="task-detail__title">{{ task.title }}</h2>
+
+                <p class="task-detail__description">{{ task.description }}</p>
+
+                <dl class="task-detail__meta">
+                    <dt class="task-detail__term">Due date:</dt>
+
+                    <dd class="task-detail__value">
+                        {{ task.dueDate | date: 'dd/MM/yyyy' }}
+                    </dd>
+
+                    <dt class="task-detail__term">Priority:</dt>
+                    <dd class="task-detail__value">
+                        {{ task.priority.name }}
+
+                        <ui-icon [name]="priorityIcon(task.priority.name)" />
+                    </dd>
+                </dl>
+
+                @if (task.assignedTo.length > 0) {
+                    <section class="task-detail__assigned-to">
+                        <p class="task-detail__term">Assigned to:</p>
+
+                        <ul class="task-detail__assigned-list">
+                            @for (contact of task.assignedTo; track contact.id) {
+                                <li class="task-detail__assigned-item">
+                                    <ui-initial-letter
+                                        [name]="contact.name"
+                                        size="md"
+                                    />
+                                    <span>{{ contact.name }}</span>
+                                </li>
+                            }
+                        </ul>
+                    </section>
+                }
+
+                @if (task.subtasks.length > 0) {
+                    <section class="task-detail__subtasks">
+                        <p class="task-detail__term">Subtasks</p>
+
+                        <ul class="task-detail__subtask-list">
+                            @for (subtask of task.subtasks; track subtask.id) {
+                                <li class="task-detail__subtask-item">
+                                    <input
+                                        type="checkbox"
+                                        [checked]="subtask.status"
+                                        disabled
+                                    />
+                                    <span>{{ subtask.title }}</span>
+                                </li>
+                            }
+                        </ul>
+                    </section>
+                }
+            </div>
+
+            <div class="task-detail__footer">
+                <div class="task-detail__actions">
+                    <ui-button
+                        (click)="deleteRequested.emit(task)"
+                        [variant]="'link'"
+                    >
+                        <ui-icon
+                            name="trash"
+                            [width]="16"
+                            [height]="16"
+                        />
+
+                        Delete
+                    </ui-button>
+
+                    <div class="task-detail__divider"></div>
+
+                    <ui-button
+                        (click)="editRequested.emit(task)"
+                        [variant]="'link'"
+                    >
+                        <ui-icon
+                            name="pen-outline"
+                            [width]="16"
+                            [height]="16"
+                        />
+                        Edit
+                    </ui-button>
+                </div>
+            </div>
+        </div>
+    </ui-dialog>
+}

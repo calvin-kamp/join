@@ -1,0 +1,23 @@
+<div
+    class="form-control form-control--radio"
+    [style.--fill-color]="fillColor()"
+>
+    <input
+        [id]="radioId()"
+        [name]="name()"
+        type="radio"
+        [value]="value()"
+        [disabled]="isDisabled()"
+        [checked]="checked()"
+        (change)="onChangeInput($event)"
+        (blur)="onBlur()"
+        class="form-control__input"
+    />
+
+    <label
+        [for]="radioId()"
+        class="form-control__label"
+    >
+        <ng-content />
+    </label>
+</div>

@@ -1,28 +1,56 @@
-<header class="auth-layout__header">auth header</header>
+<div class="auth-layout">
+    <header class="auth-layout__header auth-header">
+        <div class="auth-header__wrapper">
+            <ui-logo class="auth-header__logo" />
 
-<main class="auth-layout__main">
-    <router-outlet />
-</main>
+            @if (routeStateService.showAuthSignUp()) {
+                <p class="auth-header__sign-up">
+                    Not a Join user?
 
-<footer class="auth-layout__footer">
-    <p>
-        Not a Join user?
-
-        <ui-link href="sign-up"> Sign Up </ui-link>
-    </p>
-
-    <nav class="auth-footer__navigation">
-        <ul class="auth-footer__nav-list">
-            @for (navItem of footerNav; track $index) {
-                <li class="auth-footer__nav-item">
                     <ui-link
-                        [href]="navItem.href"
-                        [linkStyle]="navItem.linkStyle"
+                        href="sign-up"
+                        [variant]="'primary'"
                     >
-                        {{ navItem.label }}
+                        Sign Up
                     </ui-link>
-                </li>
+                </p>
             }
-        </ul>
-    </nav>
-</footer>
+        </div>
+    </header>
+
+    <main class="auth-layout__main">
+        <router-outlet />
+    </main>
+
+    <footer class="auth-layout__footer auth-footer">
+        <div class="auth-footer__wrapper">
+            @if (routeStateService.showAuthSignUp()) {
+                <p class="auth-footer__sign-up">
+                    Not a Join user?
+
+                    <ui-link
+                        href="sign-up"
+                        [variant]="'primary'"
+                    >
+                        Sign Up
+                    </ui-link>
+                </p>
+            }
+
+            <nav class="auth-footer__navigation">
+                <ul class="auth-footer__nav-list">
+                    @for (navItem of footerNav; track $index) {
+                        <li class="auth-footer__nav-item">
+                            <ui-link
+                                [href]="navItem.href"
+                                [linkStyle]="navItem.linkStyle"
+                            >
+                                {{ navItem.label }}
+                            </ui-link>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    </footer>
+</div>

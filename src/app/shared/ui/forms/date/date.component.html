@@ -1,0 +1,62 @@
+<div
+    class="form-control form-control--date"
+    [class.form-control--full-width]="fullWidth()"
+>
+    <label
+        [for]="inputId()"
+        class="form-control__label"
+    >
+        {{ label() }}
+
+        @if (isRequired()) {
+            <span
+                class="form-control__required-mark"
+                aria-hidden="true"
+            >
+                *
+            </span>
+        }
+    </label>
+
+    <div class="form-control__date-wrapper">
+        <input
+            [id]="inputId()"
+            [name]="name()"
+            type="text"
+            [value]="displayValue()"
+            [placeholder]="placeholder()"
+            [disabled]="isDisabled()"
+            [attr.aria-invalid]="hasError() ? 'true' : null"
+            [attr.aria-required]="isRequired() ? 'true' : null"
+            (input)="onInput($event)"
+            (blur)="onBlur()"
+            (focus)="onFocus()"
+            (click)="onIconClick()"
+            class="form-control__input"
+        />
+
+        <input
+            #datePickerInput
+            type="date"
+            [min]="minDate()"
+            [disabled]="isDisabled()"
+            (change)="onDatePickerChange($event)"
+            class="form-control__date-picker"
+        />
+
+        <ui-icon
+            name="calender"
+            class="form-control__date-icon"
+            (click)="onIconClick()"
+        />
+    </div>
+
+    @if (hasError()) {
+        <p
+            class="form-control__error-message"
+            role="alert"
+        >
+            {{ errorMessage() }}
+        </p>
+    }
+</div>

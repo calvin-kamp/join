@@ -1,1 +1,94 @@
-<p>board works!</p>
+<section class="board">
+    <div class="board__headline">
+        <h1 class="board__title">Board</h1>
+
+        <div class="board__searchbar-wrapper">
+            <tasks-searchbar class="board__searchbar" />
+
+            <ui-link
+                class="board__add"
+                [variant]="'primary'"
+                linkClass="button--icon-text"
+                href="/tasks/add-task"
+            >
+                <span class="board__btn-label">Add Task</span>
+                <ui-icon
+                    [name]="'plus'"
+                    [width]="16"
+                    [height]="16"
+                />
+            </ui-link>
+        </div>
+    </div>
+
+    <div class="board__task-table">
+        @for (column of columns; track column.id) {
+            <div class="board__column">
+                <div class="board__list-headline">
+                    <h3>{{ column.name }}</h3>
+
+                    @if (column.id !== STATUS_IDS.DONE) {
+                        <button
+                            type="button"
+                            class="button button--icon"
+                            (click)="openDialogForColumn(column.id)"
+                            [attr.aria-label]="'Add task to ' + column.name"
+                        >
+                            <ui-icon
+                                [name]="'plus'"
+                                [width]="15"
+                                [height]="15"
+                            />
+                        </button>
+                    }
+                </div>
+
+                <div
+                    cdkDropList
+                    [id]="dropListId(column.id)"
+                    cdkDropListOrientation="mixed"
+                    [cdkDropListData]="columnTasks[column.id]"
+                    [cdkDropListConnectedTo]="dropListIds"
+                    (cdkDropListDropped)="drop($event)"
+                    class="board__list"
+                >
+                    @for (task of columnTasks[column.id]; track task.id) {
+                        <tasks-task-card
+                            cdkDrag
+                            [cdkDragData]="task"
+                            [cdkDragStartDelay]="dragDelayTime()"
+                            (cdkDragStarted)="onCardDragStarted()"
+                            (cdkDragEnded)="onCardDragEnded()"
+                            (click)="openFromCard(task)"
+                            class="board__list-item"
+                            [task]="task"
+                        >
+                            <div
+                                *cdkDragPlaceholder
+                                class="board__task-placeholder"
+                            ></div>
+                        </tasks-task-card>
+                    } @empty {
+                        <p class="board__empty-column">No tasks {{ column.name }}</p>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<tasks-task-detail
+    [open]="detailOpen()"
+    [task]="selectedTask()"
+    (close)="closeDetail()"
+    (editRequested)="onEditTask($event)"
+    (deleteRequested)="onDeleteTask($event)"
+/>
+
+<tasks-task-form-dialog
+    [open]="dialogOpen()"
+    [statusId]="dialogStatusId()"
+    [task]="taskToEdit()"
+    (close)="closeDialog()"
+    (created)="onFormSaved()"
+/>

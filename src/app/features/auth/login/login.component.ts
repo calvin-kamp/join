@@ -64,6 +64,7 @@ export class LoginComponent {
     }
 
     continueAsGuest(): void {
+        this.auth.signIn('guest@guest.test', 'guest@guest.test');
         this.router.navigateByUrl('/summary');
     }
 }

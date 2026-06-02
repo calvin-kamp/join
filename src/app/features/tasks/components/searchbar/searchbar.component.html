@@ -1,0 +1,15 @@
+<div class="search">
+    <ui-input
+        [formControl]="searchControl"
+        name="search"
+        label="Find Task"
+        type="text"
+        [labelVisible]="false"
+        [fullWidth]="true"
+    />
+    <ui-icon
+        name="search"
+        class="search__icon"
+        (click)="loadTasks()"
+    />
+</div>
