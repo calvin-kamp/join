@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, forwardRef, input, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, forwardRef, input, output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -22,6 +22,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     hideRequiredMark = input<boolean>(false);
     labelVisible = input<boolean>(true);
     fullWidth = input<boolean>(false);
+    value = input<boolean>(false);
 
     changed = output<boolean>();
 
@@ -33,6 +34,12 @@ export class CheckboxComponent implements ControlValueAccessor {
 
     private onChange = (_: boolean) => {};
     private onTouched = () => {};
+
+    constructor() {
+        effect(() => {
+            this.checked.set(this.value());
+        });
+    }
 
     writeValue(value: boolean): void {
         this.checked.set(!!value);

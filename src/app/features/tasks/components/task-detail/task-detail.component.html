@@ -71,12 +71,14 @@
                         <ul class="task-detail__subtask-list">
                             @for (subtask of task.subtasks; track subtask.id) {
                                 <li class="task-detail__subtask-item">
-                                    <input
-                                        type="checkbox"
-                                        [checked]="subtask.status"
-                                        disabled
-                                    />
-                                    <span>{{ subtask.title }}</span>
+                                    <ui-checkbox
+                                        [name]="subtask.title"
+                                        [value]="subtask.status"
+                                        [fullWidth]="true"
+                                        (changed)="onSubtaskChanged(subtask, $event)"
+                                    >
+                                        {{ subtask.title }}
+                                    </ui-checkbox>
                                 </li>
                             }
                         </ul>

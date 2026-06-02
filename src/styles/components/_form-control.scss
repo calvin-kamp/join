@@ -129,7 +129,7 @@
             width: get-rem(20px);
             height: get-rem(20px);
             border: 2px solid var(--color-border-strong);
-            border-radius: get-rem(3px);
+            border-radius: get-rem(4px);
             background-color: transparent;
             transition:
                 background-color $transition-fast,
@@ -138,14 +138,17 @@
 
             &::after {
                 position: absolute;
-                top: get-rem(1px);
                 left: get-rem(5px);
+                top: get-rem(1px);
+
                 width: get-rem(6px);
-                height: get-rem(11px);
-                border: solid var(--color-border-strong);
-                border-width: 0 2px 2px 0;
+                height: get-rem(12px);
+
+                border-right: 2px solid var(--color-border-strong);
+                border-bottom: 2px solid var(--color-border-strong);
+
+                transform: rotate(40deg);
                 opacity: 0;
-                transform: rotate(45deg);
                 transition: opacity $transition-fast;
                 content: '';
             }
@@ -325,7 +328,7 @@
             }
         }
     }
-    
+
     &__divider {
         height: 24px;
         border: solid 1px var(--color-border);
