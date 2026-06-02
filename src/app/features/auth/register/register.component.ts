@@ -6,6 +6,7 @@ import { AuthService } from '@core/auth/auth.service';
 import { CardDirective } from '@shared/directives/card.directive';
 import { controlErrorMessage } from '@shared/forms/control-error-message';
 import { passwordMatchValidator } from '@shared/forms/password-match.validator';
+import { ToastService } from '@shared/services/toast.service';
 import { ButtonComponent } from '@shared/ui/button/button.component';
 import { InputComponent } from '@shared/ui/forms/input/input.component';
 
@@ -23,6 +24,7 @@ export class RegisterComponent {
 
     loading = signal<boolean>(false);
     error = signal<string | null>(null);
+    toast = inject(ToastService);
 
     registerForm = this.fb.group(
         {
@@ -85,8 +87,8 @@ export class RegisterComponent {
 
         try {
             const { name, email, password } = this.registerForm.getRawValue();
-
             await this.auth.signUp(email!, password!, name!);
+            this.toast.show('You Signed Up successfully');
             await this.router.navigateByUrl('/summary');
         } catch {
             this.error.set('Registration failed.');

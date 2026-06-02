@@ -1,9 +1,9 @@
-@use "abstracts" as *;
+@use 'abstracts' as *;
 
 .task-detail {
     padding: 32px 24px;
     @include flex($direction: column, $gap: 16px);
-    
+
     @include breakpoint(lg) {
         gap: 24px;
         padding: 48px 40px;
@@ -22,7 +22,7 @@
         &--user-story {
             background-color: var(--color-badge-user-story);
         }
-        
+
         &--technical-task {
             background-color: var(--color-badge-technical-task);
         }
@@ -36,9 +36,13 @@
         }
     }
 
-    &__title {}
+    &__title {
+        font-size: $font-size-3xl;
+    }
 
-    &__description {}
+    &__description {
+        font-size: $font-size-sm;
+    }
 
     &__meta {
         display: grid;
@@ -52,6 +56,7 @@
     }
 
     &__term {
+        font-size: $font-size-sm;
         font-weight: $font-weight-bold;
         color: var(--color-text-tertiary);
 
@@ -61,30 +66,41 @@
     }
 
     &__value {
-        @include flex($items: center, $gap: 12px)
+        font-size: $font-size-sm;
+        @include flex($items: center, $gap: 12px);
     }
 
-    &__assigned-to {}
+    &__assigned-to {
+    }
 
-    &__assigned-list {}
+    &__assigned-list {
+    }
 
     &__assigned-item {
         padding: 8px 16px;
         @include flex($items: center, $gap: 16px);
     }
 
-    &__subtasks {}
+    &__subtasks {
+    }
 
-    &__subtasks-list {}
+    &__subtasks-list {
+    }
 
     &__subtasks-item {
         padding: 4px 16px;
         @include flex($gap: 4px);
     }
 
-    &__footer {
-
+    &__divider {
+        height: 24px;
+        border: solid 1px var(--color-border);
     }
 
-    &__actions {}
+    &__footer {
+    }
+    
+    &__actions {
+        @include flex($justify: flex-end, $items: center, $gap: 8px);
+    }
 }
