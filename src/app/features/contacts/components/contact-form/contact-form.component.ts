@@ -11,6 +11,7 @@ import { InitialLetterComponent } from '@shared/ui/initial-letter/initial-letter
 import { LogoComponent } from '@shared/ui/logo/logo.component';
 import { IconComponent } from '@shared/ui/icon/icon.component';
 import { LinkComponent } from '@shared/ui/link/link.component';
+import { AuthService } from '@core/auth/auth.service';
 import { ToastService } from '@shared/services/toast.service';
 
 type FormType = 'add' | 'edit';
@@ -33,6 +34,7 @@ type FormType = 'add' | 'edit';
 export class ContactFormComponent {
     private fb = inject(FormBuilder);
     private contactsService = inject(ContactsService);
+    private authService = inject(AuthService);
     private router = inject(Router);
 
     private editingContact = signal<Contact | null>(null);
@@ -128,7 +130,9 @@ export class ContactFormComponent {
 
             const editing = this.editingContact();
 
-            if (editing?.id) {
+            if (editing?.id === 0) {
+                await this.authService.updateUserContact(contactData);
+            } else if (editing?.id != null) {
                 await this.contactsService.updateContact({ ...contactData, id: editing.id });
             } else {
                 await this.contactsService.addContact(contactData);

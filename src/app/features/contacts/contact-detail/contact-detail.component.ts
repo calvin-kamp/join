@@ -1,5 +1,6 @@
 import { Component, effect, inject, input, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '@core/auth/auth.service';
 import { ContactsService, type Contact } from '@features/contacts/contacts.service';
 import { ButtonComponent } from '@shared/ui/button/button.component';
 import { IconComponent } from '@shared/ui/icon/icon.component';
@@ -14,6 +15,7 @@ import { LinkComponent } from '@shared/ui/link/link.component';
 })
 export class ContactDetailComponent {
     private contactsService = inject(ContactsService);
+    private authService = inject(AuthService);
     private router = inject(Router);
 
     readonly id = input.required<number, string>({
@@ -61,7 +63,13 @@ export class ContactDetailComponent {
     }
 
     private async loadContact(id: number, callback: (contact: Contact | undefined) => void): Promise<void> {
-        const contact = await this.contactsService.getContactByID(id);
+        var contact;
+        if (id === 0) {
+            contact = this.authService.getUserContact();
+            contact.id = 0;
+        } else {
+            contact = await this.contactsService.getContactByID(id);
+        }
 
         callback(contact);
     }

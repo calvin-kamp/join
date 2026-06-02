@@ -1,5 +1,6 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '@core/auth/auth.service';
 import { ContactsService, type Contact } from '@features/contacts/contacts.service';
 import { ButtonComponent } from '@shared/ui/button/button.component';
 import { ContactComponent } from '@shared/ui/contact/contact.component';
@@ -13,8 +14,17 @@ import { IconComponent } from '@shared/ui/icon/icon.component';
 })
 export class ContactListComponent {
     private contactsService = inject(ContactsService);
+    private authService = inject(AuthService);
 
     contacts = input.required<Contact[]>();
+    userContact = computed(() => {
+        const id = 0;
+        const user = this.authService.getUserContact();
+        const userData: Contact = user;
+        userData.id = id;
+
+        return userData;
+    });
 
     protected groupedContacts = computed(() => {
         const sorted = [...this.contacts()].sort((a, b) => a.name.localeCompare(b.name));
