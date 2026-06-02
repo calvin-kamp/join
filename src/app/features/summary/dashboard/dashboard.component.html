@@ -1,5 +1,9 @@
 <div class="summary__welcome-msg">
-    <h1>{{ greetings() }}</h1>
+    @if (authService.displayName() !== 'Guest') {
+        <h1 class="greet-user">{{ greetings() + authService.displayName() }}</h1>
+    } @else {
+        <h1 class="greet-guest">{{ greetings() }}</h1>
+    }
 </div>
 <div class="summary">
     <div class="summary__wrapper">

@@ -1,5 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { AuthService } from '@core/auth/auth.service';
 import { TasksService } from '@features/tasks/tasks.service';
 import { IconComponent } from '@shared/ui/icon/icon.component';
 
@@ -12,6 +13,7 @@ import { IconComponent } from '@shared/ui/icon/icon.component';
 })
 export class DashboardComponent {
     taskService = inject(TasksService);
+    protected authService = inject(AuthService);
 
     urgentAmount() {
         let urgentAmount = 0;
@@ -101,7 +103,7 @@ export class DashboardComponent {
 
     greetings() {
         let timeHour = new Date().getHours();
-        let greets: string[] = ['Good Morning', 'Good Afternoon', 'Good Evening'];
+        let greets: string[] = ['Good morning', 'Good afternoon', 'Good evening'];
         let greetMsg: string = '';
 
         if (timeHour > 5 && timeHour < 12) {
