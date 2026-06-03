@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { guestGuard } from '@core/auth/auth.guard';
+import { rootRedirectGuard } from '@core/auth/auth.guard';
 
 export const PUBLIC_ROUTES: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        canActivate: [guestGuard],
+        canActivate: [rootRedirectGuard],
         loadComponent: () => import('./entry/entry.component').then((m) => m.EntryComponent)
     },
     {
