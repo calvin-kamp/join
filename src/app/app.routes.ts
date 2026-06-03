@@ -5,6 +5,11 @@ import { MainLayoutComponent } from '@core/layout/main-layout.component';
 export const ROUTES: Routes = [
     {
         path: '',
+        pathMatch: 'full',
+        redirectTo: '/summary'
+    },
+    {
+        path: '',
         component: MainLayoutComponent,
         canActivate: [authGuard],
         children: [
@@ -39,6 +44,6 @@ export const ROUTES: Routes = [
     },
     {
         path: '**',
-        redirectTo: ''
+        redirectTo: '/summary'
     }
 ];
