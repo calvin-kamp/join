@@ -1,23 +1,25 @@
-@use "abstracts" as *;
+@use 'abstracts' as *;
 
 .summary {
-    
-        display: flex;
-        flex-direction: column;
-        background-color: var(--color-body-background);
-        color: white;
-        position: relative;
-        z-index: 2;
-        animation: slideUpSummary 0.8s ease-in-out 3s forwards;
-        
-        @include breakpoint(lg) {
+    @include flex($direction: column, $items: center);
+    background-color: var(--color-body-background);
+    position: relative;
+    z-index: 2;
+    animation: slideUpSummary 0.8s ease-in-out 3s forwards;
+
+    @include breakpoint(lg) {
         display: flex;
         flex-direction: row-reverse;
         justify-content: space-around;
         margin-top: 166px;
         animation: none;
-        }
-    
+    }
+
+    &__dashboard{
+        height: calc(100vh - $footer-height-mobile - $header-height-mobile);
+        @include flex($direction: column, $justify:center, $items:center)
+    }
+
     &__welcome-msg {
         @include flex($justify: center, $direction: column);
         z-index: 1;
@@ -27,22 +29,18 @@
         @include breakpoint(lg) {
             animation: none;
         }
-
     }
 
-    @keyframes slideUp{
+    @keyframes slideUp {
         100% {
             transform: translateY(-26vh);
         }
-
     }
 
-    @keyframes slideUpSummary{
+    @keyframes slideUpSummary {
         100% {
-            transform: translateY(-85vh);
+            transform: translateY(-86vh);
         }
-
-
     }
 
     &__greet {
@@ -52,13 +50,12 @@
         color: var(--color-black);
     }
 
-    &__greet-user {        
-        
+    &__greet-user {
         display: block;
 
         font-weight: 700;
         font-size: 48px;
-        color: #29ABE2;
+        color: #29abe2;
     }
 
     &__wrapper {
@@ -71,16 +68,15 @@
         background-color: var(--color-white);
         color: var(--color-surface-inverted);
 
-        &:hover{
-        transform: scale(1.1);
-        background-color: var(--color-surface-inverted);
-        color: var(--color-white);
+        &:hover {
+            transform: scale(1.1);
+            background-color: var(--color-surface-inverted);
+            color: var(--color-white);
             cursor: pointer;
-        &__amount {
-        color: var(--color-white);
+            &__amount {
+                color: var(--color-white);
+            }
         }
-}
-
     }
     &__wrapper-left {
         width: 120px;
@@ -90,7 +86,7 @@
         row-gap: 8px;
         @include divider($position: right, $sizeMobile: 102px);
         &:after {
-            background-color: var(--color-surface);  
+            background-color: var(--color-surface);
         }
     }
 
@@ -118,8 +114,9 @@
         position: relative;
         top: 19px;
         left: 19px;
-    }
 
+        fill: var(--color-ui-warning);
+    }
 
     &__wrapper-right {
         width: 192px;
@@ -133,17 +130,17 @@
     }
 
     &__to-do {
-        @include flex($type:flex, $justify: center, $items: center, $gap: 20px);
+        @include flex($type: flex, $justify: center, $items: center, $gap: 20px);
         width: 396px;
         height: 106px;
         margin: 24px 0px;
         border-radius: 30px;
         background-color: var(--color-white);
         color: var(--color-surface-inverted);
-        &:hover{
-        transform: scale(1.1);
-        background-color: var(--color-surface-inverted);
-        color: var(--color-white);
+        &:hover {
+            transform: scale(1.1);
+            background-color: var(--color-surface-inverted);
+            color: var(--color-white);
             cursor: pointer;
         }
 
@@ -166,27 +163,25 @@
         gap: 15px;
     }
 
-    
     &__task-squares2 {
         display: flex;
         gap: 15px;
     }
 
     &__board-task {
-            @include flex($type:flex, $justify: center, $items: center, $direction: column, $gap: 8px);
+        @include flex($type: flex, $justify: center, $items: center, $direction: column, $gap: 8px);
         width: 186px;
         height: 152px;
         border-radius: 30px;
         background-color: var(--color-white);
         color: var(--color-surface-inverted);
         margin-bottom: 24px;
-        &:hover{
-        transform: scale(1.1);
-        background-color: var(--color-surface-inverted);
-        color: var(--color-white);
+        &:hover {
+            transform: scale(1.1);
+            background-color: var(--color-surface-inverted);
+            color: var(--color-white);
             cursor: pointer;
         }
-
     }
 
     &__bts {
@@ -216,5 +211,3 @@
         font-weight: $font-weight-regular;
     }
 }
-
- 

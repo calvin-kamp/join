@@ -9,7 +9,7 @@
             <h1 class="greet-guest">{{ greetings() }}</h1>
         }
     </div>
-    <div>
+    <div class="summary__dashboard">
         <div
             class="summary__wrapper"
             [routerLink]="'/tasks/board'"
@@ -20,7 +20,9 @@
                         <ui-icon
                             name="badge-urgent"
                             class="summary__status"
-                        ></ui-icon>
+                            [height]="25"
+                            [width]="34"
+                        />
                     </div>
                     <div>
                         <p class="summary__amount">{{ urgentAmount() }}</p>
@@ -37,7 +39,10 @@
             </div>
         </div>
 
-        <div class="summary__to-do">
+        <div
+            class="summary__to-do"
+            [routerLink]="'/tasks/board'"
+        >
             <div class="summary__to-do-symbol">
                 <ui-icon
                     name="nav-add-task"
@@ -54,13 +59,16 @@
 
         <!-- equal to the first div changing the class names will follow-->
         <div class="summary__task-squares1">
-            <div class="summary__board-task">
+            <div
+                class="summary__board-task"
+                [routerLink]="'/tasks/board'"
+            >
                 <div class="summary__bts">
                     <div class="summary__board-task-symbol">
                         <ui-icon
                             name="nav-board"
                             class="summary__board-task-icon"
-                        ></ui-icon>
+                        />
                     </div>
                     <div>
                         <p class="summary__amount">{{ tasksOnBoard() }}</p>
@@ -72,7 +80,10 @@
                 </div>
             </div>
 
-            <div class="summary__board-task">
+            <div
+                class="summary__board-task"
+                [routerLink]="'/tasks/board'"
+            >
                 <div class="summary__bts">
                     <div class="summary__board-task-symbol">
                         <ui-icon
@@ -92,7 +103,10 @@
         </div>
 
         <div class="summary__task-squares2">
-            <div class="summary__board-task">
+            <div
+                class="summary__board-task"
+                [routerLink]="'/tasks/board'"
+            >
                 <div class="summary__bts">
                     <div class="summary__board-task-symbol">
                         <ui-icon
@@ -110,7 +124,10 @@
                 </div>
             </div>
 
-            <div class="summary__board-task">
+            <div
+                class="summary__board-task"
+                [routerLink]="'/tasks/board'"
+            >
                 <div class="summary__bts">
                     <div class="summary__board-task-symbol">
                         <ui-icon

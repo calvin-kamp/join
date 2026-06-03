@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AuthService } from '@core/auth/auth.service';
 import { TasksService } from '@features/tasks/tasks.service';
@@ -7,7 +6,7 @@ import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'summary-dashboard',
-    imports: [IconComponent, IconComponent, JsonPipe, RouterLink],
+    imports: [IconComponent, IconComponent, RouterLink],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -103,7 +102,7 @@ export class DashboardComponent {
     }
 
     greetings() {
-        let timeHour = new Date().getHours();
+        const timeHour = new Date().getHours();
 
         if (timeHour >= 5 && timeHour < 12) {
             return 'Good morning';
