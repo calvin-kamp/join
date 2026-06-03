@@ -1,5 +1,8 @@
 <footer class="footer">
-    <div class="footer__wrapper">
+    <div
+        class="footer__wrapper"
+        [class.footer__wrapper--logged-in]="auth.isLoggedIn()"
+    >
         <ui-logo
             class="footer__logo"
             variant="light"
@@ -41,24 +44,30 @@
             </ul>
         </nav>
 
-        <ul class="footer__legal-list">
-            <li>
-                <ui-link
-                    [href]="'/privacy-policy'"
-                    [linkStyle]="'muted'"
-                >
-                    Privacy Policy
-                </ui-link>
-            </li>
+        @if (!auth.isLoggedIn()) {
+            <ul class="footer__legal-list">
+                <li>
+                    <ui-link
+                        [href]="'/privacy-policy'"
+                        [linkStyle]="'muted'"
+                        [linkClass]="'footer__nav-link'"
+                        [activeClass]="'footer__nav-link--active'"
+                    >
+                        Privacy Policy
+                    </ui-link>
+                </li>
 
-            <li>
-                <ui-link
-                    [href]="'/legal-notice'"
-                    [linkStyle]="'muted'"
-                >
-                    Legal Notice
-                </ui-link>
-            </li>
-        </ul>
+                <li>
+                    <ui-link
+                        [href]="'/legal-notice'"
+                        [linkStyle]="'muted'"
+                        [linkClass]="'footer__nav-link'"
+                        [activeClass]="'footer__nav-link--active'"
+                    >
+                        Legal Notice
+                    </ui-link>
+                </li>
+            </ul>
+        }
     </div>
 </footer>

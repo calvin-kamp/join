@@ -26,16 +26,18 @@
                 />
             </ui-link>
 
-            <button
-                type="button"
-                class="header__avatar"
-                (click)="toggleNavigation()"
-            >
-                <ui-initial-letter
-                    [name]="displayName()"
-                    [borderColor]="'dark'"
-                />
-            </button>
+            @if (auth.isLoggedIn()) {
+                <button
+                    type="button"
+                    class="header__avatar"
+                    (click)="toggleNavigation()"
+                >
+                    <ui-initial-letter
+                        [name]="displayName()"
+                        [borderColor]="'dark'"
+                    />
+                </button>
+            }
         </div>
 
         <nav
