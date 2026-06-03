@@ -16,7 +16,7 @@ export class SearchbarComponent {
 
     searchControl = new FormControl('');
     allTasks: Task[] = [];
-    showErrorMessage = signal<boolean>(false) ;
+    showErrorMessage = signal<boolean>(false);
 
     constructor() {
         this.searchControl.valueChanges.subscribe((value) => {
@@ -43,9 +43,7 @@ export class SearchbarComponent {
                 t.title?.toLowerCase().includes(lowerTerm) || (t as any).description?.toLowerCase().includes(lowerTerm)
         );
 
-        if(filtered.length === 0) {
-          this.showErrorMessage.set(true)
-        }
+        this.showErrorMessage.set(filtered.length === 0);
         this.taskService.tasks.set(filtered);
     }
 
