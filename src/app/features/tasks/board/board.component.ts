@@ -42,7 +42,9 @@ export class BoardComponent {
     // looks up the matching task list via `columnTasks[column.id]`. The
     // references get rebuilt whenever the `tasks` signal changes — CDK is
     // fine with that because it reads `cdkDropListData` fresh on each drop.
-    protected columnTasks: Record<number, Task[]> = Object.fromEntries(BOARD_COLUMNS.map((c) => [c.id, [] as Task[]]));
+    protected readonly columnTasks = signal<Record<number, Task[]>>(
+        Object.fromEntries(BOARD_COLUMNS.map((c) => [c.id, [] as Task[]]))
+    );
 
     // Ids of every drop list in the board, used so each column can receive
     // dragged items from any other column.
@@ -68,7 +70,7 @@ export class BoardComponent {
                 next[column.id] = tasks.filter((task) => task.status.id === column.id);
             }
 
-            this.columnTasks = next;
+            this.columnTasks.set(next);
         });
     }
 

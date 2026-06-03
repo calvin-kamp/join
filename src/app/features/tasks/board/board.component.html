@@ -47,12 +47,12 @@
                     cdkDropList
                     [id]="dropListId(column.id)"
                     cdkDropListOrientation="mixed"
-                    [cdkDropListData]="columnTasks[column.id]"
+                    [cdkDropListData]="columnTasks()[column.id]"
                     [cdkDropListConnectedTo]="dropListIds"
                     (cdkDropListDropped)="drop($event)"
                     class="board__list"
                 >
-                    @for (task of columnTasks[column.id]; track task.id) {
+                    @for (task of columnTasks()[column.id]; track task.id) {
                         <tasks-task-card
                             cdkDrag
                             [cdkDragData]="task"
