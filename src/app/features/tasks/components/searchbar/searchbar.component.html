@@ -12,4 +12,10 @@
         class="search__icon"
         (click)="loadTasks()"
     />
+
+    @if (showErrorMessage()) {
+      <p>
+        No Tasks found
+      </p>
+    }
 </div>

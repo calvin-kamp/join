@@ -16,6 +16,7 @@ export class SearchbarComponent {
 
     searchControl = new FormControl('');
     allTasks: Task[] = [];
+    showErrorMessage = signal<boolean>(false) ;
 
     constructor() {
         this.searchControl.valueChanges.subscribe((value) => {
@@ -33,7 +34,6 @@ export class SearchbarComponent {
 
         // Suchfeld leer: Originale Liste wiederherstellen
         if (!lowerTerm) {
-            this.taskService.tasks.set(this.allTasks);
             return;
         }
 
@@ -43,6 +43,9 @@ export class SearchbarComponent {
                 t.title?.toLowerCase().includes(lowerTerm) || (t as any).description?.toLowerCase().includes(lowerTerm)
         );
 
+        if(filtered.length === 0) {
+          this.showErrorMessage.set(true)
+        }
         this.taskService.tasks.set(filtered);
     }
 
