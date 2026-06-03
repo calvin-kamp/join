@@ -2,14 +2,32 @@
 
 .summary {
     
-    &__welcome-msg {
-        @include flex($type: flex, $items: center, $justify: center);
-        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--color-body-background);
+        color: white;
         position: relative;
+        z-index: 2;
+        animation: slideUpSummary 0.8s ease-in-out 3s forwards;
+        
+        @include breakpoint(lg) {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-around;
+        margin-top: 166px;
+        animation: none;
+        }
+    
+    &__welcome-msg {
+        @include flex($justify: center, $direction: column);
         z-index: 1;
         height: 86vh;
         color: var(--color-black);
         animation: slideUp 0.9s ease-in-out 3s forwards;
+        @include breakpoint(lg) {
+            animation: none;
+        }
+
     }
 
     @keyframes slideUp{
@@ -21,8 +39,9 @@
 
     @keyframes slideUpSummary{
         100% {
-            transform: translateY(-80vh);
+            transform: translateY(-85vh);
         }
+
 
     }
 
@@ -30,20 +49,18 @@
         text-align: center;
         font-weight: 400;
         font-size: 36px;
+        color: var(--color-black);
     }
 
-    &__greet-user {
+    &__greet-user {        
+        
+        display: block;
+
         font-weight: 700;
         font-size: 48px;
         color: #29ABE2;
     }
 
-    background-color: var(--color-body-background);
-    color: white;
-    position: relative;
-    z-index: 2;
-    animation: slideUpSummary 0.8s ease-in-out 3s forwards;
-    
     &__wrapper {
         display: flex;
         justify-content: center;
@@ -51,8 +68,19 @@
         width: 396px;
         height: 150px;
         border-radius: 30px;
+        background-color: var(--color-white);
+        color: var(--color-surface-inverted);
+
+        &:hover{
+        transform: scale(1.1);
         background-color: var(--color-surface-inverted);
         color: var(--color-white);
+            cursor: pointer;
+        &__amount {
+        color: var(--color-white);
+        }
+}
+
     }
     &__wrapper-left {
         width: 120px;
@@ -66,7 +94,14 @@
         }
     }
 
+    &__amount {
+        font-weight: $font-weight-bold;
+        font-size: 40px;
+    }
 
+    .summary--amount {
+        color: var(--color-surface-inverted);
+    }
 
     &__status-number {
         display: flex;
@@ -84,11 +119,7 @@
         top: 19px;
         left: 19px;
     }
-    &__amount {
-        font-weight: $font-weight-bold;
-        font-size: 40px;
-        color: white;
-    }
+
 
     &__wrapper-right {
         width: 192px;
@@ -107,7 +138,14 @@
         height: 106px;
         margin: 24px 0px;
         border-radius: 30px;
+        background-color: var(--color-white);
+        color: var(--color-surface-inverted);
+        &:hover{
+        transform: scale(1.1);
         background-color: var(--color-surface-inverted);
+        color: var(--color-white);
+            cursor: pointer;
+        }
 
         &-symbol {
             width: 60px;
@@ -139,8 +177,15 @@
         width: 186px;
         height: 152px;
         border-radius: 30px;
-        background-color: var(--color-surface-inverted);
+        background-color: var(--color-white);
+        color: var(--color-surface-inverted);
         margin-bottom: 24px;
+        &:hover{
+        transform: scale(1.1);
+        background-color: var(--color-surface-inverted);
+        color: var(--color-white);
+            cursor: pointer;
+        }
 
     }
 

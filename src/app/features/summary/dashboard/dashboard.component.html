@@ -9,120 +9,124 @@
             <h1 class="greet-guest">{{ greetings() }}</h1>
         }
     </div>
-    <div class="summary__wrapper">
-        <div class="summary__wrapper-left">
-            <div class="summary__status-number">
-                <div class="summary__status-symbol">
-                    <ui-icon
-                        name="badge-low"
-                        class="summary__status"
-                    ></ui-icon>
+    <div>
+        <div
+            class="summary__wrapper"
+            [routerLink]="'/tasks/board'"
+        >
+            <div class="summary__wrapper-left">
+                <div class="summary__status-number">
+                    <div class="summary__status-symbol">
+                        <ui-icon
+                            name="badge-urgent"
+                            class="summary__status"
+                        ></ui-icon>
+                    </div>
+                    <div>
+                        <p class="summary__amount">{{ urgentAmount() }}</p>
+                    </div>
                 </div>
-                <div>
-                    <p class="summary__amount">{{ urgentAmount() }}</p>
-                </div>
-            </div>
-            <div class="summary__urgent">
-                <p class="summary__task-type">Tasks Urgent</p>
-            </div>
-        </div>
-
-        <div class="summary__wrapper-right">
-            <p class="summary__deadline">{{ upcomingDeadlineInDays() }}</p>
-            <p>Upcoming Deadline</p>
-        </div>
-    </div>
-
-    <div class="summary__to-do">
-        <div class="summary__to-do-symbol">
-            <ui-icon
-                name="nav-add-task"
-                class="summary__to-do-icon"
-            ></ui-icon>
-        </div>
-        <div>
-            <p class="summary__amount">{{ toDoAmount() }}</p>
-        </div>
-        <div class="summary__task-to-do">
-            <p class="summary__task-type">Tasks To-Do</p>
-        </div>
-    </div>
-
-    <!-- equal to the first div changing the class names will follow-->
-    <div class="summary__task-squares1">
-        <div class="summary__board-task">
-            <div class="summary__bts">
-                <div class="summary__board-task-symbol">
-                    <ui-icon
-                        name="nav-board"
-                        class="summary__board-task-icon"
-                    ></ui-icon>
-                </div>
-                <div>
-                    <p class="summary__amount">{{ tasksOnBoard() }}</p>
+                <div class="summary__urgent">
+                    <p class="summary__task-type">Tasks Urgent</p>
                 </div>
             </div>
 
+            <div class="summary__wrapper-right">
+                <p class="summary__deadline">{{ upcomingDeadlineInDays() }}</p>
+                <p>Upcoming Deadline</p>
+            </div>
+        </div>
+
+        <div class="summary__to-do">
+            <div class="summary__to-do-symbol">
+                <ui-icon
+                    name="nav-add-task"
+                    class="summary__to-do-icon"
+                ></ui-icon>
+            </div>
             <div>
-                <p class="summary__task-type">Tasks on Board</p>
+                <p class="summary__amount">{{ toDoAmount() }}</p>
+            </div>
+            <div class="summary__task-to-do">
+                <p class="summary__task-type">Tasks To-Do</p>
             </div>
         </div>
 
-        <div class="summary__board-task">
-            <div class="summary__bts">
-                <div class="summary__board-task-symbol">
-                    <ui-icon
-                        name="nav-board"
-                        class="summary__board-task-icon"
-                    ></ui-icon>
+        <!-- equal to the first div changing the class names will follow-->
+        <div class="summary__task-squares1">
+            <div class="summary__board-task">
+                <div class="summary__bts">
+                    <div class="summary__board-task-symbol">
+                        <ui-icon
+                            name="nav-board"
+                            class="summary__board-task-icon"
+                        ></ui-icon>
+                    </div>
+                    <div>
+                        <p class="summary__amount">{{ tasksOnBoard() }}</p>
+                    </div>
                 </div>
+
                 <div>
-                    <p class="summary__amount">{{ inProgress() }}</p>
+                    <p class="summary__task-type">Tasks on Board</p>
                 </div>
             </div>
 
-            <div>
-                <p class="summary__task-type">Tasks in Progress</p>
+            <div class="summary__board-task">
+                <div class="summary__bts">
+                    <div class="summary__board-task-symbol">
+                        <ui-icon
+                            name="nav-board"
+                            class="summary__board-task-icon"
+                        ></ui-icon>
+                    </div>
+                    <div>
+                        <p class="summary__amount">{{ inProgress() }}</p>
+                    </div>
+                </div>
+
+                <div>
+                    <p class="summary__task-type">Tasks in Progress</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="summary__task-squares2">
-        <div class="summary__board-task">
-            <div class="summary__bts">
-                <div class="summary__board-task-symbol">
-                    <ui-icon
-                        name="nav-board"
-                        class="summary__board-task-icon"
-                    ></ui-icon>
+        <div class="summary__task-squares2">
+            <div class="summary__board-task">
+                <div class="summary__bts">
+                    <div class="summary__board-task-symbol">
+                        <ui-icon
+                            name="nav-board"
+                            class="summary__board-task-icon"
+                        ></ui-icon>
+                    </div>
+                    <div>
+                        <p class="summary__amount">{{ awaitFeedback() }}</p>
+                    </div>
                 </div>
+
                 <div>
-                    <p class="summary__amount">{{ awaitFeedback() }}</p>
+                    <p class="summary__task-type">Awaiting feedback</p>
                 </div>
             </div>
 
-            <div>
-                <p class="summary__task-type">Awaiting feedback</p>
-            </div>
-        </div>
-
-        <div class="summary__board-task">
-            <div class="summary__bts">
-                <div class="summary__board-task-symbol">
-                    <ui-icon
-                        name="nav-board"
-                        class="summary__board-task-icon"
-                    ></ui-icon>
+            <div class="summary__board-task">
+                <div class="summary__bts">
+                    <div class="summary__board-task-symbol">
+                        <ui-icon
+                            name="nav-board"
+                            class="summary__board-task-icon"
+                        ></ui-icon>
+                    </div>
+                    <div>
+                        <p class="summary__amount">{{ done() }}</p>
+                    </div>
                 </div>
+
                 <div>
-                    <p class="summary__amount">{{ done() }}</p>
+                    <p class="summary__task-type">Tasks Done</p>
                 </div>
-            </div>
-
-            <div>
-                <p class="summary__task-type">Tasks Done</p>
             </div>
         </div>
     </div>
 </div>
-<div></div>

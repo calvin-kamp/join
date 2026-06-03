@@ -3,10 +3,11 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AuthService } from '@core/auth/auth.service';
 import { TasksService } from '@features/tasks/tasks.service';
 import { IconComponent } from '@shared/ui/icon/icon.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'summary-dashboard',
-    imports: [IconComponent, IconComponent, JsonPipe],
+    imports: [IconComponent, IconComponent, JsonPipe, RouterLink],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -103,24 +104,13 @@ export class DashboardComponent {
 
     greetings() {
         let timeHour = new Date().getHours();
-        let greets: string[] = ['Good morning', 'Good afternoon', 'Good evening'];
-        let greetMsg: string = '';
 
-        if (timeHour > 5 && timeHour < 12) {
-            greetMsg = greets[0];
+        if (timeHour >= 5 && timeHour < 12) {
+            return 'Good morning';
+        } else if (timeHour >= 12 && timeHour < 18) {
+            return 'Good afternoon';
+        } else {
+            return 'Good evening';
         }
-
-        if (timeHour >= 12 && timeHour < 18) {
-            greetMsg = greets[1];
-        }
-
-        if (timeHour >= 18 && timeHour < 0) {
-            greetMsg = greets[2];
-        }
-
-        if (timeHour >= 0 && timeHour < 5) {
-            greetMsg = greets[2];
-        }
-        return greetMsg;
     }
 }
