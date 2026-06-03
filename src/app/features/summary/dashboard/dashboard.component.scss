@@ -1,45 +1,68 @@
 @use 'abstracts' as *;
 
+:host{
+    display: block;
+    height: calc(100vh - $header-height-mobile - $footer-height-mobile);
+}
 .summary {
-    @include flex($direction: column, $items: center);
+    height: 100%;
+    @include flex($direction: column, $items: center, $wrap: nowrap, $justify: center);
     background-color: var(--color-body-background);
-    position: relative;
     z-index: 2;
-    animation: slideUpSummary 0.8s ease-in-out 3s forwards;
+    
 
     @include breakpoint(lg) {
-        display: flex;
         flex-direction: row-reverse;
         justify-content: space-around;
-        margin-top: 166px;
         animation: none;
     }
 
-    &__dashboard{
-        height: calc(100vh - $footer-height-mobile - $header-height-mobile);
-        @include flex($direction: column, $justify:center, $items:center)
-    }
-
     &__welcome-msg {
+        position: fixed;
+        inset: 0;
+        height: 100%;
         @include flex($justify: center, $direction: column);
         z-index: 1;
-        height: 86vh;
         color: var(--color-black);
-        animation: slideUp 0.9s ease-in-out 3s forwards;
+        animation: slideUp 1.2s ease-in-out 3s forwards;
         @include breakpoint(lg) {
+            animation: none;
+            position: static;
+        }
+    }
+
+    &__dashboard{
+        z-index: 2;
+        transform: translateY(85vh);
+        animation: slideUpSummary 1.3s ease-in-out 3s forwards;
+
+        @include breakpoint(lg){
+            transform: translateY(0);
             animation: none;
         }
     }
 
     @keyframes slideUp {
-        100% {
+        50% {
             transform: translateY(-26vh);
+            opacity: 1;
+        }
+
+        100%{
+            transform: translateY(-26vh);
+            opacity: 0;
         }
     }
 
     @keyframes slideUpSummary {
-        100% {
-            transform: translateY(-86vh);
+        0% {
+            transform: translateY(85vh);
+        }
+        70%{
+            transform: translateY(10vh);
+        }
+        100%{
+            transform: translateY(0);
         }
     }
 
@@ -55,7 +78,7 @@
 
         font-weight: 700;
         font-size: 48px;
-        color: #29abe2;
+        color: var(--color-text-accent);
     }
 
     &__wrapper {
