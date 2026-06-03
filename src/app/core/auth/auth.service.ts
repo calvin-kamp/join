@@ -13,6 +13,8 @@ export class AuthService {
     readonly user = computed<User | null>(() => this.session()?.user ?? null);
     readonly isLoggedIn = computed<boolean>(() => this.session() !== null);
 
+    private readonly ready: Promise<void>;
+
     readonly displayName = computed<string>(() => {
         const user = this.user();
 
@@ -28,8 +30,14 @@ export class AuthService {
     });
 
     constructor() {
-        this.supabase.auth.getSession().then(({ data }) => this.session.set(data.session));
+        this.ready = this.supabase.auth.getSession().then(({ data }) => {
+            this.session.set(data.session);
+        });
         this.supabase.auth.onAuthStateChange((_event, session) => this.session.set(session));
+    }
+
+    whenReady(): Promise<void> {
+        return this.ready;
     }
 
     signIn(email: string, password: string): Promise<AuthTokenResponsePassword> {
@@ -49,7 +57,7 @@ export class AuthService {
     async signOut(): Promise<{ error: AuthError | null }> {
         const result = await this.supabase.auth.signOut();
 
-        await this.router.navigateByUrl('/');
+        await this.router.navigateByUrl('/auth/sign-in');
 
         return result;
     }

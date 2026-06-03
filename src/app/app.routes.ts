@@ -1,15 +1,13 @@
 import { Routes } from '@angular/router';
+import { authGuard, guestGuard } from '@core/auth/auth.guard';
 import { MainLayoutComponent } from '@core/layout/main-layout.component';
 
 export const ROUTES: Routes = [
     {
         path: '',
         component: MainLayoutComponent,
+        canActivate: [authGuard],
         children: [
-            {
-                path: '',
-                loadChildren: () => import('./features/public/public.routes').then((m) => m.PUBLIC_ROUTES)
-            },
             {
                 path: 'summary',
                 loadComponent: () =>
@@ -22,6 +20,16 @@ export const ROUTES: Routes = [
             {
                 path: 'tasks',
                 loadChildren: () => import('./features/tasks/tasks.routes').then((m) => m.TASKS_ROUTES)
+            }
+        ]
+    },
+    {
+        path: '',
+        component: MainLayoutComponent,
+        children: [
+            {
+                path: '',
+                loadChildren: () => import('./features/public/public.routes').then((m) => m.PUBLIC_ROUTES)
             }
         ]
     },
