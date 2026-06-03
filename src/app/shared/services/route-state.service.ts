@@ -9,8 +9,6 @@ import { filter, map, startWith } from 'rxjs';
 export class RouteStateService {
     router = inject(Router);
 
-    scrollableRoutes = ['/tasks/board', '/tasks/add-task', '/contacts', '/legal-notice', '/privacy-policy', '/help'];
-
     url = toSignal(
         this.router.events.pipe(
             filter((e) => e instanceof NavigationEnd),
@@ -20,12 +18,10 @@ export class RouteStateService {
         { initialValue: this.cleanPath(this.router.url) }
     );
 
-    isScrollable = computed(() => this.scrollableRoutes.some((path) => this.url().startsWith(path)));
-    showAuthSignUp = computed(() => !this.url().startsWith('/auth/sign-up'));
+    lockedRoutes = ['/contacts'];
+    isViewportLocked = computed(() => this.lockedRoutes.some((path) => this.url().startsWith(path)));
 
-    matches(path: string): boolean {
-        return this.url().startsWith(path);
-    }
+    showAuthSignUp = computed(() => !this.url().startsWith('/auth/sign-up'));
 
     cleanPath(url: string): string {
         return url.split('?')[0].split('#')[0];

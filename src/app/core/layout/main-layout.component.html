@@ -1,5 +1,5 @@
 <layout-header />
-<main [class.is-scrollable]="routeStateService.isScrollable()">
+<main [class.is-locked]="routeStateService.isViewportLocked()">
     <router-outlet />
 </main>
 <layout-footer />

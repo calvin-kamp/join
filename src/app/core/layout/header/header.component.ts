@@ -22,7 +22,7 @@ interface NavLink {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
-    private auth = inject(AuthService);
+    auth = inject(AuthService);
     private router = inject(Router);
 
     protected readonly displayName = this.auth.displayName;

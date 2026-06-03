@@ -2,20 +2,24 @@
 
 :host {
     display: block;
-    height: 100vh;
-    overflow: hidden;
 }
 
 main {
-    height: calc(100vh - $footer-height-mobile);
+    margin-top: 0;
+    padding-block: $header-height-mobile $footer-height-mobile;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    &.is-locked {
+        height: 100vh;
+        height: 100dvh;
+        min-height: 0;
+        overflow: hidden;
+    }
 
     @include breakpoint(lg) {
         max-width: 1440px;
-        height: 100vh;
+        padding-bottom: 0;
         padding-left: 232px;
-    }
-    &.is-scrollable{
-        overflow: auto;
-        padding-bottom: $footer-height-mobile;
     }
 }
