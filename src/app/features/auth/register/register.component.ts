@@ -67,7 +67,7 @@ export class RegisterComponent {
         required: 'Please confirm your password'
     });
 
-    protected acceptTosError = controlErrorMessage(this.registerForm.controls.email, {
+    protected acceptTosError = controlErrorMessage(this.registerForm.controls.acceptTos, {
         required: 'Please accept the Privacy Policy'
     });
 
@@ -93,6 +93,9 @@ export class RegisterComponent {
 
     async onSubmit(): Promise<void> {
         this.registerForm.markAllAsTouched();
+
+        console.log(this.registerForm.getRawValue());
+        console.log(this.acceptTosError);
 
         if (this.registerForm.invalid) {
             return;
