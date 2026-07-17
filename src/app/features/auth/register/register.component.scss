@@ -1,6 +1,7 @@
 @use "abstracts" as *;
 
 .register {
+  position: relative;
     max-width: 600px;
     margin-inline: auto;
 
@@ -10,8 +11,15 @@
         @include divider($sizeMobile: 88px, $sizeDesktop: 150px)
     }
 
-    &__form {
+    &__arrow-back {
+      position: absolute;
+      top: 40px;
+      left: 40px;
 
+      @include breakpoint(lg) {
+        top: 64px;
+        left: 48px;
+      }
     }
 
     &__submit {

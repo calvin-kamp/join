@@ -11,10 +11,19 @@ import { ButtonComponent } from '@shared/ui/button/button.component';
 import { InputComponent } from '@shared/ui/forms/input/input.component';
 import { CheckboxComponent } from '@shared/ui/forms/checkbox/checkbox.component';
 import { LinkComponent } from '@shared/ui/link/link.component';
+import { IconComponent } from '@shared/ui/icon/icon.component';
 
 @Component({
     selector: 'auth-register',
-    imports: [CardDirective, InputComponent, ReactiveFormsModule, ButtonComponent, CheckboxComponent, LinkComponent],
+    imports: [
+        CardDirective,
+        InputComponent,
+        ReactiveFormsModule,
+        ButtonComponent,
+        CheckboxComponent,
+        LinkComponent,
+        IconComponent
+    ],
     templateUrl: './register.component.html',
     styleUrl: './register.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
