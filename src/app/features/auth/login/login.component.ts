@@ -6,10 +6,11 @@ import { CardDirective } from '@shared/directives/card.directive';
 import { controlErrorMessage } from '@shared/forms/control-error-message';
 import { ButtonComponent } from '@shared/ui/button/button.component';
 import { InputComponent } from '@shared/ui/forms/input/input.component';
+import { IconComponent } from '@shared/ui/icon/icon.component';
 
 @Component({
     selector: 'auth-login',
-    imports: [ReactiveFormsModule, CardDirective, InputComponent, ButtonComponent],
+    imports: [ReactiveFormsModule, CardDirective, InputComponent, ButtonComponent, IconComponent],
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
