@@ -18,4 +18,23 @@
             gap: 32px;
         }
     }
+
+    &__input{
+        position: relative;
+    }
+
+    &__icon{
+        position: absolute;
+        right: 120px;
+        top: 13px;
+
+            
+        @include breakpoint(lg) {
+            right: 25px;
+        }
+    }
+
+    &__error{
+        color: red;
+    }
 }

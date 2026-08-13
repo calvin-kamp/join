@@ -10,32 +10,46 @@
         [formGroup]="logInForm"
         class="login__form"
     >
-        <ui-input
-            formControlName="email"
-            label="Email"
-            name="email"
-            type="email"
-            [labelVisible]="false"
-            [isRequired]="true"
-            [errorMessage]="emailError()"
-        />
-
-        <ui-input
-            formControlName="password"
-            label="Password"
-            name="password"
-            type="password"
-            [labelVisible]="false"
-            [isRequired]="true"
-            [errorMessage]="passwordError()"
-        />
-
+        <div class="login__input">
+            <ui-input
+                formControlName="email"
+                label="Email"
+                name="email"
+                type="email"
+                [labelVisible]="false"
+                [isRequired]="true"
+                [errorMessage]="emailError()"
+            />
+            <ui-icon
+                name="mail"
+                class="login__icon"
+                [width]="24"
+                [height]="24"
+            />
+        </div>
+        <div class="login__input">
+            <ui-input
+                formControlName="password"
+                label="Password"
+                name="password"
+                type="password"
+                [labelVisible]="false"
+                [isRequired]="true"
+                [errorMessage]="passwordError()"
+            />
+            <ui-icon
+                name="password-hidden"
+                class="login__icon"
+                [width]="24"
+                [height]="24"
+            />
+        </div>
         @if (error()) {
             <p
                 class="login__error"
                 role="alert"
             >
-                {{ error() }}
+                Login Failed! Please check your Password or Email.
             </p>
         }
 
