@@ -5,7 +5,7 @@ import { type Database } from './database.types';
 
 @Injectable({ providedIn: 'root' })
 export class SupabaseService {
-    readonly client: SupabaseClient;
+    readonly client: SupabaseClient<Database>;
 
     constructor() {
         this.client = createClient<Database>(environment.supabaseUrl, environment.supabaseKey);
@@ -20,8 +20,9 @@ export class SupabaseService {
 
         return data;
     }
+
     async selectByID<T extends keyof Database['public']['Tables']>(table: T, id: number) {
-        const { data, error } = await this.client.from(table).select('*').eq('id', id).limit(1).single();
+        const { data, error } = await this.client.from(table).select('*').eq('id' as never, id as never).limit(1).single();
 
         if (error) {
             throw error;
@@ -30,24 +31,31 @@ export class SupabaseService {
         return data;
     }
 
-    async insert<T>(tableName: string, payload: T): Promise<void> {
-        const { error } = await this.client.from(tableName).insert([payload]).select();
+    async insert<T extends keyof Database['public']['Tables']>(
+        tableName: T,
+        payload: Database['public']['Tables'][T]['Insert']
+    ): Promise<void> {
+        const { error } = await this.client.from(tableName).insert(payload as never);
 
         if (error) {
             throw error;
         }
     }
 
-    async update(tableName: string, id: number, payload: Record<string, unknown>): Promise<void> {
-        const { error } = await this.client.from(tableName).update(payload).eq('id', id);
+    async update<T extends keyof Database['public']['Tables']>(
+        tableName: T,
+        id: number,
+        payload: Database['public']['Tables'][T]['Update']
+    ): Promise<void> {
+        const { error } = await this.client.from(tableName).update(payload as never).eq('id' as never, id as never);
 
         if (error) {
             throw error;
         }
     }
 
-    async delete(tableName: string, id: number): Promise<void> {
-        const { error } = await this.client.from(tableName).delete().eq('id', id);
+    async delete<T extends keyof Database['public']['Tables']>(tableName: T, id: number): Promise<void> {
+        const { error } = await this.client.from(tableName).delete().eq('id' as never, id as never);
 
         if (error) {
             throw error;
@@ -56,13 +64,13 @@ export class SupabaseService {
 
     async selectTasks() {
         const { data, error } = await this.client.from('tasks').select(`
-            *,
-            subtasks (*),
-            contacts (*),
-            priority (*),
-            status (*),
-            category (*)
-        `);
+                *,
+                subtasks (*),
+                contacts (*),
+                priority (*),
+                status (*),
+                category (*)
+            `);
 
         if (error) {
             throw error;
@@ -76,13 +84,13 @@ export class SupabaseService {
             .from('tasks')
             .select(
                 `
-            *,
-            subtasks (*),
-            contacts (*),
-            priority (*),
-            status (*),
-            category (*)
-        `
+                *,
+                subtasks (*),
+                contacts (*),
+                priority (*),
+                status (*),
+                category (*)
+            `
             )
             .eq('id', id)
             .single();

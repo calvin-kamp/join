@@ -22,6 +22,7 @@ type SelectValue = string | number | boolean | object | Array<string | number | 
 })
 export class SelectComponent implements ControlValueAccessor {
     options = input<readonly SelectOption[]>([]);
+    protected readonly ngSelectItems = computed(() => [...this.options()]);
     multiSelect = input<boolean>(false);
     useCheckboxes = input<boolean>(false);
     showAvatar = input<boolean>(false);

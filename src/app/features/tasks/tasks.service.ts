@@ -325,7 +325,11 @@ export class TasksService {
     }
 
     async createSubtask(subtask: Subtask): Promise<void> {
-        await this.supabase.insert('subtasks', subtask);
+        await this.supabase.insert('subtasks', {
+            task_id: subtask.taskId,
+            title: subtask.title,
+            status: subtask.status
+        });
         await this.getTasks();
     }
 

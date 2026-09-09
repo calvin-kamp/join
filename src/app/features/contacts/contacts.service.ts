@@ -25,7 +25,13 @@ export class ContactsService {
     }
 
     async getContacts(): Promise<void> {
-        const contacts: Contact[] = await this.supabase.select('contacts');
+        const rows = await this.supabase.select('contacts');
+        const contacts: Contact[] = (rows ?? []).map((row) => ({
+            id: row.id,
+            name: row.name ?? '',
+            mail: row.mail ?? '',
+            phone: row.phone ?? ''
+        }));
 
         if (!contacts) {
             return;
@@ -35,13 +41,16 @@ export class ContactsService {
     }
 
     async getContactByID(id: number): Promise<Contact | undefined> {
-        const contact: Contact = await this.supabase.selectByID('contacts', id);
+        const row = await this.supabase.selectByID('contacts', id);
+        const contact: Contact | null = row
+            ? { id: row.id, name: row.name ?? '', mail: row.mail ?? '', phone: row.phone ?? '' }
+            : null;
 
         return contact ?? undefined;
     }
 
     async addContact(contact: Contact): Promise<void> {
-        await this.supabase.insert<Contact>('contacts', contact);
+        await this.supabase.insert('contacts', contact);
         await this.getContacts();
     }
 
