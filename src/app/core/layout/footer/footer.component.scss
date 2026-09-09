@@ -18,8 +18,12 @@
 
     &__wrapper {
         height: $footer-height-mobile;
-        padding-inline: 16px;
+        padding-inline: 10px;
         @include flex($wrap: nowrap, $items: center, $justify: space-between);
+
+        @media screen and (min-width: 340px) {
+            padding-inline: 16px;
+        }
 
         @include breakpoint(lg) {
             flex-direction: column;
@@ -90,7 +94,7 @@
     ::ng-deep .footer__nav-link {
         @include flex($direction: column, $items: center, $justify: center);
         min-height: 76px;
-        padding-inline: 6px;
+        padding-inline: 5px;
         border-radius: 16px;
 
         @include hoverable() {
