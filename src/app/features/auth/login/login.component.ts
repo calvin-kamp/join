@@ -22,6 +22,7 @@ export class LoginComponent {
 
     loading = signal<boolean>(false);
     error = signal<string | null>(null);
+    showPassword = signal<boolean>(false);
 
     logInForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
@@ -67,5 +68,9 @@ export class LoginComponent {
     continueAsGuest(): void {
         this.auth.signIn('guest@guest.test', 'guest@guest.test');
         this.router.navigateByUrl('/summary');
+    }
+
+    togglePassword(): void {
+        this.showPassword.set(!this.showPassword());
     }
 }

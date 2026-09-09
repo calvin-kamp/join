@@ -83,23 +83,24 @@
     }
 
     &__nav-item {
-        padding: 10px;
         border-radius: 4px;
         transition: background-color $transition-default;
-
+        
         @include hoverable() {
             background-color: var(--color-primary-subtle);
         }
-
+        
         &--mobile-only {
             @include breakpoint(lg) {
                 display: none;
             }
         }
+        cursor: pointer;
     }
 
     &__nav-action {
-        padding: 0;
+        display: block;
+        padding: 10px;
         background: none;
         border: none;
         color: var(--color-text-muted);
@@ -108,3 +109,12 @@
         cursor: pointer;
     }
 }
+
+    ::ng-deep ui-link {
+      display: block;
+    }
+
+    ::ng-deep .link {
+      display: block;
+      padding: 10px;
+    }

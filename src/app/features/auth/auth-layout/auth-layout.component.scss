@@ -1,31 +1,43 @@
 @use "abstracts" as *;
 
 .auth-layout {
-    height: 100dvh;
+    min-height: 100dvh;
     @include flex($direction: column, $justify: center);
 
+    @include breakpoint(md) {
+        height: 100dvh;
+    }
+    
     &__header {
-        position: absolute;
+        position: sticky;
         top: 0;
         left: 0;
         right: 0;
+
+        @include breakpoint(md) {
+            position: absolute;
+        }
     }
 
     &__main {
-
+        margin-top: 0;
     }
 
     &__footer {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        padding-bottom: 20px;
 
+        @include breakpoint(md) {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding-bottom: 20px;
+        }
         @include breakpoint(lg) {
             padding-bottom: 48px;
         }
+
     }
+
 
 }
 
@@ -56,6 +68,11 @@
 }
 
 .auth-footer {
+    padding-top: 20px;
+
+    @include breakpoint(md) {
+        padding-top: 0;
+    }
 
     &__wrapper {
         @include flex($justify: center, $wrap: wrap);
