@@ -1,236 +1,250 @@
 @use 'abstracts' as *;
 
-:host{
+:host {
     display: block;
-    height: calc(100vh - $header-height-mobile - $footer-height-mobile);
 }
+
 .summary {
-    height: 100%;
-    @include flex($direction: column, $items: center, $wrap: nowrap, $justify: center);
-    background-color: var(--color-body-background);
-    z-index: 2;
-    
+    padding-block: 40px 32px;
 
     @include breakpoint(lg) {
-        flex-direction: row-reverse;
-        justify-content: space-around;
-        animation: none;
+        margin-left: 64px;
+        padding-block: 64px;
     }
 
-    &__welcome-msg {
-        position: fixed;
-        inset: 0;
-        height: 100%;
-        @include flex($justify: center, $direction: column);
-        z-index: 1;
-        color: var(--color-black);
-        animation: slideUp 1.2s ease-in-out 3s forwards;
+    &__header {
+        margin-bottom: 32px;
+
         @include breakpoint(lg) {
-            animation: none;
-            position: static;
+            @include flex($items: center, $wrap: nowrap, $gap: var(--gap-lg));
+            margin-bottom: 48px;
         }
     }
 
-    &__dashboard{
-        z-index: 2;
-        transform: translateY(85vh);
-        animation: slideUpSummary 1.3s ease-in-out 3s forwards;
+    &__subtitle {
+        @include divider($position: bottom-left, $sizeMobile: 90px);
+        color: var(--color-text-secondary);
+        font-size: $font-size-body;
 
-        @include breakpoint(lg){
-            transform: translateY(0);
-            animation: none;
-        }
-    }
-
-    @keyframes slideUp {
-        50% {
-            transform: translateY(-26vh);
-            opacity: 1;
+        @include breakpoint(md) {
+            font-size: $font-size-body-lg;
         }
 
-        100%{
-            transform: translateY(-26vh);
-            opacity: 0;
-        }
-    }
+        @include breakpoint(lg) {
+            padding-bottom: 0;
+            padding-inline-start: 30px;
+            font-size: $font-size-lg;
 
-    @keyframes slideUpSummary {
-        0% {
-            transform: translateY(85vh);
-        }
-        70%{
-            transform: translateY(10vh);
-        }
-        100%{
-            transform: translateY(0);
-        }
-    }
-
-    &__greet {
-        text-align: center;
-        font-weight: 400;
-        font-size: 36px;
-        color: var(--color-black);
-    }
-
-    &__greet-user {
-        display: block;
-
-        font-weight: 700;
-        font-size: 48px;
-        color: var(--color-text-accent);
-    }
-
-    &__wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 396px;
-        height: 150px;
-        border-radius: 30px;
-        background-color: var(--color-white);
-        color: var(--color-surface-inverted);
-
-        &:hover {
-            transform: scale(1.1);
-            background-color: var(--color-surface-inverted);
-            color: var(--color-white);
-            cursor: pointer;
-            &__amount {
-                color: var(--color-white);
+            &::after {
+                inset-block: 0;
+                width: 3px;
+                height: auto;
             }
         }
     }
-    &__wrapper-left {
-        width: 120px;
-        height: 98px;
-        display: flex;
-        flex-direction: column;
-        row-gap: 8px;
-        @include divider($position: right, $sizeMobile: 102px);
-        &:after {
-            background-color: var(--color-surface);
+
+    &__body {
+        @include breakpoint(lg) {
+            @include flex($items: center, $wrap: nowrap, $gap: 80px);
         }
     }
 
-    &__amount {
-        font-weight: $font-weight-bold;
-        font-size: 40px;
+    &__metrics {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: var(--gap-md);
+
+        @include breakpoint(md) {
+            gap: var(--gap-xl);
+        }
+
+        @include breakpoint(lg) {
+            flex: 0 1 620px;
+        }
     }
 
-    .summary--amount {
-        color: var(--color-surface-inverted);
-    }
-
-    &__status-number {
+    &__metric {
         display: flex;
-        gap: 8px;
+
+        &--half {
+            grid-column: span 3;
+        }
+
+        &--wide {
+            grid-column: span 6;
+        }
     }
 
-    &__status-symbol {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        background: (var(--color-ui-warning));
-    }
-    &__status {
-        position: relative;
-        top: 19px;
-        left: 19px;
+    &__card {
+        @include flex($items: center, $justify: center, $wrap: nowrap, $gap: var(--gap-md));
+        flex: 1;
+        min-height: 88px;
+        padding: 16px;
+        border-radius: $radius-card-lg;
+        background-color: var(--color-surface);
+        box-shadow: var(--shadow-md);
+        color: var(--color-text-secondary);
+        text-align: center;
+        transition:
+            transform $transition-fast,
+            background-color $transition-fast,
+            color $transition-fast;
 
-        fill: var(--color-ui-warning);
+        @include breakpoint(md) {
+            min-height: 112px;
+            padding: 24px;
+        }
+
+        &:focus-visible {
+            @include focus-ring($width: 2px, $offset: 2px);
+        }
+
+        @include hoverable() {
+            transform: scale(1.05);
+            background-color: var(--color-surface-inverted);
+            color: var(--color-text-inverted);
+
+            .summary__badge--dark {
+                background-color: var(--color-surface);
+                color: var(--color-primary);
+            }
+        }
+
+        &--deadline {
+            justify-content: space-evenly;
+        }
     }
 
-    &__wrapper-right {
-        width: 192px;
-        height: 48px;
-        margin: 16px;
+    &__badge {
+        @include flex($items: center, $justify: center, $wrap: nowrap);
+        flex: 0 0 auto;
+        width: 44px;
+        height: 44px;
+        border-radius: $radius-round;
+        transition:
+            background-color $transition-fast,
+            color $transition-fast;
+
+        @include breakpoint(md) {
+            width: 60px;
+            height: 60px;
+        }
+
+        &--dark {
+            background-color: var(--color-primary);
+            color: var(--color-text-inverted);
+        }
+
+        &--urgent {
+            background-color: var(--color-priority-urgent);
+
+            ::ng-deep path {
+                fill: var(--color-white);
+            }
+        }
+    }
+
+    &__priority {
+        @include flex($items: center, $wrap: nowrap, $gap: var(--gap-md));
+    }
+
+    &__figure {
+        @include flex($direction: column, $items: center, $wrap: nowrap);
+    }
+
+    &__value {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        line-height: $line-height-tight;
+
+        @include breakpoint(md) {
+            font-size: $font-size-2xl;
+        }
+    }
+
+    &__label {
+        font-size: $font-size-body;
+
+        @include breakpoint(md) {
+            font-size: $font-size-body-lg;
+        }
     }
 
     &__deadline {
+        @include flex($direction: column, $wrap: nowrap);
+        padding-inline-start: var(--gap-md);
+        border-inline-start: 2px solid var(--color-border);
+        text-align: start;
+
+        @include breakpoint(md) {
+            padding-inline-start: var(--gap-xl);
+        }
+    }
+
+    &__deadline-date {
+        font-size: $font-size-body-lg;
         font-weight: $font-weight-bold;
-        font-size: 24px;
-    }
+        line-height: $line-height-tight;
 
-    &__to-do {
-        @include flex($type: flex, $justify: center, $items: center, $gap: 20px);
-        width: 396px;
-        height: 106px;
-        margin: 24px 0px;
-        border-radius: 30px;
-        background-color: var(--color-white);
-        color: var(--color-surface-inverted);
-        &:hover {
-            transform: scale(1.1);
-            background-color: var(--color-surface-inverted);
-            color: var(--color-white);
-            cursor: pointer;
-        }
-
-        &-symbol {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: (var(--color-ui-warning));
-        }
-
-        &-icon {
-            position: relative;
-            top: 15px;
-            left: 19px;
+        @include breakpoint(md) {
+            font-size: $font-size-md;
         }
     }
 
-    &__task-squares1 {
-        display: flex;
-        gap: 15px;
+    &__deadline-label {
+        font-size: $font-size-body;
     }
 
-    &__task-squares2 {
-        display: flex;
-        gap: 15px;
-    }
+    &__greeting {
+        display: none;
+        color: var(--color-text-secondary);
+        font-size: $font-size-xl;
+        text-align: center;
 
-    &__board-task {
-        @include flex($type: flex, $justify: center, $items: center, $direction: column, $gap: 8px);
-        width: 186px;
-        height: 152px;
-        border-radius: 30px;
-        background-color: var(--color-white);
-        color: var(--color-surface-inverted);
-        margin-bottom: 24px;
-        &:hover {
-            transform: scale(1.1);
-            background-color: var(--color-surface-inverted);
-            color: var(--color-white);
-            cursor: pointer;
+        @include breakpoint(lg) {
+            display: block;
+            flex: 0 1 auto;
+            font-size: $font-size-2xl;
         }
     }
 
-    &__bts {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
+    &__greeting-name {
+        display: block;
+        color: var(--color-text-accent);
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-bold;
+
+        @include breakpoint(lg) {
+            font-size: $font-size-3xl;
+        }
     }
 
-    &__board-task-symbol {
-        display: flex;
-        gap: 8px;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        background: (var(--color-ui-warning));
-    }
+    &--intro {
+        .summary__header,
+        .summary__metrics {
+            animation: summary-reveal $transition-duration-default $transition-ease 1500ms backwards;
+        }
 
-    &__board-task-icon {
-        position: relative;
-        top: 20px;
-        left: 18px;
+        .summary__greeting {
+            @include flex($items: center, $justify: center, $wrap: nowrap);
+            position: fixed;
+            inset: $header-height-mobile 0 $footer-height-mobile 0;
+            z-index: $z-index-8;
+            pointer-events: none;
+            animation: summary-dismiss $transition-duration-default $transition-ease 1500ms forwards;
+        }
     }
+}
 
-    &__task-type {
-        width: 100px;
-        font-weight: $font-weight-regular;
+@keyframes summary-reveal {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes summary-dismiss {
+    to {
+        visibility: hidden;
+        opacity: 0;
     }
 }

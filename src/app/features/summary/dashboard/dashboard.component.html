@@ -1,149 +1,125 @@
-<div class="summary">
-    <div class="summary__welcome-msg">
-        @if (authService.displayName() !== 'Guest') {
-            <h1 class="summary__greet">
-                {{ greetings() }},
-                <span class="summary__greet-user"> {{ authService.displayName() }} </span>
-            </h1>
-        } @else {
-            <h1 class="greet-guest">{{ greetings() }}</h1>
-        }
-    </div>
-    <div class="summary__dashboard">
-        <div
-            class="summary__wrapper"
-            [routerLink]="'/tasks/board'"
-        >
-            <div class="summary__wrapper-left">
-                <div class="summary__status-number">
-                    <div class="summary__status-symbol">
+<section
+    class="summary"
+    [class.summary--intro]="introActive()"
+>
+    <header class="summary__header">
+        <h1 class="summary__title">Join 360</h1>
+        <p class="summary__subtitle">Key Metrics at a Glance</p>
+    </header>
+
+    <div class="summary__body">
+        <ul class="summary__metrics">
+            <li class="summary__metric summary__metric--wide">
+                <a
+                    class="summary__card summary__card--deadline"
+                    [routerLink]="boardLink"
+                >
+                    <span class="summary__priority">
+                        <span class="summary__badge summary__badge--urgent">
+                            <ui-icon
+                                name="badge-urgent"
+                                [width]="{ base: 24, md: 30 }"
+                                [height]="{ base: 18, md: 22 }"
+                            />
+                        </span>
+
+                        <span class="summary__figure">
+                            <span class="summary__value">{{ urgentCount() }}</span>
+                            <span class="summary__label">Urgent</span>
+                        </span>
+                    </span>
+
+                    <span class="summary__deadline">
+                        <span class="summary__deadline-date">{{ upcomingDeadline() | date: 'longDate' }}</span>
+                        <span class="summary__deadline-label">Upcoming Deadline</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="summary__metric summary__metric--wide">
+                <a
+                    class="summary__card"
+                    [routerLink]="boardLink"
+                >
+                    <span class="summary__badge summary__badge--dark">
                         <ui-icon
-                            name="badge-urgent"
-                            class="summary__status"
-                            [height]="25"
-                            [width]="34"
+                            name="nav-add-task"
+                            [width]="{ base: 22, md: 28 }"
+                            [height]="{ base: 22, md: 28 }"
                         />
-                    </div>
-                    <div>
-                        <p class="summary__amount">{{ urgentAmount() }}</p>
-                    </div>
-                </div>
-                <div class="summary__urgent">
-                    <p class="summary__task-type">Tasks Urgent</p>
-                </div>
-            </div>
+                    </span>
 
-            <div class="summary__wrapper-right">
-                <p class="summary__deadline">{{ upcomingDeadlineInDays() }}</p>
-                <p>Upcoming Deadline</p>
-            </div>
-        </div>
+                    <span class="summary__figure">
+                        <span class="summary__value">{{ toDoCount() }}</span>
+                        <span class="summary__label">To-do</span>
+                    </span>
+                </a>
+            </li>
 
-        <div
-            class="summary__to-do"
-            [routerLink]="'/tasks/board'"
-        >
-            <div class="summary__to-do-symbol">
-                <ui-icon
-                    name="nav-add-task"
-                    class="summary__to-do-icon"
-                ></ui-icon>
-            </div>
-            <div>
-                <p class="summary__amount">{{ toDoAmount() }}</p>
-            </div>
-            <div class="summary__task-to-do">
-                <p class="summary__task-type">Tasks To-Do</p>
-            </div>
-        </div>
+            <li class="summary__metric summary__metric--half">
+                <a
+                    class="summary__card"
+                    [routerLink]="boardLink"
+                >
+                    <span class="summary__figure">
+                        <span class="summary__value">{{ boardCount() }}</span>
+                        <span class="summary__label">Tasks in Board</span>
+                    </span>
+                </a>
+            </li>
 
-        <!-- equal to the first div changing the class names will follow-->
-        <div class="summary__task-squares1">
-            <div
-                class="summary__board-task"
-                [routerLink]="'/tasks/board'"
-            >
-                <div class="summary__bts">
-                    <div class="summary__board-task-symbol">
+            <li class="summary__metric summary__metric--half">
+                <a
+                    class="summary__card"
+                    [routerLink]="boardLink"
+                >
+                    <span class="summary__figure">
+                        <span class="summary__value">{{ inProgressCount() }}</span>
+                        <span class="summary__label">Tasks In Progress</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="summary__metric summary__metric--half">
+                <a
+                    class="summary__card"
+                    [routerLink]="boardLink"
+                >
+                    <span class="summary__figure">
+                        <span class="summary__value">{{ awaitFeedbackCount() }}</span>
+                        <span class="summary__label">Awaiting Feedback</span>
+                    </span>
+                </a>
+            </li>
+
+            <li class="summary__metric summary__metric--half">
+                <a
+                    class="summary__card"
+                    [routerLink]="boardLink"
+                >
+                    <span class="summary__badge summary__badge--dark">
                         <ui-icon
-                            name="nav-board"
-                            class="summary__board-task-icon"
+                            name="check-solid"
+                            [width]="{ base: 22, md: 28 }"
+                            [height]="{ base: 16, md: 20 }"
                         />
-                    </div>
-                    <div>
-                        <p class="summary__amount">{{ tasksOnBoard() }}</p>
-                    </div>
-                </div>
+                    </span>
 
-                <div>
-                    <p class="summary__task-type">Tasks on Board</p>
-                </div>
-            </div>
+                    <span class="summary__figure">
+                        <span class="summary__value">{{ doneCount() }}</span>
+                        <span class="summary__label">Done</span>
+                    </span>
+                </a>
+            </li>
+        </ul>
 
-            <div
-                class="summary__board-task"
-                [routerLink]="'/tasks/board'"
-            >
-                <div class="summary__bts">
-                    <div class="summary__board-task-symbol">
-                        <ui-icon
-                            name="nav-board"
-                            class="summary__board-task-icon"
-                        ></ui-icon>
-                    </div>
-                    <div>
-                        <p class="summary__amount">{{ inProgress() }}</p>
-                    </div>
-                </div>
-
-                <div>
-                    <p class="summary__task-type">Tasks in Progress</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="summary__task-squares2">
-            <div
-                class="summary__board-task"
-                [routerLink]="'/tasks/board'"
-            >
-                <div class="summary__bts">
-                    <div class="summary__board-task-symbol">
-                        <ui-icon
-                            name="nav-board"
-                            class="summary__board-task-icon"
-                        ></ui-icon>
-                    </div>
-                    <div>
-                        <p class="summary__amount">{{ awaitFeedback() }}</p>
-                    </div>
-                </div>
-
-                <div>
-                    <p class="summary__task-type">Awaiting feedback</p>
-                </div>
-            </div>
-
-            <div
-                class="summary__board-task"
-                [routerLink]="'/tasks/board'"
-            >
-                <div class="summary__bts">
-                    <div class="summary__board-task-symbol">
-                        <ui-icon
-                            name="nav-board"
-                            class="summary__board-task-icon"
-                        ></ui-icon>
-                    </div>
-                    <div>
-                        <p class="summary__amount">{{ done() }}</p>
-                    </div>
-                </div>
-
-                <div>
-                    <p class="summary__task-type">Tasks Done</p>
-                </div>
-            </div>
-        </div>
+        <p class="summary__greeting">
+            @if (isGuest()) {
+                {{ greeting }}!
+            } @else {
+                {{ greeting }},
+                <strong class="summary__greeting-name">{{ displayName() }}</strong>
+            }
+        </p>
     </div>
-</div>
+</section>
