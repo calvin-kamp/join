@@ -28,7 +28,12 @@
         right: 120px;
         top: 13px;
 
-            
+        @include breakpoint(xs) {
+            right: 25px;
+        }    
+        @include breakpoint(md) {
+            right: 120px;
+        }
         @include breakpoint(lg) {
             right: 25px;
         }
