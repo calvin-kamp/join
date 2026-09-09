@@ -22,6 +22,7 @@
         "@ng-select/ng-select": "^21.8.2",
         "@supabase/supabase-js": "^2.105.0",
         "rxjs": "~7.8.0",
+        "supabase": "^2.117.0",
         "toastify-js": "^1.12.0",
         "tslib": "^2.3.0"
     },
