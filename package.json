@@ -19,7 +19,7 @@
     "@angular/forms": "^22.1.5",
     "@angular/platform-browser": "^22.1.5",
     "@angular/router": "^22.1.5",
-    "@ng-select/ng-select": "^21.8.2",
+    "@ng-select/ng-select": "^24.1.1",
     "@supabase/supabase-js": "^2.105.0",
     "rxjs": "~7.8.0",
     "supabase": "^2.117.0",
