@@ -45,29 +45,31 @@
         </nav>
 
         @if (!auth.isLoggedIn()) {
-            <ul class="footer__legal-list">
-                <li>
-                    <ui-link
-                        [href]="'/privacy-policy'"
-                        [linkStyle]="'muted'"
-                        [linkClass]="'footer__nav-link'"
-                        [activeClass]="'footer__nav-link--active'"
-                    >
-                        Privacy Policy
-                    </ui-link>
-                </li>
+            <nav class="footer__nav">
+                <ul class="footer__legal-list footer__nav-list">
+                    <li class="footer__nav-item">
+                        <ui-link
+                            [href]="'/privacy-policy'"
+                            [linkStyle]="'no-decoration'"
+                            [linkClass]="'footer__nav-link'"
+                            [activeClass]="'footer__nav-link--active'"
+                        >
+                            Privacy Policy
+                        </ui-link>
+                    </li>
 
-                <li>
-                    <ui-link
-                        [href]="'/legal-notice'"
-                        [linkStyle]="'muted'"
-                        [linkClass]="'footer__nav-link'"
-                        [activeClass]="'footer__nav-link--active'"
-                    >
-                        Legal Notice
-                    </ui-link>
-                </li>
-            </ul>
+                    <li class="footer__nav-item">
+                        <ui-link
+                            [href]="'/legal-notice'"
+                            [linkStyle]="'no-decoration'"
+                            [linkClass]="'footer__nav-link'"
+                            [activeClass]="'footer__nav-link--active'"
+                        >
+                            Legal Notice
+                        </ui-link>
+                    </li>
+                </ul>
+            </nav>
         }
     </div>
 </footer>
