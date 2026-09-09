@@ -1,4 +1,7 @@
-<div class="auth-layout">
+<div
+    class="auth-layout"
+    [class.auth-layout--splash]="splashActive()"
+>
     <header class="auth-layout__header auth-header">
         <div class="auth-header__wrapper">
             <ui-logo class="auth-header__logo" />
@@ -53,4 +56,18 @@
             </nav>
         </div>
     </footer>
+
+    @if (splashActive()) {
+        <div
+            class="auth-splash"
+            aria-hidden="true"
+        >
+            <div class="auth-splash__backdrop"></div>
+
+            <ui-logo
+                class="auth-splash__logo"
+                [variant]="'light'"
+            />
+        </div>
+    }
 </div>

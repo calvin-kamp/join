@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { RouteStateService } from '@shared/services/route-state.service';
 import { LinkComponent, type LinkStyle } from '@shared/ui/link/link.component';
@@ -11,6 +11,11 @@ interface NavItem {
     linkStyle: LinkStyle;
 }
 
+const SPLASH_DURATION_MS = 800;
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
+
+let splashPlayed = false;
+
 @Component({
     selector: 'auth-layout',
     imports: [RouterOutlet, LinkComponent, LogoComponent],
@@ -20,6 +25,7 @@ interface NavItem {
 })
 export class AuthLayoutComponent {
     routeStateService = inject(RouteStateService);
+    private readonly destroyRef = inject(DestroyRef);
 
     readonly footerNav: NavItem[] = [
         {
@@ -33,4 +39,27 @@ export class AuthLayoutComponent {
             linkStyle: 'muted'
         }
     ];
+
+    protected readonly splashActive = signal(false);
+
+    constructor() {
+        this.playSplash();
+    }
+
+    private playSplash(): void {
+        if (splashPlayed) {
+            return;
+        }
+
+        splashPlayed = true;
+
+        if (matchMedia(REDUCED_MOTION_QUERY).matches) {
+            return;
+        }
+
+        this.splashActive.set(true);
+
+        const timeout = setTimeout(() => this.splashActive.set(false), SPLASH_DURATION_MS);
+        this.destroyRef.onDestroy(() => clearTimeout(timeout));
+    }
 }
