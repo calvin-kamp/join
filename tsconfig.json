@@ -14,13 +14,14 @@
         "importHelpers": true,
         "target": "ES2022",
         "module": "preserve",
+        "ignoreDeprecations": "6.0",
         "baseUrl": ".",
         "paths": {
             "@styles/*": ["src/styles/*"],
             "@core/*": ["src/app/core/*"],
             "@shared/*": ["src/app/shared/*"],
             "@features/*": ["src/app/features/*"]
-        },
+        }
     },
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,
