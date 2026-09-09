@@ -35,6 +35,8 @@
         }
 
         &--logged-in {
+            justify-content: flex-start;
+
             .footer__nav {
                 width: 100%;
             }

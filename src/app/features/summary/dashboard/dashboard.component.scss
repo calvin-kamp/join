@@ -45,7 +45,7 @@
 
     &__body {
         @include breakpoint(lg) {
-            @include flex($items: center, $wrap: nowrap, $gap: 80px);
+            @include flex($items: center, $justify: space-between, $wrap: nowrap, $gap: 80px);
         }
     }
 

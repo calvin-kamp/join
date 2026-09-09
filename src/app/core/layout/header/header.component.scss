@@ -1,4 +1,4 @@
-@use "abstracts" as *;
+@use 'abstracts' as *;
 
 .header {
     position: fixed;
@@ -30,7 +30,7 @@
 
     &__title {
         display: none;
-        
+
         @include breakpoint(lg) {
             display: block;
             padding-left: 332px;
@@ -45,7 +45,7 @@
         display: none;
 
         @include breakpoint(lg) {
-            @include flex($items: center)
+            @include flex($items: center);
         }
     }
 
@@ -85,17 +85,26 @@
     &__nav-item {
         border-radius: 4px;
         transition: background-color $transition-default;
-        
+        cursor: pointer;
+
         @include hoverable() {
             background-color: var(--color-primary-subtle);
         }
-        
+
         &--mobile-only {
             @include breakpoint(lg) {
                 display: none;
             }
         }
-        cursor: pointer;
+
+        ::ng-deep ui-link {
+            display: block;
+        }
+
+        ::ng-deep .link {
+            display: block;
+            padding: 10px;
+        }
     }
 
     &__nav-action {
@@ -109,12 +118,3 @@
         cursor: pointer;
     }
 }
-
-    ::ng-deep ui-link {
-      display: block;
-    }
-
-    ::ng-deep .link {
-      display: block;
-      padding: 10px;
-    }
