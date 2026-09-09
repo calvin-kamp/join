@@ -19,30 +19,33 @@
                 [labelVisible]="false"
                 [isRequired]="true"
                 [errorMessage]="emailError()"
-            />
-            <ui-icon
-                name="mail"
-                class="login__icon"
-                [width]="24"
-                [height]="24"
-            />
+            >
+                <ui-icon
+                    name="mail"
+                    class="login__icon"
+                    [width]="24"
+                    [height]="24"
+                />
+            </ui-input>
         </div>
         <div class="login__input">
             <ui-input
                 formControlName="password"
                 label="Password"
                 name="password"
-                type="password"
+                [type]="showPassword() == true ? 'text' : 'password'"
                 [labelVisible]="false"
                 [isRequired]="true"
                 [errorMessage]="passwordError()"
-            />
-            <ui-icon
-                name="password-hidden"
-                class="login__icon"
-                [width]="24"
-                [height]="24"
-            />
+            >
+                <ui-icon
+                    [name]="showPassword() == true ? 'password-hidden' : 'password-visible'"
+                    class="login__icon"
+                    [width]="24"
+                    [height]="24"
+                    (click)="togglePassword()"
+                />
+            </ui-input>
         </div>
         @if (error()) {
             <p

@@ -14,6 +14,9 @@
         margin-top: 32px;
         @include flex($wrap: wrap, $justify: center, $gap: 20px);
     
+        @include breakpoint(xs) {
+            gap: 20px;
+        }
         @include breakpoint(lg) {
             gap: 32px;
         }
@@ -24,17 +27,26 @@
     }
 
     &__icon{
+        margin-left: auto;
         position: absolute;
         right: 120px;
         top: 13px;
 
-            
-        @include breakpoint(lg) {
+        @include breakpoint(xs) {
             right: 25px;
-        }
+        }       
     }
 
     &__error{
         color: red;
+
+        @include breakpoint(sm) {
+            padding: 0 20px;
+            text-align: left;
+        }
+        @include breakpoint(md) {
+            padding: 0;
+            text-align: center;
+        }
     }
 }

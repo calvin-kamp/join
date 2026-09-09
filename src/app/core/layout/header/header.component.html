@@ -60,11 +60,13 @@
                 }
 
                 @if (auth.isLoggedIn()) {
-                    <li class="header__nav-item">
+                    <li
+                        (click)="logout()"
+                        class="header__nav-item"
+                    >
                         <button
                             type="button"
                             class="header__nav-action"
-                            (click)="logout()"
                         >
                             Log out
                         </button>
