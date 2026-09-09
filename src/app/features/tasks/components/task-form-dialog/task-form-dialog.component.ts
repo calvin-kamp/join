@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { DialogComponent } from '@shared/ui/dialog/dialog.component';
 import { TaskFormComponent } from '../task-form/task-form.component';
 import { STATUS_IDS } from '@features/tasks/tasks.constants';
@@ -8,6 +8,7 @@ import { type Task } from '@features/tasks/tasks.service';
     selector: 'tasks-task-form-dialog',
     imports: [DialogComponent, TaskFormComponent],
     templateUrl: './task-form-dialog.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './task-form-dialog.component.scss'
 })
 export class TaskFormDialogComponent {

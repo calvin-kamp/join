@@ -1,9 +1,10 @@
-import { Component, ElementRef, effect, input, output, viewChild } from '@angular/core';
+import { Component, ElementRef, effect, input, output, viewChild, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'ui-dialog',
     imports: [],
     templateUrl: './dialog.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './dialog.component.scss'
 })
 export class DialogComponent {

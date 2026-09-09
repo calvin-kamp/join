@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 
 type LogoVariant = 'dark' | 'light';
 
@@ -6,9 +6,9 @@ type LogoVariant = 'dark' | 'light';
     selector: 'ui-logo',
     imports: [],
     templateUrl: './logo.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './logo.component.scss'
 })
 export class LogoComponent {
     variant = input<LogoVariant>('dark');
 }
-

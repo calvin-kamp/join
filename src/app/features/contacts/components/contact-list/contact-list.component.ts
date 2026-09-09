@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '@core/auth/auth.service';
 import { ContactsService, type Contact } from '@features/contacts/contacts.service';
@@ -10,6 +10,7 @@ import { IconComponent } from '@shared/ui/icon/icon.component';
     selector: 'contacts-contact-list',
     imports: [RouterLink, RouterLinkActive, ButtonComponent, ContactComponent, IconComponent],
     templateUrl: './contact-list.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './contact-list.component.scss'
 })
 export class ContactListComponent {

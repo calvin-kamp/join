@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Task, TasksService, UpdateTaskPayload } from '../tasks.service';
 import { TaskCardComponent } from '../components/task-card/task-card.component';
 import { TaskFormDialogComponent } from '../components/task-form-dialog/task-form-dialog.component';
@@ -30,6 +30,7 @@ import { SearchbarComponent } from '../components/searchbar/searchbar.component'
         TaskDetailComponent
     ],
     templateUrl: './board.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './board.component.scss'
 })
 export class BoardComponent {

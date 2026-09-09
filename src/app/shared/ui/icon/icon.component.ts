@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
 
 export type IconName =
     | 'more-vertical'
@@ -197,6 +197,7 @@ const ICONS: Record<IconName, IconMeta> = {
     selector: 'ui-icon',
     imports: [],
     templateUrl: './icon.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './icon.component.scss'
 })
 export class IconComponent {

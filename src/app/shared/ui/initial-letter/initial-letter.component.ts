@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
 
 export type InitialLetterSize = 'sm' | 'md' | 'lg' | 'xl';
 export type InitialLetterBorderColor = 'default' | 'dark';
@@ -7,6 +7,7 @@ export type InitialLetterBorderColor = 'default' | 'dark';
     selector: 'ui-initial-letter',
     imports: [],
     templateUrl: './initial-letter.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './initial-letter.component.scss'
 })
 export class InitialLetterComponent {

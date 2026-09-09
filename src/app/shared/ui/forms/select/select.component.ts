@@ -1,4 +1,4 @@
-import { Component, computed, forwardRef, input, output, signal } from '@angular/core';
+import { Component, computed, forwardRef, input, output, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgSelectComponent, NgOptionTemplateDirective } from '@ng-select/ng-select';
 import { InitialLetterComponent } from '@shared/ui/initial-letter/initial-letter.component';
@@ -11,6 +11,7 @@ type SelectValue = string | number | boolean | object | Array<string | number | 
     imports: [NgSelectComponent, NgOptionTemplateDirective, FormsModule, InitialLetterComponent],
     templateUrl: './select.component.html',
     styleUrl: './select.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,

@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import { Component, effect, inject, input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/auth/auth.service';
 import { ContactsService, type Contact } from '@features/contacts/contacts.service';
@@ -11,6 +11,7 @@ import { LinkComponent } from '@shared/ui/link/link.component';
     selector: 'contacts-contact-detail',
     imports: [ButtonComponent, IconComponent, InitialLetterComponent, LinkComponent],
     templateUrl: './contact-detail.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './contact-detail.component.scss'
 })
 export class ContactDetailComponent {

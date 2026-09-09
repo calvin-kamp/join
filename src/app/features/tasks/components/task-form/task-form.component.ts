@@ -1,4 +1,14 @@
-import { Component, computed, inject, input, OnChanges, output, signal, SimpleChanges } from '@angular/core';
+import {
+    Component,
+    computed,
+    inject,
+    input,
+    OnChanges,
+    output,
+    signal,
+    SimpleChanges,
+    ChangeDetectionStrategy
+} from '@angular/core';
 import { InputComponent } from '@shared/ui/forms/input/input.component';
 import { FormBuilder, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { RadioComponent } from '@shared/ui/forms/radio/radio.component';
@@ -36,6 +46,7 @@ export interface Priority {
         ButtonComponent
     ],
     templateUrl: './task-form.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './task-form.component.scss'
 })
 export class TaskFormComponent implements OnChanges {

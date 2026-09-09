@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { TaskFormComponent } from '../components/task-form/task-form.component';
 import { STATUS_IDS } from '../tasks.constants';
 
@@ -6,6 +6,7 @@ import { STATUS_IDS } from '../tasks.constants';
     selector: 'tasks-add-task',
     imports: [TaskFormComponent],
     templateUrl: './add-task.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './add-task.component.scss'
 })
 export class AddTaskComponent {

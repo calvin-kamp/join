@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
 import { LinkComponent } from '../link/link.component';
 import { InitialLetterComponent } from '../initial-letter/initial-letter.component';
 import { Contact } from '@features/contacts/contacts.service';
@@ -7,6 +7,7 @@ import { Contact } from '@features/contacts/contacts.service';
     selector: 'ui-contact',
     imports: [LinkComponent, InitialLetterComponent],
     templateUrl: './contact.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './contact.component.scss'
 })
 export class ContactComponent {

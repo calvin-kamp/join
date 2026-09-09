@@ -1,4 +1,4 @@
-import { Component, inject, input, output } from '@angular/core';
+import { Component, inject, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { DialogComponent } from '@shared/ui/dialog/dialog.component';
 import { LinkComponent } from '@shared/ui/link/link.component';
@@ -20,6 +20,7 @@ import { CheckboxComponent } from '@shared/ui/forms/checkbox/checkbox.component'
         CheckboxComponent
     ],
     templateUrl: './task-detail.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './task-detail.component.scss'
 })
 export class TaskDetailComponent {

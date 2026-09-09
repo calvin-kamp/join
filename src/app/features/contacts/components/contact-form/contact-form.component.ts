@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -29,6 +29,7 @@ type FormType = 'add' | 'edit';
         LinkComponent
     ],
     templateUrl: './contact-form.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './contact-form.component.scss'
 })
 export class ContactFormComponent {

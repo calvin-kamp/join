@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ContactListComponent } from '../components/contact-list/contact-list.component';
 import { ContactFormComponent } from '../components/contact-form/contact-form.component';
@@ -8,6 +8,7 @@ import { ContactsService } from '../contacts.service';
     selector: 'contacts',
     imports: [RouterOutlet, ContactListComponent, ContactFormComponent],
     templateUrl: './contacts.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './contacts.component.scss'
 })
 export class ContactsComponent {

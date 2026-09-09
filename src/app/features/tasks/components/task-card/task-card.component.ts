@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { Task } from '@features/tasks/tasks.service';
 import { CardDirective } from '@shared/directives/card.directive';
 import { IconComponent, IconName } from '@shared/ui/icon/icon.component';
@@ -8,6 +8,7 @@ import { InitialLetterComponent } from '@shared/ui/initial-letter/initial-letter
     selector: 'tasks-task-card',
     imports: [IconComponent, InitialLetterComponent, CardDirective],
     templateUrl: './task-card.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './task-card.component.scss'
 })
 export class TaskCardComponent {
