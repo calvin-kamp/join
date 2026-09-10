@@ -10,9 +10,9 @@
         </strong>
 
         @if (showEmail() && mailHref()) {
-            <ui-link [href]="mailHref()">
+            <span class="contact__mail">
                 {{ contact().mail }}
-            </ui-link>
+            </span>
         }
     </div>
 </div>

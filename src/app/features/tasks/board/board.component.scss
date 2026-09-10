@@ -44,7 +44,8 @@
         }
 
         @include breakpoint(lg) {
-            position: unset;
+            position: static;
+            height: fit-content;
             margin-top: 3px;
         }
     }
@@ -97,15 +98,13 @@
 
     &__column {
         width: 100%;
-        
 
-        @include breakpoint(lg){
+        @include breakpoint(lg) {
             width: 252px;
         }
     }
 
     &__list-headline {
-
         padding-bottom: 16px;
         color: var(--color-text-tertiary);
         @include flex($justify: space-between, $items: center);

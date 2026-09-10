@@ -1,4 +1,4 @@
-@use "abstracts" as *;
+@use 'abstracts' as *;
 
 :host {
     display: block;
@@ -16,7 +16,6 @@
 
     &__add {
         display: block;
-
         @include breakpoint(lg) {
             width: 100%;
         }
@@ -27,7 +26,9 @@
     }
 
     &__item {
+        width: 100%;
         list-style: none;
+        overflow: hidden;
         cursor: pointer;
     }
 
@@ -46,12 +47,12 @@
         text-decoration: none;
         transition: background $transition-default;
 
-        @include breakpoint(lg){
+        @include breakpoint(lg) {
             padding-left: 16px;
         }
 
         @include hoverable() {
-            background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
+            background: linear-gradient(180deg, #f9f9f9 0%, #f0f0f0 100%);
         }
 
         &--active {

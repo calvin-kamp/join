@@ -1,9 +1,9 @@
-@use "abstracts" as *;
+@use 'abstracts' as *;
 
 .contact {
     padding-block: 15px;
     @include flex($items: center, $wrap: nowrap);
-    
+
     &--compact {
         padding-block: 8px;
 
@@ -14,24 +14,27 @@
 
             &__name {
                 font-size: $font-size-xs;
-                
+
                 @include breakpoint(lg) {
                     font-size: $font-size-sm;
                 }
             }
         }
-        
     }
 
     &__wrapper {
         margin-left: 32px;
     }
-    
+
     &__name {
         display: block;
         color: var(--color-text);
         font-size: $font-size-sm;
         font-weight: $font-weight-regular;
         line-height: $line-height-tight;
+    }
+
+    &__mail {
+        color: var(--color-accent);
     }
 }
