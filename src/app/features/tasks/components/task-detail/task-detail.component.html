@@ -13,17 +13,18 @@
                     {{ task.category.name }}
                 </span>
 
-                <ui-link
-                    linkStyle="no-decoration"
-                    (click)="close.emit()"
+                <button
+                    type="button"
                     class="task-detail__close-btn"
+                    aria-label="Close"
+                    (click)="close.emit()"
                 >
                     <ui-icon
                         name="close"
                         [width]="13"
                         [height]="13"
                     />
-                </ui-link>
+                </button>
             </div>
 
             <div class="task-detail__body">

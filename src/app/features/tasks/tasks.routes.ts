@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { guestGuard } from '@core/auth/auth.guard';
 
+/** Board and add-task page. */
 export const TASKS_ROUTES: Routes = [
     {
         path: 'board',

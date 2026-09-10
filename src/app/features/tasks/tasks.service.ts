@@ -2,24 +2,29 @@ import { inject, Injectable, signal } from '@angular/core';
 import { SupabaseService } from '@core/supabase/supabase.service';
 import { Contact } from '@features/contacts/contacts.service';
 
+/** Row of a lookup table (priority, category, status). */
 export interface NamedEntity {
     id: number;
     name: string;
 }
 
+/** A task as used in the UI, with all relations resolved. */
 export interface Task {
     id: number;
     title: string;
     description: string;
+    /** ISO date `yyyy-mm-dd`, `null` without due date. */
     dueDate: string | null;
     priority: NamedEntity;
     category: NamedEntity;
     status: NamedEntity;
+    /** Id of the user who created the task. */
     createdBy: string | null;
     assignedTo: Contact[];
     subtasks: Subtask[];
 }
 
+/** Checklist item of a task. `status: true` means done. */
 export interface Subtask {
     id: number;
     taskId: number;
@@ -27,6 +32,7 @@ export interface Subtask {
     status: boolean;
 }
 
+/** Everything {@link TasksService.createTask} needs to create a task with its relations. */
 export interface CreateTaskPayload {
     title: string;
     description: string;
@@ -41,6 +47,12 @@ export interface CreateTaskPayload {
     }>;
 }
 
+/**
+ * Everything {@link TasksService.editTask} needs to save a task.
+ *
+ * Contains no status (unchanged by the form) and no subtask state; subtask
+ * states are kept by title.
+ */
 export interface EditTaskPayload {
     title: string;
     description: string;
@@ -53,6 +65,7 @@ export interface EditTaskPayload {
     }>;
 }
 
+/** Column values for a direct update of the `tasks` row (database column names). */
 export interface UpdateTaskPayload {
     title?: string;
     description?: string;
@@ -63,8 +76,10 @@ export interface UpdateTaskPayload {
     created_by?: string | null;
 }
 
+/** Supabase returns joined relations as object or array depending on the relation type. */
 type MaybeArray<T> = T | T[] | null;
 
+/** Raw task row as returned by the select query in {@link TasksService.getTasks}. */
 interface TaskRow {
     id: number;
     title: string | null;
@@ -85,18 +100,26 @@ interface TaskRow {
     }> | null;
 }
 
+/**
+ * Loads and changes tasks and keeps the current list in a signal.
+ *
+ * The list is not loaded on creation; pages that show tasks call
+ * {@link getTasks} themselves. Every write method reloads the list afterwards.
+ */
 @Injectable({
     providedIn: 'root'
 })
 export class TasksService {
     private readonly supabase = inject(SupabaseService);
 
+    /** All tasks from the last {@link getTasks} call. */
     readonly tasks = signal<Task[]>([]);
 
-    constructor() {
-        this.getTasks();
-    }
-
+    /**
+     * Reloads all tasks with their relations into {@link tasks}.
+     *
+     * @throws {PostgrestError} If the query fails.
+     */
     async getTasks(): Promise<void> {
         const { data, error } = await this.supabase.client.from('tasks').select(`
                 id,
@@ -139,6 +162,11 @@ export class TasksService {
         this.tasks.set((data ?? []).map((task) => this.mapTask(task as unknown as TaskRow)));
     }
 
+    /**
+     * Reads one task with its relations.
+     *
+     * @throws {PostgrestError} If the query fails or no task matches.
+     */
     async getTaskByID(id: number): Promise<Task | undefined> {
         const { data, error } = await this.supabase.client
             .from('tasks')
@@ -187,6 +215,14 @@ export class TasksService {
         return this.mapTask(data as unknown as TaskRow);
     }
 
+    /**
+     * Creates a task, then its contact assignments and subtasks.
+     *
+     * The three inserts are separate requests; if a later one fails, the task
+     * row already exists.
+     *
+     * @throws {PostgrestError} If one of the inserts fails.
+     */
     async createTask(task: CreateTaskPayload): Promise<void> {
         const { data: createdTask, error: taskError } = await this.supabase.client
             .from('tasks')
@@ -237,11 +273,20 @@ export class TasksService {
         await this.getTasks();
     }
 
+    /** Updates columns of the `tasks` row directly (e.g. the status after a drag). */
     async updateTask(payload: UpdateTaskPayload, id: number): Promise<void> {
         await this.supabase.update('tasks', id, payload as Record<string, unknown>);
         await this.getTasks();
     }
 
+    /**
+     * Saves a task from the edit form.
+     *
+     * Contact assignments and subtasks are deleted and inserted again. The
+     * done state of a subtask survives if its title is unchanged.
+     *
+     * @throws {PostgrestError} If one of the requests fails.
+     */
     async editTask(id: number, task: EditTaskPayload): Promise<void> {
         const { error: taskError } = await this.supabase.client
             .from('tasks')
@@ -314,6 +359,11 @@ export class TasksService {
         await this.getTasks();
     }
 
+    /**
+     * Deletes a task.
+     *
+     * @throws {PostgrestError} If the delete fails.
+     */
     async deleteTask(id: number): Promise<void> {
         const { error } = await this.supabase.client.from('tasks').delete().eq('id', id);
 
@@ -324,6 +374,7 @@ export class TasksService {
         await this.getTasks();
     }
 
+    /** Adds a subtask to an existing task. */
     async createSubtask(subtask: Subtask): Promise<void> {
         await this.supabase.insert('subtasks', {
             task_id: subtask.taskId,
@@ -333,16 +384,19 @@ export class TasksService {
         await this.getTasks();
     }
 
+    /** Updates columns of a subtask row, e.g. `{ status: true }`. */
     async updateSubtask(id: number, payload: {}): Promise<void> {
         await this.supabase.update('subtasks', id, payload);
         await this.getTasks();
     }
 
+    /** Deletes a subtask. */
     async deleteSubtask(id: number): Promise<void> {
         this.supabase.delete('subtasks', id);
         await this.getTasks();
     }
 
+    /** Converts a raw row into a {@link Task}. */
     private mapTask(task: TaskRow): Task {
         return {
             id: task.id,
@@ -358,6 +412,7 @@ export class TasksService {
         };
     }
 
+    /** Returns the single related row; `{ id: 0, name: '' }` if it is missing. */
     private getSingleRelation(relation: MaybeArray<NamedEntity>): NamedEntity {
         if (Array.isArray(relation)) {
             return (
@@ -376,6 +431,7 @@ export class TasksService {
         );
     }
 
+    /** Extracts the contacts from the `task_contacts` join rows. */
     private mapAssignedContacts(taskContacts: TaskRow['task_contacts']): Contact[] {
         if (!taskContacts) {
             return [];
@@ -392,6 +448,7 @@ export class TasksService {
             .filter((contact): contact is Contact => contact !== null);
     }
 
+    /** Converts raw subtask rows into {@link Subtask} objects. */
     private mapSubtasks(subtasks: TaskRow['subtasks']): Subtask[] {
         if (!subtasks) {
             return [];

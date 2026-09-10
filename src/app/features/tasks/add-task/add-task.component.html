@@ -1,1 +1,4 @@
-<tasks-task-form [statusId]="todoStatusId" />
+<tasks-task-form
+    [statusId]="todoStatusId"
+    (created)="onCreated()"
+/>

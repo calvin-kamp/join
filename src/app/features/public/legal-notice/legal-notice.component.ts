@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LinkComponent } from '@shared/ui/link/link.component';
 import { IconComponent } from '@shared/ui/icon/icon.component';
 
+/** Static legal notice page. */
 @Component({
     selector: 'public-legal-notice',
     imports: [LinkComponent, IconComponent, IconComponent],

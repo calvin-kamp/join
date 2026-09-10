@@ -253,7 +253,7 @@
 
                     <ui-button
                         type="submit"
-                        [disabled]="isInvalid() || loading()"
+                        [disabled]="loading()"
                     >
                         Save
                         <ui-icon name="check-outline" />
@@ -270,7 +270,7 @@
 
                     <ui-button
                         type="submit"
-                        [disabled]="isInvalid() || loading()"
+                        [disabled]="loading()"
                     >
                         Create Task
                         <ui-icon name="check-solid" />

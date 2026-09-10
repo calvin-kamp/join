@@ -1,4 +1,4 @@
-@use "abstracts" as *;
+@use 'abstracts' as *;
 
 :host {
     display: block;
@@ -21,5 +21,6 @@ main {
         max-width: 1440px;
         padding-bottom: 0;
         padding-left: 232px;
+        padding-right: 16px;
     }
 }

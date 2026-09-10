@@ -1,7 +1,14 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { TaskFormComponent } from '../components/task-form/task-form.component';
 import { STATUS_IDS } from '../tasks.constants';
 
+/**
+ * Add-task page (`/tasks/add-task`).
+ *
+ * New tasks always start in "To do". After a successful create it navigates
+ * to the board.
+ */
 @Component({
     selector: 'tasks-add-task',
     imports: [TaskFormComponent],
@@ -10,6 +17,13 @@ import { STATUS_IDS } from '../tasks.constants';
     styleUrl: './add-task.component.scss'
 })
 export class AddTaskComponent {
-    // Tasks created from the /add-task route always land in the "To do" column.
+    private readonly router = inject(Router);
+
+    /** Status every task created on this page gets. */
     protected readonly todoStatusId = STATUS_IDS.TODO;
+
+    /** Navigates to the board after the task was created. */
+    protected async onCreated(): Promise<void> {
+        await this.router.navigateByUrl('/tasks/board');
+    }
 }

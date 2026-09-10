@@ -16,6 +16,12 @@ import { ToastService } from '@shared/services/toast.service';
 
 type FormType = 'add' | 'edit';
 
+/**
+ * Dialog to add or edit a contact.
+ *
+ * Opens on {@link ContactsService.requestFormOpen}. Editing contact id `0`
+ * updates the signed-in user's own profile instead of a contacts row.
+ */
 @Component({
     selector: 'contacts-contact-form',
     imports: [
@@ -40,19 +46,28 @@ export class ContactFormComponent {
 
     private editingContact = signal<Contact | null>(null);
 
+    /** `'edit'` while a contact is being edited, `'add'` otherwise. */
     readonly formType = computed<FormType>(() => (this.editingContact() ? 'edit' : 'add'));
 
     toast = inject(ToastService);
+
+    /** `true` while the dialog is open. */
     isOpen = signal<boolean>(false);
+
+    /** `true` while a save or delete request is running. */
     loading = signal<boolean>(false);
+
+    /** Error text of the last failed request, `null` otherwise. */
     error = signal<string | null>(null);
 
+    /** Contact form model. */
     contactForm = this.fb.group({
         name: ['', [Validators.required, Validators.minLength(4)]],
         email: ['', [Validators.required, Validators.email]],
         phone: ['', [Validators.required, Validators.minLength(6)]]
     });
 
+    /** Name for the avatar preview; updated on blur, not on every keystroke. */
     nameValue = signal<string | null>(null);
 
     hasName = computed(() => !!this.nameValue()?.trim());
@@ -73,10 +88,16 @@ export class ContactFormComponent {
         minlength: 'Must be atleast 6 characters'
     });
 
+    /** Opens the dialog whenever another component requests it. */
     constructor() {
         this.contactsService.formOpenRequests$.pipe(takeUntilDestroyed()).subscribe((contact) => this.open(contact));
     }
 
+    /**
+     * Opens the dialog.
+     *
+     * @param contact - Contact to edit; omit to start with an empty form.
+     */
     open(contact?: Contact): void {
         if (contact) {
             this.editingContact.set(contact);
@@ -98,6 +119,7 @@ export class ContactFormComponent {
         this.isOpen.set(true);
     }
 
+    /** Closes the dialog and resets the form. */
     close(): void {
         this.isOpen.set(false);
         this.contactForm.reset();
@@ -106,10 +128,16 @@ export class ContactFormComponent {
         this.nameValue.set(null);
     }
 
+    /** Updates the avatar preview with the entered name. */
     onNameBlur(): void {
         this.nameValue.set(this.contactForm.controls.name.value);
     }
 
+    /**
+     * Validates and saves the contact, then closes the dialog.
+     *
+     * Invalid fields are marked and show their error message instead.
+     */
     async onSubmit(): Promise<void> {
         this.contactForm.markAllAsTouched();
 
@@ -148,6 +176,7 @@ export class ContactFormComponent {
         }
     }
 
+    /** Deletes the edited contact and returns to the contact list. */
     async onDelete(): Promise<void> {
         const contact = this.editingContact();
 

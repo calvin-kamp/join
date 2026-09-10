@@ -1,13 +1,12 @@
 import { Routes } from '@angular/router';
 import { rootRedirectGuard } from '@core/auth/auth.guard';
 
+/**
+ * Pages reachable with and without a session.
+ *
+ * The empty path only redirects (see {@link rootRedirectGuard}).
+ */
 export const PUBLIC_ROUTES: Routes = [
-    {
-        path: '',
-        pathMatch: 'full',
-        canActivate: [rootRedirectGuard],
-        loadComponent: () => import('./entry/entry.component').then((m) => m.EntryComponent)
-    },
     {
         path: 'legal-notice',
         loadComponent: () => import('./legal-notice/legal-notice.component').then((m) => m.LegalNoticeComponent)

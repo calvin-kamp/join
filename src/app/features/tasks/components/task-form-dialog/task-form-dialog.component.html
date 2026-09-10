@@ -3,11 +3,13 @@
     [open]="open()"
     (close)="onCloseRequested()"
 >
-    <tasks-task-form
-        [showClose]="true"
-        [statusId]="statusId()"
-        [task]="task()"
-        (close)="onCloseRequested()"
-        (created)="onTaskCreated()"
-    />
+    @if (open()) {
+        <tasks-task-form
+            [showClose]="true"
+            [statusId]="statusId()"
+            [task]="task()"
+            (close)="onCloseRequested()"
+            (created)="onTaskCreated()"
+        />
+    }
 </ui-dialog>

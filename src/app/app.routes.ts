@@ -2,6 +2,16 @@ import { Routes } from '@angular/router';
 import { authGuard, guestGuard } from '@core/auth/auth.guard';
 import { MainLayoutComponent } from '@core/layout/main-layout.component';
 
+/**
+ * Top-level route table.
+ *
+ * - Authenticated feature routes (summary, contacts, tasks) share the main
+ *   layout and are protected by {@link authGuard}.
+ * - Public pages (legal notice, privacy policy, help) share the main layout
+ *   without a guard.
+ * - Auth pages (sign in, sign up) use their own layout.
+ * - Unknown URLs redirect to the summary.
+ */
 export const ROUTES: Routes = [
     {
         path: '',

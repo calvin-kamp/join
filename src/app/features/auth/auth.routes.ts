@@ -2,6 +2,11 @@ import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 import { guestGuard } from '@core/auth/auth.guard';
 
+/**
+ * Sign-in and sign-up pages inside the auth layout.
+ *
+ * Only reachable without a session ({@link guestGuard}).
+ */
 export const AUTH_ROUTES: Routes = [
     {
         path: '',

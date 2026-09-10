@@ -1,8 +1,16 @@
 import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
 
+/** Avatar size. */
 export type InitialLetterSize = 'sm' | 'md' | 'lg' | 'xl';
+/** `'dark'` is the outlined variant used in the header. */
 export type InitialLetterBorderColor = 'default' | 'dark';
 
+/**
+ * Round avatar with the initials of a name.
+ *
+ * The background color is derived from the name, so a person always gets the
+ * same color.
+ */
 @Component({
     selector: 'ui-initial-letter',
     imports: [],
@@ -11,10 +19,15 @@ export type InitialLetterBorderColor = 'default' | 'dark';
     styleUrl: './initial-letter.component.scss'
 })
 export class InitialLetterComponent {
+    /** Full name; first and last word give the initials. */
     readonly name = input.required<string>();
+
     readonly size = input<InitialLetterSize>('md');
+
+    /** `'dark'` renders the outlined header variant without background color. */
     readonly borderColor = input<InitialLetterBorderColor>('default');
 
+    /** Up to two uppercase initials, e.g. `'Anna Maria Schmidt'` → `'AS'`. */
     readonly initials = computed(() => {
         const parts = this.name().trim().split(/\s+/).filter(Boolean);
 
@@ -28,6 +41,7 @@ export class InitialLetterComponent {
         return (first + last).toUpperCase();
     });
 
+    /** Palette color picked by a hash of the name; `null` for the `'dark'` variant. */
     readonly backgroundColor = computed<string | null>(() => {
         if (this.borderColor() !== 'default') {
             return null;

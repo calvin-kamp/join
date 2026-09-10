@@ -11,6 +11,13 @@ import {
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { IconComponent } from '@shared/ui/icon/icon.component';
 
+/**
+ * Date field with `dd/mm/yyyy` text input and a native date picker.
+ *
+ * The form value is an ISO date (`yyyy-mm-dd`). Typed dates are only passed
+ * to the form when complete, valid and not in the past; incomplete input sets
+ * the value to `''`.
+ */
 @Component({
     selector: 'ui-date',
     imports: [IconComponent],
@@ -26,12 +33,21 @@ import { IconComponent } from '@shared/ui/icon/icon.component';
     ]
 })
 export class DateComponent {
+    /** Visible label. */
     label = input.required<string>();
+
+    /** Name attribute; also used to build the element id. */
     name = input.required<string>();
 
     placeholder = input<string>('dd/mm/yyyy');
+
+    /** Error text below the field; a non-empty text marks it invalid. */
     errorMessage = input<string>('');
+
+    /** Sets `aria-required` and shows the required mark. */
     isRequired = input<boolean>(false);
+
+    /** Stretches the field to the full width. */
     fullWidth = input<boolean>(false);
 
     protected readonly datePickerInput = viewChild<ElementRef<HTMLInputElement>>('datePickerInput');
@@ -42,10 +58,12 @@ export class DateComponent {
 
     protected readonly inputId = computed(() => `ui-date-input-${this.name()}`);
     protected readonly hasError = computed(() => this.errorMessage().length > 0);
+    /** Today as ISO date; the picker doesn't offer earlier dates. */
     protected readonly minDate = computed(() => {
         const today = new Date();
         return today.toISOString().split('T')[0];
     });
+    /** The ISO value formatted as `dd/mm/yyyy` for the text input. */
     protected readonly displayValue = computed(() => {
         const val = this.value();
         if (!val) {
@@ -62,22 +80,30 @@ export class DateComponent {
     private onChange = (_: string) => {};
     private onTouched = () => {};
 
+    /** Called by the forms API to set the ISO date. */
     writeValue(value: string | null): void {
         this.value.set(value ?? '');
     }
 
+    /** Called by the forms API to register the change callback. */
     registerOnChange(fn: (value: string) => void): void {
         this.onChange = fn;
     }
 
+    /** Called by the forms API to register the touched callback. */
     registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
+    /** Called by the forms API when the control is enabled or disabled. */
     setDisabledState(isDisabled: boolean): void {
         this.isDisabled.set(isDisabled);
     }
 
+    /**
+     * Formats typed digits as `dd/mm/yyyy` and passes complete, valid dates
+     * to the form as ISO date.
+     */
     protected onInput(event: Event): void {
         let input = (event.target as HTMLInputElement).value;
 
@@ -114,12 +140,14 @@ export class DateComponent {
         }
     }
 
+    /** Takes over the date chosen in the native picker. */
     protected onDatePickerChange(event: Event): void {
         const isoDate = (event.target as HTMLInputElement).value;
         this.value.set(isoDate);
         this.onChange(isoDate);
     }
 
+    /** Opens the native date picker. */
     protected onIconClick(): void {
         if (!this.isDisabled()) {
             this.datePickerInput()?.nativeElement.showPicker?.();
@@ -135,6 +163,7 @@ export class DateComponent {
         this.onTouched();
     }
 
+    /** `true` if day, month and year form an existing calendar date (e.g. not 31/02). */
     private isValidDate(day: string, month: string, year: string): boolean {
         const d = parseInt(day, 10);
         const m = parseInt(month, 10);

@@ -14,6 +14,7 @@ import { CheckboxComponent } from '@shared/ui/forms/checkbox/checkbox.component'
 import { LinkComponent } from '@shared/ui/link/link.component';
 import { IconComponent } from '@shared/ui/icon/icon.component';
 
+/** User-facing texts for the Supabase auth error codes that can occur on sign up. */
 const SIGN_UP_ERRORS: Record<string, string> = {
     user_already_exists: 'This email address is already registered.',
     email_exists: 'This email address is already registered.',
@@ -25,6 +26,12 @@ const SIGN_UP_ERRORS: Record<string, string> = {
 
 const SIGN_UP_FALLBACK = 'Sign up failed. Please try again.';
 
+/**
+ * Maps a caught sign-up error to a user-facing text.
+ *
+ * @param caught - Anything thrown by `AuthService.signUp`.
+ * @returns The mapped text, or a generic fallback for unknown errors.
+ */
 function signUpErrorMessage(caught: unknown): string {
     if (isAuthApiError(caught) && caught.code) {
         return SIGN_UP_ERRORS[caught.code] ?? SIGN_UP_FALLBACK;
@@ -33,6 +40,12 @@ function signUpErrorMessage(caught: unknown): string {
     return SIGN_UP_FALLBACK;
 }
 
+/**
+ * Sign-up form.
+ *
+ * Validates name, email, matching passwords and the privacy-policy checkbox,
+ * then creates the account and navigates to `/summary`.
+ */
 @Component({
     selector: 'auth-register',
     imports: [
@@ -53,17 +66,22 @@ export class RegisterComponent {
     private auth = inject(AuthService);
     private router = inject(Router);
 
+    /** `true` while the sign-up request is running. */
     loading = signal<boolean>(false);
+
+    /** Error text of the last failed sign up, `null` otherwise. */
     error = signal<string | null>(null);
+
     toast = inject(ToastService);
 
+    /** Sign-up form model; the group validator checks that both passwords match. */
     registerForm = this.fb.group(
         {
             name: ['', [Validators.required, Validators.minLength(4)]],
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(6)]],
             confirmPassword: ['', Validators.required],
-            acceptTos: ['', Validators.required]
+            acceptTos: [false, Validators.requiredTrue]
         },
         { validators: passwordMatchValidator() }
     );
@@ -95,6 +113,12 @@ export class RegisterComponent {
         initialValue: this.registerForm.status
     });
 
+    /**
+     * Error text for the confirm field.
+     *
+     * Shows the field's own error first, then the form-level mismatch error.
+     * Reads `formStatus` so it re-runs when the form-level validator changes.
+     */
     protected passwordConfirmError = computed(() => {
         const fieldErr = this.confirmFieldError();
 
@@ -111,6 +135,11 @@ export class RegisterComponent {
         return '';
     });
 
+    /**
+     * Validates the form and creates the account.
+     *
+     * Invalid fields are marked and show their error message instead.
+     */
     async onSubmit(): Promise<void> {
         this.registerForm.markAllAsTouched();
 

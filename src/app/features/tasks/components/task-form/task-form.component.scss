@@ -7,7 +7,7 @@
     }
     &__header {
         padding-top: 24px;
-        @include breakpoint(lg){
+        @include breakpoint(lg) {
             padding-top: 48px;
         }
     }
@@ -81,8 +81,11 @@
 
     &__subtask-list {
         list-style: none;
+        max-height: 84px;
         padding: 0;
         margin: 8px 0 0;
+        overflow: hidden;
+        overflow-y: auto;
     }
 
     &__subtask-item {

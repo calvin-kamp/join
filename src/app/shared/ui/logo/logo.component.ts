@@ -2,6 +2,7 @@ import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 
 type LogoVariant = 'dark' | 'light';
 
+/** Join logo as inline SVG. */
 @Component({
     selector: 'ui-logo',
     imports: [],
@@ -10,5 +11,6 @@ type LogoVariant = 'dark' | 'light';
     styleUrl: './logo.component.scss'
 })
 export class LogoComponent {
+    /** `'light'` for dark backgrounds. */
     variant = input<LogoVariant>('dark');
 }

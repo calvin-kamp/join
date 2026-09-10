@@ -5,11 +5,11 @@
         <div class="board__searchbar-wrapper">
             <tasks-searchbar class="board__searchbar" />
 
-            <ui-link
-                class="board__add"
-                [variant]="'primary'"
-                linkClass="button--icon-text"
-                href="/tasks/add-task"
+            <button
+                type="button"
+                class="board__add button button--primary button--icon-text"
+                aria-label="Add Task"
+                (click)="openDialogForColumn(STATUS_IDS.TODO)"
             >
                 <span class="board__btn-label">Add Task</span>
                 <ui-icon
@@ -17,7 +17,7 @@
                     [width]="16"
                     [height]="16"
                 />
-            </ui-link>
+            </button>
         </div>
     </div>
 

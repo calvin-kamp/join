@@ -1,5 +1,6 @@
 import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
 
+/** Names of all icons in the sprite template. */
 export type IconName =
     | 'more-vertical'
     | 'arrow-left'
@@ -32,14 +33,17 @@ export type IconName =
     | 'board-add-task'
     | 'phone';
 
+/** Size in px, either fixed or per breakpoint. */
 type ResponsiveSize = number | { base?: number; md?: number; lg?: number };
 
+/** Native size of an icon. */
 interface IconMeta {
     viewBox: string;
     width: number;
     height: number;
 }
 
+/** Native size and view box of every icon. */
 const ICONS: Record<IconName, IconMeta> = {
     'more-vertical': {
         viewBox: '0 0 6 22',
@@ -193,6 +197,12 @@ const ICONS: Record<IconName, IconMeta> = {
     }
 };
 
+/**
+ * Inline SVG icon.
+ *
+ * Without `width`/`height` the icon renders in its native size. Sizes per
+ * breakpoint are passed to CSS as custom properties.
+ */
 @Component({
     selector: 'ui-icon',
     imports: [],
@@ -201,12 +211,18 @@ const ICONS: Record<IconName, IconMeta> = {
     styleUrl: './icon.component.scss'
 })
 export class IconComponent {
+    /** Icon to render. */
     name = input.required<IconName>();
+
+    /** Width in px, fixed or per breakpoint. */
     width = input<ResponsiveSize>();
+
+    /** Height in px, fixed or per breakpoint. */
     height = input<ResponsiveSize>();
 
     protected readonly viewBox = computed(() => ICONS[this.name()].viewBox);
 
+    /** Width and height per breakpoint as CSS values; `null` where no size is set. */
     protected readonly sizeVars = computed(() => {
         const meta = ICONS[this.name()];
         const width = this.resolve(this.width(), meta.width);
@@ -222,6 +238,7 @@ export class IconComponent {
         };
     });
 
+    /** Normalizes a size input to base/md/lg values, using `fallback` as base. */
     private resolve(
         size: ResponsiveSize | undefined,
         fallback: number
