@@ -1,26 +1,32 @@
-@use "abstracts" as *;
+@use 'abstracts' as *;
 
 .register {
-  position: relative;
+    position: relative;
     max-width: 600px;
     margin-inline: auto;
 
     &__headline {
         margin-bottom: 32px;
         text-align: center;
-        @include divider($sizeMobile: 88px, $sizeDesktop: 150px)
+        @include divider($sizeMobile: 88px, $sizeDesktop: 150px);
     }
 
     &__arrow-back {
-      position: absolute;
-      top: 40px;
-      left: 40px;
-      z-index: $z-index-1;
+        position: absolute;
+        top: 40px;
+        left: 40px;
+        z-index: $z-index-1;
 
-      @include breakpoint(lg) {
-        top: 64px;
-        left: 48px;
-      }
+        @include breakpoint(lg) {
+            top: 64px;
+            left: 48px;
+        }
+    }
+
+    &__error {
+        margin-top: 8px;
+        color: var(--color-ui-red);
+        text-align: center;
     }
 
     &__submit {

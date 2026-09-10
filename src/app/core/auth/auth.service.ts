@@ -2,7 +2,13 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { SupabaseService } from '@core/supabase/supabase.service';
 import { Contact } from '@features/contacts/contacts.service';
-import { type Session, type User, type AuthError, type AuthTokenResponsePassword } from '@supabase/supabase-js';
+import {
+    AuthApiError,
+    type Session,
+    type User,
+    type AuthError,
+    type AuthTokenResponsePassword
+} from '@supabase/supabase-js';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -45,13 +51,19 @@ export class AuthService {
     }
 
     async signUp(email: string, password: string, name: string): Promise<void> {
-        const { error } = await this.supabase.auth.signUp({
+        const { data, error } = await this.supabase.auth.signUp({
             email,
             password,
             options: { data: { name } }
         });
 
-        if (error) throw error;
+        if (error) {
+            throw error;
+        }
+
+        if (data.user && data.user.identities?.length === 0) {
+            throw new AuthApiError('User already registered', 422, 'user_already_exists');
+        }
     }
 
     async signOut(): Promise<{ error: AuthError | null }> {

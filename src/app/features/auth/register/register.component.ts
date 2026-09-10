@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { isAuthApiError } from '@supabase/supabase-js';
 import { AuthService } from '@core/auth/auth.service';
 import { CardDirective } from '@shared/directives/card.directive';
 import { controlErrorMessage } from '@shared/forms/control-error-message';
@@ -12,6 +13,25 @@ import { InputComponent } from '@shared/ui/forms/input/input.component';
 import { CheckboxComponent } from '@shared/ui/forms/checkbox/checkbox.component';
 import { LinkComponent } from '@shared/ui/link/link.component';
 import { IconComponent } from '@shared/ui/icon/icon.component';
+
+const SIGN_UP_ERRORS: Record<string, string> = {
+    user_already_exists: 'This email address is already registered.',
+    email_exists: 'This email address is already registered.',
+    email_address_invalid: 'Please enter a valid email address.',
+    weak_password: 'Please choose a stronger password.',
+    over_email_send_rate_limit: 'Too many attempts. Please try again in a few minutes.',
+    signup_disabled: 'Sign up is currently unavailable.'
+};
+
+const SIGN_UP_FALLBACK = 'Sign up failed. Please try again.';
+
+function signUpErrorMessage(caught: unknown): string {
+    if (isAuthApiError(caught) && caught.code) {
+        return SIGN_UP_ERRORS[caught.code] ?? SIGN_UP_FALLBACK;
+    }
+
+    return SIGN_UP_FALLBACK;
+}
 
 @Component({
     selector: 'auth-register',
@@ -94,9 +114,6 @@ export class RegisterComponent {
     async onSubmit(): Promise<void> {
         this.registerForm.markAllAsTouched();
 
-        console.log(this.registerForm.getRawValue());
-        console.log(this.acceptTosError);
-
         if (this.registerForm.invalid) {
             return;
         }
@@ -109,8 +126,8 @@ export class RegisterComponent {
             await this.auth.signUp(email!, password!, name!);
             this.toast.show('You Signed Up successfully');
             await this.router.navigateByUrl('/summary');
-        } catch {
-            this.error.set('Registration failed.');
+        } catch (caught) {
+            this.error.set(signUpErrorMessage(caught));
         } finally {
             this.loading.set(false);
         }

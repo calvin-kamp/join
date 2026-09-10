@@ -57,21 +57,20 @@
         }
 
         <div class="login__actions">
-            <ui-button
-                [type]="'submit'"
-                [variant]="'primary'"
-                [disabled]="loading()"
+            <button
+                type="submit"
+                class="button button--primary"
             >
                 Log in
-            </ui-button>
+            </button>
 
-            <ui-button
-                [type]="'button'"
-                [variant]="'outlined'"
+            <button
+                class="button button--outlined"
+                type="button"
                 (click)="continueAsGuest()"
             >
                 Guest Log in
-            </ui-button>
+            </button>
         </div>
     </form>
 </div>
