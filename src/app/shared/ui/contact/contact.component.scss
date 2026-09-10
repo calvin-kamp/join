@@ -24,6 +24,9 @@
 
     &__wrapper {
         margin-left: 32px;
+        min-width: 0;   
+        flex: 1;        
+        overflow: hidden; 
     }
 
     &__name {
@@ -32,9 +35,16 @@
         font-size: $font-size-sm;
         font-weight: $font-weight-regular;
         line-height: $line-height-tight;
+        white-space: nowrap;     
+        overflow: hidden;        
+        text-overflow: ellipsis; 
     }
 
     &__mail {
+        display: block;          
         color: var(--color-accent);
+        white-space: nowrap;     
+        overflow: hidden;        
+        text-overflow: ellipsis; 
     }
 }
