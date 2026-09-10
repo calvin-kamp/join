@@ -54,6 +54,10 @@
         @include breakpoint(md) {
             @include flex($gap: 16px);
         }
+
+        ::ng-deep ui-radio {
+            flex: 1;
+        }
     }
 
     &__label {
